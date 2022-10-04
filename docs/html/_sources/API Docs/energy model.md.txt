@@ -1,5 +1,0 @@
-## Energy model
-
-
-### Requirements
-
