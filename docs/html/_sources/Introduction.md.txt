@@ -1,0 +1,7 @@
+# Introduction
+
+## Atomic Graph ATtention (AGAT) 
+AGAT model is an high-efficient dee-graph model for prediction energy and forces of crystals.
+
+## Source code
+The source code will come to the github soon. The code is now available upon reasonable request (Dr. ZHAO Shijun, shijzhao@cityu.edu.hk).
