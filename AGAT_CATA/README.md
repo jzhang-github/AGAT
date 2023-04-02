@@ -37,14 +37,14 @@ tensorflow-gpu==2.4.0
   
 - Cleave surface: insert vacuum space along z.  
   Code: [add_vacuum_space.py](tools/add_vacuum_space.py)  
-  See the [Manual](docs/add_vacuum_space.md).  
+  See the [code documentation](docs/add_vacuum_space.md).  
   
 - Relax the surface model.  
   Volume and shape of the surpercell is fixed.  
   
 - Add adsorbate(s)  
-  Code: [generate_adsorption_sites_ase.py](tools/generate_adsorption_sites_ase.py)
-  See the [Manual](docs/generate_adsorption_sites_ase.md).  
+  Code: [generate_adsorption_sites_ase.py](tools/generate_adsorption_sites_ase.py)   
+  See the [code documentation](docs/generate_adsorption_sites_ase.md).  
   
 - Copy generated structural file into individual folders, and run VASP.  
 
