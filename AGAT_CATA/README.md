@@ -1,6 +1,6 @@
 # **AGAT for High-Entropy Catalysis**
-This is the manual to reproduce  results and support conclusions of *Journal*.
-![Graphical-abstract](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/files/Graphical%20abstract%20-%20github.tif)
+### This is the manual to reproduce  results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](url).   <br>    <br>
+![Graphical-abstract](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/files/Graphical%20abstract%20-%20github.jpg)
 
 # Table of Contents
 - [Dependencies](#dependencies)  
