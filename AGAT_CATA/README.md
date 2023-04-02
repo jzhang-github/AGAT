@@ -31,15 +31,18 @@ tensorflow==2.5.0
 tensorflow-gpu==2.4.0
 ```
 ## Example of using this code
-### 1) Prepare VASP calculations
+### Prepare VASP calculations
 - Bulk optimization: orientation of z axis: [111]
-- Cleave surface: insert vacuum space along z: [add_vacuum_space.py](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/tools/add_vacuum_space.py)
+- Cleave surface: insert vacuum space along z.  
+  Code: [add_vacuum_space.py](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/tools/add_vacuum_space.py)  
+  Manual: [](url)  
+  
 - Add adsorbate(s): Using this code: [generate_adsorption_sites_ase.py](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/tools/generate_adsorption_sites_ase.py)
-### 2) Collect paths of VASP calculations
-### 3) Build graphs
-### 4) Train
-### 5) Predict
-### 6) High-throughput predict
+### Collect paths of VASP calculations
+### Build graphs
+### Train
+### Predict
+### High-throughput predict
 
 The reader can find the code and data of the results presented in the Figures. An example of collecting data, generating graphs, training, predicting is also provided
 .
