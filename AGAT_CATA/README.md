@@ -1,5 +1,6 @@
 # **AGAT for High-Entropy Catalysis**
-### This is the manual to reproduce  results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](url).   <br>    <br>
+### This is the manual to reproduce  results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](url).   
+We recommend using a Linux operating system to run the following examples.  <br>    <br>
 ![Graphical-abstract](files/Graphical%20abstract%20-%20github.jpg)
 
 # Table of Contents
@@ -220,6 +221,38 @@ tensorflow-gpu==2.4.0
   - `project/force_ckpt`    
 
 ### Predict   
+- Code: `[GatAseCalculator](tools/GatApp.py#L135-L165)`
+- Prepare a structural file. For example: [POSCAR_0_0](files/POSCAR_0_0).  
+- Run:   
+  ```
+  from GatApp import GatAseCalculator # self-defined calculator including AGAT model.
+  from ase.optimize import BFGS
+  from ase.io import read, write
+  
+  energy_model_save_dir = os.path.join('project', 'energy_ckpt') # well-trained energy model
+  force_model_save_dir  = os.path.join('project', 'force_ckpt') # well-trained force model
+  calculator=GatAseCalculator(energy_model_save_dir, force_model_save_dir, gpu=-1) # instantiate a ase calclulator
+  
+  config = {'fmax'             : 0.1,  # force convergence criteria
+             'steps'            : 200, # max iteration steps
+             'maxstep'          : 0.05, # relaxation step size
+             'restart'          : None,
+             'restart_steps'    : 0,
+             'perturb_steps'    : 0,
+             'perturb_amplitude': 0.05}
+  
+  atoms = read('POSCAR_0_0') # read structural file
+  dyn = BFGS(atoms,
+             logfile='test.log',
+             trajectory='test.traj',
+             restart=config["restart"],
+             maxstep=config["maxstep"])
+  return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"]) # optimize structure
+  write('CONTCAR_0_0', atoms, format='vasp') # save the optimized structure.
+  ```
+
+
+
 ### High-throughput predict   
 
 The reader can find the code and data of the results presented in the Figures. An example of collecting data, generating graphs, training, predicting is also provided
