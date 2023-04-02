@@ -4,9 +4,11 @@
 
 * Structural file: [CONTCAR_bulk_example](CONTCAR_bulk_example)  
 
+* Modify the code [lines](../tools/generate_adsorption_sites_ase.py#L331-L335).  
+  
 * Run:  
 ```  
-python add_vacuum_space.py CONTCAR_bulk_example 6  
+python generate_adsorption_sites_ase.py    
 ```  
 
 * Output file: [CONTCAR_bulk_example_with_vacuum](CONTCAR_bulk_example_with_vacuum)
