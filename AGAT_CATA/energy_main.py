@@ -22,7 +22,7 @@ import dgl
 # =============================================================================
 if __name__ == '__main__':
     Train              = True
-    epochs             = 1
+    epochs             = 3000
     Project            = 'project'           # file name of user-defined project. It contains dataset, file, ckpt, log... and so on.
     new_training       = False # If true, the graphs are loaded from scratch. The training, validation, and test dataset are split, rather than loaded.
     gpu                = 0
@@ -38,10 +38,10 @@ if __name__ == '__main__':
     embed_activation   ='LeakyReLU' # Alternatives: LeakyReLU, relu, tanh, softmax, edge_softmax
     readout_activation ='LeakyReLU' # Alternatives: LeakyReLU, relu, tanh, softmax, edge_softmax
     loss_fcn           = tf.keras.losses.MeanSquaredError()              # loss function
-    optimizer          = tf.keras.optimizers.Adam(learning_rate=0.0005, epsilon=1e-8) # Default lr: 0.001
+    optimizer          = tf.keras.optimizers.Adam(learning_rate=0.001, epsilon=1e-8) # Default lr: 0.001
     weight_decay       = 5e-5
     mae                = tf.keras.losses.MeanAbsoluteError()
-    batch_size         = 64
+    batch_size         = 256
     val_batch_size     = 400  # number of graphs for validation.
     L2_reg             = False # L2 regularization
     validation_freq    = 20000    # validation frequency. e.g. validation_freq=2 runs validation every 2 graphs.
@@ -52,10 +52,10 @@ if __name__ == '__main__':
     super_cell         = False
     mode_of_NN         = 'ase_natural_cutoffs' # 'pymatgen_dist', 'ase_dist', 'ase_natural_cutoffs', or 'voronoi'
     NN_cutoff          = 3.2
-    transfer_learning  = True
+    transfer_learning  = False
     trainable_layers   = -4 # tail layers
     adsorbate          = True # indentify adsorbate or not when building graphs.
-    split_binary_graph = False # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
+    split_binary_graph = True # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
 # =============================================================================
 # Setting done
 # =============================================================================
