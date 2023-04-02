@@ -32,12 +32,20 @@ tensorflow-gpu==2.4.0
 ```
 # Example of using this code
 ### Prepare VASP calculations
-- Bulk optimization: orientation of z axis: [111]
+- Bulk optimization: orientation of z axis: [111]   
+  The atomic positions, cell shape, and cell volume are freely relaxed.  
+  
 - Cleave surface: insert vacuum space along z.  
   Code: [add_vacuum_space.py](tools/add_vacuum_space.py)  
-  Manual: [](url)  
+  See the [Manual](docs/add_vacuum_space.md).  
   
-- Add adsorbate(s): Using this code: [generate_adsorption_sites_ase.py](tools/generate_adsorption_sites_ase.py)
+- Relax the surface model.  
+  Volume and shape of the surpercell is fixed.  
+  
+- Add adsorbate(s)  
+  Code: [generate_adsorption_sites_ase.py](tools/generate_adsorption_sites_ase.py)
+  See the [Manual](docs/generate_adsorption_sites_ase.md).  
+  
 ### Collect paths of VASP calculations
 ### Build graphs
 ### Train
