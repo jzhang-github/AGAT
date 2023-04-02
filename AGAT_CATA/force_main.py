@@ -23,7 +23,7 @@ import dgl
 ''' Pay attention to `mask fixed atoms`. '''
 if __name__ == '__main__':
     Train              = True
-    epochs             = 1
+    epochs             = 3000
     Project            = 'project'           # file name of user-defined project. It contains dataset, file, ckpt, log... and so on.
     new_training       = False # If true, the graphs are loaded from scratch. The training, validation, and test dataset are split, rather than loaded.
     gpu                = 0
@@ -40,10 +40,10 @@ if __name__ == '__main__':
     bias               = True        # bias term of dense layers.
     negative_slope     = 0.2
     loss_fcn           = tf.keras.losses.MeanSquaredError()                          # loss function
-    optimizer          = tf.keras.optimizers.Adam(learning_rate=0.005, epsilon=1e-8) # Default lr: 0.001
+    optimizer          = tf.keras.optimizers.Adam(learning_rate=0.001, epsilon=1e-8) # Default lr: 0.001
     weight_decay       = 5e-5
     mae                = tf.keras.losses.MeanAbsoluteError()
-    batch_size         = 128
+    batch_size         = 256
     val_batch_size     = 400
     L2_reg             = False  # L2 regularization. Useful when overfitting.
     validation_freq    = 20000     # validation frequency. e.g. validation_freq=2 runs validation every 2 graphs.
@@ -51,15 +51,15 @@ if __name__ == '__main__':
     log_file           = 'v7_force.log' # 'v6_force_leakey_leakey_relunone.log'   #'testv2.0.log' #'test.log' # The outputs of `print()` function. Default: None
     num_core_read      = 6      # specify the number of cores for reading graphs.
     super_cell         = False
-    mode_of_NN         = 'ase'  # 'pymatgen_dist', 'ase_dist', 'ase_natural_cutoffs', or 'voronoi'. Speed: 'distance' > 'ase' >> 'voronoi'
+    mode_of_NN         = 'ase_natural_cutoffs'  # 'pymatgen_dist', 'ase_dist', 'ase_natural_cutoffs', or 'voronoi'. Speed: 'distance' > 'ase' >> 'voronoi'
     NN_cutoff          = 3.2    # For building graphs.
     batch_normalization = False
     mask_fixed          = False
     transfer_learning  = False
     trainable_layers   = -2
     adsorbate          = True # indentify adsorbate or not when building graphs.
-    adsorbate_coeff    = 20.0 # the importance of adsorbate atoms with respective to surface atoms.
-    split_binary_graph = False # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
+    adsorbate_coeff    = 100.0 # the importance of adsorbate atoms with respective to surface atoms.
+    split_binary_graph = True # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
 # =============================================================================
 # Setting done
 # =============================================================================
