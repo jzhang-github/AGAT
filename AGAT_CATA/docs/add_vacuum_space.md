@@ -1,16 +1,22 @@
-# Manual for [add_vacuum_space.py](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/tools/add_vacuum_space.py)  
+# Manual for [add_vacuum_space.py](../tools/add_vacuum_space.py)  
 
-* Structural file: [CONTCAR_bulk_example](CONTCAR_bulk_example)  
+* Usage: python add_vacuum_space.py `structural file name` `number of atomic layers along z`  
+
+* Structural file: [CONTCAR_bulk_example](../files/CONTCAR_bulk_example)  
 
 * Run:  
 ```  
 python add_vacuum_space.py CONTCAR_bulk_example 6  
 ```  
 
-* Output file: [CONTCAR_bulk_example_with_vacuum](CONTCAR_bulk_example_with_vacuum)
+* Output file: [CONTCAR_bulk_example_with_vacuum](../files/CONTCAR_bulk_example_with_vacuum).   
+
+* The surface model:  
+
+![CONTCAR_bulk_example_with_vacuum](../files/CONTCAR_bulk_example_with_vacuum.png)
 
 * Note:  
-	* There are 6 atomic planes along z in [CONTCAR_bulk_example](CONTCAR_bulk_example) file.
+	* There are 6 atomic planes along z in [CONTCAR_bulk_example](../files/CONTCAR_bulk_example) file.
 	* Atoms in the bottom plane will be removed by this code.  
 	* Thickness of vacuum space: 10 Å.  
 	* Bottom two atomic layers are fixed to their bulk positions.
