@@ -46,6 +46,8 @@ tensorflow-gpu==2.4.0
   Code: [generate_adsorption_sites_ase.py](tools/generate_adsorption_sites_ase.py)
   See the [Manual](docs/generate_adsorption_sites_ase.md).  
   
+- Copy generated structural file into individual folders, and run VASP.  
+
 ### Collect paths of VASP calculations
 ### Build graphs
 ### Train
