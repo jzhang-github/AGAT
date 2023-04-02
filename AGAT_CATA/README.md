@@ -2,14 +2,14 @@
 This is the manual to reproduce  results and support conclusions of *Journal*.
 
 # Table of Contents
-- [Dependencies](Dependencies)  
-- Example of using this code  
-  - Prepare VASP calculations
-  - Collect paths of VASP calculations
-  - Build graphs
-  - Train
-  - Predict
-  - High-throughput predict
+- [Dependencies](#dependencies)  
+- [Example of using this code](#example-of-using-this-code)   
+  - [Prepare VASP calculations](#prepare-VASP-calculations)  
+  - [Collect paths of VASP calculations](#collect-paths-of-VASP-calculations)  
+  - [Build graphs](#build-graphs)  
+  - [Train](#train)  
+  - [Predict](#predict)  
+  - [High-throughput predict](#high-throughput-predict)  
 
 - Data for Figures in *[reference](url)*  
   - Figure 2
@@ -20,7 +20,7 @@ This is the manual to reproduce  results and support conclusions of *Journal*.
 
 ## Dependencies
 ## Example of using this code
-### Prepare VASP calculations.
+### Prepare VASP calculations
 ### Collect paths of VASP calculations
 ### Build graphs
 ### Train
