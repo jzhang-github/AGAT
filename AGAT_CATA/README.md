@@ -1,6 +1,6 @@
 # **AGAT for High-Entropy Catalysis**
 This is the manual to reproduce  results and support conclusions of *Journal*.
-引入图片
+![Graphical-abstract](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/files/Graphical%20abstract%20-%20github.tif)
 
 # Table of Contents
 - [Dependencies](#dependencies)  
@@ -20,6 +20,7 @@ This is the manual to reproduce  results and support conclusions of *Journal*.
   - [Figure 7](#figure-7)
 
 ## Dependencies
+>>> python <<<
 ## Example of using this code
 ### Prepare VASP calculations
 ### Collect paths of VASP calculations
