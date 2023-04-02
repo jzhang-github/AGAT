@@ -328,9 +328,9 @@ Direct
 }
 
 if __name__ == '__main__':
-    adder = AddAtoms('POSCAR_surf_opt_1.gat',   # input file name.
-                     species='C3H6_di',               # name of adsorbates. O, H, OH, OOH, C3H6_di, C3H6_pi, C3H7
-                     sites='disigma',            # name of sites. ontop, bridge, hollow, disigma, or all
+    adder = AddAtoms('POSCAR_surface_example',   # input file name.
+                     species='O',               # name of adsorbates. O, H, OH, OOH, C3H6_di, C3H6_pi, C3H7
+                     sites='bridge',            # name of sites. ontop, bridge, hollow, disigma, or all
                      dist_from_surf=1.7,        # distance between adsorbate and the surface. Decrease this variable if the adsorbate is too high.
-                     num_atomic_layer_along_Z=6) # number of atomic layers along z direction of the slab model.
+                     num_atomic_layer_along_Z=5) # number of atomic layers along z direction of the slab model.
     num_sites = adder.write_file_with_adsorption_sites(adsorbate_poscar)
