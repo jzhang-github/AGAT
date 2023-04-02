@@ -20,14 +20,25 @@
   - [Figure 7](#figure-7)
 
 ## Dependencies
->>> python <<<
+### Requirements file
+[requirements.txt](requirements.txt)
+
+### Key modules
+```
+dgl-cu110
+numpy==1.19.5
+scikit-learn==0.24.2
+tensorflow==2.5.0
+tensorflow-gpu==2.4.0
+```
 ## Example of using this code
-### Prepare VASP calculations
-### Collect paths of VASP calculations
-### Build graphs
-### Train
-### Predict
-### High-throughput predict
+### 1) Prepare VASP calculations
+
+### 2) Collect paths of VASP calculations
+### 3) Build graphs
+### 4) Train
+### 5) Predict
+### 6) High-throughput predict
 
 The reader can find the code and data of the results presented in the Figures. An example of collecting data, generating graphs, training, predicting is also provided
 .
