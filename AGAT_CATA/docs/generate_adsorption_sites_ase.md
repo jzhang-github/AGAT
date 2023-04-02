@@ -4,7 +4,7 @@
 
 * Structural file: [CONTCAR_bulk_example](CONTCAR_bulk_example)  
 
-* Modify the code [lines](../tools/generate_adsorption_sites_ase.py#L331-L335).  
+* Modify these [lines](../tools/generate_adsorption_sites_ase.py#L331-L335).  
   
 * Run:  
 ```  
