@@ -1,6 +1,6 @@
 # **AGAT for High-Entropy Catalysis**
 ### This is the manual to reproduce  results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](url).   <br>    <br>
-![Graphical-abstract](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/files/Graphical%20abstract%20-%20github.jpg)
+![Graphical-abstract](files/Graphical%20abstract%20-%20github.jpg)
 
 # Table of Contents
 - [Dependencies](#dependencies)  
@@ -34,10 +34,10 @@ tensorflow-gpu==2.4.0
 ### Prepare VASP calculations
 - Bulk optimization: orientation of z axis: [111]
 - Cleave surface: insert vacuum space along z.  
-  Code: [add_vacuum_space.py](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/tools/add_vacuum_space.py)  
+  Code: [add_vacuum_space.py](tools/add_vacuum_space.py)  
   Manual: [](url)  
   
-- Add adsorbate(s): Using this code: [generate_adsorption_sites_ase.py](https://github.com/jzhang-github/AGAT/blob/main/AGAT_CATA/tools/generate_adsorption_sites_ase.py)
+- Add adsorbate(s): Using this code: [generate_adsorption_sites_ase.py](tools/generate_adsorption_sites_ase.py)
 ### Collect paths of VASP calculations
 ### Build graphs
 ### Train
