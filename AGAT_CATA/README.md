@@ -1,8 +1,8 @@
 # **AGAT for High-Entropy Catalysis**
 This is the manual to reproduce  results and support conclusions of *Journal*.
 
-# Contents
-- Dependencies  
+# Table of Contents
+- [Dependencies](Dependencies)  
 - Example of using this code  
   - Prepare VASP calculations
   - Collect paths of VASP calculations
@@ -18,7 +18,7 @@ This is the manual to reproduce  results and support conclusions of *Journal*.
   - Figure 5
   - Figure 7
 
-
+## Dependencies
 ## Example of using this code
 ### Prepare VASP calculations.
 ### Collect paths of VASP calculations
