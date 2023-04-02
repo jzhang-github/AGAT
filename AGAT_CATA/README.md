@@ -19,7 +19,7 @@
   - [Figure 5](#figure-5)
   - [Figure 7](#figure-7)
 
-## Dependencies
+# Dependencies
 **Requirements file:** [requirements.txt](requirements.txt)
 
 **Key modules**
@@ -30,7 +30,7 @@ scikit-learn==0.24.2
 tensorflow==2.5.0
 tensorflow-gpu==2.4.0
 ```
-## Example of using this code
+# Example of using this code
 ### Prepare VASP calculations
 - Bulk optimization: orientation of z axis: [111]
 - Cleave surface: insert vacuum space along z.  
@@ -46,7 +46,7 @@ tensorflow-gpu==2.4.0
 
 The reader can find the code and data of the results presented in the Figures. An example of collecting data, generating graphs, training, predicting is also provided
 .
-## Data and code for figures
+# Data and code for figures
 ### Figure 2
 ### Figure 3
 ### Figure 4
