@@ -2,9 +2,10 @@
 
 * Usage: python generate_adsorption_sites_ase.py  
 
-* Structural file: [CONTCAR_bulk_example](CONTCAR_bulk_example)  
+* Structural file: [POSCAR_surface_example](../files/POSCAR_surface_example)  
 
 * Modify these [lines](../tools/generate_adsorption_sites_ase.py#L331-L335).  
+
   
 * Run:  
 ```  
