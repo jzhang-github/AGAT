@@ -273,9 +273,12 @@ tensorflow-gpu==2.4.0
   - `out.log`: The log file.  
   
 # Data and code for figures
-### Figure 2
-### Figure 3
-### Figure 4
+### Figure 2  
+- Collected data: [files/Figure_2](files/Figure_2)  
+### Figure 3  
+- Collected data: [files/Figure_3](files/Figure_3)
+### Figure 4  
+- Run [High-throughput predictions](#high-throughput-predict )
 ### Figure 5
 ### Figure 7
 
