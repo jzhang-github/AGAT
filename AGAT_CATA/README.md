@@ -221,7 +221,7 @@ tensorflow-gpu==2.4.0
   - `project/force_ckpt`    
 
 ### Predict   
-- Code: `[GatAseCalculator](tools/GatApp.py#L135-L165)`
+- Code: [`GatAseCalculator`](tools/GatApp.py#L135-L165)
 - Prepare a structural file. For example: [POSCAR_0_0](files/POSCAR_0_0).  
 - Run:   
   ```
@@ -255,15 +255,18 @@ tensorflow-gpu==2.4.0
 
 ### High-throughput predict   
 - Integrated BFGS optimizer: More details about ASE [Optimizer](https://wiki.fysik.dtu.dk/ase/ase/optimize.html).     
-  <img src="files/BFGS_optimizer.svg" width="450px" />    
-- High-throughput prediction pipline.  
+  <img src="files/BFGS_optimizer.svg" width="450px" />    <br> <br>  
+- High-throughput prediction pipline:     
   ![hp](files/high-throughput_prediction.svg)
 - Code: [high_throughput_predict.py](tools/high_throughput_predict.py)   
   This code needs [modules](modules) and [GatApp.py](tools/GatApp.py)   
 - Well-trained model for energy and force prediction can be found at [files/NiCoFePdPtP_potential](files/NiCoFePdPtP_potential)  
 - Specify the chemical formula at this [line](tools/high_throughput_predict.py#L325) of [high_throughput_predict.py](tools/high_throughput_predict.py)   
   For example: `formula = 'NiCoFePdPt'`  
-- Run: `python high_throughput_predict.py`
+- Run:   
+  ```
+  python high_throughput_predict.py
+  ```   
 - Outputs:   
   - `POSCAR_surf_opt_*.gat`: Optimized structures of clean surface. `*` is the wildcard.  
   - `ads_surf_energy_OOH_*.txt`: out data including three columns: `total energy of model with adsorbate`, `total energy of clean surface`, `error code of each calculation`. If the `error code` is `0.000000`, then this line should be discarded. `*` is the wildcard.   
