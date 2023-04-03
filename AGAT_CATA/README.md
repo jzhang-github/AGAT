@@ -278,9 +278,9 @@ tensorflow-gpu==2.4.0
 ### Figure 3  
 - Collected data: [files/Figure_3](files/Figure_3)
 ### Figure 4  
-- Run [High-throughput predictions](#high-throughput-predict )
-### Figure 5
-### Figure 7
+- Run [high-throughput predictions](#high-throughput-predict)  
+- Results can be found here: [files/Figure_4](files/Figure_4)  
+### Figure 5  
 
-## Example
+### Figure 7
 
