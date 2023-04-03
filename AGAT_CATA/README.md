@@ -254,12 +254,13 @@ tensorflow-gpu==2.4.0
 
 
 ### High-throughput predict   
-- Integrated BFGS optimizer: More details about ASE [Optimizer](https://wiki.fysik.dtu.dk/ase/ase/optimize.html).   
-  ![AGAT_BFGS](files/BFGS_optimizer.svg)  
+- Integrated BFGS optimizer: More details about ASE [Optimizer](https://wiki.fysik.dtu.dk/ase/ase/optimize.html).     
+  <img src="files/BFGS_optimizer.svg" width="450px" />    
 - High-throughput prediction pipline.  
   ![hp](files/high-throughput_prediction.svg)
 - Code: [high_throughput_predict.py](tools/high_throughput_predict.py)   
   This code needs [modules](modules) and [GatApp.py](tools/GatApp.py)   
+- Well-trained model for energy and force prediction can be found at [files/NiCoFePdPtP_potential](files/NiCoFePdPtP_potential)  
 - Specify the chemical formula at this [line](tools/high_throughput_predict.py#L325) of [high_throughput_predict.py](tools/high_throughput_predict.py)   
   For example: `formula = 'NiCoFePdPt'`  
 - Run: `python high_throughput_predict.py`
