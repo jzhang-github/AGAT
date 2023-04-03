@@ -70,10 +70,10 @@ tensorflow-gpu==2.4.0
 
   - Outputs:   
   Under the `dataset` directory, four types of files are generated.
-    - `fname_prop_*.csv`: `csv` files with three columns: file names of output frames, energy per atom, absolute path.   
+    - `fname_prop_*.csv`: `csv` files with three columns: file names of output frames, energy per atom, absolute path. `*` is the wildcard.   
     - `fname_prop.csv`: a `csv` file including all above files.  
-    - `POSCAR_*_*_*`: `POSCAR` files seprated from VASP calculations.   
-    - `POSCAR_*_*_*_force.npy`: `numpy.array` of forces.  
+    - `POSCAR_*_*_*`: `POSCAR` files seprated from VASP calculations. `*` is the wildcard.   
+    - `POSCAR_*_*_*_force.npy`: `numpy.array` of forces. `*` is the wildcard.    
 
 ### Build graphs   
 - Code: [Crystal2Graph.py](modules/Crystal2Graph.py)  
@@ -254,9 +254,20 @@ tensorflow-gpu==2.4.0
 
 
 ### High-throughput predict   
-
-The reader can find the code and data of the results presented in the Figures. An example of collecting data, generating graphs, training, predicting is also provided
-.
+- Integrated BFGS optimizer: More details about ASE [Optimizer](https://wiki.fysik.dtu.dk/ase/ase/optimize.html).   
+  ![AGAT_BFGS](files/BFGS_optimizer.svg)  
+- High-throughput prediction pipline.  
+  ![hp](files/high-throughput_prediction.svg)
+- Code: [high_throughput_predict.py](tools/high_throughput_predict.py)   
+  This code needs [modules](modules) and [GatApp.py](tools/GatApp.py)   
+- Specify the chemical formula at this [line](tools/high_throughput_predict.py#L325) of [high_throughput_predict.py](tools/high_throughput_predict.py)   
+  For example: `formula = 'NiCoFePdPt'`  
+- Run: `python high_throughput_predict.py`
+- Outputs:   
+  - `POSCAR_surf_opt_*.gat`: Optimized structures of clean surface. `*` is the wildcard.  
+  - `ads_surf_energy_OOH_*.txt`: out data including three columns: `total energy of model with adsorbate`, `total energy of clean surface`, `error code of each calculation`. If the `error code` is `0.000000`, then this line should be discarded. `*` is the wildcard.   
+  - `out.log`: The log file.  
+  
 # Data and code for figures
 ### Figure 2
 ### Figure 3
