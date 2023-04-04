@@ -31,6 +31,8 @@ numpy==1.19.5
 scikit-learn==0.24.2
 tensorflow==2.5.0
 tensorflow-gpu==2.4.0
+ase==3.21.1
+pymatgen==2020.11.11
 ```
 # Example of using this code
 ### Prepare VASP calculations
