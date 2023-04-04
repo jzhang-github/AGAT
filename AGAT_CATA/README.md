@@ -395,7 +395,7 @@ pymatgen==2020.11.11
     For example, if you want to export the attention scores of the last AGAT layer (layer 3) of the force model, you can replace [these lines](files/Figure_7/GAT_v7.7_development_interpret_edge/tools/interpret_edge.py#L76-L77) with   
     ```
     if len(f_list) > 7:
-        if f_list[7]=='energy.bin':
+        if f_list[7]=='force.bin':
     ```  
     Also replace [these lines](files/Figure_7/GAT_v7.7_development_interpret_edge/tools/interpret_edge.py#L91-L94) with:  
     ```
