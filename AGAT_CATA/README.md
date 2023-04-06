@@ -159,7 +159,7 @@ pymatgen==2020.11.11
   python force_main.py
   ```  
   - These scripts will use `GPU` card by default. You can modify [this line](energy_main.py/#L28) and [this line](force_main.py/#L29) as `gpu = -1`.    
-  - Since only 10 calculations are included in the [files/VASP_calculations_example](files/VASP_calculations_example). The [`batch_size`](energy_main.py#L44), [`val_batch_size`](energy_main.py#L45), [`validation_freq`](energy_main.py#L47),  and [`validation_samples`](energy_main.py#L48) should be lowered to reasonable values. Same to train the [force model](force_main.py#L24-L62). If you have thousands (even more) frames of data points, the provided parameters are reasonable.     
+  - Since only 10 calculations are included in the [files/VASP_calculations_example](files/VASP_calculations_example). The [`batch_size`](energy_main.py#L44), [`val_batch_size`](energy_main.py#L45), [`validation_freq`](energy_main.py#L47),  and [`validation_samples`](energy_main.py#L48) should be lowered to reasonable values if you want to train with the example dataset (not recommended). Same to train the [force model](force_main.py#L24-L62). If you have thousands (even more) frames of data points, the provided parameters are reasonable.     
   
 ### Check training results   
   - File structure of [`project`](project) after training:  
@@ -248,8 +248,8 @@ pymatgen==2020.11.11
 
 ### Predict   
 - Code: [`tools/GatAseCalculator`](tools/GatApp.py#L135-L165)
-- Prepare a structural file. For example: [POSCAR_0_0](files/POSCAR_0_0).  
-- We have provided the well-trained model at [`files\NiCoFePdPt_potential`](files\NiCoFePdPt_potential).  
+- Prepare a structural file. For example: [POSCAR_relax_example](files/POSCAR_relax_example).  
+- We have provided the well-trained model at [`files/NiCoFePdPt_potential`](files/NiCoFePdPt_potential).  
 - Run:   
   ```
   from tools.GatApp import GatAseCalculator # self-defined calculator including AGAT model.
