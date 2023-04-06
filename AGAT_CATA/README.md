@@ -310,7 +310,7 @@ pymatgen==2020.11.11
   - `out.log`: The log file.  
 - The `ads_surf_energy_OOH_*.txt` can be read by the script: [get_hp_result.py](tools/get_hp_result.py)  
 
-# Data and code for figures
+# Example for figures
 ### Figure 2  
 - Collected data: [files/Figure_2](files/Figure_2)  
 ### Figure 3  
