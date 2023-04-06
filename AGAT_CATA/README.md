@@ -1,6 +1,6 @@
 # **AGAT for High-Entropy Catalysis**
 ### This is the manual to reproduce  results and support conclusions of ***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***.   
-We recommend using a Linux operating system to run the following examples.  <br>    <br>
+We recommend using a Linux operating system to run the following examples, under the [current directory](.).  <br>    <br>
 ![Graphical-abstract](files/Graphical%20abstract%20-%20github.jpg)
 
 # Table of Contents
@@ -19,14 +19,13 @@ We recommend using a Linux operating system to run the following examples.  <br>
   - [Figure 3](#figure-3)
   - [Figure 4](#figure-4)
   - [Figure 5](#figure-5)
-  - [Figure 7](#figure-7)
 
 # Install dependencies
 **Requirements file:** [requirements.txt](requirements.txt)
 
 **Key modules**
 ```
-dgl-cu110
+dgl-cu110 (dgl.__version__ = '0.6.1')  
 numpy==1.19.5
 scikit-learn==0.24.2
 tensorflow==2.5.0
@@ -36,7 +35,7 @@ pymatgen==2020.11.11
 ```
 # Example of using this code
 ### Prepare VASP calculations
-- Bulk optimization: orientation of z axis: [111]   
+- Bulk optimization: orientation of *z* axis: [111]   
   The atomic positions, cell shape, and cell volume are freely relaxed.  
   
 - Cleave surface: insert vacuum space along z.  
@@ -52,7 +51,8 @@ pymatgen==2020.11.11
   
 - Copy generated structural file into individual folders, and run VASP.  
 
-### Collect paths of VASP calculations   
+### Collect paths of VASP calculations
+- We provided examples of VASP outputs at [files/VASP_calculations_example](files/VASP_calculations_example).   
 - Find all directories containing `OUTCAR` file:   
   ```
   find . -name OUTCAR > paths.log
@@ -61,56 +61,76 @@ pymatgen==2020.11.11
   ```
   sed -i 's/OUTCAR$//g' paths.log
   ```   
+- Specify the absolute paths in `paths.log`.   
+  ```
+  sed -i "s#^.#${PWD}#g" paths.log
+  ``` 
 
 ### Collect frames based on `paths.log`.  
-- Code: [split_POSCAR_forces_from_vaspout_parallel.py](tools/split_POSCAR_forces_from_vaspout_parallel.py)    
-- Usage: python + split_POSCAR_forces_from_vaspout_parallel.py + paths_file + dataset_path + number of cores   
+
+- Code: [tools/split_POSCAR_forces_from_vaspout_parallel.py](tools/split_POSCAR_forces_from_vaspout_parallel.py)    
+- Usage: python + tools/split_POSCAR_forces_from_vaspout_parallel.py + paths_file + dataset_path + number of cores   
 - For example:  
   ``` 
-  python split_POSCAR_forces_from_vaspout_parallel.py paths.log $PWD/dataset 8 # run parallelly with 8 cores.
+  python tools/split_POSCAR_forces_from_vaspout_parallel.py paths.log $PWD/files/dataset 8 # run parallelly with 8 cores.
   ```  
 
   - Outputs:   
-  Under the `dataset` directory, four types of files are generated.
+  The [`files/dataset`](files/dataset) directory is created. Under the [`files/dataset`](files/dataset) directory, four types of files are generated:
     - `fname_prop_*.csv`: `csv` files with three columns: file names of output frames, energy per atom, absolute path. `*` is the wildcard.   
-    - `fname_prop.csv`: a `csv` file including all above files.  
+    - [`files/dataset/fname_prop.csv`](files/dataset/fname_prop.csv): a `csv` file including all `fname_prop_*.csv` files.  
     - `POSCAR_*_*_*`: `POSCAR` files seprated from VASP calculations. `*` is the wildcard.   
-    - `POSCAR_*_*_*_force.npy`: `numpy.array` of forces. `*` is the wildcard.    
+    - `POSCAR_*_*_*_force.npy`: `numpy.array` of forces, which should be read by `numpy` module. `*` is the wildcard.    
 
-### Build graphs   
+### Build graphs
+- Prepare files  
+  - Creat a folder by running:   
+    ```
+    mkdir project  
+    mkdir -p project/dataset  
+    mkdir -p project/files    
+    ```   
+    The [`project`](project) directory is used to store all files relevant to the following training.   
+  
 - Code: [Crystal2Graph.py](modules/Crystal2Graph.py)  
 - Example:   
-  ```
+
+  ```   
   from modules.Crystal2Graph import ReadGraphs
   import os
   if __name__ == '__main__':
-      graph_reader = ReadGraphs('fname_prop.csv', # csv file generated above.
-                                'dataset', # directory contain all frames
+      graph_reader = ReadGraphs(os.path.join('files', 'dataset', 'fname_prop.csv'), # csv file generated above.
+                                os.path.join('files', 'dataset'), # directory contain all frames
                                 cutoff       = None, # We don't need this for 'ase_natural_cutoffs'.
                                 mode_of_NN   = 'ase_natural_cutoffs', # identify connection between atoms with 'ase_natural_cutoffs'
                                 from_binary  = False, # read from structural files
                                 num_of_cores = 8, # run parallelly with 8 cores.
-                                super_cell   = False # do not repeat cell for small supercells.)
+                                super_cell   = False) # do not repeat cell for small supercells.
 
       graph_list, graph_labels = graph_reader.read_all_graphs(scale_prop=False, # do not rescale the label.
-                                                              ckpt_path=os.path.join('project', 'ckpt') # save the information of how to build the graphs.)
-  ```   
+                                                              ckpt_path='.') # save the information of how to build the graphs.
+
+      train_index, validation_index, test_index = TrainValTestSplit(
+          0.15, # validation_size: int or float. int: number of samples of the validation set. float: portion of samples of the validation set. 
+          0.15, # test_size: int or float. int: number of samples of the validation set. float: portion of samples of the validation set. 
+          os.path.join('files', 'dataset', 'fname_prop.csv'), # csv_file: str. File name of a csv file that contains the filenames of crystals.
+          True)() # boolean. Split the dataset by `sklearn.model_selection.train_test_split` or loaded from previously saved txt files.
+  ```    
+ 
   - Output files:
-    - `all_graphs.bin`: binary file of graphs, can be read by `DGL`.  
-    - `graph_build_scheme.json`: a `json` file storing the graph construction information.
+    - [`files/dataset/all_graphs.bin`](files/dataset/all_graphs.bin): binary file of graphs, can be read by `DGL` module.  
+    - [`graph_build_scheme.json`](graph_build_scheme.json): a `json` file storing the graph construction information.  
+    - [`files/dataset/test.txt`](files/dataset/test.txt): a text file contains the index of test set.  
+    - [`files/dataset/train.txt`](files/dataset/train.txt): a text file contains the index of test set.  
+    - [`files/dataset/validation.txt`](files/dataset/validation.txt): a text file contains the index of test set.  
 
 ### Train   
-- Prepare files   
-  - Creat a folder by running:   
-    ```
-    mkdir project
-    mkdir -p project/dataset
-    mkdir -p project/files  
-    ```   
+- Prepare files    
   - Copy files generated by above steps  
     ```
-    cp all_graphs.bin project/dataset/
-    cp fname_prop.csv project/files/
+    cp files/dataset/all_graphs.bin project/dataset/
+    cp files/dataset/fname_prop.csv project/files/
+    cp files/dataset/{test.txt,train.txt,validation.txt} project/files 
     ```
   
   - File structure before training:  
@@ -119,26 +139,30 @@ pymatgen==2020.11.11
     ├── dataset
     │   └── all_graphs.bin
     └── files
-        └── fname_prop.csv
+        ├── fname_prop.csv
+        ├── test.txt
+        ├── train.txt
+        └── validation.txt
     ```  
   
 - Train the energy model  
   - Code: [energy_main.py](energy_main.py)   
-  - Modify energy model [parameters](energy_main.py/#L23-L58).  
+  - Modify energy model [parameters](energy_main.py#L23-L58).  
   
 - Train the force model  
   - Code: [force_main.py](force_main.py)   
-  - Modify force model [parameters](force_main.py/#L24-L62).  
+  - Modify force model [parameters](force_main.py#L24-L62).  
 
 - Run:   
   ```
   python energy_main.py
   python force_main.py
   ```  
-  
+  - These scripts will use `GPU` card by default. You can modify [this line](energy_main.py/#L28) and [this line](force_main.py/#L29) as `gpu = -1`.    
+  - Since only 10 calculations are included in the [files/VASP_calculations_example](files/VASP_calculations_example). The [`batch_size`](energy_main.py#L44), [`val_batch_size`](energy_main.py#L45), [`validation_freq`](energy_main.py#L47),  and [`validation_samples`](energy_main.py#L48) should be lowered to reasonable values. Same to train the [force model](force_main.py#L24-L62). If you have thousands (even more) frames of data points, the provided parameters are reasonable.     
   
 ### Check training results   
-  - File structure after training:
+  - File structure of [`project`](project) after training:  
     ```  
     project
     ├── dataset
@@ -223,16 +247,18 @@ pymatgen==2020.11.11
   - `project/force_ckpt`    
 
 ### Predict   
-- Code: [`GatAseCalculator`](tools/GatApp.py#L135-L165)
+- Code: [`tools/GatAseCalculator`](tools/GatApp.py#L135-L165)
 - Prepare a structural file. For example: [POSCAR_0_0](files/POSCAR_0_0).  
+- We have provided the well-trained model at [`files\NiCoFePdPt_potential`](files\NiCoFePdPt_potential).  
 - Run:   
   ```
-  from GatApp import GatAseCalculator # self-defined calculator including AGAT model.
+  from tools.GatApp import GatAseCalculator # self-defined calculator including AGAT model.
   from ase.optimize import BFGS
   from ase.io import read, write
+  import os
   
-  energy_model_save_dir = os.path.join('project', 'energy_ckpt') # well-trained energy model
-  force_model_save_dir  = os.path.join('project', 'force_ckpt') # well-trained force model
+  energy_model_save_dir = os.path.join('files', 'NiCoFePdPt_potential', 'energy_ckpt') # well-trained energy model
+  force_model_save_dir  = os.path.join('files', 'NiCoFePdPt_potential', 'force_ckpt') # well-trained force model
   calculator=GatAseCalculator(energy_model_save_dir, force_model_save_dir, gpu=-1) # instantiate a ase calclulator
   
   config = {'fmax'             : 0.1,  # force convergence criteria
@@ -243,17 +269,23 @@ pymatgen==2020.11.11
              'perturb_steps'    : 0,
              'perturb_amplitude': 0.05}
   
-  atoms = read('POSCAR_0_0') # read structural file
+  atoms = read(os.path.join('files', 'POSCAR_relax_example')) # read structural file
+  atoms.set_calculator(calculator) # assign the AGAT calculator to atoms
   dyn = BFGS(atoms,
              logfile='test.log',
              trajectory='test.traj',
              restart=config["restart"],
              maxstep=config["maxstep"])
   return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"]) # optimize structure
-  write('CONTCAR_0_0', atoms, format='vasp') # save the optimized structure.
+  write('CONTCAR_relax_example', atoms, format='vasp') # save the optimized structure.
   ```
 
+- The structures is relaxed by the AGAT combined with `ase` [calculator](files/GatApp.py#L135-L165):    
 
+  <img src="files/relax_example.gif" width="450px" />   
+- Other outputs:  
+  - `test.log`: pure text file.  
+  - `test.traj`: trajectory file.  
 
 ### High-throughput predict   
 - Integrated BFGS optimizer: More details about ASE [Optimizer](https://wiki.fysik.dtu.dk/ase/ase/optimize.html).     
@@ -265,6 +297,9 @@ pymatgen==2020.11.11
 - Well-trained model for energy and force prediction can be found at [files/NiCoFePdPtP_potential](files/NiCoFePdPtP_potential)  
 - Specify the chemical formula at this [line](tools/high_throughput_predict.py#L325) of [high_throughput_predict.py](tools/high_throughput_predict.py)   
   For example: `formula = 'NiCoFePdPt'`  
+
+- Change directory to [`tools`](tools).  
+
 - Run:   
   ```
   python high_throughput_predict.py
@@ -287,124 +322,4 @@ pymatgen==2020.11.11
 ### Figure 5  
 - For (a)-(f), the data can be generated by [high-throughput predictions](#high-throughput-predict).  
 - For (g), the `DOSCAR` file can be processed by [VTST scripts](https://theory.cm.utexas.edu/vtsttools/scripts.html)  
-- For (h) and (i):  
-  - The volcano plot for (h):  
-    ```
-    import numpy as np
-    intervals = 201
-    eta_list, arg_list = np.zeros((intervals, intervals)), np.zeros((intervals, intervals))
-    y_list = np.linspace(-2, 3.0, intervals)
-    x_list = np.linspace(-1.5, 2.0, intervals)
-    for i, O in enumerate(y_list):
-        for j, OH in enumerate(x_list):
-            g1 = 2.46 - 2 * 1.23
-            g2 = O - 2 * 1.23
-            g3 = OH - 1.23
-            g4 = 0.0
-
-            G1 = g2 - g1 # ΔG1
-            G2 = g3 - g2 # ΔG2
-            G3 = g4 - g3 # ΔG3
-
-            eta = max(G1,G2,G3)
-            eta_list[i,j] = eta
-            arg = np.argmax([G1,G2,G3])
-            arg_list[i,j] = arg
-    arg_list += 1
-
-    eta_list = np.vstack((x_list, eta_list))
-    eta_list = np.hstack((np.vstack(([[0.0]],
-                                     y_list.reshape(-1,1))),
-                          eta_list))
-    arg_list = np.vstack((x_list, arg_list))
-    arg_list = np.hstack((np.vstack(([[0.0]],
-                                     y_list.reshape(-1,1))),
-                          arg_list))
-
-    np.savetxt('eta_O_vs_OH_2e.txt', eta_list, fmt='%f')
-    np.savetxt('arg_O_vs_OH_2e.txt', arg_list, fmt='%f')
-    ```  
-    `eta_O_vs_OH_2e.txt` is the overpotential file.  
-    `arg_O_vs_OH_2e.txt` is the potential determining step file.  
-    
-  - The volcano plot for (i):  
-    ``` 
-    import numpy as np
-    intervals = 201
-    eta_list, arg_list = np.zeros((intervals, intervals)), np.zeros((intervals, intervals))
-    y_list = np.linspace(-0.5, 4.5, intervals)
-    x_list = np.linspace(-1.5, 3.5, intervals)
-    for i, O in enumerate(y_list):
-        for j, OH in enumerate(x_list):
-            OOH = 0.9760033168772717 * OH + 3.5297309325053163
-
-            g1 = 0.0
-            g2 = OOH - 3 * 1.23
-            g3 = O - 2 * 1.23
-            g4 = OH - 1.23
-            g5 = 0.0
-
-            G1 = g2 - g1 # ΔG1
-            G2 = g3 - g2 # ΔG2
-            G3 = g4 - g3 # ΔG3
-            G4 = g5 - g4 # ΔG4
-
-            eta = max(G1,G2,G3,G4)
-            eta_list[i,j] = eta
-            arg = np.argmax([G1,G2,G3,G4])
-            arg_list[i,j] = arg
-    arg_list += 1
-
-    eta_list = np.vstack((x_list, eta_list))
-    eta_list = np.hstack((np.vstack(([[0.0]],
-                                     y_list.reshape(-1,1))),
-                          eta_list))
-    arg_list = np.vstack((x_list, arg_list))
-    arg_list = np.hstack((np.vstack(([[0.0]],
-                                     y_list.reshape(-1,1))),
-                          arg_list))
-
-    np.savetxt('eta_O_vs_OH.txt', eta_list, fmt='%f')
-    np.savetxt('arg_O_vs_OH.txt', arg_list, fmt='%f')
-    ``` 
-    `eta_O_vs_OH.txt` is the overpotential file.  
-    `arg_O_vs_OH.txt` is the potential determining step file.  
-    
-- The scatter and error bars in (h) and (i) denote the average and standard deviation of the energy spectrum of each composition as given in (d)-(f) for the Ni-Co-Fe-Pd-Pt system, respectively. The data is at [files/Figure_5/formula_ave_std.csv](files/Figure_5/formula_ave_std.csv)  
-
-### Figure 7  
-- For (a) and (d):  
-  - Change directory to [files/Figure_7](files/Figure_7).  
-  - Run:  
-    ```
-    python interpret.py 
-    ```
-    This script will load the well-trained model, and calculate the difference of energies and forces of each atom before and after adsorption. The results were saved in [files/Figure_7/interpret_model/ads_optimized_structure.lmp](files/Figure_7/interpret_model/ads_optimized_structure.lmp) and [files/Figure_7/interpret_model/ads_unrelaxed_structure.lmp](files/Figure_7/interpret_model/ads_unrelaxed_structure.lmp), which can be visualized by [OVITO](https://www.ovito.org/).    
-
-- For (b) and (c), the general idea is to export all graphs in every layer. These [exported graphs](files/Figure_7/GAT_v7.7_development_interpret_edge/tools/graphs) contain the attention scores between selected atomic pairs. After that, these graphs are loaded and analyzed.  Here are the specific steps to interpret all attention scores of the energy energy model:  
-  - Change directory to [files/Figure_7/GAT_v7.7_development_interpret_edge/tools](files/Figure_7/GAT_v7.7_development_interpret_edge/tools).  
-  - Run:  
-    ```
-    python interpret_edge.py 
-    ```
-  - Output:  
-    - `all_score_vs_dist_O-M_energy.txt`: First column: edge length; Second column: attention score. `M` is the elemental name of metal.  
-    - `all_score_vs_dist_O-M_energy_flatten.txt`: First column: edge length; Second column: flattened attention score. `M` is the elemental name of metal.  
-  
-  - Attention scores of other layers:  
-    For example, if you want to export the attention scores of the last AGAT layer (layer 3) of the force model, you can replace [these lines](files/Figure_7/GAT_v7.7_development_interpret_edge/tools/interpret_edge.py#L76-L77) with   
-    ```
-    if len(f_list) > 7:
-        if f_list[7]=='force.bin':
-    ```  
-    Also replace [these lines](files/Figure_7/GAT_v7.7_development_interpret_edge/tools/interpret_edge.py#L91-L94) with:  
-    ```
-    np.savetxt(f'layer_3_score_vs_dist_O-{element_name}_energy.txt',
-                results, fmt='%.8f')
-    np.savetxt(f'layer_3_score_vs_dist_O-{element_name}_energy_flatten.txt',
-                flatten_results, fmt='%.8f')
-    ```  
-    Then rerun:  
-    ```
-    python interpret_edge.py 
-    ```
+- For (h) and (i): the scatter and error bars denote the average and standard deviation of the energy spectrum of each composition as given in (d)-(f) for the Ni-Co-Fe-Pd-Pt system, respectively. The data is at [files/Figure_5/formula_ave_std.csv](files/Figure_5/formula_ave_std.csv)  

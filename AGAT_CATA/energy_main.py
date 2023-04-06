@@ -55,7 +55,7 @@ if __name__ == '__main__':
     transfer_learning  = False
     trainable_layers   = -4 # tail layers
     adsorbate          = True # indentify adsorbate or not when building graphs.
-    split_binary_graph = True # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
+    split_binary_graph = False # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
 # =============================================================================
 # Setting done
 # =============================================================================
@@ -383,11 +383,11 @@ def predict(graph_list, label_list, model_save_path, batch_size=200):
 if __name__ == '__main__':
     if Train:
         train()
-    y_test_true, y_test_pred = predict(test_graphs, test_prop, os.path.join(Project, CKPT))
+    y_test_true, y_test_pred = predict(test_graphs, test_prop, os.path.join(Project, CKPT), batch_size=batch_size)
     np.savetxt(os.path.join(Project, LOG, 'en_test_final_true.txt'), y_test_true, fmt='%.8f')
     np.savetxt(os.path.join(Project, LOG, 'en_test_final_pred.txt'), y_test_pred, fmt='%.8f')
 
-    y_val_true, y_val_pred = predict(validation_graphs, validation_prop, os.path.join(Project, CKPT))
+    y_val_true, y_val_pred = predict(validation_graphs, validation_prop, os.path.join(Project, CKPT), batch_size=batch_size)
     np.savetxt(os.path.join(Project, LOG, 'en_val_final_true.txt'), y_val_true, fmt='%.8f')
     np.savetxt(os.path.join(Project, LOG, 'en_val_final_pred.txt'), y_val_pred, fmt='%.8f')
 

@@ -322,13 +322,13 @@ def ads_calc(formula, calculator, **kwargs):
                        out, fmt='%f')
 
 if __name__ == '__main__':
-    formula = 'NiCoFePdPt7'
+    formula = 'NiCoFePdPt'
     v_per_atom_RuRhPdIrPt = 14.045510416666668
     v_per_atom_PdPtNiCoFe = get_v_per_atom(formula)
     v_per_atom            = v_per_atom_PdPtNiCoFe
     # model save path
-    energy_model_save_dir = os.path.join('..', 'RuRhPdIrPt_natural_cutoffs_potential', 'energy_ckpt')
-    force_model_save_dir  = os.path.join('..', 'RuRhPdIrPt_natural_cutoffs_potential', 'force_ckpt')
+    energy_model_save_dir = os.path.join('..', 'files', 'NiCoFePdPt_potential', 'energy_ckpt')
+    force_model_save_dir  = os.path.join('..', 'files', 'NiCoFePdPt_potential', 'force_ckpt')
 
     # instantiate a calculator
     calculator=GatAseCalculator(energy_model_save_dir, force_model_save_dir, gpu=-1)

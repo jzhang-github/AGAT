@@ -59,7 +59,7 @@ if __name__ == '__main__':
     trainable_layers   = -2
     adsorbate          = True # indentify adsorbate or not when building graphs.
     adsorbate_coeff    = 100.0 # the importance of adsorbate atoms with respective to surface atoms.
-    split_binary_graph = True # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
+    split_binary_graph = False # split the binary graph file into small graphs (according to the `batch_size`). To solve the out-of-memory error.
 # =============================================================================
 # Setting done
 # =============================================================================
@@ -432,11 +432,11 @@ if __name__ == '__main__':
     if Train:
         train()
 
-    y_test_true, y_test_pred, mae_value = predict(test_graphs, os.path.join(Project, CKPT), 'test set')
+    y_test_true, y_test_pred, mae_value = predict(test_graphs, os.path.join(Project, CKPT), 'test set', batch_size=batch_size)
     np.savetxt(os.path.join(Project, LOG, 'force_test_final_true.txt'), tf.reshape(y_test_true, [-1]), fmt='%.8f')
     np.savetxt(os.path.join(Project, LOG, 'force_test_final_pred.txt'), tf.reshape(y_test_pred, [-1]), fmt='%.8f')
 
-    y_val_true, y_val_pred, mae_value = predict(validation_graphs, os.path.join(Project, CKPT), 'validation set')
+    y_val_true, y_val_pred, mae_value = predict(validation_graphs, os.path.join(Project, CKPT), 'validation set', batch_size=batch_size)
     np.savetxt(os.path.join(Project, LOG, 'force_val_final_true.txt'), tf.reshape(y_val_true, [-1]), fmt='%.8f')
     np.savetxt(os.path.join(Project, LOG, 'force_val_final_pred.txt'), tf.reshape(y_val_pred, [-1]), fmt='%.8f')
 
