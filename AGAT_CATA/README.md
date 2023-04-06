@@ -14,7 +14,7 @@ We recommend using a Linux operating system to run the following examples, under
   - [Predict](#predict)  
   - [High-throughput predict](#high-throughput-predict)  
 
-- [Data for Figures](#data-and-code-for-figures) in *[reference](url)*
+- [Example for figures](#example-for-figures) in *[reference](url)*
   - [Figure 2](#figure-2)
   - [Figure 3](#figure-3)
   - [Figure 4](#figure-4)
@@ -280,7 +280,7 @@ pymatgen==2020.11.11
   write('CONTCAR_relax_example', atoms, format='vasp') # save the optimized structure.
   ```
 
-- The structures is relaxed by the AGAT combined with `ase` [calculator](files/GatApp.py#L135-L165):    
+- The structures is relaxed by the AGAT combined with `ase` [calculator](tools/GatApp.py#L135-L165):    
 
   <img src="files/relax_example.gif" width="450px" />   
 - Other outputs:  
