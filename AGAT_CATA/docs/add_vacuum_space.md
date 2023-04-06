@@ -9,7 +9,7 @@
 
 * Run:  
 ```  
-python tools\add_vacuum_space.py files\CONTCAR_bulk_example 6  
+python tools/add_vacuum_space.py files/CONTCAR_bulk_example 6   
 ```  
 
 * Output file: [CONTCAR_bulk_example_with_vacuum](../files/CONTCAR_bulk_example_with_vacuum).   
