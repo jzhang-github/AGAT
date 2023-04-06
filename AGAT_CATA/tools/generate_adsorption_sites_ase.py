@@ -328,7 +328,7 @@ Direct
 }
 
 if __name__ == '__main__':
-    adder = AddAtoms('POSCAR_surface_example',   # input file name.
+    adder = AddAtoms('../files/POSCAR_surface_example',   # input file name.
                      species='O',               # name of adsorbates. O, H, OH, OOH, C3H6_di, C3H6_pi, C3H7
                      sites='bridge',            # name of sites. ontop, bridge, hollow, disigma, or all
                      dist_from_surf=1.7,        # distance between adsorbate and the surface. Decrease this variable if the adsorbate is too high.
