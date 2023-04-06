@@ -6,15 +6,16 @@
 
 * Modify these [lines](../tools/generate_adsorption_sites_ase.py#L331-L335).  
 
+* Change working directory to [AGAT/AGAT_CATA](../)  
   
 * Run:  
 ```  
-python generate_adsorption_sites_ase.py    
+python tools\generate_adsorption_sites_ase.py    
 ```  
 
-* Output files: `POSCAR_0_[0-47]`. 48 POSCAR files are generated. Here is an example: [POSCAR_0_0](../files/POSCAR_0_0)
+* Output files: `POSCAR_0_[0-47]`. 48 POSCAR files are generated under the current directory. Here is an example: [POSCAR_0_0](../files/POSCAR_0_0)
 
-## API documentation of [`AddAtoms`](../tools/generate_adsorption_sites_ase.py#L15) object in [generate_adsorption_sites_ase.py](../tools/generate_adsorption_sites_ase.py)  
+# API documentation of [`AddAtoms`](../tools/generate_adsorption_sites_ase.py#L15) object in [generate_adsorption_sites_ase.py](../tools/generate_adsorption_sites_ase.py)  
 
 
 ```  
