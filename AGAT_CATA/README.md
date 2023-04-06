@@ -294,7 +294,7 @@ pymatgen==2020.11.11
   ![hp](files/high-throughput_prediction.svg)
 - Code: [high_throughput_predict.py](tools/high_throughput_predict.py)   
   This code needs [modules](modules) and [GatApp.py](tools/GatApp.py)   
-- Well-trained model for energy and force prediction can be found at [files/NiCoFePdPtP_potential](files/NiCoFePdPtP_potential)  
+- Well-trained model for energy and force prediction can be found at [files/NiCoFePdPt_potential](files/NiCoFePdPt_potential)  
 - Specify the chemical formula at this [line](tools/high_throughput_predict.py#L325) of [high_throughput_predict.py](tools/high_throughput_predict.py)   
   For example: `formula = 'NiCoFePdPt'`  
 
