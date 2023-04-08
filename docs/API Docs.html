@@ -31,6 +31,7 @@
           
           <a href="index.html" class="icon icon-home">
             AGAT
+              <img src="_static/logo.svg" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -60,13 +61,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="API%20Docs/get_atomic_features.html">Crystal2Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/get_atomic_features.html">get_atomic_features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="API%20Docs/Crystal2Graph.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API%20Docs/SingleGatLayer.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatLib.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API%20Docs/PymatgenStructureAnalyzer.html">Crystal2Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/SingleGatLayer.html">SingleGatLayer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html">GatEnergyModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html">GatForceModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatLib.html">GatLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a><ul>
@@ -127,7 +128,7 @@
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="API%20Docs/get_atomic_features.html">Crystal2Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API%20Docs/get_atomic_features.html">get_atomic_features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API%20Docs/Crystal2Graph.html">Crystal2Graph</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="API%20Docs/Crystal2Graph.html#CrystalGraph"><code class="docutils literal notranslate"><span class="pre">CrystalGraph</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="API%20Docs/Crystal2Graph.html#CrystalGraph.__init__"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.__init__()</span></code></a></li>
@@ -155,11 +156,33 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="API%20Docs/SingleGatLayer.html">Crystal2Graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API%20Docs/GatEnergyModel.html">Crystal2Graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API%20Docs/GatForceModel.html">Crystal2Graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API%20Docs/GatLib.html">Crystal2Graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API%20Docs/PymatgenStructureAnalyzer.html">Crystal2Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API%20Docs/SingleGatLayer.html">SingleGatLayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API%20Docs/GatEnergyModel.html">GatEnergyModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT"><code class="docutils literal notranslate"><span class="pre">GAT</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT.__init__"><code class="docutils literal notranslate"><span class="pre">GAT.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT.mul"><code class="docutils literal notranslate"><span class="pre">GAT.mul()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT.div"><code class="docutils literal notranslate"><span class="pre">GAT.div()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT.free"><code class="docutils literal notranslate"><span class="pre">GAT.free()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT.get_head_mechanism"><code class="docutils literal notranslate"><span class="pre">GAT.get_head_mechanism()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatEnergyModel.html#GAT.call"><code class="docutils literal notranslate"><span class="pre">GAT.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="API%20Docs/GatForceModel.html">GatForceModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT"><code class="docutils literal notranslate"><span class="pre">GAT</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT.__init__"><code class="docutils literal notranslate"><span class="pre">GAT.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT.mul"><code class="docutils literal notranslate"><span class="pre">GAT.mul()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT.div"><code class="docutils literal notranslate"><span class="pre">GAT.div()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT.free"><code class="docutils literal notranslate"><span class="pre">GAT.free()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT.get_head_mechanism"><code class="docutils literal notranslate"><span class="pre">GAT.get_head_mechanism()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API%20Docs/GatForceModel.html#GAT.call"><code class="docutils literal notranslate"><span class="pre">GAT.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="API%20Docs/GatLib.html">GatLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API%20Docs/PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
 </ul>
 </div>
 </section>

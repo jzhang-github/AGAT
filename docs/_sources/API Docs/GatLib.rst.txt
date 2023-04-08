@@ -1,5 +1,5 @@
 #############
-Crystal2Graph
+GatLib
 #############
 
 Python code::
