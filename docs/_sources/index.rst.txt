@@ -8,9 +8,8 @@ Welcome to AGAT's documentation!
 
 Important note
 ===============
-Based on the instructions from the university, the source code will come to the github soon. The code is now available upon reasonable request (Dr. ZHAO Shijun, shijzhao@cityu.edu.hk). 
-
-
+The manual to reproduce  results and support conclusions of **Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning** is now available at: https://github.com/jzhang-github/AGAT/tree/main/AGAT_CATA.
+ 
 
 .. toctree::
    :maxdepth: 2

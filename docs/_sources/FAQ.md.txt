@@ -1,3 +1,3 @@
 # Frequently asked questions (FAQ)
 
-This is a test for now.
+Raise issues at the GitHub [page](https://github.com/jzhang-github/AGAT).   

@@ -1,5 +1,0 @@
-# Force model
-
-
-## Requirements
-

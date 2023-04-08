@@ -1,14 +1,42 @@
 API Docs
 ============
 
-Subpackages
+Energy model
+------------
+
+.. toctree::
+   :maxdepth: 6
+
+   API Docs/energy model
+
+Force model
 -----------
 
 .. toctree::
    :maxdepth: 6
 
-   API Docs/modules
-   API Docs/tools
-   API Docs/energy model
    API Docs/force model
-   API Docs/test.test.test
+
+Modules
+-----------
+
+.. toctree::
+   :maxdepth: 6
+
+   API Docs/get_atomic_features
+   API Docs/Crystal2Graph
+   API Docs/SingleGatLayer
+   API Docs/GatEnergyModel
+   API Docs/GatForceModel
+   API Docs/GatLib
+   API Docs/PymatgenStructureAnalyzer
+   
+Tools
+-------------
+
+.. toctree::
+   :maxdepth: 6
+
+   API Docs/tools
+
+

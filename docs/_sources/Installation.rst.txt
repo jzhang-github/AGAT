@@ -1,0 +1,10 @@
+============
+Installation
+============
+
+The :mod:`pip` installation is not activated yet.
+
+Requirements
+************
+
+**Requirements file:** `requirements.txt <_static/requirements.txt>`_
