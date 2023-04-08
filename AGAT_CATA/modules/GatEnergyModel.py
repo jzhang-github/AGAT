@@ -1,7 +1,3 @@
-"""
-This is a modified DGL GAT model.
-Inspired by: https://github.com/dmlc/dgl/blob/0.6.x/examples/tensorflow/gat/gat.py
-"""
 
 import tensorflow as tf
 from tensorflow.keras import Model as tf_model
