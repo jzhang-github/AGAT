@@ -60,7 +60,17 @@
 <li class="toctree-l3"><a class="reference internal" href="SingleGatLayer.html">SingleGatLayer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GatEnergyModel.html">GatEnergyModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GatForceModel.html">GatForceModel</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">GatLib</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GatLib</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#EarlyStopping"><code class="docutils literal notranslate"><span class="pre">EarlyStopping</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward"><code class="docutils literal notranslate"><span class="pre">forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward_serial"><code class="docutils literal notranslate"><span class="pre">forward_serial()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward_parallel"><code class="docutils literal notranslate"><span class="pre">forward_parallel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load_gat_weights"><code class="docutils literal notranslate"><span class="pre">load_gat_weights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accuracy"><code class="docutils literal notranslate"><span class="pre">accuracy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PearsonR"><code class="docutils literal notranslate"><span class="pre">PearsonR()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get_src_dst_data"><code class="docutils literal notranslate"><span class="pre">get_src_dst_data()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
 </ul>
 </li>
@@ -100,13 +110,209 @@
              
   <section id="gatlib">
 <h1>GatLib<a class="headerlink" href="#gatlib" title="Permalink to this heading"></a></h1>
-<dl class="simple">
-<dt>Python code::</dt><dd><dl class="simple">
-<dt>with open(‘structure.json’, ‘w’) as file:</dt><dd><p>json.dump(structure.as_dict(), file)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The AGAT APIs are here.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="EarlyStopping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EarlyStopping</span></span><a class="headerlink" href="#EarlyStopping" title="Permalink to this definition"></a></dt>
+<dd><p>Stop training when model performance stop improving for some steps.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="EarlyStopping.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'files'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EarlyStopping.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>model</em>) – The agat model object.</p></li>
+<li><p><strong>graph</strong> (<em>DGL.graph</em>) – crystal graph.</p></li>
+<li><p><strong>logger</strong> (<em>_io.TextIOWrapper</em>) – log file.</p></li>
+<li><p><strong>patience</strong> (<em>int</em>) – stop patience. Stop training when model performance stop improving for some steps.</p></li>
+<li><p><strong>folder</strong> (<em>str</em>) – directory for storing well-trained model</p></li>
+</ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#EarlyStopping.model" title="Permalink to this definition"></a></dt>
+<dd><p>AGAT model.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.patience">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">patience</span></span><a class="headerlink" href="#EarlyStopping.patience" title="Permalink to this definition"></a></dt>
+<dd><p>Patience steps.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.counter">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counter</span></span><a class="headerlink" href="#EarlyStopping.counter" title="Permalink to this definition"></a></dt>
+<dd><p>Number of steps since last improvement of model performance.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.best_score">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_score</span></span><a class="headerlink" href="#EarlyStopping.best_score" title="Permalink to this definition"></a></dt>
+<dd><p>Best model performance.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.update">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><a class="headerlink" href="#EarlyStopping.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update state.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.early_stop">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">early_stop</span></span><a class="headerlink" href="#EarlyStopping.early_stop" title="Permalink to this definition"></a></dt>
+<dd><p>Stop training if this variable is true.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping.folder">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">folder</span></span><a class="headerlink" href="#EarlyStopping.folder" title="Permalink to this definition"></a></dt>
+<dd><p>Directory for storing well-trained model.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="EarlyStopping._graph">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_graph</span></span><a class="headerlink" href="#EarlyStopping._graph" title="Permalink to this definition"></a></dt>
+<dd><p>A crystal graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EarlyStopping.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EarlyStopping.step" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score</strong> (<em>float</em>) – metrics of model performance</p></li>
+<li><p><strong>model</strong> (<em>agat</em>) – AGAT model object.</p></li>
+</ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EarlyStopping.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EarlyStopping.save_checkpoint" title="Permalink to this definition"></a></dt>
+<dd><p>Save well-trained model (save checkpoint file) under <a class="reference internal" href="#EarlyStopping.folder" title="EarlyStopping.folder"><code class="xref py py-attr docutils literal notranslate"><span class="pre">folder</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>agat</em>) – AGAT model object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#forward" title="Permalink to this definition"></a></dt>
+<dd><p>Forward calculation by feeding one graph.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Discarded</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="forward_serial">
+<span class="sig-name descname"><span class="pre">forward_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forces_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#forward_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Forward calculation by feeding a graph.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>clone graphs before calling this function</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Discarded</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="forward_parallel">
+<span class="sig-name descname"><span class="pre">forward_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#forward_parallel" title="Permalink to this definition"></a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Discarded</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load_gat_weights">
+<span class="sig-name descname"><span class="pre">load_gat_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ckpt_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#load_gat_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Load trainable weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>agat</em>) – a fresh GAT model without trainable <cite>variables</cite>.</p></li>
+<li><p><strong>graph</strong> (<em>DGL.graph</em>) – a DGL graph</p></li>
+<li><p><strong>ckpt_path</strong> (<em>str</em>) – Path to the saved checkpoint files</p></li>
+<li><p><strong>logger</strong> (<em>_io.TextIOWrapper</em>) – log file.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – <p>calculation on CPU or GPU device.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;/cpu:0&quot;</span></code>: on CPU cores;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;/gpu:0&quot;</span></code>: On GPU card.</p></li>
+</ul>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy">
+<span class="sig-name descname"><span class="pre">accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#accuracy" title="Permalink to this definition"></a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not used.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PearsonR">
+<span class="sig-name descname"><span class="pre">PearsonR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PearsonR" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate Pearson coefficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_pred</strong> (<em>tf.Tensor</em>) – predicted labels.</p></li>
+<li><p><strong>y_pred</strong> – true labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pearson coefficient</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_src_dst_data">
+<span class="sig-name descname"><span class="pre">get_src_dst_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_src_dst_data" title="Permalink to this definition"></a></dt>
+<dd><p>Extract node attribute: <cite>h</cite></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not used yet in the AGAT model.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>DGL.graph</em>) – crystal graph.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>src_data: data on source nodes.</p></li>
+<li><p>dst_data: data on destination nodes.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 

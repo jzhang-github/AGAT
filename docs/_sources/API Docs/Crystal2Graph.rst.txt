@@ -2,12 +2,15 @@
 Crystal2Graph
 #############
 
+
 .. py:class:: CrystalGraph(object)
 
    Read structural file and return a graph.
-   
+
+   .. Caution:: The constructed crystal graph may be unreasonable for high-entropy materials, if the connections are analyzed by Voronoi method.
+
    Code example::
-   
+
       from Crystal2raph import CrystalGraph
       cg = CrystalGraph(cutoff = 6.0, mode_of_NN='distance', adsorbate=True)
       cg.get_graph('POSCAR')
@@ -15,16 +18,23 @@ Crystal2Graph
    .. py:method:: __init__(self, cutoff=6.0, mode_of_NN='distance', adsorbate=True)
 
      :param float cutoff: Cutoff distance when calculate connections of a crystal.
-     :param str mode_of_NN: Mode of how to get the neighbors, which can be: 
-        ``'voronoi'``: consider Voronoi neighbors only.
-        ``'pymatgen_dist'``: build graph based on a constant distance using ``ase`` module.
-        ``'ase_dist'``: build graph based on a constant distance using ``pymatgen`` module.
-        ``'ase_natural_cutoffs'``: build graph from ``ase`` which has a dynamic cutoff scheme. In this case, the ``cutoff`` is deprecated because ``ase`` will use the dynamic cutoffs in ``ase.neighborlist.natural_cutoffs()``.
+     :param str mode_of_NN: 
+     
+        .. Hint:: 
+           Mode of how to get the neighbors, which can be:
+           
+           - ``'voronoi'``: consider Voronoi neighbors only.
+           - ``'pymatgen_dist'``: build graph based on a constant distance using ``pymatgen`` module.
+           - ``'ase_dist'``: build graph based on a constant distance using ``ase`` module.
+           - ``'ase_natural_cutoffs'``: build graph from ``ase`` which has a dynamic cutoff scheme. In this case, the ``cutoff`` is deprecated because ``ase`` will use the dynamic cutoffs in ``ase.neighborlist.natural_cutoffs()``.
+           
      :param bool adsorbate: Identify the adsorbate or not.
 
 
    .. py:method:: get_adsorbate_bool(self, element_list)
-   
+
+      Identify adsorbates based on elements： H and O.
+      
       :param list element_list: a list of element symbols.
       :return: a list of bool values.
       :rtype: tf.constant
@@ -45,7 +55,10 @@ Crystal2Graph
       The ``get_connections_new()`` of ``VoronoiConnectivity`` object is modified.
    
       :param pymatgen.core.structure crystal: a pymatgen structure object.
-      :return: [index of senders, index of receivers, a list of distance]
+      :Returns: 
+         - index of senders
+         - index of receivers
+         - a list of distance between senders and receivers
 
 
    .. py:method:: get_1NN_pairs_distance(self, crystal)
@@ -53,15 +66,18 @@ Crystal2Graph
       Find the index of senders, receivers, and distance between them based on the ``distance_matrix`` of pymargen crystal object.
       
       :param pymargen.core.structure crystal: pymargen crystal object
-      :return: the index of senders, receivers, and distance between them.
-      :rtype: list
-      
+      :Returns: 
+         - index of senders
+         - index of receivers
+         - a list of distance between senders and receivers
       
    .. py:method:: get_1NN_pairs_ase_distance(self, ase_atoms)
    
       :param ase.atoms ase_atoms: ``ase.atoms`` object.
-      :return: the index of senders, receivers, and distance between them.
-      :rtype: list
+      :Returns: 
+         - index of senders
+         - index of receivers
+         - a list of distance between senders and receivers
       
       
    .. py:method:: get_ndata(self, crystal)
@@ -73,7 +89,7 @@ Crystal2Graph
       
    .. py:method:: get_graph_from_ase(self, fname, include_forces=False)
    
-      Build graphs with ase.
+      Build graphs with ``ase``.
       
       :param str/``ase.Atoms`` fname: File name or ``ase.Atoms`` object.
       :param bool include_forces: Include forces into graphs or not.
@@ -92,7 +108,9 @@ Crystal2Graph
       
    .. py:method:: get_graph(self, crystal_fname, super_cell=False, include_forces=True)
    
-      This method can choose which graph-construction method is used, according to the ``mode_of_NN`` attribute. You can call this method to build one graph.
+      This method can choose which graph-construction method is used, according to the ``mode_of_NN`` attribute.
+      
+      .. Hint:: You can call this method to build one graph.
    
       :param str crystal_fname: File name.
       :param bool super_cell: repeat small cell or not.
@@ -103,7 +121,9 @@ Crystal2Graph
       
 .. py:class:: ReadGraphs(CrystalGraph)
 
-   This object is used to build a list of graphs. Inherited from :py:class:`CrystalGraph`. Property (or label) of each graph are loaded from csv file when build new graphs from scratch. On the other hand, they will be loaded from  the ``DGL`` binary file if all the graphs are loaded from the binary file.
+   This object is used to build a list of graphs. Inherited from :py:class:`CrystalGraph`.
+   
+   .. Hint:: Property (or label) of each graph are loaded from csv file when build new graphs from scratch. On the other hand, they will be loaded from  the ``DGL`` binary file if all the graphs are loaded from the binary file.
    
    Code example::
    
@@ -132,11 +152,16 @@ Crystal2Graph
       :param str csv_file: File name of a csv file that contains the filenames of crystals.
       :param str dataset_path: Path to the dataset. The folder contains DGL binary graph files or files with cif/VASP formate.
       :param float cutoff: Cutoff distance when calculate connections of a crystal.
-      :param str mode_of_NN: Mode of how to get the neighbors, which can be: 
-        ``'voronoi'``: consider Voronoi neighbors only.
-        ``'pymatgen_dist'``: build graph based on a constant distance using ``ase`` module.
-        ``'ase_dist'``: build graph based on a constant distance using ``pymatgen`` module.
-        ``'ase_natural_cutoffs'``: build graph from ``ase`` which has a dynamic cutoff scheme. In this case, the ``cutoff`` is deprecated because ``ase`` will use the dynamic cutoffs in ``ase.neighborlist.natural_cutoffs()``.
+      :param str mode_of_NN:
+      
+         .. Hint:: 
+            Mode of how to get the neighbors, which can be:
+            
+            - ``'voronoi'``: consider Voronoi neighbors only.
+            - ``'pymatgen_dist'``: build graph based on a constant distance using ``pymatgen`` module.
+            - ``'ase_dist'``: build graph based on a constant distance using ``ase`` module.
+            - ``'ase_natural_cutoffs'``: build graph from ``ase`` which has a dynamic cutoff scheme. In this case, the ``cutoff`` is deprecated because ``ase`` will use the dynamic cutoffs in ``ase.neighborlist.natural_cutoffs()``.
+
       :param bool from_binary: Whether the graphs are read from scratch or ``DGL`` binary graph.
       :param int num_of_cores: Number of cores when reading graphs from *cif or VASP file. Read graphs from scratch takes much more time than that from binary file. So I recommend reading *cif or VASP file with multiple CPU cores.
       :param bool super_cell: Repeat small cells or not.
@@ -150,7 +175,9 @@ Crystal2Graph
    
    .. py:method:: read_batch_graphs(self, batch_index_list, batch_num)
    
-      Read graphs with batches. Then save graph batches under the attribute of :py:attr:`dataset_path`.
+      Read graphs with batches. 
+      
+      .. Note:: The loaded graphs are saved under the attribute of :py:attr:`dataset_path`.
       
       :param list batch_index_list: a list of graph index.
       :param str batch_num: number the graph batches.
@@ -160,11 +187,15 @@ Crystal2Graph
    
       Read all graphs specified in the csv file.
       
+      .. Note:: The loaded graphs are saved under the attribute of :py:attr:`dataset_path`.
+      
+      .. DANGER:: Do not scale the label if you don't know what are you doing.
+      
       :param bool scale_prop: scale the label or not. DO NOT scale unless you know what you are doing.
       :param str ckpt_path: checkpoint directory of the well-trained model.
-      :returns: graph_list, graph_labels
-      :retval: a list of ``DGL`` graph.
-      :retval: a list of labels.
+      :Returns: 
+         - graph_list： a list of ``DGL`` graph.
+         - graph_labels： a list of labels.
 
 
 .. py:class:: TrainValTestSplit(object)
@@ -183,9 +214,10 @@ Crystal2Graph
    
       Write three file: ``'train.txt'``, ``'validation.txt'``, ``'test.txt'`` contains the index of different datasets. The target directory is the directory to the csv file.
       
-      :return: train_index : A list of integers of training dataset.
-      :return: validation_index: A list of integers of validation dataset. 
-      :return: test_index: A list of integers of test dataset.
+      :Returns: 
+         - train_index : A list of integers of training dataset.
+         - validation_index: A list of integers of validation dataset. 
+         - test_index: A list of integers of test dataset.
 
 
 ..

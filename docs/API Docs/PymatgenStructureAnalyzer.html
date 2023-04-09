@@ -17,7 +17,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tools" href="tools.html" />
+    <link rel="next" title="Other info" href="../other.html" />
     <link rel="prev" title="GatLib" href="GatLib.html" /> 
 </head>
 
@@ -61,7 +61,10 @@
 <li class="toctree-l3"><a class="reference internal" href="GatEnergyModel.html">GatEnergyModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GatForceModel.html">GatForceModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GatLib.html">GatLib</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">PymatgenStructureAnalyzer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PymatgenStructureAnalyzer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get_connections_new"><code class="docutils literal notranslate"><span class="pre">get_connections_new()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#tools">Tools</a></li>
@@ -100,13 +103,54 @@
              
   <section id="pymatgenstructureanalyzer">
 <h1>PymatgenStructureAnalyzer<a class="headerlink" href="#pymatgenstructureanalyzer" title="Permalink to this heading"></a></h1>
-<dl class="simple">
-<dt>Python code::</dt><dd><dl class="simple">
-<dt>with open(‘structure.json’, ‘w’) as file:</dt><dd><p>json.dump(structure.as_dict(), file)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Adopted from pymatgen. get_connections() are replaced by get_connections_new(). The new one is faster and more suitable for constructing a DGL graph.</p>
+</div>
+<p>Here is the code of <code class="docutils literal notranslate"><span class="pre">get_connections_new(self)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_connections_new</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>     <span class="c1"># modified by ZHANG Jun on 20210421, to build dgl graph</span>
+<span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> Returns a list of site pairs that are Voronoi Neighbors, along</span>
+<span class="sd"> with their real-space distances.</span>
+<span class="sd"> After test, this function returns the correct connections for a</span>
+<span class="sd"> supercell big enough.</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+ <span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+ <span class="n">maxconn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_connectivity</span>
+ <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxconn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+     <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ii</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxconn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+         <span class="k">if</span> <span class="n">maxconn</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+             <span class="n">dist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get_distance</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span> <span class="n">jj</span><span class="p">))</span>
+             <span class="n">sender</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
+             <span class="n">receiver</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span>
+ <span class="c1"># print(np.shape(sender), np.shape(receiver), np.shape(dist))</span>
+ <span class="n">bsender</span>   <span class="o">=</span> <span class="n">sender</span>   <span class="o">+</span> <span class="n">receiver</span>      <span class="c1"># bidirectional</span>
+ <span class="n">breceiver</span> <span class="o">=</span> <span class="n">receiver</span> <span class="o">+</span> <span class="n">sender</span>        <span class="c1"># bidirectional</span>
+ <span class="n">bsender</span>  <span class="o">+=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxconn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="c1"># add self_loop</span>
+ <span class="n">breceiver</span><span class="o">+=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxconn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="c1"># add self_loop</span>
+ <span class="n">dist</span>     <span class="o">*=</span> <span class="mi">2</span>                        <span class="c1"># bidirectional</span>
+ <span class="n">dist</span>     <span class="o">+=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">maxconn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># add self loop for `dist`</span>
+ <span class="c1"># print(np.shape(bsender), np.shape(breceiver), np.shape(dist))</span>
+ <span class="n">dist</span>      <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dist</span><span class="p">]</span>
+
+ <span class="k">return</span> <span class="n">bsender</span><span class="p">,</span> <span class="n">breceiver</span><span class="p">,</span> <span class="n">dist</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="get_connections_new">
+<span class="sig-name descname"><span class="pre">get_connections_new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_connections_new" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of site pairs that are Voronoi Neighbors, along with their real-space distances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>bsender: index of senders.</p></li>
+<li><p>breceiver: index of receivers.</p></li>
+<li><p>dist: distance between senders and receivers.</p></li>
+</ul>
 </dd>
 </dl>
-</dd>
-</dl>
+</dd></dl>
+
 </section>
 
 
@@ -114,7 +158,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="GatLib.html" class="btn btn-neutral float-left" title="GatLib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tools.html" class="btn btn-neutral float-right" title="Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../other.html" class="btn btn-neutral float-right" title="Other info" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

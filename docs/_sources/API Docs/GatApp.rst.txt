@@ -1,0 +1,79 @@
+############
+Tools
+############
+
+
+Applications for AGAT model.
+
+
+.. class:: GatApp
+
+   Apply well-trained model.
+   
+   .. method:: __init__(self, energy_model_save_path, force_model_save_path, load_model=True, gpu=-1)
+   :param str energy_model_save_path: directory storing well-trained energy model.
+   :param str force_model_save_path: directory storing well-trained force model.
+   :param bool load_model: load energy model and force model.
+   :param int gpu: specify calculations on device. ``/cpu:0``: CPU cores; ``"/gpu:{}".format(gpu)``: GPU card.
+
+
+   .. method:: load_graph_build_scheme(self, model_save_path)
+   
+      :param str model_save_path: load scheme for building graphs.
+      
+      :Returns: graph_build_scheme: a json file.
+   
+   
+   .. method:: load_energy_model(self, energy_model_save_path)
+   
+      :param str energy_model_save_path: directory storing well-trained energy model.
+      
+      :Returns: an energy AGAT model.
+      
+      
+   .. method:: load_force_model(self, force_model_save_path)
+   
+      :param str force_model_save_path: directory storing well-trained force model.
+      
+      :Returns: a force AGAT model.
+      
+      
+   .. method:: get_graph(self,  fname, super_cell=self.graph_build_scheme['read_super_cell'], include_forces=False)
+   
+      :param str fname: load graph from a file.
+      
+         .. Note:: In some cases, the ``fname`` can also be ``ase.atoms`` object.
+         
+      :param bool super_cell: repeat small cell.
+      :param bool include_forces: ``False``; No need to read True forces for application.
+   
+
+   .. method:: get_energy(self, graph)
+   
+      Predict energy of the input graph.
+      
+      :param DGL.graph graph: a graph.
+      :Returns: crystal energy.
+
+
+   .. method:: get_energies(self, graph)
+   
+      Predict atomic energies of the input graph.
+      
+      :param DGL.graph graph: a graph.
+      :Returns: atomic energies.
+
+
+   .. method:: get_forces(self, graph)
+   
+      Predict forces acting on atoms in real space.
+      
+      :param DGL.graph graph: a graph.
+      :Returns: atomic forces.
+
+
+   .. method:: get_stress(self,)
+   
+      Predict cell stress.
+      
+      .. Note:: Not applicable.

@@ -37,6 +37,9 @@ Tools
 .. toctree::
    :maxdepth: 6
 
-   API Docs/tools
+   API Docs/GatApp
+   API Docs/split_POSCAR_forces_from_vaspout_parallel
+   API Docs/high_throughput_predict.py
+   API Docs/generate_adsorption_sites_ase
 
 

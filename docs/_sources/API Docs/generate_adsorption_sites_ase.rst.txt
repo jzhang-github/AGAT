@@ -1,6 +1,6 @@
-############
-Tools
-############
+################################
+generate_adsorption_sites_ase
+################################
 
 Python code::
     with open('structure.json', 'w') as file:

@@ -17,8 +17,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Crystal2Graph" href="SingleGatLayer.html" />
-    <link rel="prev" title="Crystal2Graph" href="get_atomic_features.html" /> 
+    <link rel="next" title="SingleGatLayer" href="SingleGatLayer.html" />
+    <link rel="prev" title="get_atomic_features" href="get_atomic_features.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,18 +55,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#energy-model">Energy model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#force-model">Force model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../API%20Docs.html#modules">Modules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="get_atomic_features.html">Crystal2Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_atomic_features.html">get_atomic_features</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Crystal2Graph</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#CrystalGraph"><code class="docutils literal notranslate"><span class="pre">CrystalGraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ReadGraphs"><code class="docutils literal notranslate"><span class="pre">ReadGraphs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#TrainValTestSplit"><code class="docutils literal notranslate"><span class="pre">TrainValTestSplit</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="SingleGatLayer.html">Crystal2Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SingleGatLayer.html">SingleGatLayer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GatEnergyModel.html">GatEnergyModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GatForceModel.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GatLib.html">Crystal2Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="PymatgenStructureAnalyzer.html">Crystal2Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GatForceModel.html">GatForceModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GatLib.html">GatLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#tools">Tools</a></li>
@@ -109,6 +109,10 @@
 <dt class="sig sig-object py" id="CrystalGraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrystalGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph" title="Permalink to this definition"></a></dt>
 <dd><p>Read structural file and return a graph.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The constructed crystal graph may be unreasonable for high-entropy materials, if the connections are analyzed by Voronoi method.</p>
+</div>
 <p>Code example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Crystal2raph</span> <span class="kn">import</span> <span class="n">CrystalGraph</span>
 <span class="n">cg</span> <span class="o">=</span> <span class="n">CrystalGraph</span><span class="p">(</span><span class="n">cutoff</span> <span class="o">=</span> <span class="mf">6.0</span><span class="p">,</span> <span class="n">mode_of_NN</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">adsorbate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -122,11 +126,17 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cutoff</strong> (<em>float</em>) – Cutoff distance when calculate connections of a crystal.</p></li>
-<li><p><strong>mode_of_NN</strong> (<em>str</em>) – Mode of how to get the neighbors, which can be:
-<code class="docutils literal notranslate"><span class="pre">'voronoi'</span></code>: consider Voronoi neighbors only.
-<code class="docutils literal notranslate"><span class="pre">'pymatgen_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">ase</span></code> module.
-<code class="docutils literal notranslate"><span class="pre">'ase_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">pymatgen</span></code> module.
-<code class="docutils literal notranslate"><span class="pre">'ase_natural_cutoffs'</span></code>: build graph from <code class="docutils literal notranslate"><span class="pre">ase</span></code> which has a dynamic cutoff scheme. In this case, the <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is deprecated because <code class="docutils literal notranslate"><span class="pre">ase</span></code> will use the dynamic cutoffs in <code class="docutils literal notranslate"><span class="pre">ase.neighborlist.natural_cutoffs()</span></code>.</p></li>
+<li><p><strong>mode_of_NN</strong> (<em>str</em>) – <div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Mode of how to get the neighbors, which can be:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'voronoi'</span></code>: consider Voronoi neighbors only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'pymatgen_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">pymatgen</span></code> module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ase_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">ase</span></code> module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ase_natural_cutoffs'</span></code>: build graph from <code class="docutils literal notranslate"><span class="pre">ase</span></code> which has a dynamic cutoff scheme. In this case, the <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is deprecated because <code class="docutils literal notranslate"><span class="pre">ase</span></code> will use the dynamic cutoffs in <code class="docutils literal notranslate"><span class="pre">ase.neighborlist.natural_cutoffs()</span></code>.</p></li>
+</ul>
+</div>
+</p></li>
 <li><p><strong>adsorbate</strong> (<em>bool</em>) – Identify the adsorbate or not.</p></li>
 </ul>
 </dd>
@@ -136,7 +146,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_adsorbate_bool">
 <span class="sig-name descname"><span class="pre">get_adsorbate_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_adsorbate_bool" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Identify adsorbates based on elements： H and O.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>element_list</strong> (<em>list</em>) – a list of element symbols.</p>
 </dd>
@@ -178,7 +189,11 @@
 <dd class="field-odd"><p><strong>crystal</strong> (<em>pymatgen.core.structure</em>) – a pymatgen structure object.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>[index of senders, index of receivers, a list of distance]</p>
+<dd class="field-even"><ul class="simple">
+<li><p>index of senders</p></li>
+<li><p>index of receivers</p></li>
+<li><p>a list of distance between senders and receivers</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -192,10 +207,11 @@
 <dd class="field-odd"><p><strong>crystal</strong> (<em>pymargen.core.structure</em>) – pymargen crystal object</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>the index of senders, receivers, and distance between them.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-even"><ul class="simple">
+<li><p>index of senders</p></li>
+<li><p>index of receivers</p></li>
+<li><p>a list of distance between senders and receivers</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -208,10 +224,11 @@
 <dd class="field-odd"><p><strong>ase_atoms</strong> (<em>ase.atoms</em>) – <code class="docutils literal notranslate"><span class="pre">ase.atoms</span></code> object.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>the index of senders, receivers, and distance between them.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-even"><ul class="simple">
+<li><p>index of senders</p></li>
+<li><p>index of receivers</p></li>
+<li><p>a list of distance between senders and receivers</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -235,7 +252,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_graph_from_ase">
 <span class="sig-name descname"><span class="pre">get_graph_from_ase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_ase" title="Permalink to this definition"></a></dt>
-<dd><p>Build graphs with ase.</p>
+<dd><p>Build graphs with <code class="docutils literal notranslate"><span class="pre">ase</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -270,7 +287,11 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_graph">
 <span class="sig-name descname"><span class="pre">get_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph" title="Permalink to this definition"></a></dt>
-<dd><p>This method can choose which graph-construction method is used, according to the <code class="docutils literal notranslate"><span class="pre">mode_of_NN</span></code> attribute. You can call this method to build one graph.</p>
+<dd><p>This method can choose which graph-construction method is used, according to the <code class="docutils literal notranslate"><span class="pre">mode_of_NN</span></code> attribute.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can call this method to build one graph.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -290,7 +311,11 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ReadGraphs">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReadGraphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CrystalGraph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs" title="Permalink to this definition"></a></dt>
-<dd><p>This object is used to build a list of graphs. Inherited from <a class="reference internal" href="#CrystalGraph" title="CrystalGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrystalGraph</span></code></a>. Property (or label) of each graph are loaded from csv file when build new graphs from scratch. On the other hand, they will be loaded from  the <code class="docutils literal notranslate"><span class="pre">DGL</span></code> binary file if all the graphs are loaded from the binary file.</p>
+<dd><p>This object is used to build a list of graphs. Inherited from <a class="reference internal" href="#CrystalGraph" title="CrystalGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrystalGraph</span></code></a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Property (or label) of each graph are loaded from csv file when build new graphs from scratch. On the other hand, they will be loaded from  the <code class="docutils literal notranslate"><span class="pre">DGL</span></code> binary file if all the graphs are loaded from the binary file.</p>
+</div>
 <p>Code example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">modules.Crystal2Graph</span> <span class="kn">import</span> <span class="n">ReadGraphs</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -321,11 +346,17 @@
 <li><p><strong>csv_file</strong> (<em>str</em>) – File name of a csv file that contains the filenames of crystals.</p></li>
 <li><p><strong>dataset_path</strong> (<em>str</em>) – Path to the dataset. The folder contains DGL binary graph files or files with cif/VASP formate.</p></li>
 <li><p><strong>cutoff</strong> (<em>float</em>) – Cutoff distance when calculate connections of a crystal.</p></li>
-<li><p><strong>mode_of_NN</strong> (<em>str</em>) – Mode of how to get the neighbors, which can be:
-<code class="docutils literal notranslate"><span class="pre">'voronoi'</span></code>: consider Voronoi neighbors only.
-<code class="docutils literal notranslate"><span class="pre">'pymatgen_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">ase</span></code> module.
-<code class="docutils literal notranslate"><span class="pre">'ase_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">pymatgen</span></code> module.
-<code class="docutils literal notranslate"><span class="pre">'ase_natural_cutoffs'</span></code>: build graph from <code class="docutils literal notranslate"><span class="pre">ase</span></code> which has a dynamic cutoff scheme. In this case, the <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is deprecated because <code class="docutils literal notranslate"><span class="pre">ase</span></code> will use the dynamic cutoffs in <code class="docutils literal notranslate"><span class="pre">ase.neighborlist.natural_cutoffs()</span></code>.</p></li>
+<li><p><strong>mode_of_NN</strong> (<em>str</em>) – <div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Mode of how to get the neighbors, which can be:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'voronoi'</span></code>: consider Voronoi neighbors only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'pymatgen_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">pymatgen</span></code> module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ase_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">ase</span></code> module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ase_natural_cutoffs'</span></code>: build graph from <code class="docutils literal notranslate"><span class="pre">ase</span></code> which has a dynamic cutoff scheme. In this case, the <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is deprecated because <code class="docutils literal notranslate"><span class="pre">ase</span></code> will use the dynamic cutoffs in <code class="docutils literal notranslate"><span class="pre">ase.neighborlist.natural_cutoffs()</span></code>.</p></li>
+</ul>
+</div>
+</p></li>
 <li><p><strong>from_binary</strong> (<em>bool</em>) – Whether the graphs are read from scratch or <code class="docutils literal notranslate"><span class="pre">DGL</span></code> binary graph.</p></li>
 <li><p><strong>num_of_cores</strong> (<em>int</em>) – Number of cores when reading graphs from <a href="#id1"><span class="problematic" id="id2">*</span></a>cif or VASP file. Read graphs from scratch takes much more time than that from binary file. So I recommend reading <a href="#id3"><span class="problematic" id="id4">*</span></a>cif or VASP file with multiple CPU cores.</p></li>
 <li><p><strong>super_cell</strong> (<em>bool</em>) – Repeat small cells or not.</p></li>
@@ -344,7 +375,11 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ReadGraphs.read_batch_graphs">
 <span class="sig-name descname"><span class="pre">read_batch_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_index_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.read_batch_graphs" title="Permalink to this definition"></a></dt>
-<dd><p>Read graphs with batches. Then save graph batches under the attribute of <a class="reference internal" href="#ReadGraphs.dataset_path" title="ReadGraphs.dataset_path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dataset_path</span></code></a>.</p>
+<dd><p>Read graphs with batches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The loaded graphs are saved under the attribute of <a class="reference internal" href="#ReadGraphs.dataset_path" title="ReadGraphs.dataset_path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dataset_path</span></code></a>.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -359,6 +394,14 @@
 <dt class="sig sig-object py" id="ReadGraphs.read_all_graphs">
 <span class="sig-name descname"><span class="pre">read_all_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ckpt_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.read_all_graphs" title="Permalink to this definition"></a></dt>
 <dd><p>Read all graphs specified in the csv file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The loaded graphs are saved under the attribute of <a class="reference internal" href="#ReadGraphs.dataset_path" title="ReadGraphs.dataset_path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dataset_path</span></code></a>.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Do not scale the label if you don’t know what are you doing.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -367,13 +410,10 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>graph_list, graph_labels</p>
-</dd>
-<dt class="field-odd">Retval<span class="colon">:</span></dt>
-<dd class="field-odd"><p>a list of <code class="docutils literal notranslate"><span class="pre">DGL</span></code> graph.</p>
-</dd>
-<dt class="field-even">Retval<span class="colon">:</span></dt>
-<dd class="field-even"><p>a list of labels.</p>
+<dd class="field-even"><ul class="simple">
+<li><p>graph_list： a list of <code class="docutils literal notranslate"><span class="pre">DGL</span></code> graph.</p></li>
+<li><p>graph_labels： a list of labels.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -405,13 +445,11 @@
 <dd><p>Write three file: <code class="docutils literal notranslate"><span class="pre">'train.txt'</span></code>, <code class="docutils literal notranslate"><span class="pre">'validation.txt'</span></code>, <code class="docutils literal notranslate"><span class="pre">'test.txt'</span></code> contains the index of different datasets. The target directory is the directory to the csv file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>train_index : A list of integers of training dataset.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>validation_index: A list of integers of validation dataset.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>test_index: A list of integers of test dataset.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p>train_index : A list of integers of training dataset.</p></li>
+<li><p>validation_index: A list of integers of validation dataset.</p></li>
+<li><p>test_index: A list of integers of test dataset.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -424,8 +462,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="get_atomic_features.html" class="btn btn-neutral float-left" title="Crystal2Graph" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="SingleGatLayer.html" class="btn btn-neutral float-right" title="Crystal2Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="get_atomic_features.html" class="btn btn-neutral float-left" title="get_atomic_features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SingleGatLayer.html" class="btn btn-neutral float-right" title="SingleGatLayer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -2,9 +2,11 @@
 GatEnergyModel
 ##############
 
-Construct an energy model. You can also use this model to train and predict crystal properties. What you need to do is just replace the energy labels with property labels.
+Construct an energy model.
 
-This model has multiple attention heads.
+.. Hint:: You can also use this model to train and predict crystal properties. What you need to do is just replace the energy labels with property labels.
+
+.. Note:: This model has multiple attention heads.
 
 .. py:class:: GAT(tf_model)
 
@@ -30,6 +32,7 @@ This model has multiple attention heads.
    .. py:method:: div(self, TfTensor)
    
       The attention mechanism. Calculate 1/input_tensor
+      
       
       :param tensorflow.python.framework.ops.EagerTensor TfTensor: a tensorflow.python.framework.ops.EagerTensor.
       :returns: the reciprocal value of tensorflow.python.framework.ops.EagerTensor.
