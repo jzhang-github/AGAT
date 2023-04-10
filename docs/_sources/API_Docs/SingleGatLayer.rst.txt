@@ -4,7 +4,7 @@ SingleGatLayer
 
 Single graph attention network for predicting crystal properties.
 
-.. Note:: Some abbreviations used in ``GATLayer`` class:
+.. Note:: Some abbreviations used in :class:`GATLayer` class:
 
    ===============  =================
    Abbreviations    Full name

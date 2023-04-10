@@ -212,7 +212,7 @@ Crystal2Graph
 
    .. py:method:: __call__(self):
    
-      Write three file: ``'train.txt'``, ``'validation.txt'``, ``'test.txt'`` contains the index of different datasets. The target directory is the directory to the csv file.
+      Write three files: ``'train.txt'``, ``'validation.txt'``, ``'test.txt'`` containing the index of different datasets. The directory including these files is the directory to the csv file.
       
       :Returns: 
          - train_index : A list of integers of training dataset.

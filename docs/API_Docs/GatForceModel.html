@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GatEnergyModel &mdash; AGAT 2022.10.04 documentation</title>
+  <title>GatForceModel &mdash; AGAT 2022.10.04 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -17,8 +17,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="GatForceModel" href="GatForceModel.html" />
-    <link rel="prev" title="SingleGatLayer" href="SingleGatLayer.html" /> 
+    <link rel="next" title="GatLib" href="GatLib.html" />
+    <link rel="prev" title="GatEnergyModel" href="GatEnergyModel.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,23 +51,23 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../API%20Docs.html">API Docs</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#energy-model">Energy model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#force-model">Force model</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../API%20Docs.html#modules">Modules</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../API_Docs.html">API_Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../API_Docs.html#energy-model">Energy model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API_Docs.html#force-model">Force model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../API_Docs.html#modules">Modules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="get_atomic_features.html">get_atomic_features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Crystal2Graph.html">Crystal2Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SingleGatLayer.html">SingleGatLayer</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">GatEnergyModel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GatEnergyModel.html">GatEnergyModel</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GatForceModel</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#GAT"><code class="docutils literal notranslate"><span class="pre">GAT</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="GatForceModel.html">GatForceModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GatLib.html">GatLib</a></li>
 <li class="toctree-l3"><a class="reference internal" href="PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API_Docs.html#tools">Tools</a></li>
 </ul>
 </li>
 </ul>
@@ -90,10 +90,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../API%20Docs.html">API Docs</a></li>
-      <li class="breadcrumb-item active">GatEnergyModel</li>
+          <li class="breadcrumb-item"><a href="../API_Docs.html">API_Docs</a></li>
+      <li class="breadcrumb-item active">GatForceModel</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/API Docs/GatEnergyModel.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/API_Docs/GatForceModel.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -101,12 +101,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="gatenergymodel">
-<h1>GatEnergyModel<a class="headerlink" href="#gatenergymodel" title="Permalink to this heading"></a></h1>
-<p>Construct an energy model.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>You can also use this model to train and predict crystal properties. What you need to do is just replace the energy labels with property labels.</p>
+  <section id="gatforcemodel">
+<h1>GatForceModel<a class="headerlink" href="#gatforcemodel" title="Permalink to this heading"></a></h1>
+<p>Construct a force model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also use this model to train and predict bond related properties. You need to store the labels on graph edges if you want to do so.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -117,17 +117,18 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tf_model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GAT" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="GAT.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gat_out_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_readout_out_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_list_en</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['div']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LeakyReLU'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout_activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LeakyReLU'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative_slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GAT.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gat_out_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_readout_out_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_list_force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['div']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LeakyReLU'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout_activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LeakyReLU'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative_slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_readout_no_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GAT.__init__" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>num_gat_out_list</strong> (<em>list</em>) – stack multiple AGAT layers. A list of numbers that contains the representation dimension of each GAT layer.</p></li>
 <li><p><strong>num_readout_out_list</strong> (<em>list</em>) – stack multiple neural network (densely connected) layers. A list of numbers that contains the representation dimension of each readout layer.</p></li>
-<li><p><strong>head_list_en</strong> (<em>list</em>) – A list contains the attention mechanisms of each head for the energy prediction.</p></li>
+<li><p><strong>head_list_force</strong> (<em>list</em>) – A list contains the attention mechanisms of each head for the energy prediction.</p></li>
 <li><p><strong>embed_activation</strong> (<em>str</em>) – TensorFlow activation function for embedding the inputs.</p></li>
 <li><p><strong>readout_activation</strong> (<em>str</em>) – TensorFlow activation function for the readout layers.</p></li>
 <li><p><strong>bias</strong> (<em>bool</em>) – bias term of dense layers.</p></li>
 <li><p><strong>negative_slope</strong> (<em>float</em>) – Negative slope of LeakyReLu function.</p></li>
+<li><p><strong>batch_normalization</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, append batch_normalization to this model.</p></li>
 </ul>
 </dd>
 </dl>
@@ -203,7 +204,7 @@
 <dd class="field-odd"><p><strong>graph</strong> (<em>dgl.graph</em>) – a graph.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Raw energy predictions of each atom (node).</p>
+<dd class="field-even"><p>Raw force predictions of each atom (node). The force predictions are stored on graph edges.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -216,8 +217,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="SingleGatLayer.html" class="btn btn-neutral float-left" title="SingleGatLayer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="GatForceModel.html" class="btn btn-neutral float-right" title="GatForceModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="GatEnergyModel.html" class="btn btn-neutral float-left" title="GatEnergyModel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GatLib.html" class="btn btn-neutral float-right" title="GatLib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -2,7 +2,7 @@
 Installation
 ============
 
-The :mod:`pip` installation is not activated yet.
+The :mod:`pip` installation is not implemented yet.
 
 Requirements
 ************

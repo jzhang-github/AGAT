@@ -40,7 +40,7 @@ Atomic features are one-hot codes.
 
    Selected elements for a specific system. For example::
    
-      ['Ni', 'Co', 'Fe', 'Al', 'Ti']
+      ['H', 'He', 'Li', 'Be', 'B']
    
 
 .. py:data:: Elements_used

@@ -25,7 +25,7 @@ The manual to reproduce  results and support conclusions of **Design High-Entrop
    :maxdepth: 2
    :caption: AGAT API:
 
-   API Docs
+   API_Docs
    
 .. toctree::
    :maxdepth: 2
