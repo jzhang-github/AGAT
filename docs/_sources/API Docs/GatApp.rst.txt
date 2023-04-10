@@ -1,5 +1,5 @@
 ############
-Tools
+GatApp
 ############
 
 
@@ -77,3 +77,75 @@ Applications for AGAT model.
       Predict cell stress.
       
       .. Note:: Not applicable.
+
+
+.. class:: GatAseCalculator(Calculator)
+
+   Deploy AGAT model on ``ase.calculators``, which can relax and find the ground state energy of a structure.
+   
+   .. Note:: This calculator is more efficient than :class:`GatCalculator`
+   
+   .. Note:: Go to https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators for more information about ``ase.calculators``
+   
+   .. attribute:: implemented_properties
+   
+      .. code-block::
+      
+         ['energy', 'energies', 'free_energy', 'forces', 'stress', 'stresses']
+      
+   .. attribute:: default_parameters
+   
+      .. code-block::
+      
+         {}
+   
+   .. method:: __init__(self, energy_model_save_path, force_model_save_path, load_model=True, gpu = -1, **kwargs)
+   
+      :param str energy_model_save_path: directory storing well-trained energy model.
+      :param str force_model_save_path: directory storing well-trained force model.
+      :param bool load_model: whether to load the model.
+      :param int gpu: - ``-1``: predict energy and forces on CPU cores.
+         - ``0``: predict energy and forces on GPU card.
+      :param args **kwargs: configurations.
+      
+   .. method:: calculate(self, atoms=None, properties=None, system_changes=['positions', 'numbers', 'cell', 'pbc'])
+   
+      :param ase.atoms atoms: ase.atoms object. Input structure.
+      :param list/NoneType properties: a list of properties calculated by this calculator.
+      :param list system_changes: a list of properties that can change during relaxation.
+
+
+.. class:: GatCalculator(Calculator)
+
+   Deploy AGAT model on ``ase.calculators``, which can relax and find the ground state energy of a structure.
+   
+   .. Note:: This calculator saves intermediate structural file to disk, and loads graph by pymatgen. Not memory and storage efficient. More efficient option: :class:`GatAseCalculator`
+   
+   .. Note:: Go to https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators for more information about ``ase.calculators``
+   
+   .. attribute:: implemented_properties
+   
+      .. code-block::
+      
+         ['energy', 'energies', 'free_energy', 'forces', 'stress', 'stresses']
+      
+   .. attribute:: default_parameters
+   
+      .. code-block::
+      
+         {}
+   
+   .. method:: __init__(self, energy_model_save_path, force_model_save_path, load_model=True, **kwargs)
+   
+      :param str energy_model_save_path: directory storing well-trained energy model.
+      :param str force_model_save_path: directory storing well-trained force model.
+      :param bool load_model: whether to load the model.
+      :param args **kwargs: configurations.
+      
+      
+   .. method:: calculate(self, atoms=None, properties=None, system_changes=['positions', 'numbers', 'cell', 'pbc'])
+   
+      :param ase.atoms atoms: ase.atoms object. Input structure.
+      :param list/NoneType properties: a list of properties calculated by this calculator.
+      :param list system_changes: a list of properties that can change during relaxation.
+

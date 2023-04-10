@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tools &mdash; AGAT 2022.10.04 documentation</title>
+  <title>GatApp &mdash; AGAT 2022.10.04 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -56,8 +56,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#force-model">Force model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../API%20Docs.html#modules">Modules</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../API%20Docs.html#tools">Tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Tools</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GatApp</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#GatApp"><code class="docutils literal notranslate"><span class="pre">GatApp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#GatAseCalculator"><code class="docutils literal notranslate"><span class="pre">GatAseCalculator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#GatCalculator"><code class="docutils literal notranslate"><span class="pre">GatCalculator</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="split_POSCAR_forces_from_vaspout_parallel.html">split_POSCAR_forces_from_vaspout_parallel.py</a></li>
@@ -88,7 +90,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../API%20Docs.html">API Docs</a></li>
-      <li class="breadcrumb-item active">Tools</li>
+      <li class="breadcrumb-item active">GatApp</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/API Docs/GatApp.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,8 +100,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tools">
-<h1>Tools<a class="headerlink" href="#tools" title="Permalink to this heading"></a></h1>
+  <section id="gatapp">
+<h1>GatApp<a class="headerlink" href="#gatapp" title="Permalink to this heading"></a></h1>
 <p>Applications for AGAT model.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="GatApp">
@@ -228,6 +230,131 @@
 <p class="admonition-title">Note</p>
 <p>Not applicable.</p>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="GatAseCalculator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GatAseCalculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Calculator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GatAseCalculator" title="Permalink to this definition"></a></dt>
+<dd><p>Deploy AGAT model on <code class="docutils literal notranslate"><span class="pre">ase.calculators</span></code>, which can relax and find the ground state energy of a structure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This calculator is more efficient than <a class="reference internal" href="#GatCalculator" title="GatCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">GatCalculator</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Go to <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators">https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators</a> for more information about <code class="docutils literal notranslate"><span class="pre">ase.calculators</span></code></p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GatAseCalculator.implemented_properties">
+<span class="sig-name descname"><span class="pre">implemented_properties</span></span><a class="headerlink" href="#GatAseCalculator.implemented_properties" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;energies&#39;</span><span class="p">,</span> <span class="s1">&#39;free_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="s1">&#39;stress&#39;</span><span class="p">,</span> <span class="s1">&#39;stresses&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GatAseCalculator.default_parameters">
+<span class="sig-name descname"><span class="pre">default_parameters</span></span><a class="headerlink" href="#GatAseCalculator.default_parameters" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GatAseCalculator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_model_save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_model_save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GatAseCalculator.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_model_save_path</strong> (<em>str</em>) – directory storing well-trained energy model.</p></li>
+<li><p><strong>force_model_save_path</strong> (<em>str</em>) – directory storing well-trained force model.</p></li>
+<li><p><strong>load_model</strong> (<em>bool</em>) – whether to load the model.</p></li>
+<li><p><strong>gpu</strong> (<em>int</em>) – <ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">-1</span></code>: predict energy and forces on CPU cores.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: predict energy and forces on GPU card.</p></li>
+</ul>
+</p></li>
+<li><p><strong>**kwargs</strong> (<em>args</em>) – <p>configurations.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GatAseCalculator.calculate">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_changes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['positions',</span> <span class="pre">'numbers',</span> <span class="pre">'cell',</span> <span class="pre">'pbc']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GatAseCalculator.calculate" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atoms</strong> (<em>ase.atoms</em>) – ase.atoms object. Input structure.</p></li>
+<li><p><strong>properties</strong> (<em>list/NoneType</em>) – a list of properties calculated by this calculator.</p></li>
+<li><p><strong>system_changes</strong> (<em>list</em>) – a list of properties that can change during relaxation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="GatCalculator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GatCalculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Calculator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GatCalculator" title="Permalink to this definition"></a></dt>
+<dd><p>Deploy AGAT model on <code class="docutils literal notranslate"><span class="pre">ase.calculators</span></code>, which can relax and find the ground state energy of a structure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This calculator saves intermediate structural file to disk, and loads graph by pymatgen. Not memory and storage efficient. More efficient option: <a class="reference internal" href="#GatAseCalculator" title="GatAseCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">GatAseCalculator</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Go to <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators">https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators</a> for more information about <code class="docutils literal notranslate"><span class="pre">ase.calculators</span></code></p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GatCalculator.implemented_properties">
+<span class="sig-name descname"><span class="pre">implemented_properties</span></span><a class="headerlink" href="#GatCalculator.implemented_properties" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;energies&#39;</span><span class="p">,</span> <span class="s1">&#39;free_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="s1">&#39;stress&#39;</span><span class="p">,</span> <span class="s1">&#39;stresses&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GatCalculator.default_parameters">
+<span class="sig-name descname"><span class="pre">default_parameters</span></span><a class="headerlink" href="#GatCalculator.default_parameters" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GatCalculator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_model_save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_model_save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GatCalculator.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_model_save_path</strong> (<em>str</em>) – directory storing well-trained energy model.</p></li>
+<li><p><strong>force_model_save_path</strong> (<em>str</em>) – directory storing well-trained force model.</p></li>
+<li><p><strong>load_model</strong> (<em>bool</em>) – whether to load the model.</p></li>
+<li><p><strong>**kwargs</strong> (<em>args</em>) – <p>configurations.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GatCalculator.calculate">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_changes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['positions',</span> <span class="pre">'numbers',</span> <span class="pre">'cell',</span> <span class="pre">'pbc']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GatCalculator.calculate" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atoms</strong> (<em>ase.atoms</em>) – ase.atoms object. Input structure.</p></li>
+<li><p><strong>properties</strong> (<em>list/NoneType</em>) – a list of properties calculated by this calculator.</p></li>
+<li><p><strong>system_changes</strong> (<em>list</em>) – a list of properties that can change during relaxation.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
