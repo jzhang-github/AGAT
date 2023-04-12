@@ -1,6 +1,8 @@
 # **AGAT for High-Entropy Catalysis**
 ### This is the manual to reproduce  results and support conclusions of ***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***.   
-We recommend using a Linux operating system to run the following examples, under the [current directory](.).  <br>    <br>
+We recommend using a Linux operating system to run the following examples, under the [current directory](.).  
+
+## The documentation for main modules and code can be found at: https://jzhang-github.github.io/AGAT/API_Docs.html  <br>    <br>
 ![Graphical-abstract](files/Graphical%20abstract%20-%20github.jpg)
 
 # Table of Contents
