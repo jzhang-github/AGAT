@@ -1,0 +1,9 @@
+cff-version: 1
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: ZHANG
+    given-names: Jun
+    orcid: https://orcid.org/0000-0001-8872-6153
+title: jzhang-github/AGAT: AGAT
+version: v1
+date-released: 2023-05-28
