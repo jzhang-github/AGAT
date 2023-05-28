@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/545430295.svg)](https://zenodo.org/badge/latestdoi/545430295)
+
 # AGAT
 ## Atomic Graph ATtention networks
 
