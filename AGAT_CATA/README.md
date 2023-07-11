@@ -16,7 +16,7 @@ We recommend using a Linux operating system to run the following examples, under
   - [Predict](#predict)  
   - [High-throughput predict](#high-throughput-predict)  
 
-- [Example for figures](#example-for-figures) in *[reference]([url](https://doi.org/10.1016/j.joule.2023.06.003))*
+- [Example for figures](#example-for-figures) in [*reference*](https://doi.org/10.1016/j.joule.2023.06.003)
   - [Figure 2](#figure-2)
   - [Figure 3](#figure-3)
   - [Figure 4](#figure-4)
