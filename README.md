@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/545430295.svg)](https://zenodo.org/badge/latestdoi/545430295)
+[![DOI](https://zenodo.org/badge/545430295.svg)](https://zenodo.org/badge/latestdoi/545430295) ![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT)
 
 # AGAT
 ## Atomic Graph ATtention networks
