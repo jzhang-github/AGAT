@@ -7,3 +7,6 @@ The manual to reproduce  results and support conclusions of [***Design High-Entr
 
 ## Turorial
 The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is available.
+
+## pip wheel
+**The pip wheel is coming soon. Thank you for being so patient.**
