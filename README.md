@@ -6,8 +6,8 @@
 ### This is the first version of AGAT model, which reproduces results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](https://doi.org/10.1016/j.joule.2023.06.003)
 
 ## Turorial
-The [documentation](https://jzhang-github.github.io/AGAT/v1.0.0) of AGAT API is available.
-## The documentation for main modules and code can be found at: https://jzhang-github.github.io/AGAT/API_Docs.html  <br>    <br>
+### The [documentation](https://jzhang-github.github.io/AGAT/v1.0.0) of AGAT API is available.
+
 
 # **AGAT for High-Entropy Catalysis**
 We recommend using a Linux operating system to run the following examples, under the [current directory](.).  
