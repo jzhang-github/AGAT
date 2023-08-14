@@ -3,13 +3,12 @@
 # AGAT
 ## Atomic Graph ATtention networks
 
-### This is the first version of AGAT model, which reproduces results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](https://doi.org/10.1016/j.joule.2023.06.003)
+#### This is the first version of AGAT model, which reproduces results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](https://doi.org/10.1016/j.joule.2023.06.003)
 
-## Turorial
+# Turorial
 ### The [documentation](https://jzhang-github.github.io/AGAT/v1.0.0) of AGAT API is available.
 
 
-# **AGAT for High-Entropy Catalysis**
 We recommend using a Linux operating system to run the following examples, under the [current directory](.).  
 
 ![Graphical-abstract](files/Graphical%20abstract%20-%20github.jpg)
