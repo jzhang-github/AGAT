@@ -10,5 +10,3 @@ The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is availa
 
 ## pip wheel
 **The pip wheel is coming soon. Thank you for being so patient.**
-
-For a test
