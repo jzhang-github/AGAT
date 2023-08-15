@@ -6,5 +6,5 @@ Created on Tue Aug 15 11:41:20 2023
 """
 
 from agat.data.data import *
-from agat.data.AtomicFeatures import *
+from agat.data.AtomicFeatures import get_atomic_features， get_atomic_feature_onehot
 

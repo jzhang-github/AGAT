@@ -1,6 +1,6 @@
 
 # AGAT (Atomic Graph ATtention networks)
-[![DOI](https://zenodo.org/badge/545430295.svg)](https://zenodo.org/badge/latestdoi/545430295) ![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT) ![PyPI - Downloads](https://img.shields.io/pypi/dm/agat) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat) ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/jzhang-github/AGAT)  
+ ![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT) ![PyPI - Downloads](https://img.shields.io/pypi/dm/agat) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat) 
 
 
 # Installation
