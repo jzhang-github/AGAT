@@ -1,0 +1,21 @@
+# .gitignore file
+
+__pycache__
+cata_old
+dataset
+out_file
+tools
+*.txt
+*.gat
+POSCAR*
+CONTCAR*
+*.json
+data.py
+ads_surf_energy_H_0.txt
+*.log
+*.out
+README.txt
+*.traj
+data/dataset
+agat.egg-info
+dist

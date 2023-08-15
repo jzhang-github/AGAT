@@ -1,2 +1,0 @@
-model_checkpoint_path: "gat.ckpt"
-all_model_checkpoint_paths: "gat.ckpt"
