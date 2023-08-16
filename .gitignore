@@ -10,7 +10,6 @@ tools
 POSCAR*
 CONTCAR*
 *.json
-data.py
 ads_surf_energy_H_0.txt
 *.log
 *.out
