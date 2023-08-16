@@ -1,5 +1,7 @@
-# [v7.12](https://github.com/jzhang-github/AGAT/tree/v7.12)
+# [main](https://github.com/jzhang-github/AGAT)
+- Import `pymatgen` module when necessary. See [agat/data/AtomicFeatures.py](agat/data/AtomicFeatures.py#L44)
 
+# [v7.12](https://github.com/jzhang-github/AGAT/tree/v7.12)
 
 - Release pip wheel.   
 - Simplify packages. See [v1.0.0](https://github.com/jzhang-github/AGAT/tree/v1.0.0) for more details of the first release.
