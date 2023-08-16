@@ -52,10 +52,10 @@ class GatApp(object):
         self.force_model_save_path  = force_model_save_path
         self.graph_build_scheme_path = graph_build_scheme_path
         self.gpu                    = gpu
-        if gpu < 0:
+        if self.gpu < 0:
             self.device             = "/cpu:0"
         else:
-            self.device             = "/gpu:{}".format(gpu)
+            self.device             = "/gpu:{}".format(self.gpu)
 
         if load_model:
             self.energy_model       = self.load_energy_model(energy_model_save_path)
@@ -66,7 +66,7 @@ class GatApp(object):
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False}
         self.graph_build_scheme['build_properties'] = {**self.graph_build_scheme['build_properties'], **build_properties}
-        self.cg                     = CrystalGraph(**self.graph_build_scheme)
+        self.cg                     = CrystalGraph(**self.graph_build_scheme, gpu=self.gpu)
 
     def load_graph_build_scheme(self, path):
         """ Load graph building scheme. This file is normally saved when you build your dataset.
@@ -424,3 +424,21 @@ if __name__ == '__main__':
     #     print(f'Time used for {optimizer} is {time.time()-start}')
 
 
+    #BFGS
+    poscar_init = read('POSCAR')
+    f = open('test.log', 'w', buffering=1)
+    for i in range(10):
+        for j in range(10):
+            poscar = poscar_init.repeat(i+1)
+            calculator=GatAseCalculator(energy_model_save_dir,
+                                        force_model_save_dir,
+                                        graph_build_scheme_dir, gpu=-1)
+            poscar = Atoms(poscar, calculator=calculator)
+            dyn = BFGS(poscar, trajectory='test.traj')
+            start = time.time()
+            dyn.run(fmax=0.0000005, steps=20)
+            print('Time:', time.time() - start, 'Number of atoms:', len(poscar), file=f)
+
+            traj = read('test.traj', index=':')
+            write("XDATCAR.gat", traj)
+    f.close()

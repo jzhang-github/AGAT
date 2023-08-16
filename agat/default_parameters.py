@@ -56,7 +56,8 @@ default_data_config =  {
     'scale_prop': False,
     'validation_size': 0.15, # int or float. int: number of samples of the validation set. float: portion of samples of the validation set.
     'test_size': 0.15,
-    'new_split': True
+    'new_split': True,
+    'gpu': 0
              }
 
 default_train_config = {

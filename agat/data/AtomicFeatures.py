@@ -8,6 +8,7 @@ Created on Wed Apr 21 17:51:55 2021
 
 import numpy as np
 import tensorflow as tf
+from pymatgen.core.periodic_table import Element
 
 all_elements = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'B',  'Ba',
                 'Be', 'Bh', 'Bi', 'Bk', 'Br', 'C',  'Ca', 'Cd', 'Ce', 'Cf',
@@ -41,7 +42,7 @@ NiFe_ele = ['Fe', 'Ni']
 Elements_used = elements
 
 def get_atomic_features(Elements_used):
-    from pymatgen.core.periodic_table import Element
+
     """
     For more input features, please refer to: https://pymatgen.org/pymatgen.core.periodic_table.html
 
