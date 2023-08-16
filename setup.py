@@ -19,7 +19,7 @@ with open("D:\OneDrive - City University of Hong Kong\scripts\machine learning\A
 # long_description = (this_directory / "README.md").read_text()
 
 setup(name='agat',
-      version='7.12',
+      version='7.12.1',
       python_requires='>=3.10',
       description='Atomic Graph ATtention networks for predicting atomic energies and forces.',
       long_description=long_description,
