@@ -98,4 +98,4 @@ dyn.run(**default_hp_config['opt_config'])
 ```
 
 # Change log  
-Please check [Change_log.md](Change_log.md)
+Please check [Change_log.md](https://github.com/jzhang-github/AGAT/blob/main/Change_log.md)
