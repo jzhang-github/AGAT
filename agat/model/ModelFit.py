@@ -12,12 +12,12 @@ import time
 import sys
 import dgl
 
-from agat.model.GatEnergyModel import EnergyGat
-from agat.model.GatForceModel import ForceGat
+from .GatEnergyModel import EnergyGat
+from .GatForceModel import ForceGat
 # from modules.Crystal2Graph import ReadGraphs, TrainValTestSplit
-from agat.lib.GatLib import EarlyStopping, PearsonR, load_gat_weights, config_parser # get_src_dst_data #, evaluate
-from agat.default_parameters import default_train_config
-from agat.data.data import ReadGraphs
+from ..lib.GatLib import EarlyStopping, PearsonR, load_gat_weights, config_parser # get_src_dst_data #, evaluate
+from ..default_parameters import default_train_config
+from ..data.data import ReadGraphs
 
 class Train():
     def __init__(self, **train_config):

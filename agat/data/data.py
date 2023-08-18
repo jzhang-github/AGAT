@@ -19,9 +19,9 @@ import ase
 from ase.neighborlist import natural_cutoffs
 
 import sys
-from agat.default_parameters import default_data_config
-from agat.data.AtomicFeatures import get_atomic_feature_onehot, get_atomic_features
-from agat.lib.GatLib import config_parser
+from ..default_parameters import default_data_config
+from ..data.AtomicFeatures import get_atomic_feature_onehot, get_atomic_features
+from ..lib.GatLib import config_parser
 
 class CrystalGraph(object):
     """

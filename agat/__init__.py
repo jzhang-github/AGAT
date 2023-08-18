@@ -11,6 +11,6 @@ import os
 os.environ['DGLBACKEND']="tensorflow"
 
 # import important object.
-from agat.data.data import AgatDatabase
-from agat.model.ModelFit import Train
-from agat.app.cata import high_throughput_predict
+from .data.data import AgatDatabase
+from .model.ModelFit import Train
+from .app.cata import high_throughput_predict

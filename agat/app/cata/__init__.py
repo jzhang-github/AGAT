@@ -6,10 +6,10 @@ Created on Tue Aug 15 11:41:20 2023
 """
 
 # import important object.
-from agat.app.cata.find_adsorption_site import *
-from agat.app.cata.generate_adsorption_sites import *
-from agat.app.cata.high_throughput_predict import *
-from agat.app.cata.increase_vacuum import *
-from agat.app.cata.volcano_2e import *
-from agat.app.cata.volcano_plot import *
+from .find_adsorption_site import *
+from .generate_adsorption_sites import *
+from .high_throughput_predict import *
+from .increase_vacuum import *
+from .volcano_2e import *
+from .volcano_plot import *
 
