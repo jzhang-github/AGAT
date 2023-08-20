@@ -31,10 +31,7 @@ default_elements = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'B',  'Ba',
                     'Sr', 'Ta', 'Tb', 'Tc', 'Te', 'Th', 'Ti', 'Tl', 'Tm', 'Ts',
                     'U',  'V',  'W',  'Xe', 'Y',  'Yb', 'Zn', 'Zr']
 
-default_data_config =  {
-    'species': default_elements,
-    'path_file': 'paths.log', # A file of absolute paths where OUTCAR and XDATCAR files exist.
-    'build_properties': {'energy': True,
+default_build_properties = {'energy': True,
                          'forces': True,
                          'cell': True,
                          'cart_coords': True,
@@ -42,7 +39,12 @@ default_data_config =  {
                          'constraints': True,
                          'distance': True,
                          'direction': True,
-                         'path': False}, # Properties needed to be built into graph.
+                         'path': False}
+
+default_data_config =  {
+    'species': default_elements,
+    'path_file': 'paths.log', # A file of absolute paths where OUTCAR and XDATCAR files exist.
+    'build_properties': default_build_properties, # Properties needed to be built into graph.
     'dataset_path': 'dataset', # Path where the collected data to save.
     'mode_of_NN': 'ase_natural_cutoffs', # How to identify connections between atoms. 'ase_natural_cutoffs', 'pymatgen_dist', 'ase_dist', 'voronoi'. Note that pymatgen is much faster than ase.
     'cutoff': 5.0, # Cutoff distance to identify connections between atoms. Deprecated if ``mode_of_NN`` is ``'ase_natural_cutoffs'``
