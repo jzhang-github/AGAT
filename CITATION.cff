@@ -1,18 +1,32 @@
-cff-version: 1
+cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-type: article
 authors:
-  - family-names: ZHANG
-    given-names: Jun
-    orcid: https://orcid.org/0000-0001-8872-6153
-title: jzhang-github/AGAT: AGAT
-version: v7.12
-date-released: 2023-08-15
-title: 'Design high-entropy electrocatalyst via interpretable deep graph attention learning'
-doi: 10.1016/j.joule.2023.06.003
-url: https://github.com/jzhang-github/AGAT
-issn: 25424351
-journal: Joule
-pages: 1-20
-volume: 7
-year: 2023
+- family-names: "ZHANG"
+  given-names: "Jun"
+  orcid: "https://orcid.org/0000-0001-8872-6153"
+- family-names: "ZHAO"
+  given-names: "Shijun"
+  orcid: "https://orcid.org/0000-0003-0870-8153"
+title: "Design high-entropy electrocatalyst via interpretable deep graph attention learning"
+version: 1.0.0
+doi: 10.5281/zenodo.7979079
+date-released: 2023-05-28
+url: "https://github.com/jzhang-github/AGAT"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "ZHANG"
+    given-names: "Jun"
+    orcid: "https://orcid.org/0000-0001-8872-6153"
+  - family-names: "ZHAO"
+    given-names: "Shijun"
+    orcid: "https://orcid.org/0000-0003-0870-8153"
+  doi: "10.1016/j.joule.2023.06.003"
+  journal: "Joule"
+  month: 8
+  start: 1832 # First page number
+  end: 1851 # Last page number
+  title: "Design high-entropy electrocatalyst via interpretable deep graph attention learning"
+  issue: 8
+  volume: 7
+  year: 2023
