@@ -9,9 +9,9 @@ import json
 import os
 import sys
 import tensorflow as tf
-from agat.data.data import CrystalGraph
-from agat.model.GatEnergyModel import EnergyGat as GATE
-from agat.model.GatForceModel import ForceGat as GATF
+from ..data.data import CrystalGraph
+from ..model.GatEnergyModel import EnergyGat as GATE
+from ..model.GatForceModel import ForceGat as GATF
 from dgl.data.utils import load_graphs
 from ase import Atoms
 from ase.optimize import BFGS

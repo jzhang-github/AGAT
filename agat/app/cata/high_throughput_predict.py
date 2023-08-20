@@ -19,13 +19,13 @@ from ase.formula import Formula
 import json
 import sys
 
-from agat.app.GatApp import GatAseCalculator
-from agat.app.cata.generate_adsorption_sites import AddAtoms
-from agat.lib.AgatException import file_exit
-from agat.lib.file import generate_file_name
-from agat.lib.GatLib import config_parser
-from agat.default_parameters import default_hp_config
-from agat.lib.adsorbate_poscar import adsorbate_poscar
+from ..GatApp import GatAseCalculator
+from .generate_adsorption_sites import AddAtoms
+from ...lib.AgatException import file_exit
+from ...lib.file import generate_file_name
+from ...lib.GatLib import config_parser
+from ...default_parameters import default_hp_config
+from ...lib.adsorbate_poscar import adsorbate_poscar
 
 class HpAds(object):
     def __init__(self, **hp_config):

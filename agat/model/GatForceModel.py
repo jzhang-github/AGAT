@@ -5,7 +5,7 @@ Inspired by: https://github.com/dmlc/dgl/blob/0.6.x/examples/tensorflow/gat/gat.
 
 import tensorflow as tf
 from tensorflow.keras import Model as tf_model
-from agat.model.SingleGatLayer import GATLayer
+from .SingleGatLayer import GATLayer
 from dgl.ops import edge_softmax
 from dgl import function as fn
 

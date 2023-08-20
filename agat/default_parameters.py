@@ -16,7 +16,7 @@ Created on Mon Jun 26 23:07:24 2023
 import os
 import tensorflow as tf
 import dgl
-dgl.use_libxsmm(False)
+# dgl.use_libxsmm(False) # Uncomment this line when you have relevant error.
 
 default_elements = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'B',  'Ba',
                     'Be', 'Bh', 'Bi', 'Bk', 'Br', 'C',  'Ca', 'Cd', 'Ce', 'Cf',
