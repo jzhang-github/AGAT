@@ -1,0 +1,64 @@
+##############
+GatEnergyModel
+##############
+
+Construct an energy model.
+
+.. Hint:: You can also use this model to train and predict crystal properties. What you need to do is just replace the energy labels with property labels.
+
+.. Note:: This model has multiple attention heads.
+
+.. py:class:: GAT(tf_model)
+
+   .. py:method:: __init__(self, num_gat_out_list, num_readout_out_list=[1], head_list_en=['div'], embed_activation='LeakyReLU', readout_activation='LeakyReLU', bias=True, negative_slope=0.2)
+   
+      :param list num_gat_out_list: stack multiple AGAT layers. A list of numbers that contains the representation dimension of each GAT layer.
+      :param list num_readout_out_list: stack multiple neural network (densely connected) layers. A list of numbers that contains the representation dimension of each readout layer.
+      :param list head_list_en: A list contains the attention mechanisms of each head for the energy prediction.
+      :param str embed_activation: TensorFlow activation function for embedding the inputs.
+      :param str readout_activation: TensorFlow activation function for the readout layers.
+      :param bool bias: bias term of dense layers.
+      :param float negative_slope: Negative slope of LeakyReLu function.
+
+
+   .. py:method:: mul(self, TfTensor)
+   
+      The attention mechanism. Do nothing to this tensor.
+      
+      :param tensorflow.python.framework.ops.EagerTensor TfTensor: a tensorflow.python.framework.ops.EagerTensor.
+      :returns: a tensorflow.python.framework.ops.EagerTensor.
+      
+      
+   .. py:method:: div(self, TfTensor)
+   
+      The attention mechanism. Calculate 1/input_tensor
+      
+      
+      :param tensorflow.python.framework.ops.EagerTensor TfTensor: a tensorflow.python.framework.ops.EagerTensor.
+      :returns: the reciprocal value of tensorflow.python.framework.ops.EagerTensor.
+
+
+   .. py:method:: free(self, TfTensor)
+   
+      The attention mechanism: a free head with 1.0.
+      
+      :param tensorflow.python.framework.ops.EagerTensor TfTensor: a tensorflow.python.framework.ops.EagerTensor.
+      :returns: a tensorflow.python.framework.ops.EagerTensor filled with 1.0, which has the same shape with the input.
+
+
+   .. py:method:: get_head_mechanism(self, fn_list, TfTensor)
+
+      :param fn_list: A list of head mechanisms. For example: ['mul', 'div', 'free']
+      :type fn_list: list
+      :param TfTensor: A tensorflow tensor
+      :type TfTensor: tf.tensor
+      :return: A new tensor after the transformation.
+      :rtype: tensor
+
+
+   .. py:method:: call(self, graph)
+   
+      The ``call`` function of tensorflow. Call the model and do the forward propagation calculation.
+      
+      :param dgl.graph graph: a graph.
+      :returns: Raw energy predictions of each atom (node).
