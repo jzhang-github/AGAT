@@ -14,7 +14,7 @@ make html
 
 ### Copy all files under [docs/sphinx/build/html](docs/sphinx/build/html) to [docs](docs).
 
-**Note: Replace all files under [docs](docs)**
+**Note: Replace all files under [docs](docs).**
 
 
 
