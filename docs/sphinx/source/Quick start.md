@@ -3,7 +3,7 @@
 
 
 ### Collect paths of VASP calculations
-- We provided examples of VASP outputs at [VASP_calculations_example](https://github.com/jzhang-github/AGAT/tree/v1.0.0/files/VASP_calculations_example).   
+  
 - Find all directories containing `OUTCAR` file:   
   ```
   find . -name OUTCAR > paths.log

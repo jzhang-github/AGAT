@@ -4,6 +4,9 @@
 ![Model architecture](files/architecture.svg)
 
 
+# Using AGAT
+The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is available.
+
 # Installation
 
 ### Install with [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
@@ -32,8 +35,6 @@ For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version 
 - Change [dgl backend](https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends) to `tensorflow`.
 
 
-# Using AGAT
-The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is available.
 
 
 # Quick start

@@ -2,7 +2,7 @@
 Introduction
 ############
 
-The ``pip`` installation is not implemented yet.
+
 
 
 
@@ -12,6 +12,9 @@ Atomic Graph ATtention (AGAT)
 
 AGAT model is an high-efficient dee-graph model for prediction energy and forces of crystals.
 
+.. image:: ./architecture.svg
+   :align: center
+   :alt: AGAT architecture
 
 
 ==================
@@ -26,5 +29,5 @@ API documentation
 Source code
 ===========
 
-The manual to reproduce  results and support conclusions of **Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning** is now available at: https://github.com/jzhang-github/AGAT/tree/main/AGAT_CATA.
+Navigate to the `GitHub repo <https://github.com/jzhang-github/AGAT>`_.
 
