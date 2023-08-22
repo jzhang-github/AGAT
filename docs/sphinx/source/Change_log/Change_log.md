@@ -1,5 +1,10 @@
-## [main](https://github.com/jzhang-github/AGAT/)
-- Using relative import. For example: [agat/__init__.py](agat/__init__.py#L14-L16)
+# [main](https://github.com/jzhang-github/AGAT/)
+
+
+# [v7.12.2](https://github.com/jzhang-github/AGAT/tree/v7.12.2)
+- Using relative import. For example: [agat/__init__.py](https://github.com/jzhang-github/AGAT/tree/v7.12.2/agat/__init__.py#L14-L16)
+- Update [documentations](https://jzhang-github.github.io/AGAT/).
+- Import useful objects only. For example: [agat/app__init__.py](https://github.com/jzhang-github/AGAT/tree/v7.12.2/agat/app/__init__.py#L11)
 
 
 # [v7.12.1](https://github.com/jzhang-github/AGAT/tree/v7.12.1)
