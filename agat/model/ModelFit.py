@@ -244,6 +244,7 @@ class Train():
         np.savetxt(os.path.join(self.train_config['output_files'], 'en_test_final_pred.txt'), tf.concat(y_pred, axis=0).numpy(), fmt='%.8f')
 
         energy_log.close()
+        return mae_value
 
     def fit_force_model(self):
         # open log file
@@ -438,6 +439,7 @@ class Train():
         np.savetxt(os.path.join(self.train_config['output_files'], 'force_test_final_true.txt'), tf.reshape(y_true, [-1]).numpy(), fmt='%.8f')
         np.savetxt(os.path.join(self.train_config['output_files'], 'force_test_final_pred.txt'), tf.reshape(y_pred, [-1]).numpy(), fmt='%.8f')
         logf.close()
+        return mae_value
 
 if __name__ == '__main__':
     at = Train()
