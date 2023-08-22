@@ -60,3 +60,5 @@ A dictionary defines how to build a database.
 | `test_size`                | 0.15          | `int`/`float`    | Size of the test dataset. `int`: number of samples of the validation set. `float`: portion of samples of the validation set. |
 | `new_split`                | `True`        | `False`          | Split the dataset according specified `validation_size` and `test_size` when building graphs.  |
 | `gpu`                      | 0             | `int`: -1        | Specify device when building graphs. Negative values for cpu; Positive `int` for GPU. |
+
+**Note**: More `num_of_cores` needs more memory. Weird results happen when you don't have enough memory.
