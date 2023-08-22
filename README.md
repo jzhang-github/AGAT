@@ -1,6 +1,9 @@
 
 # AGAT (Atomic Graph ATtention networks)
- ![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT) ![PyPI - Downloads](https://img.shields.io/pypi/dm/agat) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)  <br>  <br>  
+![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT) 
+![Pypi](https://img.shields.io/pypi/v/agat.svg)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/agat)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)  <br>  <br>  
 ![Model architecture](files/architecture.svg)
 
 
