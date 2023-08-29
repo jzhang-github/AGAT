@@ -1,5 +1,6 @@
 # [main](https://github.com/jzhang-github/AGAT/)
-- Raise exception if error occurs when parsing OUTCAR file. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L584-L587)
+- Raise exception if error occurs when parsing OUTCAR file. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L584-L588)
+- Remove `os` from the root name space. [agat/__init__.py](https://github.com/jzhang-github/AGAT/tree/main/agat/__init__.py#L18)
 
 # [v7.12.2](https://github.com/jzhang-github/AGAT/tree/v7.12.2)
 - Using relative import. For example: [agat/__init__.py](https://github.com/jzhang-github/AGAT/tree/v7.12.2/agat/__init__.py#L14-L16)
