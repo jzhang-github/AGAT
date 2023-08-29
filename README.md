@@ -1,8 +1,14 @@
 
 # AGAT (Atomic Graph ATtention networks)
- ![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT) ![PyPI - Downloads](https://img.shields.io/pypi/dm/agat) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)  <br>  <br>  
+![GitHub](https://img.shields.io/github/license/jzhang-github/AGAT) 
+![Pypi](https://img.shields.io/pypi/v/agat.svg)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/agat)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)  <br>  <br>  
 ![Model architecture](files/architecture.svg)
 
+
+# Using AGAT
+The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is available.
 
 # Installation
 
@@ -32,8 +38,6 @@ For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version 
 - Change [dgl backend](https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends) to `tensorflow`.
 
 
-# Using AGAT
-The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is available.
 
 
 # Quick start

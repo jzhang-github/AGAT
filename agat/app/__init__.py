@@ -8,4 +8,4 @@ Created on Tue Aug 15 11:41:20 2023
 __version__ = '7.12'
 
 # import important object.
-from .GatApp import *
+from .GatApp import GatApp, GatAseCalculator, GatCalculator

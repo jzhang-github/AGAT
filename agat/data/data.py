@@ -578,15 +578,15 @@ class ExtractVaspFiles(object):
 
             if os.path.exists('OUTCAR') and os.path.exists('XDATCAR') and os.path.exists('OSZICAR') and os.path.exists('INCAR') and os.path.exists('CONTCAR'):
 
-                # read free energy
-                with open('OUTCAR', 'r') as f:
-                    free_energy = []
-                    for line in f:
-                        if '  free  energy   TOTEN  ' in line.split('='):
-                            free_energy.append(float(line.split()[4]))
-
                 read_good = True
                 try:
+                    # read free energy
+                    with open('OUTCAR', 'r') as f:
+                        free_energy = []
+                        for line in f:
+                            if '  free  energy   TOTEN  ' in line.split('='):
+                                free_energy.append(float(line.split()[4]))
+
                     # read frames
                     frame_contcar  = read('CONTCAR')
                     constraints    = frame_contcar.constraints

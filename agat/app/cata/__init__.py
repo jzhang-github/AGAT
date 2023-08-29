@@ -6,10 +6,10 @@ Created on Tue Aug 15 11:41:20 2023
 """
 
 # import important object.
-from .find_adsorption_site import *
-from .generate_adsorption_sites import *
-from .high_throughput_predict import *
-from .increase_vacuum import *
-from .volcano_2e import *
-from .volcano_plot import *
+from .find_adsorption_site import find_adsorption_site
+from .generate_adsorption_sites import AddAtoms
+from .high_throughput_predict import HpAds
+from .increase_vacuum import increase_vacuum
+from .volcano_2e import volcano_2e
+from .volcano_plot import volcano_plot
 
