@@ -550,6 +550,7 @@ class ExtractVaspFiles(object):
             os.mkdir(self.data_config['dataset_path'])
 
         self.in_path_list = np.loadtxt(self.data_config['path_file'], dtype=str)
+        self.batch_index = np.array_split([x for x in range(len(self.in_path_list))], self.data_config['num_of_cores'])
 
         self.working_dir = os.getcwd()
 
@@ -581,9 +582,10 @@ class ExtractVaspFiles(object):
 
         print('mask_similar_frames:', self.data_config['mask_similar_frames'])
         f_csv = open(os.path.join(self.data_config['dataset_path'], f'fname_prop_{process_index}.csv'), 'w', buffering=1)
-        for path_index, in_path in tqdm(enumerate(self.in_path_list), desc='Extracting ' + str(process_index) + ' VASP files.', delay=process_index): # tqdm(batch_fname, desc='Reading ' + str(batch_num) + ' batch graphs', delay=batch_num)
+        in_path_index = self.batch_index[process_index]
+        for path_index in tqdm(in_path_index, desc='Extracting ' + str(process_index) + ' VASP files.', delay=process_index): # tqdm(batch_fname, desc='Reading ' + str(batch_num) + ' batch graphs', delay=batch_num)
+            in_path = self.in_path_list[path_index]
             in_path = in_path.strip("\n")
-
             os.chdir(in_path)
 
             if os.path.exists('OUTCAR') and os.path.exists('XDATCAR') and os.path.exists('OSZICAR') and os.path.exists('INCAR') and os.path.exists('CONTCAR'):
@@ -659,12 +661,9 @@ class ExtractVaspFiles(object):
         f_csv.close()
 
     def __call__(self):
-        batch_index = np.array_split([x for x in range(len(self.in_path_list))], self.data_config['num_of_cores'])
-
         processes = []
-        for process_index, path_index in enumerate(batch_index):
-            path_list = [self.in_path_list[x] for x in path_index]
-            p = multiprocessing.Process(target=self.split_output, args=[process_index])
+        for process_index in range(self.data_config['num_of_cores']):
+            p = multiprocessing.Process(target=self.split_output, args=[process_index,])
             p.start()
             processes.append(p)
         print(processes)
@@ -675,7 +674,7 @@ class ExtractVaspFiles(object):
         f = open(os.path.join(self.working_dir,
                               self.data_config['dataset_path'],
                               'fname_prop.csv'), 'w')
-        for job, _ in enumerate(batch_index):
+        for job in range(self.data_config['num_of_cores']):
             lines = np.loadtxt(os.path.join(self.working_dir,
                                             self.data_config['dataset_path'],
                                             f'fname_prop_{job}.csv'),
