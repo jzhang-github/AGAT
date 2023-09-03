@@ -1,5 +1,6 @@
 # [main](https://github.com/jzhang-github/AGAT/)
 
+# [v7.13](https://github.com/jzhang-github/AGAT/tree/v7.13)
 - Raise exception if error occurs when parsing OUTCAR file. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L595-L599)
 - Remove `os` from the root name space. [agat/__init__.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/__init__.py#L18)
 - Fix a bug when build graphs. See [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L400-L411) and [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L444-L452). Specifically, one needs to cast `tf.tensor` as `np.array` before building graph properties with a very large tensor. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L408-L409).
