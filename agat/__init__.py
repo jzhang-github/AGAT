@@ -14,3 +14,5 @@ os.environ['DGLBACKEND']="tensorflow"
 from .data.data import AgatDatabase
 from .model.ModelFit import Train
 from .app.cata import high_throughput_predict
+
+del os
