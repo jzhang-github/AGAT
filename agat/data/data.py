@@ -397,9 +397,17 @@ class ReadGraphs(object):
             batch_g.append(g)
             batch_graph_info.append(graph_info)
 
-        batch_labels = {key: tf.stack([i[key] for i in batch_graph_info])\
-                        for key in batch_graph_info[0] if key != 'path'}
-        # print(batch_labels)
+        # batch_labels = {key: tf.stack([i[key] for i in batch_graph_info])\
+        #                 for key in batch_graph_info[0] if key != 'path'}
+        batch_labels = {}
+        for key in batch_graph_info[0]:
+            if key != 'path':
+                graph_info_tmp = []
+                for i in batch_graph_info:
+                    graph_info_tmp.append(i[key].numpy())
+                graph_info_tmp = np.array(graph_info_tmp)
+                graph_info_tmp = tf.cast(graph_info_tmp, dtype=tf.float32)
+                batch_labels[key] = graph_info_tmp
         save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs_' + str(batch_num) + '.bin'), batch_g, batch_labels)
 
     def read_all_graphs(self): # prop_per_node=False Deprecated!
@@ -431,14 +439,16 @@ class ReadGraphs(object):
             num_graph_per_core = self.number_of_graphs // self.data_config['num_of_cores'] + 1
             graph_index        = [x for x in range(self.number_of_graphs)]
             batch_index        = [graph_index[x: x + num_graph_per_core] for x in range(0, self.number_of_graphs, num_graph_per_core)]
-            p                  = multiprocessing.Pool(self.data_config['num_of_cores'])
+            processes = []
 
-            for batch_num, batch_index_list in enumerate(batch_index):
-                p_out = p.apply_async(self.read_batch_graphs, args=(batch_index_list, batch_num))
-            p_out.get()
             print('Waiting for all subprocesses...')
-            p.close()
-            p.join()
+            for batch_num, batch_index_list in enumerate(batch_index):
+                p = multiprocessing.Process(target=self.read_batch_graphs, args=[batch_index_list, batch_num])
+                p.start()
+                processes.append(p)
+            print(processes)
+            for process in processes:
+                process.join()
             print('All subprocesses done.')
             graph_list = []
             graph_labels = {}

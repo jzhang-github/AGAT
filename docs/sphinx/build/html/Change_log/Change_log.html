@@ -186,6 +186,10 @@
             
   <section id="main">
 <h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/">main</a><a class="headerlink" href="#main" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Raise exception if error occurs when parsing OUTCAR file. <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L594-L598">agat/data/data.py</a></p></li>
+<li><p>Fix a bug when build graphs. See <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L400-L411">agat/data/data.py</a> and <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L444-L452">agat/data/data.py</a>. Specifically, one needs to cast <code class="docutils literal notranslate"><span class="pre">tf.tensor</span></code> as <code class="docutils literal notranslate"><span class="pre">np.array</span></code> before building graph properties with a very large tensor. <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L407-L408">agat/data/data.py</a>.</p></li>
+</ul>
 </section>
 <section id="v7-12-2">
 <h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.12.2">v7.12.2</a><a class="headerlink" href="#v7-12-2" title="Permalink to this heading">¶</a></h1>
