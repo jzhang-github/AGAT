@@ -4,7 +4,7 @@
 [![Pypi](https://img.shields.io/pypi/v/agat.svg)](https://pypi.org/project/agat/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/agat)](https://pypi.org/project/agat/)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)](https://pypi.org/project/agat/)
-[![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://pynep.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
  
   <br>  <br>  ![Model architecture](files/architecture.svg)
 
