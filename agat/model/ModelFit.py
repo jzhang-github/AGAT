@@ -237,7 +237,7 @@ class Train():
 
             with tf.device("/cpu:0"):
                 y_pred.append(tf.identity(en_pred))
-                mae_value = self.train_config['mae'](tf.convert_to_tensor(y_true), tf.concat(y_pred, axis=0))
+        mae_value = self.train_config['mae'](tf.convert_to_tensor(y_true), tf.concat(y_pred, axis=0))
         print("User log: predict MAE: {:.4f}".format(mae_value), file=energy_log)
 
         np.savetxt(os.path.join(self.train_config['output_files'], 'en_test_final_true.txt'), tf.convert_to_tensor(y_true).numpy(), fmt='%.8f')
