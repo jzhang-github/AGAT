@@ -10,7 +10,7 @@ Introduction
 Atomic Graph ATtention (AGAT)
 =============================
 
-AGAT model is an high-efficient dee-graph model for prediction energy and forces of crystals.
+AGAT model is an high-efficient deep-graph model for prediction energy and forces of crystals.
 
 .. image:: ./architecture.svg
    :align: center
@@ -21,7 +21,7 @@ AGAT model is an high-efficient dee-graph model for prediction energy and forces
 API documentation
 ==================
 
-   - :doc:`API doc <API_Docs>`
+   - :doc:`API doc <API_Docs>`. We are still working on a more sophisticated documentation.
 
 
 
@@ -29,5 +29,6 @@ API documentation
 Source code
 ===========
 
-Navigate to the `GitHub repo <https://github.com/jzhang-github/AGAT>`_.
+   - Navigate to the `GitHub repo <https://github.com/jzhang-github/AGAT>`_.
+   - For previous versions: Go to `GitHub braches <https://github.com/jzhang-github/AGAT/branches>`_.
 

@@ -5,7 +5,7 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/agat)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)  <br>  <br>  
 ![Model architecture](files/architecture.svg)
-
+[![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://pynep.readthedocs.io/en/latest/)
 
 # Using AGAT
 The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is available.
