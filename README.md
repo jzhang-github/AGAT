@@ -5,7 +5,6 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/agat)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)  <br>  <br>  
 [![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://pynep.readthedocs.io/en/latest/)
-
 ![Model architecture](files/architecture.svg)
 
 # Using AGAT
