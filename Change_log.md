@@ -1,4 +1,5 @@
 # [main](https://github.com/jzhang-github/AGAT/)
+- Fix a bug here: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/main/agat/model/ModelFit.py#L240)
 
 # [v7.13](https://github.com/jzhang-github/AGAT/tree/v7.13)
 - Raise exception if error occurs when parsing OUTCAR file. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L595-L599)
