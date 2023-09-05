@@ -24,3 +24,5 @@ conda install -c dglteam/label/cu118 dgl
 For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with `pip install dgl==1.1.1`.
 
 - Change [dgl backend](https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends) to `tensorflow`.
+- For GPU, if you don't have CUDA and CUDNN on your device. You need to run: ```conda install cudatoolkit=11.8``` and ```conda install cudnn```.
+Refer to [Tensorflow_GPU](https://www.tensorflow.org/install/source#gpu) for more details.
