@@ -47,7 +47,7 @@ Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page o
   ```
 
 - For `tensorflow` of GPU version, if you don't have CUDA and CUDNN on your device, you need to run (Linux OS):
-   ```counsole
+   ```console
    conda install -c conda-forge cudatoolkit=11.8.0
    pip install nvidia-cudnn-cu11==8.6.0.163
    mkdir -p $CONDA_PREFIX/etc/conda/activate.d
