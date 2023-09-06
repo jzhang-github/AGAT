@@ -9,10 +9,12 @@ import tensorflow as tf
 from scipy.stats import pearsonr
 import os
 import json
-from dgl.data.utils import save_graphs
+from dgl.data.utils import save_graphs, load_graphs
 import multiprocessing
 import time
 import numpy as np
+from ..model.GatEnergyModel import EnergyGat as GATE
+from ..model.GatForceModel import ForceGat as GATF
 # from GatApp import GatApp # cannot import functions from each other
 
 def config_parser(config):
@@ -105,6 +107,144 @@ class EarlyStopping:
         with open(os.path.join(self.folder, 'gat_model.json'), 'w') as f:
             json.dump(gat_model, f, indent=4)
 
+def load_graph_build_scheme(path):
+    """ Load graph building scheme. This file is normally saved when you build your dataset.
+
+    :param path: Directory for storing ``graph_build_scheme.json`` file.
+    :type path: str
+    :return: A dict denotes how to build the graph.
+    :rtype: dict
+
+    """
+
+    json_file  = os.path.join(path, 'graph_build_scheme.json')
+    assert os.path.exists(json_file), f"{json_file} file dose not exist."
+    with open(json_file, 'r') as jsonf:
+        graph_build_scheme = json.load(jsonf)
+    return graph_build_scheme
+
+def load_gat_weights(model, graph, ckpt_path, logger, device): # clone graph before calling this function
+    """
+    Parameters
+    ----------
+    model: a fresh GAT model without trainable `variables`
+    graph: a DGL graph
+    ckpt_path: str
+        Path to the saved checkpoint files
+
+    Return
+    ----------
+    model: GAT model
+        A GAT model with trainable `variables`
+    """
+    assert os.path.exists(ckpt_path + '.index'), "Checkpoint file not found when loading weights."
+    # Varibles in model should be instantized and built first. See: https://github.com/tensorflow/tensorflow/issues/27937
+    # forward(model, graph)    # build a gat model with varibles.
+    # print(f'graph device: {graph.device}')
+    # print(f'device passed into this function: {device}')
+
+    graph = graph.to(device)
+    # print(f'graph device: {graph.device}')
+    with tf.device(device):
+        model(graph)
+    try:
+        load_status = model.load_weights(ckpt_path)
+        load_status.assert_consumed()  # check the load status
+    except:
+        print("User log: Weights detected but incompatible.", file=logger)
+
+def load_energy_model(energy_model_save_path, gpu=0):
+    """ Load the energy model.
+
+    :param energy_model_save_path: Directory for the saved energy model.
+    :type energy_model_save_path: str
+    :return: An AGAT model
+    :rtype: agat.model.GatEnergyModel.EnergyGat
+
+    """
+
+    if gpu < 0:
+        device             = "/cpu:0"
+    else:
+        device             = "/gpu:{}".format(gpu)
+
+    json_file  = os.path.join(energy_model_save_path, 'gat_model.json')
+    graph_file = os.path.join(energy_model_save_path, 'graph_tmp.bin')
+    ckpt_file  = os.path.join(energy_model_save_path, 'gat.ckpt')
+
+    for f in [json_file, graph_file, ckpt_file + '.index']:
+        assert os.path.exists(f), f"{f} file dose not exist."
+
+    # load json file
+    with open(json_file, 'r') as jsonf:
+        model_config = json.load(jsonf)
+
+    # build a model
+    model =  GATE(model_config['num_gat_out_list'],
+                  num_readout_out_list = model_config['num_readout_out_list'],
+                  head_list_en         = model_config['head_list_en'],
+                  embed_activation     = model_config['embed_activation'],
+                  readout_activation   = model_config['readout_activation'],
+                  bias                 = model_config['bias'],
+                  negative_slope       = model_config['negative_slope'])
+
+    # load weights
+    graph_tmp, label_tmp = load_graphs(graph_file)
+    graph_tmp = graph_tmp[0].to(device)
+    with tf.device(device):
+        model(graph_tmp)
+    load_status          = model.load_weights(ckpt_file)
+    load_status.assert_consumed()
+    print(f'Load energy model weights from {ckpt_file} successfully.')
+    return model
+
+def load_force_model(force_model_save_path, gpu=0):
+    """ Load the force model.
+
+    :param force_model_save_path: Directory for the saved force model.
+    :type force_model_save_path: str
+    :return: An AGAT model
+    :rtype: agat.model.GatForceModel.ForceGat
+
+    """
+
+    if gpu < 0:
+        device             = "/cpu:0"
+    else:
+        device             = "/gpu:{}".format(gpu)
+
+    json_file  = os.path.join(force_model_save_path, 'gat_model.json')
+    graph_file = os.path.join(force_model_save_path, 'graph_tmp.bin')
+    ckpt_file  = os.path.join(force_model_save_path, 'gat.ckpt')
+
+    for f in [json_file, graph_file, ckpt_file + '.index']:
+        assert os.path.exists(f), f"{f} file dose not exist."
+
+    # load json file
+    with open(json_file, 'r') as jsonf:
+        model_config = json.load(jsonf)
+
+    # build a model
+    model =  GATF(model_config['num_gat_out_list'],
+                  model_config['num_readout_out_list'],
+                  model_config['head_list_force'],
+                  model_config['embed_activation'],
+                  model_config['readout_activation'],
+                  model_config['bias'],
+                  model_config['negative_slope'],
+                  model_config['batch_normalization'],
+                  model_config['tail_readout_no_act'])
+
+    # load weights
+    graph_tmp, label_tmp = load_graphs(graph_file)
+    graph_tmp = graph_tmp[0].to(device)
+    with tf.device(device):
+        model(graph_tmp)
+    load_status          = model.load_weights(ckpt_file)
+    load_status.assert_consumed()
+    print(f'Load force model weights from {ckpt_file} successfully.')
+    return model
+
 def forward(model, graph): # , mean_prop=False): mean_prp: deprecated!
     """
     Parameters
@@ -186,36 +326,6 @@ def forward_parallel(model, graph_list, calculator):
     # # return tf.convert_to_tensor(energy_list, dtype='float32'), tf.convert_to_tensor(forces_list, dtype='float32')
     # # return tf.convert_to_tensor(list(energy_list), dtype='float32'), tf.convert_to_tensor(list(forces_list), dtype='float32'), result
     # # return results
-
-def load_gat_weights(model, graph, ckpt_path, logger, device): # clone graph before calling this function
-    """
-    Parameters
-    ----------
-    model: a fresh GAT model without trainable `variables`
-    graph: a DGL graph
-    ckpt_path: str
-        Path to the saved checkpoint files
-
-    Return
-    ----------
-    model: GAT model
-        A GAT model with trainable `variables`
-    """
-    assert os.path.exists(ckpt_path + '.index'), "Checkpoint file not found when loading weights."
-    # Varibles in model should be instantized and built first. See: https://github.com/tensorflow/tensorflow/issues/27937
-    # forward(model, graph)    # build a gat model with varibles.
-    # print(f'graph device: {graph.device}')
-    # print(f'device passed into this function: {device}')
-
-    graph = graph.to(device)
-    # print(f'graph device: {graph.device}')
-    with tf.device(device):
-        model(graph)
-    try:
-        load_status = model.load_weights(ckpt_path)
-        load_status.assert_consumed()  # check the load status
-    except:
-        print("User log: Weights detected but incompatible.", file=logger)
 
 def accuracy(metrics, y_true, y_pred):
     metrics.update_state([y_true], [y_pred])

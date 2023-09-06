@@ -15,7 +15,7 @@ import dgl
 from .GatEnergyModel import EnergyGat
 from .GatForceModel import ForceGat
 # from modules.Crystal2Graph import ReadGraphs, TrainValTestSplit
-from ..lib.GatLib import EarlyStopping, PearsonR, load_gat_weights, config_parser # get_src_dst_data #, evaluate
+from ..lib.GatLib import EarlyStopping, PearsonR, load_gat_weights, config_parser, load_energy_model, load_force_model # get_src_dst_data #, evaluate
 from ..default_parameters import default_train_config
 from ..data.data import ReadGraphs
 
@@ -114,7 +114,7 @@ class Train():
             nontrainable_layers = [x for x in range(len(energy_model.layers))][1:self.train_config['trainable_layers']]
             for layer_i in nontrainable_layers:
                 energy_model.layers[layer_i].trainable = False
-# =============
+        # =============
         # start the training
         start_time = time.time()
         step       = 1
@@ -218,11 +218,16 @@ class Train():
         print('User log: model summary:', file=energy_log)
         energy_model.summary()
         print('User log: model summary done.', file=energy_log)
-# =============
+        #  =============
         # predict test set.
+        # load the best model first.
+        model = load_energy_model(os.path.join(self.train_config['output_files'], 'energy_ckpt'),
+                                  self.train_config['gpu_for_energy_train'])
         y_true, y_pred = self.test_prop, [] # saved on GPU.
         # with tf.device(energy_model_device):
         batch_index = np.array_split(range(len(self.test_graphs)), len(self.test_graphs) / self.train_config['val_batch_size'])
+
+        # predict
         for i in batch_index:
             with tf.device("/cpu:0"):
                 g_batch = [self.test_graphs[x] for x in i]
@@ -230,7 +235,7 @@ class Train():
 
             with tf.device(energy_model_device):
                 g_batch = g_batch.to(energy_model_device)
-                en_pred = energy_model(g_batch)
+                en_pred = model(g_batch)
                 batch_nodes = g_batch.batch_num_nodes()
                 en_pred = tf.split(en_pred, batch_nodes)
                 en_pred = tf.convert_to_tensor([tf.reduce_mean(x) for x in en_pred])
@@ -416,6 +421,8 @@ class Train():
         print('User log: model summary done.', file=logf)
 
         # predict test set.
+        model = load_energy_model(os.path.join(self.train_config['output_files'], 'force_ckpt'),
+                                  self.train_config['gpu_for_force_train'])
         y_true, y_pred = [g.ndata['forces_true'] for g in self.test_graphs], [] # saved on GPU
 
         # with tf.device(device):
