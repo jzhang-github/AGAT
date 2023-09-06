@@ -12,10 +12,9 @@ import time
 import sys
 import dgl
 
-from .GatEnergyModel import EnergyGat
-from .GatForceModel import ForceGat
-# from modules.Crystal2Graph import ReadGraphs, TrainValTestSplit
-from ..lib.GatLib import EarlyStopping, PearsonR, load_gat_weights, config_parser, load_energy_model, load_force_model # get_src_dst_data #, evaluate
+from .GatEnergyModel import EnergyGat, load_energy_model
+from .GatForceModel import ForceGat, load_force_model
+from ..lib.GatLib import EarlyStopping, PearsonR, load_gat_weights, config_parser # get_src_dst_data #, evaluate
 from ..default_parameters import default_train_config
 from ..data.data import ReadGraphs
 

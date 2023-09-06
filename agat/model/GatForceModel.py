@@ -3,11 +3,14 @@ This is a modified DGL GAT model.
 Inspired by: https://github.com/dmlc/dgl/blob/0.6.x/examples/tensorflow/gat/gat.py
 """
 
+import os
+import json
 import tensorflow as tf
 from tensorflow.keras import Model as tf_model
 from .SingleGatLayer import GATLayer
 from dgl.ops import edge_softmax
 from dgl import function as fn
+from dgl.data.utils import load_graphs
 
 class ForceGat(tf_model):
     """
@@ -193,6 +196,54 @@ class ForceGat(tf_model):
 
             graph.update_all(fn.copy_e('score_vector', 'm'), fn.sum('m', 'force_pred'))        # shape of graph.ndata['force_pred']: (number of nodes, 3)
             return graph.ndata['force_pred']
+
+
+def load_force_model(force_model_save_path, gpu=0):
+    """ Load the force model.
+
+    :param force_model_save_path: Directory for the saved force model.
+    :type force_model_save_path: str
+    :return: An AGAT model
+    :rtype: agat.model.GatForceModel.ForceGat
+
+    """
+
+    if gpu < 0:
+        device             = "/cpu:0"
+    else:
+        device             = "/gpu:{}".format(gpu)
+
+    json_file  = os.path.join(force_model_save_path, 'gat_model.json')
+    graph_file = os.path.join(force_model_save_path, 'graph_tmp.bin')
+    ckpt_file  = os.path.join(force_model_save_path, 'gat.ckpt')
+
+    for f in [json_file, graph_file, ckpt_file + '.index']:
+        assert os.path.exists(f), f"{f} file dose not exist."
+
+    # load json file
+    with open(json_file, 'r') as jsonf:
+        model_config = json.load(jsonf)
+
+    # build a model
+    model =  ForceGat(model_config['num_gat_out_list'],
+                  model_config['num_readout_out_list'],
+                  model_config['head_list_force'],
+                  model_config['embed_activation'],
+                  model_config['readout_activation'],
+                  model_config['bias'],
+                  model_config['negative_slope'],
+                  model_config['batch_normalization'],
+                  model_config['tail_readout_no_act'])
+
+    # load weights
+    graph_tmp, label_tmp = load_graphs(graph_file)
+    graph_tmp = graph_tmp[0].to(device)
+    with tf.device(device):
+        model(graph_tmp)
+    load_status          = model.load_weights(ckpt_file)
+    load_status.assert_consumed()
+    print(f'Load force model weights from {ckpt_file} successfully.')
+    return model
 
 # debug
 if __name__ == '__main__':

@@ -13,8 +13,8 @@ from dgl.data.utils import save_graphs, load_graphs
 import multiprocessing
 import time
 import numpy as np
-from ..model.GatEnergyModel import EnergyGat as GATE
-from ..model.GatForceModel import ForceGat as GATF
+# from ..model.GatEnergyModel import EnergyGat as GATE
+# from ..model.GatForceModel import ForceGat as GATF
 # from GatApp import GatApp # cannot import functions from each other
 
 def config_parser(config):
@@ -152,98 +152,6 @@ def load_gat_weights(model, graph, ckpt_path, logger, device): # clone graph bef
         load_status.assert_consumed()  # check the load status
     except:
         print("User log: Weights detected but incompatible.", file=logger)
-
-def load_energy_model(energy_model_save_path, gpu=0):
-    """ Load the energy model.
-
-    :param energy_model_save_path: Directory for the saved energy model.
-    :type energy_model_save_path: str
-    :return: An AGAT model
-    :rtype: agat.model.GatEnergyModel.EnergyGat
-
-    """
-
-    if gpu < 0:
-        device             = "/cpu:0"
-    else:
-        device             = "/gpu:{}".format(gpu)
-
-    json_file  = os.path.join(energy_model_save_path, 'gat_model.json')
-    graph_file = os.path.join(energy_model_save_path, 'graph_tmp.bin')
-    ckpt_file  = os.path.join(energy_model_save_path, 'gat.ckpt')
-
-    for f in [json_file, graph_file, ckpt_file + '.index']:
-        assert os.path.exists(f), f"{f} file dose not exist."
-
-    # load json file
-    with open(json_file, 'r') as jsonf:
-        model_config = json.load(jsonf)
-
-    # build a model
-    model =  GATE(model_config['num_gat_out_list'],
-                  num_readout_out_list = model_config['num_readout_out_list'],
-                  head_list_en         = model_config['head_list_en'],
-                  embed_activation     = model_config['embed_activation'],
-                  readout_activation   = model_config['readout_activation'],
-                  bias                 = model_config['bias'],
-                  negative_slope       = model_config['negative_slope'])
-
-    # load weights
-    graph_tmp, label_tmp = load_graphs(graph_file)
-    graph_tmp = graph_tmp[0].to(device)
-    with tf.device(device):
-        model(graph_tmp)
-    load_status          = model.load_weights(ckpt_file)
-    load_status.assert_consumed()
-    print(f'Load energy model weights from {ckpt_file} successfully.')
-    return model
-
-def load_force_model(force_model_save_path, gpu=0):
-    """ Load the force model.
-
-    :param force_model_save_path: Directory for the saved force model.
-    :type force_model_save_path: str
-    :return: An AGAT model
-    :rtype: agat.model.GatForceModel.ForceGat
-
-    """
-
-    if gpu < 0:
-        device             = "/cpu:0"
-    else:
-        device             = "/gpu:{}".format(gpu)
-
-    json_file  = os.path.join(force_model_save_path, 'gat_model.json')
-    graph_file = os.path.join(force_model_save_path, 'graph_tmp.bin')
-    ckpt_file  = os.path.join(force_model_save_path, 'gat.ckpt')
-
-    for f in [json_file, graph_file, ckpt_file + '.index']:
-        assert os.path.exists(f), f"{f} file dose not exist."
-
-    # load json file
-    with open(json_file, 'r') as jsonf:
-        model_config = json.load(jsonf)
-
-    # build a model
-    model =  GATF(model_config['num_gat_out_list'],
-                  model_config['num_readout_out_list'],
-                  model_config['head_list_force'],
-                  model_config['embed_activation'],
-                  model_config['readout_activation'],
-                  model_config['bias'],
-                  model_config['negative_slope'],
-                  model_config['batch_normalization'],
-                  model_config['tail_readout_no_act'])
-
-    # load weights
-    graph_tmp, label_tmp = load_graphs(graph_file)
-    graph_tmp = graph_tmp[0].to(device)
-    with tf.device(device):
-        model(graph_tmp)
-    load_status          = model.load_weights(ckpt_file)
-    load_status.assert_consumed()
-    print(f'Load force model weights from {ckpt_file} successfully.')
-    return model
 
 def forward(model, graph): # , mean_prop=False): mean_prp: deprecated!
     """

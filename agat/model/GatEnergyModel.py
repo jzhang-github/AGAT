@@ -3,10 +3,13 @@ This is a modified DGL GAT model.
 Inspired by: https://github.com/dmlc/dgl/blob/0.6.x/examples/tensorflow/gat/gat.py
 """
 
+import os
+import json
 import tensorflow as tf
 from tensorflow.keras import Model as tf_model
 from .SingleGatLayer import GATLayer
 from dgl.ops import edge_softmax
+from dgl.data.utils import load_graphs
 
 class EnergyGat(tf_model):
     """
@@ -147,6 +150,51 @@ class EnergyGat(tf_model):
             for l in range(self.num_readout_layer):
                 h = self.en_read_out_layers[l](h)
             return h
+
+def load_energy_model(energy_model_save_path, gpu=0):
+    """ Load the energy model.
+
+    :param energy_model_save_path: Directory for the saved energy model.
+    :type energy_model_save_path: str
+    :return: An AGAT model
+    :rtype: agat.model.GatEnergyModel.EnergyGat
+
+    """
+
+    if gpu < 0:
+        device             = "/cpu:0"
+    else:
+        device             = "/gpu:{}".format(gpu)
+
+    json_file  = os.path.join(energy_model_save_path, 'gat_model.json')
+    graph_file = os.path.join(energy_model_save_path, 'graph_tmp.bin')
+    ckpt_file  = os.path.join(energy_model_save_path, 'gat.ckpt')
+
+    for f in [json_file, graph_file, ckpt_file + '.index']:
+        assert os.path.exists(f), f"{f} file dose not exist."
+
+    # load json file
+    with open(json_file, 'r') as jsonf:
+        model_config = json.load(jsonf)
+
+    # build a model
+    model =  EnergyGat(model_config['num_gat_out_list'],
+                  num_readout_out_list = model_config['num_readout_out_list'],
+                  head_list_en         = model_config['head_list_en'],
+                  embed_activation     = model_config['embed_activation'],
+                  readout_activation   = model_config['readout_activation'],
+                  bias                 = model_config['bias'],
+                  negative_slope       = model_config['negative_slope'])
+
+    # load weights
+    graph_tmp, label_tmp = load_graphs(graph_file)
+    graph_tmp = graph_tmp[0].to(device)
+    with tf.device(device):
+        model(graph_tmp)
+    load_status          = model.load_weights(ckpt_file)
+    load_status.assert_consumed()
+    print(f'Load energy model weights from {ckpt_file} successfully.')
+    return model
 
 # debug
 if __name__ == '__main__':
