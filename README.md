@@ -35,7 +35,7 @@ Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page o
   conda install -c dglteam/label/cu118 dgl
   ```
 
-For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with `pip install dgl==1.1.1`.
+  For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with `pip install dgl==1.1.1`.
 
 - Change [dgl backend](https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends) to `tensorflow`.
   If you have cannot use `tensorflow` backend `dgl`, run the following on Linux OS:
