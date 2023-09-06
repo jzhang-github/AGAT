@@ -9,7 +9,6 @@ import numpy as np
 import tensorflow as tf
 import os
 import time
-import sys
 import dgl
 
 from .GatEnergyModel import EnergyGat, load_energy_model
@@ -420,7 +419,7 @@ class Train():
         print('User log: model summary done.', file=logf)
 
         # predict test set.
-        model = load_energy_model(os.path.join(self.train_config['output_files'], 'force_ckpt'),
+        model = load_force_model(os.path.join(self.train_config['output_files'], 'force_ckpt'),
                                   self.train_config['gpu_for_force_train'])
         y_true, y_pred = [g.ndata['forces_true'] for g in self.test_graphs], [] # saved on GPU
 

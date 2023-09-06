@@ -8,7 +8,7 @@ Created on Tue Jul 11 13:22:58 2023
 from distutils.core import setup
 from setuptools import find_packages
 
-with open("D:\OneDrive - City University of Hong Kong\scripts\machine learning\AGAT develop\GAT_v7.12_develop\README.md", "r") as f:
+with open("README.md", "r") as f:
   long_description = f.read()
 
 # print(long_description)

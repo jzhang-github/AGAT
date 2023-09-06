@@ -9,7 +9,7 @@ import tensorflow as tf
 from scipy.stats import pearsonr
 import os
 import json
-from dgl.data.utils import save_graphs, load_graphs
+from dgl.data.utils import save_graphs
 import multiprocessing
 import time
 import numpy as np
