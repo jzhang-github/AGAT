@@ -38,15 +38,15 @@ Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page o
   For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with `pip install dgl==1.1.1`.
 
 - Change [dgl backend](https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends) to `tensorflow`.
-  If you have cannot use `tensorflow` backend `dgl`, run the following on Linux OS:
+  
+  If you still cannot use `tensorflow` backend `dgl`, run the following on Linux OS:
   ```console
   wget https://data.dgl.ai/wheels/cu118/dgl-1.1.1%2Bcu118-cp310-cp310-manylinux1_x86_64.whl
   pip install ./dgl-1.1.1+cu118-cp310-cp310-manylinux1_x86_64.whl
   pip install numpy --upgrade
-  
   ```
 
-- For GPU, if you don't have CUDA and CUDNN on your device. You need to run (Linux OS):
+- For `tensorflow` of GPU version, if you don't have CUDA and CUDNN on your device, you need to run (Linux OS):
    ```counsole
    conda install -c conda-forge cudatoolkit=11.8.0
    pip install nvidia-cudnn-cu11==8.6.0.163
@@ -57,6 +57,7 @@ Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page o
    # Verify install:
    python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
    ```
+   
    Refer to [Install TensorFlow with pip](https://www.tensorflow.org/install/pip#linux) and [Tensorflow_GPU](https://www.tensorflow.org/install/source#gpu) for more details (other OSs).
 
 
