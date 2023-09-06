@@ -1,9 +1,13 @@
-# [main](https://github.com/jzhang-github/AGAT/)
+# [v7.13.1](https://github.com/jzhang-github/AGAT/tree/v7.13.1)
+- Fix a bug here: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L243)
+- Load well-trained models: [agat/model/GatEnergyModel.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/GatEnergyModel.py#L154-L197) and [agat/model/GatForceModel.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/GatEnergyForce.py#L201-L246)
+- Test with best model after training. [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L222) and [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L422).
 
-- Raise exception if error occurs when parsing OUTCAR file. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L595-L599)
-- Remove `os` from the root name space. [agat/__init__.py](https://github.com/jzhang-github/AGAT/tree/main/agat/__init__.py#L18)
-- Fix a bug when build graphs. See [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L400-L411) and [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L444-L452). Specifically, one needs to cast `tf.tensor` as `np.array` before building graph properties with a very large tensor. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L408-L409).
-- Debug at these lines of [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py): [L553](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L553) and [L585-L588](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L585-L588).
+# [v7.13](https://github.com/jzhang-github/AGAT/tree/v7.13)
+- Raise exception if error occurs when parsing OUTCAR file. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L595-L599)
+- Remove `os` from the root name space. [agat/__init__.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/__init__.py#L18)
+- Fix a bug when build graphs. See [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L400-L411) and [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L444-L452). Specifically, one needs to cast `tf.tensor` as `np.array` before building graph properties with a very large tensor. [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L408-L409).
+- Debug at these lines of [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py): [L553](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L553) and [L585-L588](https://github.com/jzhang-github/AGAT/tree/v7.13/agat/data/data.py#L585-L588).
 
 
 # [v7.12.2](https://github.com/jzhang-github/AGAT/tree/v7.12.2)

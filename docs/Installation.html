@@ -179,33 +179,51 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
 <section id="install-with-conda-environment">
 <h2>Install with <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a> environment<a class="headerlink" href="#install-with-conda-environment" title="Permalink to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Create a new environment</p></li>
-</ul>
+<ul>
+<li><p>Create a new environment</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create -n agat python==3.10</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Activate the environment</p></li>
-</ul>
+</li>
+<li><p>Activate the environment</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda activate agat</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Install package</p></li>
-</ul>
+</li>
+<li><p>Install package</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install agat</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.<br />Please navigate to the <a class="reference external" href="https://www.dgl.ai/pages/start.html">Get Started</a> page of <a class="reference external" href="https://www.dgl.ai/">dgl</a>. For example:</p></li>
-</ul>
+</li>
+<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.<br />Please navigate to the <a class="reference external" href="https://www.dgl.ai/pages/start.html">Get Started</a> page of <a class="reference external" href="https://www.dgl.ai/">dgl</a>. For GPU version:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install -c dglteam/label/cu118 dgl</span>
 </pre></div>
 </div>
+</li>
+</ul>
 <p>For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dgl==1.1.1</span></code>.</p>
-<ul class="simple">
-<li><p>Change <a class="reference external" href="https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends">dgl backend</a> to <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>.</p></li>
+<ul>
+<li><p>Change <a class="reference external" href="https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends">dgl backend</a> to <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>.
+If you have cannot use <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> backend <code class="docutils literal notranslate"><span class="pre">dgl</span></code>, run the following on Linux OS:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">wget https://data.dgl.ai/wheels/cu118/dgl-1.1.1%2Bcu118-cp310-cp310-manylinux1_x86_64.whl</span>
+<span class="go">pip install ./dgl-1.1.1+cu118-cp310-cp310-manylinux1_x86_64.whl</span>
+<span class="go">pip install numpy --upgrade</span>
+</pre></div>
+</div>
+</li>
+<li><p>For GPU, if you don’t have CUDA and CUDNN on your device. You need to run (Linux OS):</p>
+<div class="highlight-counsole notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge cudatoolkit=11.8.0
+pip install nvidia-cudnn-cu11==8.6.0.163
+mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+echo &#39;CUDNN_PATH=$(dirname $(python -c &quot;import nvidia.cudnn;print(nvidia.cudnn.__file__)&quot;))&#39; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+echo &#39;export LD_LIBRARY_PATH=$CUDNN_PATH/lib:$CONDA_PREFIX/lib/:$LD_LIBRARY_PATH&#39; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+# Verify install:
+python3 -c &quot;import tensorflow as tf; print(tf.config.list_physical_devices(&#39;GPU&#39;))&quot;
+</pre></div>
+</div>
+<p>Refer to <a class="reference external" href="https://www.tensorflow.org/install/pip#linux">Install TensorFlow with pip</a> and <a class="reference external" href="https://www.tensorflow.org/install/source#gpu">Tensorflow_GPU</a> for more details (other OSs).</p>
+</li>
 </ul>
 </section>
 </section>
