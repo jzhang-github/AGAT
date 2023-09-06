@@ -61,4 +61,3 @@ A dictionary defines how to build a database.
 | `new_split`                | `True`        | `False`          | Split the dataset according specified `validation_size` and `test_size` when building graphs.  |
 | `gpu`                      | 0             | `int`: -1        | Specify device when building graphs. Negative values for cpu; Positive `int` for GPU. |
 
-**Note**: More `num_of_cores` needs more memory. Weird results happen when you don't have enough memory.
