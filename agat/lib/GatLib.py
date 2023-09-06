@@ -13,9 +13,6 @@ from dgl.data.utils import save_graphs
 import multiprocessing
 import time
 import numpy as np
-# from ..model.GatEnergyModel import EnergyGat as GATE
-# from ..model.GatForceModel import ForceGat as GATF
-# from GatApp import GatApp # cannot import functions from each other
 
 def config_parser(config):
     if isinstance(config, dict):
