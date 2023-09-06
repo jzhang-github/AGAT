@@ -204,7 +204,7 @@ class HpAds(object):
                                                             self.get_v_per_atom(chemical_formula),
                                                             template_file='POSCAR_temp')
         else:
-            atoms = self.get_ase_atom_from_formula(chemical_formula)
+            atoms = self.get_ase_atom_from_formula(chemical_formula, v_per_atom=self.get_v_per_atom(chemical_formula))
 
         atoms.set_calculator(calculator)
 
@@ -247,7 +247,7 @@ class HpAds(object):
 
         print('Surface optimization done.')
 
-        if True: # force_max_surf < hp_config['fmax']:
+        if force_max_surf < hp_config['opt_config']['fmax']:
             if hp_config['fix_all_surface_atom']:
                 c = FixAtoms(indices=[x for x in range(len(atoms_surf))])
                 atoms_surf.set_constraint(c)
@@ -288,7 +288,7 @@ class HpAds(object):
 
                     energy_ads_list.append(energy_ads)
 
-                    if force_max_ads > hp_config['fmax']:
+                    if force_max_ads > hp_config['opt_config']['fmax']:
                         converge_stat.append(0.0)
                     else:
                         converge_stat.append(1.0)

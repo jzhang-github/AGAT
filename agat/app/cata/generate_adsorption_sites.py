@@ -216,6 +216,7 @@ class AddAtoms(object):
                 displacement = np.vstack([displacement, [displacement_tmp for x in range(len(adsorbate))]])
                 surface.translate(displacement)
             write(f'POSCAR_{calculation_index}_{site_i}', surface, format='vasp')
+        return num_sites
 
 if __name__ == '__main__':
     adder = AddAtoms('POSCAR_surf_opt_1.gat',   # input file name.

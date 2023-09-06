@@ -66,7 +66,8 @@ class GatApp(object):
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False}
         self.graph_build_scheme['build_properties'] = {**self.graph_build_scheme['build_properties'], **build_properties}
-        self.cg                     = CrystalGraph(**self.graph_build_scheme, gpu=self.gpu)
+        self.graph_build_scheme['gpu'] = self.gpu
+        self.cg                     = CrystalGraph(**self.graph_build_scheme)
 
     def load_graph_build_scheme(self, path):
         """ Load graph building scheme. This file is normally saved when you build your dataset.

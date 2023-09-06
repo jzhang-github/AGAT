@@ -119,7 +119,7 @@ default_ase_calculator_config = {'fmax'             : 0.1,
                                  'out'              : None }
 
 default_hp_config = {
-        'volume_per_atom': 14.045510416666668,
+        # 'volume_per_atom': 14.045510416666668,
         'energy_model_save_dir': os.path.join('out_file', 'energy_ckpt'),
         'force_model_save_dir': os.path.join('out_file', 'force_ckpt'),
         'opt_config': default_ase_calculator_config,
@@ -130,7 +130,7 @@ default_hp_config = {
         'partial_fix_adsorbate': True,
         'adsorbates'           : ['H'],
         'sites'                : ['ontop'],
-        'fmax'                 : 0.1,
+        # 'fmax'                 : 0.1,
         'dist_from_surf'       : 1.7,
         'using_template_bulk_structure': False,
         'graph_build_scheme_dir': os.path.join('dataset'),

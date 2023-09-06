@@ -1,4 +1,12 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
+- Fix bugs in high-throughput predict:
+  - [agat/app/cata/generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/generate_adsorption_sites.py#L219)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L207)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L250)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L291)
+  - [agat/app/GatApp.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/GatApp.py#L69-L70)
+  - [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/main/agat/default_parameters.py#L133)
+
 
 # [v7.13.1](https://github.com/jzhang-github/AGAT/tree/v7.13.1)
 - Fix a bug here: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L243)
