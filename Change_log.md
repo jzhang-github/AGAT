@@ -7,6 +7,7 @@
   - [agat/app/GatApp.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/GatApp.py#L69-L70)
   - [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/main/agat/default_parameters.py#L133)
 
+- Deprecate redundant training configurations: train_energy_model, train_force_model, new_energy_train, new_force_train, load_graphs_on_gpu, 
 
 # [v7.13.1](https://github.com/jzhang-github/AGAT/tree/v7.13.1)
 - Fix a bug here: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L243)
