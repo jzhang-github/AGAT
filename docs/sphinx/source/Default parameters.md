@@ -61,3 +61,22 @@ A dictionary defines how to build a database.
 | `new_split`                | `True`        | `False`          | Split the dataset according specified `validation_size` and `test_size` when building graphs.  |
 | `gpu`                      | 0             | `int`: -1        | Specify device when building graphs. Negative values for cpu; Positive `int` for GPU. |
 
+
+## `default_train_config`
+
+## `default_ase_calculator_config`.
+See [bfgs](https://gitlab.com/ase/ase/-/blob/master/ase/optimize/bfgs.py) for more details.
+
+| Parameter                  | Default value | Alternative(s) | Explanation |
+| -------------------------  | ------------- | ------------ | ----------- |
+| `fmax `                      | 0.1           | `float`      | Convergence criterion of atomic forces. Details: [ase optimizer](https://wiki.fysik.dtu.dk/ase/ase/optimize.html#local-optimization) |
+| `steps`                    | 200           | `int`        | Maximum iteration steps. |
+| `maxstep`                  | 0.05          | `float`      | maximum distance an atom can move per iteration, unit is Å. |
+| `restart`                  | `None`        |  `str`       | Pickle file used to store hessian matrix. | 
+| `restart_steps`            | 0             | `int`        | Restart optimization and choose the structure with lowest energy. |
+| `perturb_steps`            | 0             | `int`        | Number of perturbated steps. AGAT may have issues in converging BFGS, perturbating atomic positions may help the convergence. |
+| `perturb_amplitude`        | 0.05          | `float`      | Perturbation amplitudes if `erturb_steps` larger than `1`. |
+
+
+
+## `default_hp_config`

@@ -1,13 +1,15 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 - Fix bugs in high-throughput predict:
   - [agat/app/cata/generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/generate_adsorption_sites.py#L219)
-  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L207)
-  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L250)
-  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L291)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L208)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L251)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L292)
   - [agat/app/GatApp.py](https://github.com/jzhang-github/AGAT/tree/main/agat/app/GatApp.py#L69-L70)
   - [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/main/agat/default_parameters.py#L133)
 
 - Deprecate redundant training configurations: train_energy_model, train_force_model, new_energy_train, new_force_train, load_graphs_on_gpu, 
+- Modify high-throughput predictions:
+	- [agat/app/cata/high_throughput_predict.py#L160](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L160), [L169](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L169), [L172](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L172), [L218](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L218), [L245](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L245), [L284](https://github.com/jzhang-github/AGAT/tree/main/agat/app/cata/high_throughput_predict.py#L284)
 
 # [v7.13.1](https://github.com/jzhang-github/AGAT/tree/v7.13.1)
 - Fix a bug here: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L243)

@@ -123,5 +123,9 @@ dyn = BFGS(poscar, trajectory='test.traj')
 dyn.run(**default_hp_config['opt_config'])
 ```
 
+### Some default parameters
+[agat/default_parameters.py](agat/default_parameters.py); Explanations: [docs/sphinx/source/Default parameters.md](docs/sphinx/source/Default parameters.md).
+
+
 # Change log  
 Please check [Change_log.md](https://github.com/jzhang-github/AGAT/blob/main/Change_log.md)

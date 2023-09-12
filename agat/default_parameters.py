@@ -115,8 +115,8 @@ default_ase_calculator_config = {'fmax'             : 0.1,
                                  'restart'          : None,
                                  'restart_steps'    : 0,
                                  'perturb_steps'    : 0,
-                                 'perturb_amplitude': 0.05,
-                                 'out'              : None }
+                                 'perturb_amplitude': 0.05}
+                                 # 'out'              : None }
 
 default_hp_config = {
         # 'volume_per_atom': 14.045510416666668,

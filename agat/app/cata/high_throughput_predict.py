@@ -157,7 +157,7 @@ class HpAds(object):
             logfile    = f'{config["out"]}.log'
             trajectory = f'{config["out"]}.traj'
         force_opt, energy_opt, atoms_list = [], [], []
-        for i in range(config["perturb_steps"]+1):
+        for i in range(config["restart_steps"]+1):
             dyn = BFGS(atoms,
                        logfile=logfile,
                        trajectory=trajectory,
@@ -166,9 +166,10 @@ class HpAds(object):
 
             return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"])
             restart_step = 0
-            while not return_code and restart_step < config["restart_steps"]:
+            while not return_code and restart_step < config["perturb_steps"]:  
                 restart_step += 1
                 config["maxstep"]      /= 2.0
+                atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
                 dyn = BFGS(atoms,
                            logfile=logfile,
                            trajectory=trajectory,
@@ -178,8 +179,8 @@ class HpAds(object):
             force_opt.append(atoms.get_forces())
             energy_opt.append(atoms.get_potential_energy(apply_constraint=False))
             atoms_list.append(atoms.copy())
-            if config["perturb_steps"] > 0:
-                atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
+            # if config["perturb_steps"] > 0:
+                # atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
         argmin = np.argmin(energy_opt)
         energy, force, atoms = energy_opt[argmin], force_opt[argmin], atoms_list[argmin]
         force_max = np.linalg.norm(force, axis=1).max()
@@ -214,7 +215,7 @@ class HpAds(object):
 
         hp_config['out'] = outbasename
 
-        energy_bulk, force_bulk, atoms_bulk, force_max_bulk = self.geo_opt(atoms, **hp_config)
+        energy_bulk, force_bulk, atoms_bulk, force_max_bulk = self.geo_opt(atoms, **hp_config['opt_config'])
         if hp_config['save_trajectory']:
             write(os.path.join(out_dir, 'CONTCAR_bulk.gat'), atoms_bulk)
 
@@ -241,7 +242,7 @@ class HpAds(object):
         atoms_bulk.set_calculator(calculator)
         hp_config['out'] = outbasename
 
-        energy_surf, force_surf, atoms_surf, force_max_surf = self.geo_opt(atoms_bulk, **hp_config)
+        energy_surf, force_surf, atoms_surf, force_max_surf = self.geo_opt(atoms_bulk, **hp_config['opt_config'])
         if hp_config['save_trajectory']:
             write(os.path.join(out_dir, 'CONTCAR_surface.gat'), atoms_surf)
 
@@ -280,7 +281,7 @@ class HpAds(object):
 
                     hp_config['out'] = outbasename
                     ads_atoms.set_calculator(calculator)
-                    energy_ads, force_ads, atoms_ads, force_max_ads = self.geo_opt(ads_atoms, **hp_config)
+                    energy_ads, force_ads, atoms_ads, force_max_ads = self.geo_opt(ads_atoms, **hp_config['opt_config'])
 
                     if hp_config['save_trajectory']:
                         write(os.path.join(out_dir, f'CONTCAR_{ads}_ads_{hp_config["calculation_index"]}_{i}.gat'),
