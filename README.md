@@ -124,7 +124,7 @@ dyn.run(**default_hp_config['opt_config'])
 ```
 
 ### Some default parameters
-[agat/default_parameters.py](agat/default_parameters.py); Explanations: [docs/sphinx/source/Default parameters.md](docs/sphinx/source/Default_parameters.md).
+[agat/default_parameters.py](agat/default_parameters.py); Explanations: [https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md).
 
 
 # Change log  
