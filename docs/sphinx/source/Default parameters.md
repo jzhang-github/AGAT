@@ -73,7 +73,7 @@ See [bfgs](https://gitlab.com/ase/ase/-/blob/master/ase/optimize/bfgs.py) for mo
 | `steps`                    | 200           | `int`        | Maximum iteration steps. |
 | `maxstep`                  | 0.05          | `float`      | maximum distance an atom can move per iteration, unit is Å. |
 | `restart`                  | `None`        |  `str`       | Pickle file used to store hessian matrix. | 
-| `restart_steps`            | 0             | `int`        | Restart optimization and choose the structure with lowest energy. |
+| `restart_steps`            | 0             | `int`        | Restart optimization if the optimization cannot converge. |
 | `perturb_steps`            | 0             | `int`        | Number of perturbated steps. AGAT may have issues in converging BFGS, perturbating atomic positions may help the convergence. |
 | `perturb_amplitude`        | 0.05          | `float`      | Perturbation amplitudes if `erturb_steps` larger than `1`. |
 

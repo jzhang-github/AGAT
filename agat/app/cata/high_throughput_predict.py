@@ -157,7 +157,7 @@ class HpAds(object):
             logfile    = f'{config["out"]}.log'
             trajectory = f'{config["out"]}.traj'
         force_opt, energy_opt, atoms_list = [], [], []
-        for i in range(config["restart_steps"]+1):
+        for i in range(config["perturb_steps"]+1):
             dyn = BFGS(atoms,
                        logfile=logfile,
                        trajectory=trajectory,
@@ -165,22 +165,21 @@ class HpAds(object):
                        maxstep=config["maxstep"])
 
             return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"])
-            restart_step = 0
-            while not return_code and restart_step < config["perturb_steps"]:  
+            restart_step = 1
+            while not return_code and restart_step < config["restart_steps"]:  
                 restart_step += 1
-                config["maxstep"]      /= 2.0
-                atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
+                maxstep_tmp = config["maxstep"]/2**restart_step
                 dyn = BFGS(atoms,
                            logfile=logfile,
                            trajectory=trajectory,
                            restart=config["restart"],
-                           maxstep=config["maxstep"])
+                           maxstep=maxstep_tmp)
                 return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"])
             force_opt.append(atoms.get_forces())
             energy_opt.append(atoms.get_potential_energy(apply_constraint=False))
             atoms_list.append(atoms.copy())
-            # if config["perturb_steps"] > 0:
-                # atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
+            if config["perturb_steps"] > 0:
+                atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
         argmin = np.argmin(energy_opt)
         energy, force, atoms = energy_opt[argmin], force_opt[argmin], atoms_list[argmin]
         force_max = np.linalg.norm(force, axis=1).max()
