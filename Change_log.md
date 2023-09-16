@@ -1,4 +1,7 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
+- Using self-defined tf-based functions to calculate Pearson r: [agat/lib/GatLib.py#L248-L259](https://github.com/jzhang-github/AGAT/tree/main/agat/lib/GatLib.py#L248-L259)  
+
+  This self-defined function can handle `ValueError: array must not contain infs or NaNs`.
 
 # [v7.13.2](https://github.com/jzhang-github/AGAT/tree/v7.13.2)
 - Fix bugs in high-throughput predict:

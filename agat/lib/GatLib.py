@@ -242,8 +242,21 @@ def evaluate(metrics, model, g, y_true): # for now, this function is deprecated
     y_pred   = tf.reduce_mean(logits)
     return accuracy(metrics, y_true, y_pred)
 
-def PearsonR(y_pred, y_true):
-    return pearsonr(y_pred, y_true)[0]
+# def PearsonR_old(y_pred, y_true):
+#     return pearsonr(y_pred, y_true)[0]
+
+@tf.function
+def PearsonR(y_true, y_pred):
+    ave_y_true = tf.math.reduce_mean(y_true)
+    ave_y_pred = tf.math.reduce_mean(y_pred)
+
+    y_true_diff = tf.math.add(y_true, -ave_y_true)
+    y_pred_diff = tf.math.add(y_pred, -ave_y_pred)
+
+    above = tf.math.reduce_sum(tf.math.multiply(y_true_diff, y_pred_diff))
+    below = tf.math.multiply(tf.math.sqrt(tf.math.reduce_sum(tf.math.square(y_true_diff))),
+                             tf.math.sqrt(tf.math.reduce_sum(tf.math.square(y_pred_diff))))
+    return tf.math.divide(above, below)
 
 def get_src_dst_data(graph):
     src, dst = graph.edges()
