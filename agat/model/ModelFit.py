@@ -93,7 +93,7 @@ class Train():
                      negative_slope=self.train_config['negative_slope'])
 
         # early stop
-        if self.train_config['early_stop'] and self.train_config['train_energy_model']:
+        if self.train_config['early_stop']: # and self.train_config['train_energy_model']
             stopper = EarlyStopping(energy_model, self.graph_eg, energy_log,
                                     patience=self.train_config['stop_patience'],
                                     folder=os.path.join(self.train_config['output_files'], 'energy_ckpt'))
@@ -195,7 +195,7 @@ class Train():
                                  PearsonR(en_true_all, en_pred_all), val_mae,
                                  PearsonR(en_val_true, en_val_pred), dur),file=energy_log)
 
-                    if self.train_config['early_stop'] and self.train_config['train_energy_model']:
+                    if self.train_config['early_stop']: # and self.train_config['train_energy_model']
                         if stopper.step(val_mae, energy_model):
                             print('User log: model summary:', file=energy_log)
                             energy_model.summary()
@@ -271,7 +271,7 @@ class Train():
                      tail_readout_no_act=self.train_config['tail_readout_noact'])
 
         # early stop
-        if self.train_config['early_stop'] and self.train_config['train_force_model']:
+        if self.train_config['early_stop']: #  and self.train_config['train_force_model']
             stopper = EarlyStopping(model, self.graph_eg, logf,
                                     patience=self.train_config['stop_patience'],
                                     folder=os.path.join(self.train_config['output_files'], 'force_ckpt'))
@@ -395,7 +395,7 @@ class Train():
                                  force_val_mae, PearsonR(tf.reshape(force_val_true, [-1]), tf.reshape(force_val_pred, [-1])), dur),
                                  file=logf)
 
-                    if self.train_config['early_stop'] and self.train_config['train_force_model']:
+                    if self.train_config['early_stop']: # and self.train_config['train_force_model']
                         if stopper.step(force_val_mae, model):
                             print('User log: model summary:', file=logf)
                             model.summary()

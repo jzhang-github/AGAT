@@ -1,6 +1,24 @@
+# [main](https://github.com/jzhang-github/AGAT/tree/main)
+
+# [v7.13.2](https://github.com/jzhang-github/AGAT/tree/v7.13.2)
+- Fix bugs in high-throughput predict:
+  - [agat/app/cata/generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/app/cata/generate_adsorption_sites.py#L218)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/app/cata/high_throughput_predict.py#L207)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/app/cata/high_throughput_predict.py#L250)
+  - [agat/app/cata/high_throughput_predict.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/app/cata/high_throughput_predict.py#L291)
+  - [agat/app/GatApp.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2ain/agat/app/GatApp.py#L69-L70)
+  - [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/default_parameters.py#L133)
+
+- Deprecate redundant training configurations: 
+	- `train_energy_model`: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L96)  and [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L198)
+	- `train_force_model`: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L274) and [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L398)
+	- `new_energy_train`
+	- `new_force_train`
+	- `load_graphs_on_gpu`
+
 # [v7.13.1](https://github.com/jzhang-github/AGAT/tree/v7.13.1)
 - Fix a bug here: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L243)
-- Load well-trained models: [agat/model/GatEnergyModel.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/GatEnergyModel.py#L154-L197) and [agat/model/GatForceModel.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/GatEnergyForce.py#L201-L246)
+- Load well-trained models: [agat/model/GatEnergyModel.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/GatEnergyModel.py#L154-L197) and [agat/model/GatForceModel.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/GatForceModel.py#L201-L246)
 - Test with best model after training. [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L222) and [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.1/agat/model/ModelFit.py#L422).
 
 # [v7.13](https://github.com/jzhang-github/AGAT/tree/v7.13)

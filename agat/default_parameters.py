@@ -64,12 +64,8 @@ default_data_config =  {
 
 default_train_config = {
     'dataset_path': 'dataset',
-    'train_energy_model': True,
-    'train_force_model': True,
     'epochs': 1000,
     'output_files': 'out_file',
-    'new_energy_train': False,
-    'new_force_train': False,
     'gpu_for_energy_train': 0,
     'gpu_for_force_train': 0,
     'load_graphs_on_gpu': False, # deprecated

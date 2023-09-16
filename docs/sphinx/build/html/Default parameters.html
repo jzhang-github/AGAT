@@ -96,6 +96,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#default-elements"><code class="docutils literal notranslate"><span class="pre">default_elements</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#default-build-properties"><code class="docutils literal notranslate"><span class="pre">default_build_properties</span> </code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#default-data-config"><code class="docutils literal notranslate"><span class="pre">default_data_config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-train-config"><code class="docutils literal notranslate"><span class="pre">default_train_config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-ase-calculator-config"><code class="docutils literal notranslate"><span class="pre">default_ase_calculator_config</span></code>.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-hp-config"><code class="docutils literal notranslate"><span class="pre">default_hp_config</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribution</a></li>
@@ -382,7 +385,69 @@
 <td>Specify device when building graphs. Negative values for cpu; Positive <code>int</code> for GPU.</td>
 </tr>
 </tbody>
-</table><p><strong>Note</strong>: More <code class="docutils literal notranslate"><span class="pre">num_of_cores</span></code> needs more memory. Weird results happen when you don’t have enough memory.</p>
+</table></section>
+<section id="default-train-config">
+<h2><code class="docutils literal notranslate"><span class="pre">default_train_config</span></code><a class="headerlink" href="#default-train-config" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="default-ase-calculator-config">
+<h2><code class="docutils literal notranslate"><span class="pre">default_ase_calculator_config</span></code>.<a class="headerlink" href="#default-ase-calculator-config" title="Permalink to this heading">¶</a></h2>
+<p>See <a class="reference external" href="https://gitlab.com/ase/ase/-/blob/master/ase/optimize/bfgs.py">bfgs</a> for more details.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default value</th>
+<th>Alternative(s)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fmax</code></td>
+<td>0.1</td>
+<td><code>float</code></td>
+<td>Convergence criterion of atomic forces. Details: <a href="https://wiki.fysik.dtu.dk/ase/ase/optimize.html#local-optimization">ase optimizer</a></td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td>200</td>
+<td><code>int</code></td>
+<td>Maximum iteration steps.</td>
+</tr>
+<tr>
+<td><code>maxstep</code></td>
+<td>0.05</td>
+<td><code>float</code></td>
+<td>maximum distance an atom can move per iteration, unit is Å.</td>
+</tr>
+<tr>
+<td><code>restart</code></td>
+<td><code>None</code></td>
+<td><code>str</code></td>
+<td>Pickle file used to store hessian matrix.</td>
+</tr>
+<tr>
+<td><code>restart_steps</code></td>
+<td>0</td>
+<td><code>int</code></td>
+<td>Restart optimization if the optimization cannot converge.</td>
+</tr>
+<tr>
+<td><code>perturb_steps</code></td>
+<td>0</td>
+<td><code>int</code></td>
+<td>Number of perturbated steps. AGAT may have issues in converging BFGS, perturbating atomic positions may help the convergence.</td>
+</tr>
+<tr>
+<td><code>perturb_amplitude</code></td>
+<td>0.05</td>
+<td><code>float</code></td>
+<td>Perturbation amplitudes if <code>erturb_steps</code> larger than <code>1</code>.</td>
+</tr>
+</tbody>
+</table></section>
+<section id="default-hp-config">
+<h2><code class="docutils literal notranslate"><span class="pre">default_hp_config</span></code><a class="headerlink" href="#default-hp-config" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
