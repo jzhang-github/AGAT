@@ -85,8 +85,8 @@ default_train_config = {
     'readout_activation': 'LeakyReLU',
     'energy_loss_fcn': tf.keras.losses.MeanSquaredError(),
     'force_loss_fcn': tf.keras.losses.MeanSquaredError(),
-    'energy_optimizer': tf.keras.optimizers.Adam(learning_rate=0.0005, epsilon=1e-8), # Default lr: 0.001
-    'force_optimizer': tf.keras.optimizers.Adam(learning_rate=0.0005, epsilon=1e-8), # Default lr: 0.001
+    'energy_optimizer': tf.keras.optimizers.Adam(learning_rate=0.0005, epsilon=1e-8, clipnorm=1.0), # Default lr: 0.001
+    'force_optimizer': tf.keras.optimizers.Adam(learning_rate=0.0005, epsilon=1e-8, clipnorm=1.0), # Default lr: 0.001
     'weight_decay': 5e-5,
     'mae': tf.keras.losses.MeanAbsoluteError(),
     'batch_size': 64,

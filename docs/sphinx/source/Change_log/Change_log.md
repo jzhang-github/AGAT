@@ -1,5 +1,13 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 
+# [v7.13.3](https://github.com/jzhang-github/AGAT/tree/v7.13.3)
+- Using self-defined tf-based functions to calculate Pearson r: [agat/lib/GatLib.py#L248-L259](https://github.com/jzhang-github/AGAT/tree/v7.13.3/agat/lib/GatLib.py#L248-L259)  
+
+  This self-defined function can handle `ValueError: array must not contain infs or NaNs`.
+
+- Fix a bug: [bug](https://github.com/jzhang-github/AGAT/tree/v7.13.3/agat/model/ModelFit.py#L280)
+- Clip optimizer grads: [clipnorm=1.0](https://github.com/jzhang-github/AGAT/tree/v7.13.3/agat/default_parameters.py#L88-89)
+
 # [v7.13.2](https://github.com/jzhang-github/AGAT/tree/v7.13.2)
 - Fix bugs in high-throughput predict:
   - [agat/app/cata/generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/app/cata/generate_adsorption_sites.py#L218)

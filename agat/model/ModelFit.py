@@ -277,7 +277,7 @@ class Train():
                                     folder=os.path.join(self.train_config['output_files'], 'force_ckpt'))
 
         # detect the saved weights. Load them if possible.
-        model_save_path = os.path.join(self.train_config['output_files'], 'foce_ckpt', 'gat.ckpt')
+        model_save_path = os.path.join(self.train_config['output_files'], 'force_ckpt', 'gat.ckpt')
         print("User log: Model save path:", model_save_path, file=logf)
         if os.path.exists(model_save_path + '.index'):    # If the `checkpoint` file is saved before, try to load it.
             print("User log: Loading saved weights......", file=logf)
