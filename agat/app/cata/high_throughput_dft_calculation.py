@@ -125,7 +125,7 @@ class HpDftAds(object):
                                  species=ads,
                                  sites=self.hp_config['sites'],
                                  dist_from_surf=self.hp_config['dist_from_surf'],
-                                 num_atomic_layer_along_Z=2)
+                                 num_atomic_layer_along_Z=6)
             all_sites = adder.write_file_with_adsorption_sites(adsorbate_poscar,
                                                                calculation_index=self.hp_config['calculation_index'])
 

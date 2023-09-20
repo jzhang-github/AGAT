@@ -61,7 +61,7 @@ def get_ase_atom_from_formula(chemical_formula, v_per_atom=None):
 
     Pt_radii           = covalent_radii[78]
     latticeconstant    = mean_radii / Pt_radii * 3.92
-    atoms              = FaceCenteredCubic('Pt', directions=[[1,-1,0], [0,1,-1], [1,1,1]], size=(2, 2, 2), latticeconstant=latticeconstant, pbc=True)
+    atoms              = FaceCenteredCubic('Pt', directions=[[1,-1,0], [0,1,-1], [1,1,1]], size=(4, 4, 2), latticeconstant=latticeconstant, pbc=True)
     total_atom         = len(atoms)
     num_atom_list      = np.array(list(atomic_fracions.values())) * total_atom
     num_atom_list      = np.around(num_atom_list, decimals=0)
