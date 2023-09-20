@@ -103,6 +103,7 @@
 <p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="API_Docs.html">API_Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_Docs.html#api-docs-old">API_Docs_old</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">CHANGE LOG:</span></p>
 <ul>
@@ -212,7 +213,7 @@ If you have cannot use <code class="docutils literal notranslate"><span class="p
 </div>
 </li>
 <li><p>For GPU, if you don’t have CUDA and CUDNN on your device. You need to run (Linux OS):</p>
-<div class="highlight-counsole notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge cudatoolkit=11.8.0
+<div class="highlight-cousole notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge cudatoolkit=11.8.0
 pip install nvidia-cudnn-cu11==8.6.0.163
 mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 echo &#39;CUDNN_PATH=$(dirname $(python -c &quot;import nvidia.cudnn;print(nvidia.cudnn.__file__)&quot;))&#39; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh

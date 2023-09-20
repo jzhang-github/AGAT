@@ -13,3 +13,5 @@ from .increase_vacuum import increase_vacuum
 from .volcano_2e import volcano_2e
 from .volcano_plot import volcano_plot
 
+from .high_throughput_dft_calculation import HpDftAds
+

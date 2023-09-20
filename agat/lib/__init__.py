@@ -9,3 +9,5 @@ from .adsorbate_poscar import adsorbate_poscar
 from .AgatException import file_exit
 from .file import generate_file_name
 from .GatLib import config_parser, EarlyStopping, get_src_dst_data
+
+from .ModifyINCAR import modify_INCAR

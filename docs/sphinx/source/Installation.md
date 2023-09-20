@@ -34,7 +34,7 @@ For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version 
   ```
 
 - For GPU, if you don't have CUDA and CUDNN on your device. You need to run (Linux OS):
-   ```counsole
+   ```cousole
    conda install -c conda-forge cudatoolkit=11.8.0
    pip install nvidia-cudnn-cu11==8.6.0.163
    mkdir -p $CONDA_PREFIX/etc/conda/activate.d

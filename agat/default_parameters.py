@@ -136,3 +136,111 @@ default_hp_config = {
 default_predict_config = {}
 
 default_active_learning_config = {}
+
+default_hp_dft_config = {'INCAR_static': '''
+SYSTEM = ML
+
+Start parameter for this Run:
+  ISTART = 0
+  ICHARG = 2
+  INIWAV = 1
+
+Electronic Relaxation:
+  ENCUT = 500
+  PREC = Accurate
+  ALGO = Fast
+  NELM = 300
+  NELMIN = 4
+  EDIFF = 1E-06
+  GGA = PE
+  LREAL = A
+
+Ionic Relaxation:
+  EDIFFG = -0.05
+  NSW = 300
+  IBRION = 2
+  ISIF = 3
+  POTIM = 0.5
+
+DOS related values:
+  SIGMA = 0.1
+  ISMEAR = 1
+
+Spin polarized:
+  ISPIN = 2
+  MAGMOM = placeholder
+
+File writing
+  LWAVE = .FALSE.
+  LCHARG = .FALSE.
+
+Calculation of DOS
+  NPAR = 8
+  LORBIT = 11
+  NCORE = 1
+  IVDW = 11
+
+''',
+
+'INCAR_aimd': '''
+SYSTEM = ML
+
+Start parameter for this Run:
+  ISTART = 0
+  ICHARG = 2
+  INIWAV = 1
+
+Electronic Relaxation:
+  ENCUT = 500
+  PREC = Accurate
+  ALGO = Fast
+  NELM = 300
+  NELMIN = 4
+  EDIFF = 1E-06
+  GGA = PE
+  LREAL = A
+
+Ionic Relaxation:
+  NSW = 100
+  IBRION = 0
+  ISIF = 3
+  POTIM = 2
+
+DOS related values:
+  SIGMA = 0.1
+  ISMEAR = 1
+
+Spin polarized:
+  ISPIN = 2
+  MAGMOM = placeholder
+
+File writing
+  LWAVE = .FALSE.
+  LCHARG = .FALSE.
+
+Calculation of DOS
+  NPAR = 8
+  LORBIT = 11
+  IVDW = 11
+
+
+  MDALGO = 3
+  SMASS = 0
+  TEBEG = 300
+  TEEND = 300
+
+''',
+
+  "KPOINTS": '''Automatic mesh
+0
+Gamma
+1 1 1
+0.0 0.0 0.0
+
+''',
+
+        'calculation_index'    : '0', # sys.argv[1],
+        'adsorbates'           : ['H'],
+        'sites'                : ['ontop'],
+        'dist_from_surf'       : 1.7,
+    }

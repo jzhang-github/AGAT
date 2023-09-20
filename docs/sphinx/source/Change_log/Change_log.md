@@ -1,5 +1,13 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 
+# [v7.13.4](https://github.com/jzhang-github/AGAT/tree/v7.13.4)
+- Add [agat/app/cata/high_throughput_dft_calculation.py](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/app/cata/high_throughput_dft_calculation.py).
+- Shift atomic positions before fix bottom atoms: [agat/app/cata/high_throughput_predict.py#L225-L227](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/app/cata/high_throughput_predict.py#L225-L227)
+- Add `default_hp_dft_config` to [agat/default_parameters.py#L139-L246](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/default_parameters.py#L139-L246).
+- Add [agat/lib/HighThroughputLib.py](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/lib/HighThroughputLib.py).
+- Add [agat/lib/ModifyINCAR.py](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/lib/ModifyINCAR.py).
+- Upgrade docs.
+
 # [v7.13.3](https://github.com/jzhang-github/AGAT/tree/v7.13.3)
 - Using self-defined tf-based functions to calculate Pearson r: [agat/lib/GatLib.py#L248-L259](https://github.com/jzhang-github/AGAT/tree/v7.13.3/agat/lib/GatLib.py#L248-L259)  
 

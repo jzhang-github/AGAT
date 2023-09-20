@@ -222,15 +222,15 @@ class HpAds(object):
 
         # add vacuum space and fix bottom atoms
         len_z = atoms_bulk.cell.array[2][2]
-        c     = FixAtoms(indices=np.where(atoms_bulk.positions[:,2] < len_z / 2 - 1.0)[0])
+        atoms_bulk.positions += 1.3 # avoid PBC error
+        atoms_bulk.wrap()
+        c     = FixAtoms(indices=np.where(atoms_bulk.positions[:,2] < len_z / 2)[0])
         atoms_bulk.set_constraint(c)
 
         if hp_config['remove_bottom_atoms']:
             pop_list = np.where(atoms_bulk.positions[:,2] < 1.0)
             del atoms_bulk[pop_list]
 
-        atoms_bulk.positions += 1.3 # avoid PBC error
-        atoms_bulk.wrap()
         add_vacuum(atoms_bulk, 10.0)
 
         if hp_config['save_trajectory']:
