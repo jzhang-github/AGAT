@@ -18,7 +18,7 @@ from agat.app.cata.generate_adsorption_sites import AddAtoms
 from agat.lib.GatLib import config_parser
 from agat.lib.adsorbate_poscar import adsorbate_poscar
 
-from agat.default_parameters import default_hp_dft_config, modify_INCAR
+from agat.default_parameters import default_hp_dft_config
 from agat.lib.ModifyINCAR import modify_INCAR
 from agat.lib.HighThroughputLib import get_ase_atom_from_formula, run_vasp
 
