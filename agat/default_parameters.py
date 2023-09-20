@@ -241,6 +241,6 @@ Gamma
 
         'calculation_index'    : '0', # sys.argv[1],
         'adsorbates'           : ['H'],
-        'sites'                : ['ontop'],
+        'sites'                : ['bridge'],
         'dist_from_surf'       : 1.7,
     }
