@@ -20,7 +20,7 @@ from agat.lib.adsorbate_poscar import adsorbate_poscar
 
 from agat.default_parameters import default_hp_dft_config
 from agat.lib.ModifyINCAR import modify_INCAR
-from agat.lib.HighThroughputLib import get_ase_atom_from_formula, run_vasp
+from agat.lib.HighThroughputLib import get_ase_atom_from_formula, get_v_per_atom, run_vasp
 
 class HpDftAds(object):
     """High-throughput DFT calculations for adsorption. See details in: https://jzhang-github.github.io/AGAT/Default%20parameters.html#default_hp_dft_config
@@ -50,7 +50,8 @@ class HpDftAds(object):
 
         # generate bulk structure
         chemical_formula = formula
-        atoms = get_ase_atom_from_formula(chemical_formula)
+        v_per_atom = get_v_per_atom(formula)
+        atoms = get_ase_atom_from_formula(chemical_formula, v_per_atom)
         atoms = sort(atoms)
         atoms.write('POSCAR')
 
@@ -170,7 +171,8 @@ class HpDftAds(object):
 
         # generate bulk structure
         chemical_formula = formula
-        atoms = get_ase_atom_from_formula(chemical_formula)
+        v_per_atom = get_v_per_atom(formula)
+        atoms = get_ase_atom_from_formula(chemical_formula, v_per_atom)
         atoms = sort(atoms)
         atoms.write('POSCAR')
 
