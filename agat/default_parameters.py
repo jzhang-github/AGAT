@@ -243,4 +243,10 @@ Gamma
         'adsorbates'           : ['H'],
         'sites'                : ['bridge'],
         'dist_from_surf'       : 1.7,
+        'include_bulk_static': True, # This should be true for other calculations.
+        'include_surface_static': True, # This should be true for other calculations.
+        'include_adsorption_static': True,
+        'include_bulk_aimd': True,
+        'include_surface_aimd': True,
+        'include_adsorption_aimd': True,
     }

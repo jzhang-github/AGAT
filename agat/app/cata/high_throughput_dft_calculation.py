@@ -184,7 +184,7 @@ class HpDftAds(object):
             f.write(self.hp_config['INCAR_aimd'])
         os.system('modify_MAGMOM_auto.sh POSCAR')
         modify_INCAR('ISIF', '3')
-        modify_INCAR('NSW', '50')
+        modify_INCAR('NSW', '100')
 
         # get KPOINTS
         with open('KPOINTS', 'w') as f:
@@ -275,7 +275,7 @@ class HpDftAds(object):
                     f.write(self.hp_config['INCAR_aimd'])
                 os.system('modify_MAGMOM_auto.sh POSCAR')
                 modify_INCAR('ISIF', '2')
-                modify_INCAR('NSW', '50')
+                modify_INCAR('NSW', '100')
 
                 # get KPOINTS
                 with open('KPOINTS', 'w') as f:
@@ -299,54 +299,60 @@ class HpDftAds(object):
         self.hp_config = {**self.hp_config, **config_parser(kwargs)}
 
         # bulk static calculation
-        if not os.path.exists('bulk_static'):
-            os.mkdir('bulk_static')
-        os.chdir('bulk_static')
-        self.bulk_opt(formula)
-        os.chdir(self.root_dir)
+        if self.hp_config['include_bulk_static']:
+            if not os.path.exists('bulk_static'):
+                os.mkdir('bulk_static')
+            os.chdir('bulk_static')
+            self.bulk_opt(formula)
+            os.chdir(self.root_dir)
 
         # surface static calculation
-        if not os.path.exists('surface_static'):
-            os.mkdir('surface_static')
-        shutil.copyfile(os.path.join('bulk_static', 'CONTCAR'),
-                        os.path.join('surface_static', 'CONTCAR_bulk_opt'))
-        os.chdir('surface_static')
-        self.surf_opt(bulk_structural_file='CONTCAR_bulk_opt')
-        os.chdir(self.root_dir)
+        if self.hp_config['include_surface_static']:
+            if not os.path.exists('surface_static'):
+                os.mkdir('surface_static')
+            shutil.copyfile(os.path.join('bulk_static', 'CONTCAR'),
+                            os.path.join('surface_static', 'CONTCAR_bulk_opt'))
+            os.chdir('surface_static')
+            self.surf_opt(bulk_structural_file='CONTCAR_bulk_opt')
+            os.chdir(self.root_dir)
 
         # adsorption static calculation
-        if not os.path.exists('adsorption_static'):
-            os.mkdir('adsorption_static')
-        shutil.copyfile(os.path.join('surface_static', 'CONTCAR'),
-                        os.path.join('adsorption_static', 'CONTCAR_surf_opt'))
-        os.chdir('adsorption_static')
-        self.ads_opt(structural_file='CONTCAR_surf_opt', random_samples=5)
-        os.chdir(self.root_dir)
+        if self.hp_config['include_adsorption_static']:
+            if not os.path.exists('adsorption_static'):
+                os.mkdir('adsorption_static')
+            shutil.copyfile(os.path.join('surface_static', 'CONTCAR'),
+                            os.path.join('adsorption_static', 'CONTCAR_surf_opt'))
+            os.chdir('adsorption_static')
+            self.ads_opt(structural_file='CONTCAR_surf_opt', random_samples=5)
+            os.chdir(self.root_dir)
 
         # bulk aimd
-        if not os.path.exists('bulk_aimd'):
-            os.mkdir('bulk_aimd')
-        os.chdir('bulk_aimd')
-        self.bulk_aimd(formula)
-        os.chdir(self.root_dir)
+        if self.hp_config['include_bulk_aimd']:
+            if not os.path.exists('bulk_aimd'):
+                os.mkdir('bulk_aimd')
+            os.chdir('bulk_aimd')
+            self.bulk_aimd(formula)
+            os.chdir(self.root_dir)
 
         # surface aimd calculation
-        if not os.path.exists('surface_aimd'):
-            os.mkdir('surface_aimd')
-        shutil.copyfile(os.path.join('bulk_static', 'CONTCAR'),
-                        os.path.join('surface_aimd', 'CONTCAR_bulk_opt'))
-        os.chdir('surface_aimd')
-        self.surface_aimd(bulk_structural_file='CONTCAR_bulk_opt')
-        os.chdir(self.root_dir)
+        if self.hp_config['include_surface_aimd']:
+            if not os.path.exists('surface_aimd'):
+                os.mkdir('surface_aimd')
+            shutil.copyfile(os.path.join('bulk_static', 'CONTCAR'),
+                            os.path.join('surface_aimd', 'CONTCAR_bulk_opt'))
+            os.chdir('surface_aimd')
+            self.surface_aimd(bulk_structural_file='CONTCAR_bulk_opt')
+            os.chdir(self.root_dir)
 
         # adsorption static calculation
-        if not os.path.exists('adsorption_aimd'):
-            os.mkdir('adsorption_aimd')
-        shutil.copyfile(os.path.join('surface_static', 'CONTCAR'),
-                        os.path.join('adsorption_aimd', 'CONTCAR_surf_opt'))
-        os.chdir('adsorption_aimd')
-        self.ads_aimd(structural_file='CONTCAR_surf_opt', random_samples=2)
-        os.chdir(self.root_dir)
+        if self.hp_config['include_adsorption_aimd']:
+            if not os.path.exists('adsorption_aimd'):
+                os.mkdir('adsorption_aimd')
+            shutil.copyfile(os.path.join('surface_static', 'CONTCAR'),
+                            os.path.join('adsorption_aimd', 'CONTCAR_surf_opt'))
+            os.chdir('adsorption_aimd')
+            self.ads_aimd(structural_file='CONTCAR_surf_opt', random_samples=2)
+            os.chdir(self.root_dir)
 
 if __name__ == '__main__':
     HA = HpDftAds(calculation_index=0)

@@ -1,4 +1,5 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
+- Add API for controling HP DFT calculation. [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/main/agat/default_parameters.py#L246-L251)
 
 # [v7.13.4](https://github.com/jzhang-github/AGAT/tree/v7.13.4)
 - Add [agat/app/cata/high_throughput_dft_calculation.py](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/app/cata/high_throughput_dft_calculation.py).
