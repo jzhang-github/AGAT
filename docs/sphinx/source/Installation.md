@@ -45,3 +45,5 @@ For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version 
    python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
    ```
    Refer to [Install TensorFlow with pip](https://www.tensorflow.org/install/pip#linux) and [Tensorflow_GPU](https://www.tensorflow.org/install/source#gpu) for more details (other OSs).
+
+   **Attention: Please use the correct cuda and cudnn to avoid unnecessary issues.**

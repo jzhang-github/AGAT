@@ -60,6 +60,7 @@ Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page o
    
    Refer to [Install TensorFlow with pip](https://www.tensorflow.org/install/pip#linux) and [Tensorflow_GPU](https://www.tensorflow.org/install/source#gpu) for more details (other OSs).
 
+   **Attention: Please use the correct cuda and cudnn to avoid unnecessary issues.**
 
 # Quick start
 ### Prepare VASP calculations
