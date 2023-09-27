@@ -37,6 +37,7 @@ default_build_properties = {'energy': True,
                          'cart_coords': True,
                          'frac_coords': True,
                          'constraints': True,
+                         'stress': True,
                          'distance': True,
                          'direction': True,
                          'path': False}
@@ -49,11 +50,12 @@ default_data_config =  {
     'mode_of_NN': 'ase_natural_cutoffs', # How to identify connections between atoms. 'ase_natural_cutoffs', 'pymatgen_dist', 'ase_dist', 'voronoi'. Note that pymatgen is much faster than ase.
     'cutoff': 5.0, # Cutoff distance to identify connections between atoms. Deprecated if ``mode_of_NN`` is ``'ase_natural_cutoffs'``
     'load_from_binary': False, # Read graphs from binary graphs that are constructed before. If this variable is ``True``, these above variables will be depressed.
-    'num_of_cores': 2,
+    'num_of_cores': 8,
     'super_cell': False,
     'has_adsorbate': False,
     'keep_readable_structural_files': False,
     'mask_similar_frames': False,
+    'mask_reversed_magnetic_moments': False, # Frames with atomic magnetic moments lower than this value will be masked.
     'energy_stride': 0.05,
     'scale_prop': False,
     'validation_size': 0.15, # int or float. int: number of samples of the validation set. float: portion of samples of the validation set.

@@ -1,5 +1,10 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 - Add API for controling HP DFT calculation. [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/main/agat/default_parameters.py#L246-L251)
+- Add `mask_reversed_magnetic_moments` in [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/main/agat/default_parameters.py#L58) and [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py) 
+- Modify [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py):
+	- Include stress in the graph: [agat/data/data.py#L273-L275](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L273-L275), [agat/data/data.py#L350-L352](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L350-L352).
+	- Update method of parsing the vasp data: [agat/data/data.py#L610](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L610), [agat/data/data.py#L625-L656](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L625-L656), [agat/data/data.py#L661-L675](https://github.com/jzhang-github/AGAT/tree/main/agat/data/data.py#L661-L675).
+- Update docs.
 
 # [v7.13.4](https://github.com/jzhang-github/AGAT/tree/v7.13.4)
 - Add [agat/app/cata/high_throughput_dft_calculation.py](https://github.com/jzhang-github/AGAT/tree/v7.13.4/agat/app/cata/high_throughput_dft_calculation.py).

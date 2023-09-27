@@ -34,10 +34,11 @@ A dictionary defines which properties will be built into the graph.
 | `cell`                     | `True`        | `False`        | Include structural cell when building graphs. |   
 | `cart_coords`              | `True`        | `False`        | Include Cartesian coordinates when building graphs. |   
 | `frac_coords`              | `True`        | `False`        | Include Fractional coordinates when building graphs. |   
-| `constraints`              | `True`        | `False`        | Include constraint information when building graphs. |   
+| `constraints`              | `True`        | `False`        | Include constraint information when building graphs. |  
+| `stress`                   | `True`        | `False`        | Include [Virial stress](https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms.get_stress) when building graphs. |  
 | `distance`                 | `True`        | `False`        | Include distance between connected atoms when building graphs. |   
 | `direction`                | `True`        | `False`        | Include unit vector between connected atoms when building graphs. |   
-| `path`                     | `True`        | `False`        | Include file path of each graph corresponding to DFT calculations when building graphs. |   
+| `path`                     | `False`        | `True`        | Include file path of each graph corresponding to DFT calculations when building graphs. |   
 
 ## `default_data_config`
 A dictionary defines how to build a database.
@@ -55,6 +56,7 @@ A dictionary defines how to build a database.
 | `has_adsorbate`            | `False`       | `True`        | Include adsorbate information when building graphs. For now, only `H` and `O` atoms are considered as adsorbate atoms. | |
 | `keep_readable_structural_files` | `False`       | `True`        | Massive number of structural files (POSCARs) under `dataset_path` are generated when building graphs, you can choose to keep them or not. | 
 | `mask_similar_frames`      | `False`       | `True`        | In VASP calculations, the energy optimization generate many frames that have similar geometry and total energies, you can extract only some of them by specifying this parameter and `energy_stride` below. |
+| `mask_reversed_magnetic_moments`      | `False`       | `float`        | Frames with atomic magnetic moments lower than this value will be masked. |
 | `scale_prop`               | `False`       | `True`        | Scale the properties. This function seems to be deprecated. I need to double-check the source code first, so do not use it. |
 | `validation_size`          | 0.15          | `int`/`float`    | Size of the validation dataset. `int`: number of samples of the validation set. `float`: portion of samples of the validation set. | 
 | `test_size`                | 0.15          | `int`/`float`    | Size of the test dataset. `int`: number of samples of the validation set. `float`: portion of samples of the validation set. |

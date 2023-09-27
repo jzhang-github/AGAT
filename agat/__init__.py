@@ -5,7 +5,7 @@ Created on Tue Aug 15 11:41:20 2023
 @author: ZHANG Jun
 """
 
-__version__ = '7.13.4.2'
+__version__ = '7.14.0'
 
 import os
 os.environ['DGLBACKEND']="tensorflow"

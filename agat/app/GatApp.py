@@ -64,7 +64,7 @@ class GatApp(object):
         self.graph_build_scheme     = self.load_graph_build_scheme(self.graph_build_scheme_path) # you can also load it from `force_model_save_path`
 
         build_properties = {'energy': False, 'forces': False, 'cell': False,
-                            'cart_coords': False, 'frac_coords': False, 'path': False}
+                            'cart_coords': False, 'frac_coords': False, 'path': False, 'stress': False}
         self.graph_build_scheme['build_properties'] = {**self.graph_build_scheme['build_properties'], **build_properties}
         self.graph_build_scheme['gpu'] = self.gpu
         self.cg                     = CrystalGraph(**self.graph_build_scheme)

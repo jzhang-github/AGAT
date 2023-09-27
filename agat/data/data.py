@@ -270,6 +270,9 @@ class CrystalGraph(object):
         if self.data_config['build_properties']['energy']:
             energy_true = tf.constant(np.load(fname+'_energy.npy'), dtype='float32')
             graph_info['energy_true'] = tf.constant((energy_true), dtype='float32')
+        if self.data_config['build_properties']['stress']:
+            stress_true = tf.constant(np.load(fname+'_stress.npy'), dtype='float32')
+            graph_info['stress_true'] = tf.constant((stress_true), dtype='float32')
         if self.data_config['build_properties']['cell']:
             cell_true = tf.constant(ase_atoms.cell.array, dtype='float32')
             graph_info['cell_true'] = tf.constant((cell_true), dtype='float32')
@@ -344,6 +347,9 @@ class CrystalGraph(object):
         if self.data_config['build_properties']['energy']:
             energy_true = tf.constant(np.load(crystal_fname+'_energy.npy'), dtype='float32')
             graph_info['energy_true'] = tf.constant((energy_true), dtype='float32')
+        if self.data_config['build_properties']['stress']:
+            stress_true = tf.constant(np.load(crystal_fname+'_stress.npy'), dtype='float32')
+            graph_info['stress_true'] = tf.constant((stress_true), dtype='float32')
         if self.data_config['build_properties']['cell']:
             cell_true = tf.constant(mycrystal.lattice.matrix, dtype='float32')
             graph_info['cell_true'] = tf.constant((cell_true), dtype='float32')
@@ -580,7 +586,8 @@ class ExtractVaspFiles(object):
 
         '''
 
-        print('mask_similar_frames:', self.data_config['mask_similar_frames'])
+        print('Mask similar frames:', self.data_config['mask_similar_frames'],
+              'Mask reversed magnetic moments:', self.data_config['mask_reversed_magnetic_moments'])
         f_csv = open(os.path.join(self.data_config['dataset_path'], f'fname_prop_{process_index}.csv'), 'w', buffering=1)
         in_path_index = self.batch_index[process_index]
         for path_index in tqdm(in_path_index, desc='Extracting ' + str(process_index) + ' VASP files.', delay=process_index): # tqdm(batch_fname, desc='Reading ' + str(batch_num) + ' batch graphs', delay=batch_num)
@@ -592,13 +599,6 @@ class ExtractVaspFiles(object):
 
                 read_good = True
                 try:
-                    # read free energy
-                    with open('OUTCAR', 'r') as f:
-                        free_energy = []
-                        for line in f:
-                            if '  free  energy   TOTEN  ' in line.split('='):
-                                free_energy.append(float(line.split()[4]))
-
                     # read frames
                     frame_contcar  = read('CONTCAR')
                     constraints    = frame_contcar.constraints
@@ -606,53 +606,77 @@ class ExtractVaspFiles(object):
                     frames_xdatcar = read('XDATCAR', index=':')
                     [x.set_constraint(constraints) for x in frames_xdatcar]
 
-                    num_atoms      = len(frames_outcar[0])
-                    num_frames     = len(frames_outcar)
+                    # pre processing
+                    free_energy = [x.get_total_energy() for x in frames_outcar]
+                    num_atoms = len(frames_outcar[0])
+                    num_frames = len(frames_outcar)
+                    ee_steps = self.read_oszicar()
+                    NELM = self.read_incar()
+
+                    # check magnetic moments (magmom).
+                    if self.data_config['mask_reversed_magnetic_moments']:
+                        frames_outcar[0].get_magnetic_moments()
+
                     assert len(frames_outcar) == len(frames_xdatcar), f'Inconsistent number of frames between OUTCAR and XDATCAR files. OUTCAR: {len(frames_outcar)}; XDATCAR {len(frames_xdatcar)}'
                     assert num_frames == len(free_energy), 'Number of frams does not equal to number of free energies.'
-                    ee_steps = self.read_oszicar()
                     assert len(ee_steps) == len(frames_xdatcar), f'Inconsistent number of frames between OSZICAR and XDATCAR files. OSZICAR: {len(ee_steps)}; XDATCAR {len(frames_xdatcar)}'
-                    NELM     = self.read_incar()
+
                 except:
                     print(f'Read OUTCAR, OSZICAR, INCAR, CONTCAR, and/or XDATCAR with exception in: {in_path}')
                     read_good = False
 
                 if read_good:
-                    ###############################################################
-                    # mask similar frames based on energy difference.
+                    output_mask = [True for x in range(num_frames)]
+                    report_mask = False
+
+                    # check similar frames
                     if self.data_config['mask_similar_frames']:
                         no_mask_list = [0]
                         for i, e in enumerate(free_energy):
                             if abs(e - free_energy[no_mask_list[-1]]) > self.data_config['energy_stride']:
                                 no_mask_list.append(i)
-                        if not no_mask_list[-1] == num_frames - 1:
+                        if not no_mask_list[-1] == num_frames - 1: # keep the last frame
                             no_mask_list.append(num_frames - 1)
+                        output_mask = [x if i in no_mask_list else False for i,x in enumerate(output_mask)]
 
-                        free_energy    = [free_energy[x] for x in no_mask_list]
-                        frames_outcar  = [frames_outcar[x] for x in no_mask_list]
-                        frames_xdatcar = [frames_xdatcar[x] for x in no_mask_list]
-                        ee_steps       = [ee_steps[x] for x in no_mask_list]
-                    else:
-                        no_mask_list = [x for x in range(num_frames)]
-                    ###############################################################
+                    # check electronic steps
+                    for i, outcar in enumerate(frames_outcar):
+                        if ee_steps[i] >= NELM:
+                            output_mask[i] = False
+                            report_mask = True
 
+                    # check magnetic moments
+                    if self.data_config['mask_reversed_magnetic_moments']:
+                        for i, outcar in enumerate(frames_outcar):
+                            magmoms = outcar.get_magnetic_moments()
+                            if not (magmoms > self.data_config['mask_reversed_magnetic_moments']).all():
+                                output_mask[i] = False
+                                report_mask = True
+
+                    no_mask_list   = [i for i,x in enumerate(output_mask) if x]
+                    free_energy    = [free_energy[x] for x in no_mask_list]
+                    frames_outcar  = [frames_outcar[x] for x in no_mask_list]
+                    frames_xdatcar = [frames_xdatcar[x] for x in no_mask_list]
+                    ee_steps       = [ee_steps[x] for x in no_mask_list]
                     free_energy_per_atom = [x / num_atoms for x in free_energy]
 
                     # save frames
                     for i in range(len(no_mask_list)):
-                        if ee_steps[i] < NELM:
-                            fname = str(os.path.join(self.data_config['dataset_path'], f'POSCAR_{process_index}_{path_index}_{i}'))
-                            while os.path.exists(os.path.join(self.working_dir, fname)):
-                                fname = fname + '_new'
+                        fname = str(os.path.join(self.data_config['dataset_path'], f'POSCAR_{process_index}_{path_index}_{i}'))
+                        while os.path.exists(os.path.join(self.working_dir, fname)):
+                            fname = fname + '_new'
 
-                            frames_xdatcar[i].write(os.path.join(self.working_dir, fname))
-                            forces = frames_outcar[i].get_forces(apply_constraint=False)
-                            np.save(os.path.join(self.working_dir, f'{fname}_force.npy'), forces)
-                            np.save(os.path.join(self.working_dir,f'{fname}_energy.npy'), free_energy_per_atom[i])
-                            f_csv.write(os.path.basename(fname) + ',  ')
-                            f_csv.write(str(free_energy_per_atom[i]) + ',  ' + str(in_path) + '\n')
-                        else:
-                            print(f'Electronic steps of {i}th ionic step greater than NELM: {NELM} in path: {in_path}')
+                        frames_xdatcar[i].write(os.path.join(self.working_dir, fname))
+                        forces = frames_outcar[i].get_forces(apply_constraint=False)
+                        stress = frames_outcar[i].get_stress()
+                        np.save(os.path.join(self.working_dir, f'{fname}_force.npy'), forces)
+                        np.save(os.path.join(self.working_dir,f'{fname}_energy.npy'), free_energy_per_atom[i])
+                        np.save(os.path.join(self.working_dir,f'{fname}_stress.npy'), stress)
+                        f_csv.write(os.path.basename(fname) + ',  ')
+                        f_csv.write(str(free_energy_per_atom[i]) + ',  ' + str(in_path) + '\n')
+
+                    if report_mask:
+                        print(f'Frame(s) in {in_path} are masked.')
 
             else:
                 print(f'OUTCAR, OSZICAR, INCAR, CONTCAR, and/or XDATCAR files do not exist in {in_path}.')
@@ -707,6 +731,7 @@ class AgatDatabase():
                 os.remove(os.path.join(self.data_config['dataset_path'], fname))
                 os.remove(os.path.join(self.data_config['dataset_path'], f'{fname}_energy.npy'))
                 os.remove(os.path.join(self.data_config['dataset_path'], f'{fname}_force.npy'))
+                os.remove(os.path.join(self.data_config['dataset_path'], f'{fname}_stress.npy'))
             # os.remove(os.path.join(self.data_config['dataset_path'], 'fname_prop.csv'))
             for i in range(self.data_config['num_of_cores']):
                 os.remove(os.path.join(self.data_config['dataset_path'], f'fname_prop_{i}.csv'))
