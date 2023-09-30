@@ -6,6 +6,7 @@
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)](https://pypi.org/project/agat/)
 [![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
  
+ ## The [PyTorch](https://pytorch.org/) backend AGAT is on the way...
   <br>  <br>  ![Model architecture](files/architecture.svg)
 
 # Using AGAT
