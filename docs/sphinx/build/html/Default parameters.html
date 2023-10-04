@@ -257,6 +257,12 @@
 <td>Include constraint information when building graphs.</td>
 </tr>
 <tr>
+<td><code>stress</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td>Include <a href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms.get_stress">Virial stress</a> when building graphs.</td>
+</tr>
+<tr>
 <td><code>distance</code></td>
 <td><code>True</code></td>
 <td><code>False</code></td>
@@ -270,8 +276,8 @@
 </tr>
 <tr>
 <td><code>path</code></td>
-<td><code>True</code></td>
 <td><code>False</code></td>
+<td><code>True</code></td>
 <td>Include file path of each graph corresponding to DFT calculations when building graphs.</td>
 </tr>
 </tbody>
@@ -354,6 +360,12 @@
 <td><code>False</code></td>
 <td><code>True</code></td>
 <td>In VASP calculations, the energy optimization generate many frames that have similar geometry and total energies, you can extract only some of them by specifying this parameter and <code>energy_stride</code> below.</td>
+</tr>
+<tr>
+<td><code>mask_reversed_magnetic_moments</code></td>
+<td><code>False</code></td>
+<td><code>float</code></td>
+<td>Frames with atomic magnetic moments lower than this value will be masked.</td>
 </tr>
 <tr>
 <td><code>scale_prop</code></td>

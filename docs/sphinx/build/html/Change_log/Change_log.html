@@ -107,6 +107,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../Change_log.html">Change log</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../Change_log.html#energy-model">Energy model</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">main</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v7-14-0">v7.14.0</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#v7-13-4">v7.13.4</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#v7-13-3">v7.13.3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#v7-13-2">v7.13.2</a></li>
@@ -192,6 +193,23 @@
             
   <section id="main">
 <h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/main">main</a><a class="headerlink" href="#main" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Prepare PyTorch-backend AGAT.</p></li>
+</ul>
+</section>
+<section id="v7-14-0">
+<h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0">v7.14.0</a><a class="headerlink" href="#v7-14-0" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Add API for controling HP DFT calculation. <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/default_parameters.py#L246-L251">agat/default_parameters.py</a></p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">mask_reversed_magnetic_moments</span></code> in <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/default_parameters.py#L58">agat/default_parameters.py</a> and <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py">agat/data/data.py</a></p></li>
+<li><p>Modify <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py">agat/data/data.py</a>:</p>
+<ul>
+<li><p>Include stress in the graph: <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L273-L275">agat/data/data.py#L273-L275</a>, <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L350-L352">agat/data/data.py#L350-L352</a>.</p></li>
+<li><p>Update method of parsing the vasp data: <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L610">agat/data/data.py#L610</a>, <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L625-L656">agat/data/data.py#L625-L656</a>, <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L661-L675">agat/data/data.py#L661-L675</a>.</p></li>
+</ul>
+</li>
+<li><p>Update docs.</p></li>
+</ul>
 </section>
 <section id="v7-13-4">
 <h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v7.13.4">v7.13.4</a><a class="headerlink" href="#v7-13-4" title="Permalink to this heading">¶</a></h1>
