@@ -1,79 +1,23 @@
-INCAR_TAG = '''
-SYSTEM
-ISTART
-ICHARG
-INIWAV
-ENCUT
-ENAUG
-PREC
-IALGO
-NELM
-NELMIN
-NELMDL
-EDIFF
-NBANDS
-GGA
-VOSKOWN
-LREAL
-WEIMIN
-EDIFFG
-NSW
-IBRION
-ISIF
-POTIM
-IOPT
-ISYM
-SIGMA
-ISMEAR
-ISPIN
-MAGMOM
-LWAVE
-LCHARG
-RWIGS
-NPAR
-LORBIT
-LDAU
-LDAUTYPE
-LDAUL
-LDAUU
-LDAUJ
-LDAUPRINT
-LMAXMIX
-LASPH
-IDIPOL
-LDIPOL
-LAECHG
-LADDGRID
-NGX
-NGY
-NGZ
-NGXF
-NGYF
-NGZF
-ICHAIN
-IMAGES
-SPRING
-LCLIMB
-DdR
-DRotMax
-DFNMin
-DFNMax
-NFREE
-LUSE_VDW
-Zab_vdW
-AGGAC
-AMIX
-AMIX_MAG
-BMIX
-BMIX_MAG
-ALGO
-KPAR
-NCORE
-NEDOS
-IVDW
-LELF
-MDALGO
-'''.split()
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Aug 12 16:08:41 2023
+
+@author: ZHANG Jun
+"""
+
+import os
+from .exceptions import FileExit
+from .incar_tag import INCAR_TAG
+
+def generate_file_name(fname):
+    while os.path.exists(fname):
+        fname = fname + '_new'
+    return fname
+
+def file_exit():
+    if os.path.exists('StopPython'):
+        os.remove('StopPython')
+        raise FileExit('Exit because `StopPython` file is found.')
 
 def modify_INCAR(key='NSW', value='300', s=''):
     if not key in INCAR_TAG:

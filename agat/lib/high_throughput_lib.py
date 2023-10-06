@@ -9,6 +9,7 @@ import platform
 import numpy as np
 import os
 import stat
+
 from ase.formula import Formula
 from ase.io import read
 from ase.lattice.cubic import FaceCenteredCubic

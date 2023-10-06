@@ -7,8 +7,9 @@ Created on Wed Apr 21 17:51:55 2021
 
 
 import numpy as np
-import tensorflow as tf
-from pymatgen.core.periodic_table import Element
+
+# from pymatgen.core.periodic_table import Element
+from ase.data import atomic_numbers
 
 all_elements = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'B',  'Ba',
                 'Be', 'Bh', 'Bi', 'Bk', 'Br', 'C',  'Ca', 'Cd', 'Ce', 'Cf',
@@ -41,44 +42,44 @@ NiFe_ele = ['Fe', 'Ni']
 
 Elements_used = elements
 
-def get_atomic_features(Elements_used):
+# def get_atomic_features(Elements_used): # deprecated
 
-    """
-    For more input features, please refer to: https://pymatgen.org/pymatgen.core.periodic_table.html
+#     """
+#     For more input features, please refer to: https://pymatgen.org/pymatgen.core.periodic_table.html
 
-    Returns
-    -------
-    None.
+#     Returns
+#     -------
+#     None.
 
-    """
-    atom_feat_data, atom_feat = [], {}
-    for i, element in enumerate(Elements_used):
-        atom_feat_tmp = []
-        atom_feat_tmp.append(Element(element).Z)                # atomic number
-        atom_feat_tmp.append(Element(element).atomic_radius)
-        atom_feat_tmp.append(Element(element).molar_volume)
-        atom_feat_tmp.append(Element(element).atomic_mass)
-        atom_feat_tmp.append(Element(element).mendeleev_no)
-        atom_feat_tmp.append(Element(element).X)                # Electronegativity of element
-        atom_feat_tmp.append(Element(element).boiling_point)
-        atom_feat_tmp.append(Element(element).melting_point)
-        atom_feat_tmp.append(Element(element).row)
-        atom_feat_tmp.append(Element(element).group)
-        atom_feat_tmp.append(Element(element).max_oxidation_state)
-        atom_feat_tmp.append(Element(element).min_oxidation_state)
-        atom_feat_data.append(atom_feat_tmp)
+#     """
+#     atom_feat_data, atom_feat = [], {}
+#     for i, element in enumerate(Elements_used):
+#         atom_feat_tmp = []
+#         atom_feat_tmp.append(Element(element).Z)                # atomic number
+#         atom_feat_tmp.append(Element(element).atomic_radius)
+#         atom_feat_tmp.append(Element(element).molar_volume)
+#         atom_feat_tmp.append(Element(element).atomic_mass)
+#         atom_feat_tmp.append(Element(element).mendeleev_no)
+#         atom_feat_tmp.append(Element(element).X)                # Electronegativity of element
+#         atom_feat_tmp.append(Element(element).boiling_point)
+#         atom_feat_tmp.append(Element(element).melting_point)
+#         atom_feat_tmp.append(Element(element).row)
+#         atom_feat_tmp.append(Element(element).group)
+#         atom_feat_tmp.append(Element(element).max_oxidation_state)
+#         atom_feat_tmp.append(Element(element).min_oxidation_state)
+#         atom_feat_data.append(atom_feat_tmp)
 
-    # scale the features
-    atom_feat_data = np.array(atom_feat_data)
-    max_list = np.max(atom_feat_data, axis=0)
-    min_list = np.min(atom_feat_data, axis=0)
+#     # scale the features
+#     atom_feat_data = np.array(atom_feat_data)
+#     max_list = np.max(atom_feat_data, axis=0)
+#     min_list = np.min(atom_feat_data, axis=0)
 
-    for i in range(np.shape(atom_feat_data)[0]):
-        for j in range(np.shape(atom_feat_data)[1]):
-            atom_feat_data[i][j] = (atom_feat_data[i][j] - min_list[j]) / (max_list[j] - min_list[j])
-    for i_index, i in enumerate(Elements_used):
-        atom_feat[i] = atom_feat_data[i_index,:]
-    return atom_feat
+#     for i in range(np.shape(atom_feat_data)[0]):
+#         for j in range(np.shape(atom_feat_data)[1]):
+#             atom_feat_data[i][j] = (atom_feat_data[i][j] - min_list[j]) / (max_list[j] - min_list[j])
+#     for i_index, i in enumerate(Elements_used):
+#         atom_feat[i] = atom_feat_data[i_index,:]
+#     return atom_feat
 
 def get_atomic_feature_onehot(Elements_used):
     """
@@ -91,9 +92,9 @@ def get_atomic_feature_onehot(Elements_used):
     atom_feat : dict
         atomic number of all considered elements
     """
-    number_of_elements = len(Elements_used)
 
-    atomic_number = [Element(x).Z for x in Elements_used]
+    number_of_elements = len(Elements_used)
+    atomic_number = [atomic_numbers[x] for x in Elements_used]
     atoms_dict = dict(zip(atomic_number, Elements_used))
 
     atomic_number.sort()
@@ -102,6 +103,6 @@ def get_atomic_feature_onehot(Elements_used):
 
     keys               = Elements_sorted
     element_index      = [i for i, ele in enumerate(keys)]
-    values             = tf.one_hot(element_index, number_of_elements)
+    values             = np.eye(number_of_elements)[element_index]
     atom_feat          = dict(zip(keys, values))
     return atom_feat

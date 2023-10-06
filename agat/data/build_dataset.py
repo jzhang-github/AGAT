@@ -6,22 +6,22 @@ Created on Sun Jun 25 22:54:47 2023
 """
 
 import numpy as np
+import sys
 import os
-import dgl
-import tensorflow as tf
-from sklearn.model_selection import train_test_split
-from dgl.data.utils import save_graphs, load_graphs
-import multiprocessing
-from tqdm import tqdm
 import json
+import multiprocessing
+
 from ase.io import read, write
 import ase
 from ase.neighborlist import natural_cutoffs
+import torch
+import dgl
+from dgl.data.utils import save_graphs, load_graphs
+from tqdm import tqdm
 
-import sys
 from ..default_parameters import default_data_config
-from ..data.AtomicFeatures import get_atomic_feature_onehot, get_atomic_features
-from ..lib.GatLib import config_parser
+from .atomic_feature import get_atomic_feature_onehot
+from ..lib.model_lib import config_parser
 
 class CrystalGraph(object):
     """
@@ -62,7 +62,7 @@ class CrystalGraph(object):
 
         if self.data_config['mode_of_NN'] == 'voronoi' or self.data_config['mode_of_NN'] == 'pymatgen_dist':
             ''' We encourage you to use ``ase`` module to build crystal graphs.
-            The ``pymatgen`` module needs some dependencies that conflict with
+            The ``pymatgen`` module may need dependencies that conflict with
             other modules.'''
             try:
                 from pymatgen.core.structure import Structure
@@ -76,16 +76,12 @@ class CrystalGraph(object):
             self.Structure = Structure
             self.VoronoiConnectivity = VoronoiConnectivity
 
-        # specify device.
-        if self.data_config['gpu'] < 0:
-            self.device = "/cpu:0"
-        else:
-            self.device = "/gpu:{}".format(self.data_config['gpu'])
+        # self.device = self.data_config['device']
 
         if self.data_config['build_properties']['path']:
             print('You choose to store the path of each graph. \
-            Be noted that this will expose your file structure when you \
-            publish your dataset.')
+Be noted that this will expose your file structure when you publish your dataset.')
+        self.dtype = torch.float
 
     def get_adsorbate_bool(self, element_list):
         """
@@ -99,7 +95,8 @@ class CrystalGraph(object):
         """
         # element_list = np.array(self.data_config['species'])
         element_list = np.array(element_list)
-        return tf.constant(np.where((element_list == 'H') | (element_list == 'O'), True, False), dtype='bool')
+        return torch.tensor(np.where((element_list == 'H') | (element_list == 'O'),
+                                     1, 0), dtype=self.dtype)
 
     def get_crystal(self, crystal_fpath):
         """
@@ -226,7 +223,7 @@ class CrystalGraph(object):
         num_sites = len(ase_atoms)
         if self.data_config['mode_of_NN'] == 'ase_dist':
             assert self.data_config['cutoff'], 'The `cutoff` cannot be `None` \
-            in this case. Provide a float here.'
+in this case. Provide a float here.'
             ase_cutoffs = self.data_config['cutoff']
         elif self.data_config['mode_of_NN'] == 'ase_natural_cutoffs':
             ase_cutoffs = np.array(natural_cutoffs(ase_atoms, mult=1.25, H=3.0, O=3.0)) # the specified values are radius, not diameters.
@@ -237,45 +234,45 @@ class CrystalGraph(object):
 
         ndata                   = self.get_ndata(ase_atoms)
         bg                      = dgl.graph((i, j))
-        bg.ndata['h']           = tf.constant(ndata, dtype='float32')
+        bg.ndata['h']           = torch.tensor(ndata, dtype=self.dtype)
         if self.data_config['build_properties']['distance']:
-            bg.edata['dist']        = tf.constant(d, dtype='float32')
+            bg.edata['dist']        = torch.tensor(d, dtype=self.dtype)
         if self.data_config['build_properties']['direction']:
-            bg.edata['direction']   = tf.constant(D, dtype='float32')
+            bg.edata['direction']   = torch.tensor(D, dtype=self.dtype)
         if self.data_config['build_properties']['constraints']:
-            constraints             = [[True, True, True]] * num_sites
+            constraints             = [[1, 1, 1]] * num_sites
             for c in ase_atoms.constraints:
                 if isinstance(c, ase.constraints.FixScaled):
                     constraints[c.a] = c.mask
                 elif isinstance(c, ase.constraints.FixAtoms):
                     for i in c.index:
-                        constraints[i] = [False, False, False]
+                        constraints[i] = [0, 0, 0]
                 elif isinstance(c, ase.constraints.FixBondLengths):
                     pass
                 else:
                     raise TypeError(f'Wraning!!! Undefined constraint type: {type(c)}')
-            bg.ndata['constraints'] = tf.constant(constraints, dtype='bool')
+            bg.ndata['constraints'] = torch.tensor(constraints, dtype=self.dtype)
         if self.data_config['build_properties']['forces']:
-            forces_true             = tf.constant(np.load(fname+'_force.npy'), dtype='float32')
-            bg.ndata['forces_true'] = tf.constant((forces_true), dtype='float32')
+            forces_true             = torch.tensor(np.load(fname+'_force.npy'), dtype=self.dtype)
+            bg.ndata['forces_true'] = torch.tensor((forces_true))
         if self.data_config['build_properties']['cart_coords']:
-            bg.ndata['cart_coords'] = tf.constant(ase_atoms.positions, dtype='float32')
+            bg.ndata['cart_coords'] = torch.tensor(ase_atoms.positions, dtype=self.dtype)
         if self.data_config['build_properties']['frac_coords']:
-            bg.ndata['frac_coords'] = tf.constant(ase_atoms.get_scaled_positions(), dtype='float32')
+            bg.ndata['frac_coords'] = torch.tensor(ase_atoms.get_scaled_positions(), dtype=self.dtype)
         if self.data_config['has_adsorbate']:
             element_list            = ase_atoms.get_chemical_symbols()
             bg.ndata['adsorbate']   = self.get_adsorbate_bool(element_list)
 
         graph_info = {}
         if self.data_config['build_properties']['energy']:
-            energy_true = tf.constant(np.load(fname+'_energy.npy'), dtype='float32')
-            graph_info['energy_true'] = tf.constant((energy_true), dtype='float32')
+            energy_true = torch.tensor(np.load(fname+'_energy.npy'), dtype=self.dtype)
+            graph_info['energy_true'] = torch.tensor((energy_true), dtype=self.dtype)
         if self.data_config['build_properties']['stress']:
-            stress_true = tf.constant(np.load(fname+'_stress.npy'), dtype='float32')
-            graph_info['stress_true'] = tf.constant((stress_true), dtype='float32')
+            stress_true = torch.tensor(np.load(fname+'_stress.npy'), dtype=self.dtype)
+            graph_info['stress_true'] = torch.tensor((stress_true), dtype=self.dtype)
         if self.data_config['build_properties']['cell']:
-            cell_true = tf.constant(ase_atoms.cell.array, dtype='float32')
-            graph_info['cell_true'] = tf.constant((cell_true), dtype='float32')
+            cell_true = torch.tensor(ase_atoms.cell.array, dtype=self.dtype)
+            graph_info['cell_true'] = torch.tensor((cell_true), dtype=self.dtype)
         if self.data_config['build_properties']['path']:
             graph_info['path'] = fname
 
@@ -307,14 +304,14 @@ class CrystalGraph(object):
 
         ndata                   = self.get_ndata(mycrystal)
         bg                      = dgl.graph((sender, receiver))
-        bg.ndata['h']           = tf.constant(ndata, dtype='float32')
+        bg.ndata['h']           = torch.tensor(ndata, dtype=self.dtype)
 
         if self.data_config['build_properties']['distance']:
-            bg.edata['dist']        = tf.constant(dist, dtype='float32')
+            bg.edata['dist']        = torch.tensor(dist, dtype=self.dtype)
         if self.data_config['build_properties']['cart_coords']:
-            bg.ndata['cart_coords'] = tf.constant(mycrystal.cart_coords, dtype='float32')
+            bg.ndata['cart_coords'] = torch.tensor(mycrystal.cart_coords, dtype=self.dtype)
         if self.data_config['build_properties']['frac_coords']:
-            bg.ndata['frac_coords'] = tf.constant(mycrystal.frac_coords, dtype='float32')
+            bg.ndata['frac_coords'] = torch.tensor(mycrystal.frac_coords, dtype=self.dtype)
         if self.data_config['build_properties']['direction']:
             frac_coords             = mycrystal.frac_coords
             sender_frac_coords      = frac_coords[sender]
@@ -330,29 +327,29 @@ class CrystalGraph(object):
             direction_norm          = np.linalg.norm(real_direction, axis=1, keepdims=True)
             direction_normalized    = real_direction / direction_norm
             direction_normalized[np.where(sender == receiver)] = 0.0
-            bg.edata['direction']   = tf.constant(direction_normalized, dtype='float32')
+            bg.edata['direction']   = torch.tensor(direction_normalized, dtype=self.dtype)
         if self.data_config['build_properties']['constraints']:
             try:
-                bg.ndata['constraints'] = tf.constant([x.selective_dynamics for x in mycrystal], dtype='bool')
+                bg.ndata['constraints'] = torch.tensor([x.selective_dynamics for x in mycrystal], dtype=self.dtype)
             except AttributeError:
-                bg.ndata['constraints'] = tf.constant([[True, True, True] for x in mycrystal], dtype='bool')
+                bg.ndata['constraints'] = torch.tensor([[True, True, True] for x in mycrystal], dtype=self.dtype)
         if self.data_config['build_properties']['forces']:
-            forces_true             = tf.constant(np.load(crystal_fname+'_force.npy'), dtype='float32')
-            bg.ndata['forces_true'] = tf.constant((forces_true), dtype='float32')
+            forces_true             = torch.tensor(np.load(crystal_fname+'_force.npy'), dtype=self.dtype)
+            bg.ndata['forces_true'] = torch.tensor((forces_true), dtype=self.dtype)
         if self.data_config['has_adsorbate']:
             element_list            = [x.specie.name for x in mycrystal.sites]
             bg.ndata['adsorbate']   = self.get_adsorbate_bool(element_list)
 
         graph_info = {}
         if self.data_config['build_properties']['energy']:
-            energy_true = tf.constant(np.load(crystal_fname+'_energy.npy'), dtype='float32')
-            graph_info['energy_true'] = tf.constant((energy_true), dtype='float32')
+            energy_true = torch.tensor(np.load(crystal_fname+'_energy.npy'), dtype=self.dtype)
+            graph_info['energy_true'] = torch.tensor((energy_true), dtype=self.dtype)
         if self.data_config['build_properties']['stress']:
-            stress_true = tf.constant(np.load(crystal_fname+'_stress.npy'), dtype='float32')
-            graph_info['stress_true'] = tf.constant((stress_true), dtype='float32')
+            stress_true = torch.tensor(np.load(crystal_fname+'_stress.npy'), dtype=self.dtype)
+            graph_info['stress_true'] = torch.tensor((stress_true), dtype=self.dtype)
         if self.data_config['build_properties']['cell']:
-            cell_true = tf.constant(mycrystal.lattice.matrix, dtype='float32')
-            graph_info['cell_true'] = tf.constant((cell_true), dtype='float32')
+            cell_true = torch.tensor(mycrystal.lattice.matrix, dtype=self.dtype)
+            graph_info['cell_true'] = torch.tensor((cell_true), dtype=self.dtype)
         if self.data_config['build_properties']['path']:
             graph_info['path'] = crystal_fname
         return bg, graph_info
@@ -368,11 +365,10 @@ class CrystalGraph(object):
            :param str crystal_fname: File name.
            :return: A bidirectional graph with self-loop connection.
         """
-        with tf.device(self.device):
-            if self.data_config['mode_of_NN'] == 'voronoi' or self.data_config['mode_of_NN'] == 'pymatgen_dist':
-                return self.get_graph_from_pymatgen(crystal_fname)
-            elif self.data_config['mode_of_NN'] == 'ase_natural_cutoffs' or self.data_config['mode_of_NN'] == 'ase_dist':
-                return self.get_graph_from_ase(crystal_fname)
+        if self.data_config['mode_of_NN'] == 'voronoi' or self.data_config['mode_of_NN'] == 'pymatgen_dist':
+            return self.get_graph_from_pymatgen(crystal_fname)
+        elif self.data_config['mode_of_NN'] == 'ase_natural_cutoffs' or self.data_config['mode_of_NN'] == 'ase_dist':
+            return self.get_graph_from_ase(crystal_fname)
 
 class ReadGraphs(object):
     """
@@ -412,7 +408,7 @@ class ReadGraphs(object):
                 for i in batch_graph_info:
                     graph_info_tmp.append(i[key].numpy())
                 graph_info_tmp = np.array(graph_info_tmp)
-                graph_info_tmp = tf.cast(graph_info_tmp, dtype=tf.float32)
+                graph_info_tmp = torch.tensor(graph_info_tmp)
                 batch_labels[key] = graph_info_tmp
         save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs_' + str(batch_num) + '.bin'), batch_g, batch_labels)
 
@@ -465,7 +461,7 @@ class ReadGraphs(object):
                 for key in batch_labels.keys():
                     try:
                         # graph_labels[key].extend(batch_labels[key])
-                        graph_labels[key] = tf.concat([graph_labels[key],
+                        graph_labels[key] = torch.cat([graph_labels[key],
                                                        batch_labels[key]], 0)
                     except KeyError:
                         graph_labels[key] = batch_labels[key]
@@ -706,7 +702,7 @@ class ExtractVaspFiles(object):
             np.savetxt(f, lines, fmt='%s')
         f.close()
 
-class AgatDatabase():
+class BuildDatabase():
     def __init__(self, **data_config):
         self.data_config = {**default_data_config, **config_parser(data_config)}
 
@@ -719,9 +715,8 @@ class AgatDatabase():
         graph_reader.read_all_graphs()
 
         # split the dataset.
-        train_index, validation_index, test_index = TrainValTestSplit(**self.data_config)()
-        # print(os.getcwd())
-        # curdir = os.getcwd()
+        # train_index, validation_index, test_index = TrainValTestSplit(**self.data_config)()
+
         if not self.data_config['keep_readable_structural_files']:
             fname_prop_data = np.loadtxt(os.path.join(self.data_config['dataset_path'],
                                                       'fname_prop.csv'),
@@ -757,7 +752,7 @@ def concat_graphs(*list_of_bin):
         graph_list.extend(batch_g)
         for key in batch_labels.keys():
             try:
-                graph_labels[key] = tf.concat([graph_labels[key],
+                graph_labels[key] = torch.cat([graph_labels[key],
                                                batch_labels[key]], 0)
             except KeyError:
                 graph_labels[key] = batch_labels[key]
@@ -766,6 +761,6 @@ def concat_graphs(*list_of_bin):
 
 # build data
 if __name__ == '__main__':
-    ad = AgatDatabase(mode_of_NN='pymatgen_dist', num_of_cores=16)
+    ad = BuildDatabase(mode_of_NN='pymatgen_dist', num_of_cores=16)
     ad.build()
 
