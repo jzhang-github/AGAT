@@ -25,7 +25,7 @@ The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is availa
   conda activate agat
   ```
 
-- Install [PyTorch](https://pytorch.org/)
+- Install [PyTorch](https://pytorch.org/),   
   Navigate to the [installation page](https://pytorch.org/get-started/locally/#start-locally) and choose you platform.
   For example (GPU):
   ```console

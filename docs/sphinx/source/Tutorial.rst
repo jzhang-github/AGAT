@@ -6,8 +6,9 @@ Default
 
 By default, the database construction, model training, and model application are controled by the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
 
+
 For example:: python
-   
+
    # Build database
    from agat.data import BuildDatabase
    if __name__ == '__main__':
@@ -35,16 +36,22 @@ There are generally two ways to customize your AGAT training and deployment. Tac
 
 Customized input arguements
 ****************************
+
+
 .. code-block:: python
    from agat.model import Fit
    f = Fit(verbose=2, gat_node_dim_list=[6, 10, 10], b=10.0)
    f.fit()
+
+
 
 This will replace the seetings for ``verbose``, ``gat_node_dim_list``, ``b``. Other parameters are controled by the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
 
 
 Customized input dict
 ****************************
+
+
 .. code-block:: python
    import os
    import torch.nn as nn
@@ -85,16 +92,18 @@ Customized input dict
    f = Fit(**train_config)
    f.fit()
 
+
+
 The input ``train_config`` has higher priority than the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
 
 
 .. toctree::
    :maxdepth: 6
 
-   VASP calculations
-   Build database
-   Train AGAT model
-   Structural optimization
-   High-throughput prediction
+   Tutorial/VASP calculations
+   Tutorial/Build database
+   Tutorial/Train AGAT model
+   Tutorial/Structural optimization
+   Tutorial/High-throughput prediction
 
 
