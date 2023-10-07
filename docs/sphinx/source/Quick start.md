@@ -1,5 +1,4 @@
 # Quick start
-# Quick start
 ### Prepare VASP calculations
 Run VASP calculations at this step.
 

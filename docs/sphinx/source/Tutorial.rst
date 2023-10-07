@@ -1,13 +1,26 @@
-Tutorial
-============
+Brief introduction
+==================
 
-Default
+Take a look at the Default parameters
+---------------------------------------------
+
+.. toctree::
+   :maxdepth: 6
+   
+   Default parameters
+   
+   
+
+
+Easy usage
 ---------------
 
-By default, the database construction, model training, and model application are controled by the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
+By default, the database construction, model training, and model application are controled by the `Default parameters <https://jzhang-github.github.io/AGAT/docs/sphinx/build/html/Default%20parameters.html>`_ .
 
 
-For example:: python
+For example:
+
+.. code-block:: python
 
    # Build database
    from agat.data import BuildDatabase
@@ -29,8 +42,8 @@ For example:: python
 As you can see that, you only need to provide very few input arguments to instantiate the imported objects.
 
 
-Customized
----------------
+Customized usage
+--------------------
 
 There are generally two ways to customize your AGAT training and deployment. Tacking the training as an example:
 
@@ -39,6 +52,7 @@ Customized input arguements
 
 
 .. code-block:: python
+
    from agat.model import Fit
    f = Fit(verbose=2, gat_node_dim_list=[6, 10, 10], b=10.0)
    f.fit()
@@ -53,6 +67,7 @@ Customized input dict
 
 
 .. code-block:: python
+
    import os
    import torch.nn as nn
    from agat.model import Fit
@@ -96,14 +111,16 @@ Customized input dict
 
 The input ``train_config`` has higher priority than the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
 
+More tutorials
+==================
 
 .. toctree::
    :maxdepth: 6
 
-   Tutorial/VASP calculations
-   Tutorial/Build database
-   Tutorial/Train AGAT model
-   Tutorial/Structural optimization
-   Tutorial/High-throughput prediction
+   Tutorial/VASP_calculations
+   Tutorial/Build_database
+   Tutorial/Train_AGAT_model
+   Tutorial/Structural_optimization
+   Tutorial/High_throughput_prediction
 
 

@@ -16,21 +16,18 @@ from ..data.build_dataset import CrystalGraph
 from ..lib.model_lib import load_model
 
 class AgatCalculator(Calculator):
-    """ Calculator with ASE module.
+    """Calculator with ASE module.
 
-    :param energy_model_save_path: Directory for the saved energy model.
-    :type energy_model_save_path: str
-    :param force_model_save_path: Directory for the saved force model.
-    :type force_model_save_path: str
-    :param graph_build_scheme_path: Directory for the json file of how to build graphs. This file is normally saved when you build your dataset.
-    :type graph_build_scheme_path: str
-    :param load_model: Load well-trained models or not, defaults to True
-    :type load_model: bool, optional
-    :param gpu: Predict with GPU or CPU, negative value for GPU, defaults to -1
-    :type gpu: int, optional
-    :param **kwargs: kwargs
-    :type **kwargs: dict/kwargs
-
+    :param model_save_dir: Directory storing the well-trained model.
+    :type model_save_dir: str
+    :param graph_build_scheme_dir: Direcotry storing the ``graph_build_scheme.json`` file.
+    :type graph_build_scheme_dir: str
+    :param device: model device, defaults to 'cuda'
+    :type device: str, optional
+    :param **kwargs: other input arguments
+    :type **kwargs: dict
+    :return: Calculated properties.
+    :rtype: dict
 
     Example::
 
@@ -91,6 +88,19 @@ class AgatCalculator(Calculator):
         return graph_build_scheme
 
     def calculate(self, atoms=None, properties=None, system_changes=['positions', 'numbers', 'cell', 'pbc']):
+        """
+
+        :param atoms: ase.atoms object, defaults to None
+        :type atoms: ase.atoms, optional
+        :param properties: calculated properties, defaults to None
+        :type properties: none, optional
+        :param system_changes: DESCRIPTION, defaults to ['positions', 'numbers', 'cell', 'pbc']
+        :type system_changes: TYPE, optional
+        :return: calculated results
+        :rtype: dict
+
+        """
+
         if properties is None:
             properties = self.implemented_properties
 

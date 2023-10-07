@@ -5,6 +5,13 @@ import sys
 from collections import Counter
 
 def find_adsorption_site():
+    """
+
+    :return: DESCRIPTION
+    :rtype: TYPE
+
+    """
+
     assert len(sys.argv) > 3, 'Usage: command + file name + atomic index (start from zero) + distance cutoff'
     fname = sys.argv[1]
     atom_num = sys.argv[2]

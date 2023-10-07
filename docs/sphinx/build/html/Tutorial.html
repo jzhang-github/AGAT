@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Brief introduction &mdash; AGAT 2022.10.04 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Default parameters" href="Default%20parameters.html" />
+    <link rel="prev" title="Quick start" href="Quick%20start.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> AGAT
+          
+
+          
+            
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick%20start.html">Quick start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Brief introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#take-a-look-at-the-default-parameters">Take a look at the Default parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Default%20parameters.html">Default parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#easy-usage">Easy usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customized-usage">Customized usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#customized-input-arguements">Customized input arguements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customized-input-dict">Customized input dict</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#more-tutorials">More tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/VASP_calculations.html">VASP calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/Build_database.html">Build database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/Train_AGAT_model.html">Train AGAT model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/Structural_optimization.html">Application (structural optimization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/High_throughput_prediction.html">Application (high-throughput prediction)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API_Docs.html">API_Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_Docs.html#api-docs-old">API_Docs_old</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Change_log.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AGAT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Brief introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="brief-introduction">
+<h1>Brief introduction<a class="headerlink" href="#brief-introduction" title="Permalink to this heading">¶</a></h1>
+<section id="take-a-look-at-the-default-parameters">
+<h2>Take a look at the Default parameters<a class="headerlink" href="#take-a-look-at-the-default-parameters" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Default%20parameters.html">Default parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-elements"><code class="docutils literal notranslate"><span class="pre">default_elements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-build-properties"><code class="docutils literal notranslate"><span class="pre">default_build_properties</span> </code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-data-config"><code class="docutils literal notranslate"><span class="pre">default_data_config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-train-config"><code class="docutils literal notranslate"><span class="pre">default_train_config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-ase-calculator-config"><code class="docutils literal notranslate"><span class="pre">default_ase_calculator_config</span></code>.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-high-throughput-config"><code class="docutils literal notranslate"><span class="pre">default_high_throughput_config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Default%20parameters.html#default-hp-dft-config"><code class="docutils literal notranslate"><span class="pre">default_hp_dft_config</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="easy-usage">
+<h2>Easy usage<a class="headerlink" href="#easy-usage" title="Permalink to this heading">¶</a></h2>
+<p>By default, the database construction, model training, and model application are controled by the <a class="reference external" href="https://jzhang-github.github.io/AGAT/docs/sphinx/build/html/Default%20parameters.html">Default parameters</a> .</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build database</span>
+<span class="kn">from</span> <span class="nn">agat.data</span> <span class="kn">import</span> <span class="n">BuildDatabase</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="n">BuildDatabase</span><span class="p">()</span>
+    <span class="n">database</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="c1"># Train AGAT model</span>
+<span class="kn">from</span> <span class="nn">agat.model</span> <span class="kn">import</span> <span class="n">Fit</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Fit</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Application (high-throughput prediction)</span>
+<span class="kn">from</span> <span class="nn">agat.app.cata</span> <span class="kn">import</span> <span class="n">HpAds</span>
+<span class="n">ha</span> <span class="o">=</span> <span class="n">HpAds</span><span class="p">(</span><span class="n">model_save_dir</span><span class="o">=</span><span class="n">model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="o">=</span><span class="n">graph_build_scheme_dir</span><span class="p">)</span>
+<span class="n">ha</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;NiCoFePdPt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you can see that, you only need to provide very few input arguments to instantiate the imported objects.</p>
+</section>
+<section id="customized-usage">
+<h2>Customized usage<a class="headerlink" href="#customized-usage" title="Permalink to this heading">¶</a></h2>
+<p>There are generally two ways to customize your AGAT training and deployment. Tacking the training as an example:</p>
+<section id="customized-input-arguements">
+<h3>Customized input arguements<a class="headerlink" href="#customized-input-arguements" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.model</span> <span class="kn">import</span> <span class="n">Fit</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Fit</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">gat_node_dim_list</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will replace the seetings for <code class="docutils literal notranslate"><span class="pre">verbose</span></code>, <code class="docutils literal notranslate"><span class="pre">gat_node_dim_list</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>. Other parameters are controled by the <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md">Default parameters</a> .</p>
+</section>
+<section id="customized-input-dict">
+<h3>Customized input dict<a class="headerlink" href="#customized-input-dict" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">agat.model</span> <span class="kn">import</span> <span class="n">Fit</span>
+<span class="n">train_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># `0`: no train and validation output; `1`: Validation and test output; `2`: train, validation, and test output.</span>
+    <span class="s1">&#39;dataset_path&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="s1">&#39;all_graphs.bin&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;model_save_dir&#39;</span><span class="p">:</span> <span class="s1">&#39;agat_model&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;epochs&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="s1">&#39;output_files&#39;</span><span class="p">:</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;device&#39;</span><span class="p">:</span> <span class="s1">&#39;cuda:0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;validation_size&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s1">&#39;early_stop&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;stop_patience&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="s1">&#39;gat_node_dim_list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="s1">&#39;head_list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mul&#39;</span><span class="p">,</span> <span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="s1">&#39;free&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;energy_readout_node_list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;force_readout_node_list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s1">&#39;stress_readout_node_list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;negative_slope&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s1">&#39;criterion&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">(),</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;optimizer&#39;</span><span class="p">:</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="c1"># Fix to sgd.</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
+    <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="c1"># weight decay (L2 penalty)</span>
+    <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+    <span class="s1">&#39;val_batch_size&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="s1">&#39;transfer_learning&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;trainable_layers&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;mask_fixed&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;tail_readout_no_act&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+    <span class="s1">&#39;adsorbate_coeff&#39;</span><span class="p">:</span> <span class="mf">20.0</span> <span class="c1"># indentify and specify the importance of adsorbate atoms with respective to surface atoms. zero for equal importance.</span>
+    <span class="p">}</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Fit</span><span class="p">(</span><span class="o">**</span><span class="n">train_config</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The input <code class="docutils literal notranslate"><span class="pre">train_config</span></code> has higher priority than the <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md">Default parameters</a> .</p>
+</section>
+</section>
+</section>
+<section id="more-tutorials">
+<h1>More tutorials<a class="headerlink" href="#more-tutorials" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial/VASP_calculations.html">VASP calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial/Build_database.html">Build database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/Build_database.html#collect-paths-of-vasp-calculations">Collect paths of VASP calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial/Build_database.html#id1">Build database</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial/Train_AGAT_model.html">Train AGAT model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial/Structural_optimization.html">Application (structural optimization)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial/High_throughput_prediction.html">Application (high-throughput prediction)</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Default%20parameters.html" class="btn btn-neutral float-right" title="Default parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Quick%20start.html" class="btn btn-neutral float-left" title="Quick start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2023, ZHANG Jun, ZHAO Shijun
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

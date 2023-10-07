@@ -10,6 +10,15 @@ from ase.io import read, write
 import sys
 
 def increase_vacuum(fname):
+    """
+
+    :param fname: Structural file name.
+    :type fname: str
+    :return: DESCRIPTION
+    :rtype: TYPE
+
+    """
+
     # fname = sys.argv[1]
 
     poscar = read(fname)

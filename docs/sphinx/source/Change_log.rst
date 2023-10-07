@@ -1,9 +1,6 @@
 Change log
 ============
 
-Energy model
-------------
-
 .. toctree::
    :maxdepth: 6
 

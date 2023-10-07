@@ -95,23 +95,23 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Quick%20start.html">Quick start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Default%20parameters.html">Default parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently asked questions (FAQ)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Brief introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html#more-tutorials">More tutorials</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="API_Docs.html">API_Docs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_Docs.html#api-docs-old">API_Docs_old</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">CHANGE LOG:</span></p>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently asked questions (FAQ)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Change_log.html">Change log</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Other:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="other.html">Other info</a></li>
 </ul>
 
             
@@ -191,40 +191,30 @@
 </pre></div>
 </div>
 </li>
-<li><p>Install package</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install agat</span>
+<li><p>Install <a class="reference external" href="https://pytorch.org/">PyTorch</a>
+Navigate to the <a class="reference external" href="https://pytorch.org/get-started/locally/#start-locally">installation page</a> and choose you platform.
+For example (GPU):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia</span>
 </pre></div>
 </div>
 </li>
-<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.<br />Please navigate to the <a class="reference external" href="https://www.dgl.ai/pages/start.html">Get Started</a> page of <a class="reference external" href="https://www.dgl.ai/">dgl</a>. For GPU version:</p>
+<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.<br />Please navigate to the <a class="reference external" href="https://www.dgl.ai/pages/start.html">Get Started</a> page of <a class="reference external" href="https://www.dgl.ai/">dgl</a>.
+For example (GPU):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install -c dglteam/label/cu118 dgl</span>
 </pre></div>
 </div>
 </li>
-</ul>
-<p>For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dgl==1.1.1</span></code>.</p>
-<ul>
-<li><p>Change <a class="reference external" href="https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends">dgl backend</a> to <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>.
-If you have cannot use <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> backend <code class="docutils literal notranslate"><span class="pre">dgl</span></code>, run the following on Linux OS:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">wget https://data.dgl.ai/wheels/cu118/dgl-1.1.1%2Bcu118-cp310-cp310-manylinux1_x86_64.whl</span>
-<span class="go">pip install ./dgl-1.1.1+cu118-cp310-cp310-manylinux1_x86_64.whl</span>
-<span class="go">pip install numpy --upgrade</span>
+<li><p>Install AGAT package</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install agat</span>
 </pre></div>
 </div>
 </li>
-<li><p>For GPU, if you don’t have CUDA and CUDNN on your device. You need to run (Linux OS):</p>
-<div class="highlight-cousole notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge cudatoolkit=11.8.0
-pip install nvidia-cudnn-cu11==8.6.0.163
-mkdir -p $CONDA_PREFIX/etc/conda/activate.d
-echo &#39;CUDNN_PATH=$(dirname $(python -c &quot;import nvidia.cudnn;print(nvidia.cudnn.__file__)&quot;))&#39; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-echo &#39;export LD_LIBRARY_PATH=$CUDNN_PATH/lib:$CONDA_PREFIX/lib/:$LD_LIBRARY_PATH&#39; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-# Verify install:
-python3 -c &quot;import tensorflow as tf; print(tf.config.list_physical_devices(&#39;GPU&#39;))&quot;
-</pre></div>
-</div>
-<p>Refer to <a class="reference external" href="https://www.tensorflow.org/install/pip#linux">Install TensorFlow with pip</a> and <a class="reference external" href="https://www.tensorflow.org/install/source#gpu">Tensorflow_GPU</a> for more details (other OSs).</p>
-<p><strong>Attention: Please use the correct cuda and cudnn to avoid unnecessary issues.</strong></p>
+<li><p>Install CUDA and CUDNN [<strong>Optional</strong>].</p>
+<ul class="simple">
+<li><p>For HPC, you may load CUDA by checking <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">av</span></code>, or you can contact your administrator for help.</p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA Toolkit</a></p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/cudnn">cuDNN</a></p></li>
+</ul>
 </li>
 </ul>
 </section>

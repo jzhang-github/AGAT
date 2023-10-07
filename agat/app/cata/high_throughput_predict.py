@@ -188,6 +188,17 @@ class HpAds(object):
                            out, fmt='%f')
 
     def run(self, formula, **kwargs):
+        """
+
+        :param formula: Input chemical formula
+        :type formula: str
+        :param **kwargs: DESCRIPTION
+        :type **kwargs: TYPE
+        :return: DESCRIPTION
+        :rtype: TYPE
+
+        """
+
         # model save path
         model_save_dir = self.hp_config['model_save_dir']
 

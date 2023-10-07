@@ -1,11 +1,16 @@
-#############
-HpDftAds
-#############
+#######################################
+high_throughput_dft_calculation
+#######################################
 
 
 .. py:class:: HpDftAds
 
    High-throughput DFT calculations for adsorption.
+   
+   .. code-block::
+   
+       HA = HpDftAds(calculation_index=0)
+       HA.run('NiCoFePdPt')
 
    .. py:property:: root_dir
 
