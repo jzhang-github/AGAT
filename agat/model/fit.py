@@ -143,6 +143,7 @@ changed to be: `6`.", file=self.log)
                                self.device,
                                self.train_config['tail_readout_no_act']
                                )
+
         optimizer = optim.Adam(model.parameters(),
                               lr=self.train_config['learning_rate'],
                               weight_decay=self.train_config['weight_decay'])
@@ -291,7 +292,17 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
 
             # file_exit()
 
-        # test
+        # test with the best model
+        try:
+            checkpoint = load_state_dict(self.train_config['model_save_dir'])
+            model.load_state_dict(checkpoint['model_state_dict'])
+            model.eval()
+            model = model.to(self.device)
+            model.device = self.device
+            print(f'User info: Test model state dict loaded successfully from {self.train_config["model_save_dir"]}.', file=self.log)
+        except:
+            print('User warning: Exception catched when loading test model state dict. \nUsing train model instead.', file=self.log)
+
         with torch.no_grad():
             energy_true_all, force_true_all, stress_true_all = [], [], []
             energy_pred_all, force_pred_all, stress_pred_all = [], [], []
@@ -314,7 +325,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             energy_loss = criterion(energy_pred_all, energy_true_all)
             force_loss = criterion(force_pred_all, force_true_all)
             stress_loss = criterion(stress_pred_all, stress_true_all)
-            # total_loss = a*energy_loss + b*force_loss + c*stress_loss
+            total_loss = a*energy_loss + b*force_loss + c*stress_loss
 
             energy_mae = mae(energy_pred_all, energy_true_all)
             force_mae = mae(force_pred_all, force_true_all)
@@ -329,6 +340,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
     Energy loss: {energy_loss.item()}
     Force_Loss : {force_loss.item()}
     Stress_Loss: {stress_loss.item()}
+    Total_Loss : {total_loss.item()}
     Energy_MAE : {energy_mae.item()}
     Force_MAE  : {force_mae.item()}
     Stress_MAE : {stress_mae.item()}
@@ -363,7 +375,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
 if __name__ == '__main__':
     FIX_VALUE = [1,3,6]
     train_config = {
-        'verbose': 2,
+        'verbose': 1,
     'dataset_path': os.path.join('dataset', 'all_graphs.bin'),
     'model_save_dir': 'agat_model',
     'epochs': 1000,
@@ -398,6 +410,5 @@ if __name__ == '__main__':
     'adsorbate_coeff': 20.0 # the importance of adsorbate atoms with respective to surface atoms.
     }
 
-    f = Fit(**train_config, dataset_path='all_graphs.bin', gat_node_dim_list=[6, 100, 100, 100],
-            epochs=1000, a=1.0, b=1.0, c=0.0)
+    f = Fit(**train_config)
     # f.fit()

@@ -1,5 +1,6 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
-- Prepare PyTorch-backend AGAT.
+- Convert TensorFlow to PyTorch backend.
+- Updata docs.
 
 # [v7.14.0](https://github.com/jzhang-github/AGAT/tree/v7.14.0)
 - Add API for controling HP DFT calculation. [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/default_parameters.py#L246-L251)

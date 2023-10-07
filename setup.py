@@ -8,7 +8,7 @@ Created on Tue Jul 11 13:22:58 2023
 from distutils.core import setup
 from setuptools import find_packages
 
-with open("README.md", "r") as f:
+with open("D:\GitHubRepo\AGAT\README.md", "r") as f:
   long_description = f.read()
 
 # print(long_description)

@@ -55,11 +55,7 @@ default_data_config =  {
     'mask_similar_frames': False,
     'mask_reversed_magnetic_moments': False, # or -0.5 # Frames with atomic magnetic moments lower than this value will be masked.
     'energy_stride': 0.05,
-    'scale_prop': False,
-    'validation_size': 0.15, # int or float. int: number of samples of the validation set. float: portion of samples of the validation set.
-    'test_size': 0.15,
-    'new_split': True,
-    # 'device': 'cuda'. Deprecated
+    'scale_prop': False
              }
 
 FIX_VALUE = [1,3,6]
@@ -75,19 +71,19 @@ default_train_config = {
     'test_size': 0.15,
     'early_stop': True,
     'stop_patience': 300,
-    'gat_node_dim_list': [len(default_elements), 100, 100, 100],
     'head_list': ['mul', 'div', 'free'],
-    'energy_readout_node_list': [300, 100, 50, 30, 10, 3, FIX_VALUE[0]],
-    'force_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[1]],
-    'stress_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[2]],
+    'gat_node_dim_list': [len(default_elements), 100, 100, 100],
+    'energy_readout_node_list': [len(head_list)*gat_node_dim_list[-1], 100, 50, 30, 10, 3, FIX_VALUE[0]],
+    'force_readout_node_list': [len(head_list)*gat_node_dim_list[-1], 100, 50, 30, 10, FIX_VALUE[1]],
+    'stress_readout_node_list': [len(head_list)*gat_node_dim_list[-1], 100, 50, 30, 10, FIX_VALUE[2]],
     'bias': True,
     'negative_slope': 0.2,
     'criterion': nn.MSELoss(),
     'a': 1.0,
     'b': 1.0,
     'c': 0.0,
-    'optimizer': 'adam', # Fix to sgd.
-    'learning_rate': 0.001,
+    # 'optimizer': 'adam',
+    'learning_rate': 0.0001,
     'weight_decay': 0.0, # weight decay (L2 penalty)
     'batch_size': 64,
     'val_batch_size': 400,

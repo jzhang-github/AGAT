@@ -77,16 +77,16 @@ class PotentialModel(nn.Module):
         self.tail_readout_no_act = tail_readout_no_act
 
         self.num_gat_layers = len(self.gat_node_dim_list)-1
-        self.num_energy_readout_layers = len(self.energy_readout_node_list)
-        self.num_force_readout_layers = len(self.force_readout_node_list)
-        self.num_stress_readout_layers = len(self.stress_readout_node_list)
+        self.num_energy_readout_layers = len(self.energy_readout_node_list)-1
+        self.num_force_readout_layers = len(self.force_readout_node_list)-1
+        self.num_stress_readout_layers = len(self.stress_readout_node_list)-1
         self.num_heads = len(self.head_list)
 
         self.__gat_real_node_dim_list = [x*self.num_heads for x in self.gat_node_dim_list[1:]]
         self.__gat_real_node_dim_list.insert(0,self.gat_node_dim_list[0])
-        self.energy_readout_node_list.insert(0, self.__gat_real_node_dim_list[-1]) # calculate and insert input dimension.
-        self.force_readout_node_list.insert(0, self.__gat_real_node_dim_list[-1])
-        self.stress_readout_node_list.insert(0, self.__gat_real_node_dim_list[-1])
+        # self.energy_readout_node_list.insert(0, self.__gat_real_node_dim_list[-1]) # calculate and insert input dimension.
+        # self.force_readout_node_list.insert(0, self.__gat_real_node_dim_list[-1])
+        # self.stress_readout_node_list.insert(0, self.__gat_real_node_dim_list[-1])
 
         # register layers and parameters.
         self.gat_layers = nn.ModuleList([])

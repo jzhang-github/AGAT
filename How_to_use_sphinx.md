@@ -16,5 +16,7 @@ make html
 
 **Note: Replace all files under [docs](docs).**
 
+**Keep `.nojekyll` if you need to clean the `docs` folder.**
+
 
 

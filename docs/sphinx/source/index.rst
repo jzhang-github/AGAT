@@ -19,10 +19,13 @@ Navigate to `v1.0.0 <https://github.com/jzhang-github/AGAT/tree/v1.0.0>`_ for th
    Introduction
    Installation
    Quick start
-   Default parameters
-   Contribution
-   Reference
-   FAQ
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: AGAT Tutorial:
+
+   Tutorial
 
 
 .. toctree::
@@ -34,16 +37,12 @@ Navigate to `v1.0.0 <https://github.com/jzhang-github/AGAT/tree/v1.0.0>`_ for th
 
 .. toctree::
    :maxdepth: 2
-   :caption: CHANGE LOG:
-
+   :caption: OTHER:
+   Contribution
+   Reference
+   FAQ
    Change_log
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Other:
-
-   other
 
 
 Indices and tables

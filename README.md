@@ -25,47 +25,33 @@ The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is availa
   conda activate agat
   ```
 
-- Install package  
+- Install [PyTorch](https://pytorch.org/)
+  Navigate to the [installation page](https://pytorch.org/get-started/locally/#start-locally) and choose you platform.
+  For example (GPU):
   ```console
-  pip install agat
+  conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
   ```
 
 - Install [dgl](https://www.dgl.ai/).   
-Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page of [dgl](https://www.dgl.ai/). For GPU version:   
+Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page of [dgl](https://www.dgl.ai/). 
+For example (GPU):  
   ```console
   conda install -c dglteam/label/cu118 dgl
   ```
 
-  For now, the cpu version 1.1.2 of dgl has bugs. You can install the cpu version with `pip install dgl==1.1.1`.
-
-- Change [dgl backend](https://docs.dgl.ai/en/1.1.x/install/#working-with-different-backends) to `tensorflow`.
-  
-  If you still cannot use `tensorflow` backend `dgl`, run the following on Linux OS:
+- Install AGAT package  
   ```console
-  wget https://data.dgl.ai/wheels/cu118/dgl-1.1.1%2Bcu118-cp310-cp310-manylinux1_x86_64.whl
-  pip install ./dgl-1.1.1+cu118-cp310-cp310-manylinux1_x86_64.whl
-  pip install numpy --upgrade
+  pip install agat
   ```
 
-- For `tensorflow` of GPU version, if you don't have CUDA and CUDNN on your device, you need to run (Linux OS):
-   ```console
-   conda install -c conda-forge cudatoolkit=11.8.0
-   pip install nvidia-cudnn-cu11==8.6.0.163
-   mkdir -p $CONDA_PREFIX/etc/conda/activate.d
-   echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-   echo 'export LD_LIBRARY_PATH=$CUDNN_PATH/lib:$CONDA_PREFIX/lib/:$LD_LIBRARY_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-   source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-   # Verify install:
-   python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
-   ```
-   
-   Refer to [Install TensorFlow with pip](https://www.tensorflow.org/install/pip#linux) and [Tensorflow_GPU](https://www.tensorflow.org/install/source#gpu) for more details (other OSs).
-
-   **Attention: Please use the correct cuda and cudnn to avoid unnecessary issues.**
+- Install CUDA and CUDNN [**Optional**].
+	- For HPC, you may load CUDA by checking `module av`, or you can contact your administrator for help.
+	- [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads)
+	- [cuDNN](https://developer.nvidia.com/cudnn)
 
 # Quick start
 ### Prepare VASP calculations
-
+Run VASP calculations at this step.
 
 ### Collect paths of VASP calculations
 - We provided examples of VASP outputs at [VASP_calculations_example](https://github.com/jzhang-github/AGAT/tree/v1.0.0/files/VASP_calculations_example).   
@@ -84,46 +70,47 @@ Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page o
 
 ### Build database
 ```python
-from agat.data import AgatDatabase
+from agat.data import BuildDatabase
 if __name__ == '__main__':
-    ad = AgatDatabase(mode_of_NN='ase_dist', num_of_cores=2)
-    ad.build()
+    database = BuildDatabase(mode_of_NN='ase_dist', num_of_cores=16)
+    database.build()
 ```
 
 ### Train AGAT model
 ```python
-from agat.model import Train
-at = Train()
-at.fit_energy_model()
-at.fit_force_model()
+from agat.model import Fit
+f = Fit()
+f.fit()
 ```
 
-### Model prediction
+### Application (geometry optimization)
 ```python
-from agat.app import GatApp
-energy_model_save_dir = os.path.join('out_file', 'energy_ckpt')
-force_model_save_dir = os.path.join('out_file', 'force_ckpt')
-graph_build_scheme_dir = 'dataset'
-app = GatApp(energy_model_save_dir, force_model_save_dir, graph_build_scheme_dir)
-graph, info = app.get_graph('POSCAR')
-energy = app.get_energy(graph)
-forces = app.get_forces(graph)
-```
-
-### Geometry optimization
-```python
-from ase.io import read
 from ase.optimize import BFGS
-from agat.app import GatAseCalculator
-from agat.default_parameters import default_hp_config
-poscar = read('POSCAR')
-calculator=GatAseCalculator(energy_model_save_dir,
-                            force_model_save_dir,
-                            graph_build_scheme_dir)
-poscar = Atoms(poscar, calculator=calculator)
-dyn = BFGS(poscar, trajectory='test.traj')
-dyn.run(**default_hp_config['opt_config'])
+from agat.app import AgatCalculator
+
+model_save_dir = 'agat_model'
+graph_build_scheme_dir = 'dataset'
+
+atoms = read('POSCAR')
+calculator=AgatCalculator(model_save_dir,
+                          graph_build_scheme_dir)
+atoms = Atoms(atoms, calculator=calculator)
+dyn = BFGS(atoms, trajectory='test.traj')
+dyn.run(fmax=0.05)
 ```
+### Application (high-throughput prediction)
+```python
+from agat.app.cata import HpAds
+
+model_save_dir = 'agat_model'
+graph_build_scheme_dir = 'dataset'
+formula='NiCoFePdPt'
+
+ha = HpAds(model_save_dir=model_save_dir, graph_build_scheme_dir=graph_build_scheme_dir)
+ha.run(formula=formula)
+```
+
+**For more custom manipulations, see our [documentation](https://jzhang-github.github.io/AGAT/) page.**
 
 ### Some default parameters
 [agat/default_parameters.py](agat/default_parameters.py); Explanations: [docs/sphinx/source/Default parameters.md](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md).
