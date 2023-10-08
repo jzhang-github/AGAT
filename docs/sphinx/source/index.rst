@@ -12,8 +12,6 @@ Welcome to AGAT's documentation!
 
    Navigate to `v1.0.0 <https://github.com/jzhang-github/AGAT/tree/v1.0.0>`_ for the documentation and source codes to reproduce results and support conclusions of `Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning <https://doi.org/10.1016/j.joule.2023.06.003>`_.
 
-
-
 .. toctree::
    :maxdepth: 2
    :caption: AGAT:
