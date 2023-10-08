@@ -15,7 +15,7 @@ Take a look at the Default parameters
 Easy usage
 ---------------
 
-By default, the database construction, model training, and model application are controled by the `Default parameters <https://jzhang-github.github.io/AGAT/docs/sphinx/build/html/Default%20parameters.html>`_ .
+By default, the database construction, model training, and model application are controled by the `Default parameters <https://jzhang-github.github.io/AGAT/Default%20parameters.html>`_ .
 
 
 For example:
@@ -59,7 +59,7 @@ Customized keyword arguements
 
 
 
-This will replace the seetings for ``verbose``, ``gat_node_dim_list``, ``b``. Other parameters are still controled by the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
+This will replace the settings for ``verbose``, ``gat_node_dim_list``, ``b``. Other parameters are still controled by the `Default parameters <https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-config>`_ .
 
 
 Customized input dict
@@ -109,7 +109,7 @@ Customized input dict
 
 
 
-The input ``train_config`` has higher priority than the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
+The input ``train_config`` has higher priority than the `Default parameters <https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-config>`_ .
 
 More tutorials
 ==================

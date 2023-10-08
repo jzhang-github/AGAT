@@ -84,7 +84,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
@@ -203,11 +203,9 @@
       </ul></li>
       <li><a href="API_Docs/data/load_dataset.html#LoadDataset.__getitem__">__getitem__() (LoadDataset method)</a>
 </li>
-      <li><a href="API_Docs/lib/model_lib.html#init__">__init__()</a>
+      <li><a href="API_Docs/app/cata/generate_adsorption_sites.html#AddAtoms.__init__">__init__() (AddAtoms method)</a>
 
       <ul>
-        <li><a href="API_Docs/app/cata/generate_adsorption_sites.html#AddAtoms.__init__">(AddAtoms method)</a>
-</li>
         <li><a href="API_Docs/app/app.html#AgatCalculator.__init__">(AgatCalculator method)</a>
 </li>
         <li><a href="API_Docs/data/build_dataset.html#BuildDatabase.__init__">(BuildDatabase method)</a>
@@ -215,6 +213,8 @@
         <li><a href="API_Docs/data/load_dataset.html#Collater.__init__">(Collater method)</a>
 </li>
         <li><a href="API_Docs/data/build_dataset.html#CrystalGraph.__init__">(CrystalGraph method)</a>
+</li>
+        <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.__init__">(EarlyStopping method)</a>
 </li>
         <li><a href="API_Docs/data/build_dataset.html#ExtractVaspFiles.__init__">(ExtractVaspFiles method)</a>
 </li>
@@ -263,7 +263,7 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_Docs/lib/model_lib.html#best_score">best_score</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.best_score">best_score (EarlyStopping property)</a>
 </li>
       <li><a href="API_Docs/data/build_dataset.html#BuildDatabase.build">build() (BuildDatabase method)</a>
 </li>
@@ -364,7 +364,7 @@
         <li><a href="API_Docs/lib/model_lib.html#config_parser">built-in function</a>
 </li>
       </ul></li>
-      <li><a href="API_Docs/lib/model_lib.html#counter">counter</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.counter">counter (EarlyStopping property)</a>
 </li>
       <li><a href="API_Docs/data/build_dataset.html#CrystalGraph">CrystalGraph (built-in class)</a>
 </li>
@@ -386,12 +386,14 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_Docs/lib/model_lib.html#early_stop">early_stop</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.early_stop">early_stop (EarlyStopping property)</a>
 </li>
-      <li><a href="API_Docs/data/atomic_feature.html#elements">elements (built-in variable)</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping">EarlyStopping (built-in class)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_Docs/data/atomic_feature.html#elements">elements (built-in variable)</a>
+</li>
       <li><a href="API_Docs/data/atomic_feature.html#Elements_used">Elements_used (built-in variable)</a>
 </li>
       <li><a href="API_Docs/data/build_dataset.html#ExtractVaspFiles">ExtractVaspFiles (built-in class)</a>
@@ -623,7 +625,7 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_Docs/lib/model_lib.html#model">model</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.model">model (EarlyStopping property)</a>
 </li>
       <li>
     modify_INCAR()
@@ -642,7 +644,7 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_Docs/lib/model_lib.html#patience">patience</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.patience">patience (EarlyStopping property)</a>
 </li>
       <li>
     PearsonR()
@@ -695,12 +697,15 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_Docs/lib/model_lib.html#id0">save_model()</a>
+      <li>
+    save_model()
 
       <ul>
         <li><a href="API_Docs/lib/model_lib.html#save_model">built-in function</a>
 </li>
       </ul></li>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.save_model">save_model() (EarlyStopping method)</a>
+</li>
       <li>
     save_state_dict()
 
@@ -723,7 +728,7 @@
 </li>
       <li><a href="API_Docs/data/build_dataset.html#ExtractVaspFiles.split_output">split_output() (ExtractVaspFiles method)</a>
 </li>
-      <li><a href="API_Docs/lib/model_lib.html#step">step()</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.step">step() (EarlyStopping method)</a>
 </li>
       <li><a href="API_Docs/app/cata/high_throughput_dft_calculation.html#HpDftAds.surf_opt">surf_opt() (HpDftAds method)</a>
 </li>
@@ -743,7 +748,7 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_Docs/lib/model_lib.html#update">update</a>
+      <li><a href="API_Docs/lib/model_lib.html#EarlyStopping.update">update (EarlyStopping property)</a>
 </li>
   </ul></td>
 </tr></table>

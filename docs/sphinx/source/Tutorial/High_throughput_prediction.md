@@ -4,6 +4,7 @@ Modify the passed input dict to control the prediction.
 
 ### Python script
 ```python
+import os
 from agat.app import HpAds
 
 ase_calculator_config = {'fmax'             : 0.1,
@@ -35,7 +36,7 @@ ha = HpAds(**high_throughput_config)
 ha.run(formula='NiCoFePdPt')
 ```
 
-**See [docs/sphinx/source/Default parameters.md#default_high_throughput_config](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_high_throughput_config) to know how to use the parameter settings.**
+**See [default_high_throughput_config](https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-high-throughput-config) to know how to use the parameter settings.**
 
 
 ### Output

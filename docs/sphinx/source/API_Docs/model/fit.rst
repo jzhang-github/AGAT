@@ -8,7 +8,7 @@ fit
 
    .. note::
    
-      See https://jzhang-github.github.io/AGAT/Tutorial/Train_AGAT_model.html to know how to train a model.
+      See https://jzhang-github.github.io/AGAT/Tutorial/Train_AGAT_model.html to know how to train an AGAT model.
 
       The first value of ``gat_node_dim_list`` is the depth of atomic representation, which will be modified if you specify a wrong value.
 
@@ -28,11 +28,11 @@ fit
    
       Initialize parameters and model.
       
-      :param dict train_config: Configuration file for building database. See https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config for more details.
+      :param dict train_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-configfor more details.
 
 
    .. py:method:: fit(self, **train_config)
    
-      Fit the ``PotentialModel``. You can modify some settings here by input keyword arguements or dictionary.
+      Fit the :class:`PotentialModel`. You can modify some settings here by input keyword arguements or dictionary.
       
       .. note:: Some settings are already used in the :meth:`Fit.__init__` method, so input arguements here will not change them.

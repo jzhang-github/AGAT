@@ -39,7 +39,7 @@ See https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html for more i
 
    .. py:method:: __init__(self, **data_config)
 
-      :param **data_config: Configuration file for building database. See https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config for the detailed info.
+      :param **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
       :type **data_config: str/dict
       :return: A ``DGL.graph``.
       :rtype: ``DGL.graph``.
@@ -153,7 +153,7 @@ See https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html for more i
 
    .. py:method:: __init__(self, **data_config)
    
-      :param dict **data_config: Configuration file for building database. See https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config for the detailed info.
+      :param dict **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
 
          .. Hint:: 
             Mode of how to get the neighbors, which can be:
@@ -216,7 +216,7 @@ See https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html for more i
 
    .. method:: __init__(self, **data_config)
    
-      :param dict **data_config: Configuration file for building database. See https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config for the detailed info.
+      :param dict **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
 
    .. py:method:: read_oszicar(self,fname='OSZICAR')
    
@@ -256,7 +256,7 @@ See https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html for more i
    
    .. method:: __init__(self, **data_config)
    
-      :param dict **data_config: Configuration file for building database. See https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config for the detailed info.
+      :param dict **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
 
    .. py:method:: build(self)
    

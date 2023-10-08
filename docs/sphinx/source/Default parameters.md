@@ -5,7 +5,7 @@ The default parameters that control the database construction, model training, h
 ```python
 from agat.default_paramters import default_elements, default_build_properties, default_data_config, default_train_config, default_high_throughput_config
 ```
-Then you will get a python dictionary of all default parameters. Or you can read the [source](https://github.com/jzhang-github/AGAT/blob/main/agat/default_parameters.py) code.
+Or you can read the [source](https://github.com/jzhang-github/AGAT/blob/main/agat/default_parameters.py) code.
 
 ## `default_elements`
 Elements used to build graph. A list of elements that are used to encode atomic features.
@@ -45,7 +45,7 @@ A dictionary defines how to build a database.
 
 | Parameter                  | Default value | Alternative(s) | Explanation |
 | -------------------------  | ------------- | ------------ | ----------- |
-| `species`                  | `default_elements` above | For a system with `C` and `H`, this parameter can be `['C', 'H']` | A list of elements that are used to encode atomic features. |
+| `species`                  | `default_elements` above | A list of element symbols | A list of elements that are used to encode atomic features. |
 | `path_file`                | 'paths.log'   | `str `         | A file of absolute paths where OUTCAR and XDATCAR files exist. | 
 | `build_properties`         |  `default_build_properties` above | See [default_build_properties](#default_build_properties) | Properties needed to be built into graph. | 
 | `dataset_path`             | 'dataset'     | A `str`      | A directory contains the database. |

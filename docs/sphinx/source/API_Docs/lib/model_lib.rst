@@ -59,7 +59,7 @@ model_lib
    :param state_dict_save_dir:  A directory to store the model state dict (model weigths and other info), defaults to 'agat_model'
    :type state_dict_save_dir: str, optional
    :return: State dict.
-   :rtype: TYPE
+   :rtype: dict
 
    .. note::
       Reconstruct a model/optimizer before using the loaded state dict.
@@ -89,7 +89,7 @@ model_lib
 
 
 
-. py:class:: EarlyStopping
+.. py:class:: EarlyStopping
 
    Stop training when model performance stop improving after some steps.
 
@@ -181,5 +181,5 @@ model_lib
 
    .. Note::
 
-       It looks like the `torch.jit.script` decorator is not helping in comuputing large `torch.tensor`, see `agat/test/tesor_computation_test.py` for more details.
+       It looks like the ``torch.jit.script`` decorator is not helping in comuputing large ``torch.tensor``, see ``agat/test/tesor_computation_test.py`` in the GitHub page for more details.
 

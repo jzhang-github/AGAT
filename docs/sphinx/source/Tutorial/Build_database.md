@@ -1,7 +1,8 @@
 # Build database
 
 ### Collect paths of VASP calculations
-- We provided examples of VASP outputs at [VASP_calculations_example](https://github.com/jzhang-github/AGAT/tree/v1.0.0/files/VASP_calculations_example).   
+
+ 
 - Find all directories containing `OUTCAR` file:   
   ```
   find . -name OUTCAR > paths.log
@@ -16,7 +17,8 @@
   ``` 
 
 ### Python script
-Modify `data_config` for your own purposes. **See [docs/sphinx/source/Default parameters.md#default_data_config](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config) to know how to use the parameter settings.**
+Modify `data_config` for your own purposes. **See [default_data_config](https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config) to know how to use the parameter settings.**
+
 ```python
 from agat.data import BuildDatabase
 data_config =  {

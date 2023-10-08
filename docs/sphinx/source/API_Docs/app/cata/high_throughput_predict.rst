@@ -5,11 +5,11 @@ high_throughput_predict
 
 .. class:: HpAds(object)
 
-   High-throughput predictions. https://jzhang-github.github.io/AGAT/docs/sphinx/build/html/Default%20parameters.html#default-high-throughput-config
+   High-throughput predictions. 
 
    .. function:: __init__(self, **hp_config)
    
-      See https://jzhang-github.github.io/AGAT/docs/sphinx/build/html/Default%20parameters.html#default-high-throughput-config
+      See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-high-throughput-config for more details.
 
 
    .. function:: geo_opt(atoms_with_calculator, **kwargs)
@@ -33,7 +33,6 @@ high_throughput_predict
             restart_steps     5            In some cases, it can be difficult for `BFGS`_ to converge. If `BFGS`_ cannot coverge after ``steps``, this code halves ``maxstep`` and rerun. But this code will not rerun more than ``restart_steps`` times.
             perturb_steps     0            Defines how many perturbated structures (perturb free atoms only) are optimized. Only structure with lowest energy is adopted.
             perturb_amplitude 0.05         perturbation amplitude
-            out               None         file name for outputs.
             ================= ============ ============
       
       :Returns: - energy: energy after relaxation

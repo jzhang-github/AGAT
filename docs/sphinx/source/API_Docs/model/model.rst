@@ -9,9 +9,6 @@ model
    A GAT model with multiple gat layers for predicting atomic energies, forces, and stress tensors.
 
 
-   .. Note:: You can also use this model to train and predict atom and bond related properties. You need to store the labels on graph edges if you want to do so. This model has multiple attention heads.
-
-
    .. Important::
 
       The first value of ``gat_node_dim_list`` is the depth of atomic representation.
@@ -24,7 +21,7 @@ model
 
    .. py:method:: __init__(self, gat_node_dim_list, energy_readout_node_list, force_readout_node_list, stress_readout_node_list, head_list=['div'], bias=True, negative_slope=0.2, device = 'cuda', tail_readout_no_act=[3,3,3])
 
-      :param gat_node_dim_list: A list of node dimensions of the AGAT ``Layer``s.
+      :param gat_node_dim_list: A list of node dimensions of the AGAT ``Layer``.
       :type gat_node_dim_list: list
       :param energy_readout_node_list: A list of node dimensions of the energy readout layers.
       :type energy_readout_node_list: list

@@ -14,7 +14,7 @@ Welcome to AGAT's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tutorial:
+   :caption: AGAT:
 
    Introduction
    Installation

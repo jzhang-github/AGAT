@@ -87,7 +87,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
@@ -201,10 +201,6 @@
 <dt class="sig sig-object py" id="PotentialModel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PotentialModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nn.Module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PotentialModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GAT model with multiple gat layers for predicting atomic energies, forces, and stress tensors.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can also use this model to train and predict atom and bond related properties. You need to store the labels on graph edges if you want to do so. This model has multiple attention heads.</p>
-</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The first value of <code class="docutils literal notranslate"><span class="pre">gat_node_dim_list</span></code> is the depth of atomic representation.</p>
@@ -217,7 +213,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gat_node_dim_list</strong> (<em>list</em>) – A list of node dimensions of the AGAT <a href="#id1"><span class="problematic" id="id2">``</span></a>Layer``s.</p></li>
+<li><p><strong>gat_node_dim_list</strong> (<em>list</em>) – A list of node dimensions of the AGAT <code class="docutils literal notranslate"><span class="pre">Layer</span></code>.</p></li>
 <li><p><strong>energy_readout_node_list</strong> (<em>list</em>) – A list of node dimensions of the energy readout layers.</p></li>
 <li><p><strong>force_readout_node_list</strong> (<em>list</em>) – A list of node dimensions of the force readout layers.</p></li>
 <li><p><strong>stress_readout_node_list</strong> (<em>list</em>) – A list of node dimensions of the stress readout layers.</p></li>

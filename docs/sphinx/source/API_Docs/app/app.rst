@@ -55,7 +55,7 @@ AGAT model applications
 
         Load graph building scheme. 
         
-        .. note:: This file is normally saved to the disk when you build your dataset, under the same directory of ``all_graphs.bin``.
+        .. note:: This file is normally saved to the disk when you build your dataset, under the same directory containing ``all_graphs.bin``.
 
         :param path: Directory for storing ``graph_build_scheme.json`` file.
         :type path: str

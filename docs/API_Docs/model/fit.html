@@ -87,7 +87,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
@@ -198,7 +198,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Fit" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Tutorial/Train_AGAT_model.html">https://jzhang-github.github.io/AGAT/Tutorial/Train_AGAT_model.html</a> to know how to train a model.</p>
+<p>See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Tutorial/Train_AGAT_model.html">https://jzhang-github.github.io/AGAT/Tutorial/Train_AGAT_model.html</a> to know how to train an AGAT model.</p>
 <p>The first value of <code class="docutils literal notranslate"><span class="pre">gat_node_dim_list</span></code> is the depth of atomic representation, which will be modified if you specify a wrong value.</p>
 <p>The first value of <code class="docutils literal notranslate"><span class="pre">energy_readout_node_list</span></code>, <code class="docutils literal notranslate"><span class="pre">force_readout_node_list</span></code>, <code class="docutils literal notranslate"><span class="pre">stress_readout_node_list</span></code> is the input dimension and equals to last value of <code class="docutils literal notranslate"><span class="pre">gat_node_list</span> <span class="pre">*</span> <span class="pre">num_heads</span></code>. The correct values will also be assigned.</p>
 <p>The last values of <code class="docutils literal notranslate"><span class="pre">energy_readout_node_list</span></code>, <code class="docutils literal notranslate"><span class="pre">force_readout_node_list</span></code>, <code class="docutils literal notranslate"><span class="pre">stress_readout_node_list</span></code> are <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">6</span></code>, respectively. The correct values will also be assigned.</p>
@@ -215,7 +215,7 @@
 <dd><p>Initialize parameters and model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>train_config</strong> (<em>dict</em>) – Configuration file for building database. See <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config">https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config</a> for more details.</p>
+<dd class="field-odd"><p><strong>train_config</strong> (<em>dict</em>) – Configuration file for building database. See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-configfor">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-configfor</a> more details.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -223,7 +223,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Fit.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">train_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Fit.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit the <code class="docutils literal notranslate"><span class="pre">PotentialModel</span></code>. You can modify some settings here by input keyword arguements or dictionary.</p>
+<dd><p>Fit the <a class="reference internal" href="model.html#PotentialModel" title="PotentialModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PotentialModel</span></code></a>. You can modify some settings here by input keyword arguements or dictionary.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Some settings are already used in the <a class="reference internal" href="#Fit.__init__" title="Fit.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fit.__init__()</span></code></a> method, so input arguements here will not change them.</p>

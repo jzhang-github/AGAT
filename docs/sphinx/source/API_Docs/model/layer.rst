@@ -25,8 +25,8 @@ Single graph attention network for predicting crystal properties.
 
    .. method:: __init__(self, in_dim, out_dim, num_heads, device='cuda', bias=True, negative_slope=0.2)
    
-      :param int in_dim: Depth of node representation in the input of each head of this AGAT `Layer`.
-      :param int out_dim: Depth of node representation in the output of each head of this `GAT` layer.
+      :param int in_dim: Depth of node representation in the input of this AGAT `Layer`.
+      :param int out_dim: Depth of node representation in the output of this `GAT` layer.
       :param int num_heads: Number of attention heads.
       :param str device: Device to perform tensor calculations and store parameters.
       :param bool bias: Whether the dense layer uses a bias vector.
@@ -43,6 +43,7 @@ Single graph attention network for predicting crystal properties.
       :param DGL.graph graph: A graph built with DGL.
       
       :Returns: dst: output features of all nodes.
+      :rtype dst: torch.tensor
 
 
 

@@ -87,7 +87,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
@@ -270,7 +270,7 @@
 <dd class="field-even"><p>State dict.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>TYPE</p>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -309,12 +309,13 @@
 </dl>
 </dd></dl>
 
-<p>. py:class:: EarlyStopping</p>
-<blockquote>
-<div><p>Stop training when model performance stop improving after some steps.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="EarlyStopping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EarlyStopping</span></span><a class="headerlink" href="#EarlyStopping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop training when model performance stop improving after some steps.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'files'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'files'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EarlyStopping.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -328,44 +329,44 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="model">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#EarlyStopping.model" title="Permalink to this definition">¶</a></dt>
 <dd><p>AGAT model.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="patience">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">patience</span></span><a class="headerlink" href="#patience" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.patience">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">patience</span></span><a class="headerlink" href="#EarlyStopping.patience" title="Permalink to this definition">¶</a></dt>
 <dd><p>Patience steps.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="counter">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counter</span></span><a class="headerlink" href="#counter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.counter">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counter</span></span><a class="headerlink" href="#EarlyStopping.counter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of steps since last improvement of model performance.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="best_score">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_score</span></span><a class="headerlink" href="#best_score" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.best_score">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_score</span></span><a class="headerlink" href="#EarlyStopping.best_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Best model performance.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="update">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><a class="headerlink" href="#update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.update">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><a class="headerlink" href="#EarlyStopping.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update state.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="early_stop">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">early_stop</span></span><a class="headerlink" href="#early_stop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.early_stop">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">early_stop</span></span><a class="headerlink" href="#EarlyStopping.early_stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop training if this variable is true.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#step" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EarlyStopping.step" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -378,8 +379,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EarlyStopping.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EarlyStopping.save_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves model when validation loss decrease.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -388,7 +389,8 @@
 </dl>
 </dd></dl>
 
-</div></blockquote>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="load_graph_build_scheme">
 <span class="sig-name descname"><span class="pre">load_graph_build_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#load_graph_build_scheme" title="Permalink to this definition">¶</a></dt>
@@ -426,7 +428,7 @@
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It looks like the <cite>torch.jit.script</cite> decorator is not helping in comuputing large <cite>torch.tensor</cite>, see <cite>agat/test/tesor_computation_test.py</cite> for more details.</p>
+<p>It looks like the <code class="docutils literal notranslate"><span class="pre">torch.jit.script</span></code> decorator is not helping in comuputing large <code class="docutils literal notranslate"><span class="pre">torch.tensor</span></code>, see <code class="docutils literal notranslate"><span class="pre">agat/test/tesor_computation_test.py</span></code> in the GitHub page for more details.</p>
 </div>
 </dd></dl>
 

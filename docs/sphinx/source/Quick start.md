@@ -35,6 +35,7 @@ f.fit()
 ### Application (geometry optimization)
 ```python
 from ase.optimize import BFGS
+from ase.io import read
 from agat.app import AgatCalculator
 
 model_save_dir = 'agat_model'

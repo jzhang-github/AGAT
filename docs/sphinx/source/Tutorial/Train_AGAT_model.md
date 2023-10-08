@@ -2,6 +2,8 @@
 
 ### Python script
 ```python
+import os
+import torch.nn as nn
 from agat.model import Fit
 
 train_config = {
@@ -43,7 +45,7 @@ f = Fit(**train_config)
 f.fit()
 ```
 
-**See [docs/sphinx/source/Default parameters.md#default_train_config](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_train_config) to know how to use the parameter settings.**
+**See [default_train_config](https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-config) to know how to use the parameter settings.**
 
 ### Output
 

@@ -87,7 +87,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
@@ -243,8 +243,8 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>in_dim</strong> (<em>int</em>) – Depth of node representation in the input of each head of this AGAT <cite>Layer</cite>.</p></li>
-<li><p><strong>out_dim</strong> (<em>int</em>) – Depth of node representation in the output of each head of this <cite>GAT</cite> layer.</p></li>
+<li><p><strong>in_dim</strong> (<em>int</em>) – Depth of node representation in the input of this AGAT <cite>Layer</cite>.</p></li>
+<li><p><strong>out_dim</strong> (<em>int</em>) – Depth of node representation in the output of this <cite>GAT</cite> layer.</p></li>
 <li><p><strong>num_heads</strong> (<em>int</em>) – Number of attention heads.</p></li>
 <li><p><strong>device</strong> (<em>str</em>) – Device to perform tensor calculations and store parameters.</p></li>
 <li><p><strong>bias</strong> (<em>bool</em>) – Whether the dense layer uses a bias vector.</p></li>
@@ -268,6 +268,9 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dst: output features of all nodes.</p>
+</dd>
+<dt class="field-odd">Rtype dst<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.tensor</p>
 </dd>
 </dl>
 </dd></dl>
