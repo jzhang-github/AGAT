@@ -113,9 +113,13 @@ ha.run(formula=formula)
 ### For more custom manipulations, see our [documentation](https://jzhang-github.github.io/AGAT/) page.
 
 
+[![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
+
+
+
 ### Some default parameters
 [agat/default_parameters.py](agat/default_parameters.py); Explanations: [docs/sphinx/source/Default parameters.md](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md).
-[![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
+
 
 # Change log  
 Please check [Change_log.md](https://github.com/jzhang-github/AGAT/blob/main/Change_log.md)
