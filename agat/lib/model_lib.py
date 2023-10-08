@@ -87,6 +87,16 @@ def load_state_dict(state_dict_save_dir='agat_model'):
     return checkpoint_dict
 
 def config_parser(config):
+    """Parse the input configurations/settings.
+
+    :param config: configurations
+    :type config: str/dict. if str, load from the json file.
+    :raises TypeError: DESCRIPTION
+    :return: TypeError('Wrong configuration type.')
+    :rtype: TypeError
+
+    """
+
     if isinstance(config, dict):
         return config
     elif isinstance(config, str):
@@ -99,6 +109,21 @@ def config_parser(config):
 
 class EarlyStopping:
     def __init__(self, model, logger, patience=10, model_save_dir='model_save_dir'):
+        """Stop training when model performance stop improving after some steps.
+
+        :param model: AGAT model
+        :type model: torch.nn
+        :param logger: I/O file
+        :type logger: _io.TextIOWrapper
+        :param patience: Stop patience, defaults to 10
+        :type patience: int, optional
+        :param model_save_dir: DESCRIPTION, defaults to 'model_save_dir'
+        :type model_save_dir: TYPE, optional
+        :return: DESCRIPTION
+        :rtype: TYPE
+
+        """
+
         self.model      = model
         self.patience   = patience
         self.counter    = 0
@@ -138,7 +163,7 @@ class EarlyStopping:
     def save_model(self, model):
         '''Saves model when validation loss decrease.'''
         torch.save(model, os.path.join(self.model_save_dir, 'agat.pth'))
-        print(f'User log: Save model with the best score: {self.best_score}',
+        print(f'User info: Save model with the best score: {self.best_score}',
               file=self.logger)
 
     # def save_checkpoint(self, model):

@@ -15,8 +15,8 @@
   sed -i "s#^.#${PWD}#g" paths.log
   ``` 
 
-### Build database
-Modify `data_config` for your own purposes.
+### Python script
+Modify `data_config` for your own purposes. **See [docs/sphinx/source/Default parameters.md#default_data_config](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config) to know how to use the parameter settings.**
 ```python
 from agat.data import BuildDatabase
 data_config =  {
@@ -37,9 +37,23 @@ data_config =  {
     'scale_prop': False
              }
 
-if __name__ == '__main__':
+if __name__ == '__main__': # encapsulate the following line in '__main__' because of the `multiprocessing`
     database = BuildDatabase(**data_config)
     database.build()
 ```
 
-**See [docs/sphinx/source/Default parameters.md#default_data_config](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_data_config) to know how to use the parameter settings.**
+### Outputs
+A new folder is created, which is defined by the `data_config['dataset_path']`. The structure of this folder is:
+
+```console
+dataset
+├── all_graphs.bin
+├── fname_prop.csv
+└── graph_build_scheme.json
+```
+
+| File name | Explanation |
+| --------- | ----------- |
+|`all_graphs.bin` | Binary file of the DGL graphs |
+| `fname_prop.csv` | A file storing the structural file name, properties, and paths. This file will not be used in the training, but is useful for checking the raw data. |
+| `graph_build_scheme.json` | An information file tells you how to build the database. When deploying the well-trained model, this file is useful to construct new graphs. |

@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>adsorbate_poscar &mdash; AGAT 2022.10.04 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="exceptions" href="exceptions.html" />
+    <link rel="prev" title="lib" href="../lib.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AGAT
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quick%20start.html">Quick start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html">Brief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html#more-tutorials">More tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../API_Docs.html">API_Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#default-parameters">default_parameters</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../API_Docs.html#lib">lib</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../lib.html">lib</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">adsorbate_poscar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="exceptions.html">exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file_lib.html">file_lib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="high_throughput_lib.html">high_throughput_lib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="incar_tag.html">incar_tag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="model_lib.html">model_lib</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#data">data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#model">model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#app">app</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Change_log.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AGAT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../API_Docs.html">API_Docs</a> &raquo;</li>
+        
+          <li><a href="../lib.html">lib</a> &raquo;</li>
+        
+      <li>adsorbate_poscar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/API_Docs/lib/adsorbate_poscar.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="adsorbate-poscar">
+<h1>adsorbate_poscar<a class="headerlink" href="#adsorbate-poscar" title="Permalink to this heading">¶</a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="adsorbate_poscar">
+<span class="sig-name descname"><span class="pre">adsorbate_poscar</span></span><a class="headerlink" href="#adsorbate_poscar" title="Permalink to this definition">¶</a></dt>
+<dd><p>POSCAR files of adsorbates, which are used to place adsorbate on a clean surface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adsorbate_poscar</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s1">&#39;C3H6_pi&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;C H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   3   6</span>
+<span class="sd">Selective dynamics</span>
+<span class="sd">Direct</span>
+<span class="sd">  0.5535920307240257  0.5054944871530235  .3586050403312200   T   T   T</span>
+<span class="sd">  0.6352790921072941  0.3879206403028466  .4062799115126201   T   T   T</span>
+<span class="sd">  0.4108903806304410  0.5027727193223586  .3567572395450800   T   T   T</span>
+<span class="sd">  0.5814503326975878  0.2934868248102315  .3968419267082002   T   T   T</span>
+<span class="sd">  0.6636640002806579  0.4018408119171915  .5113676042094202   T   T   T</span>
+<span class="sd">  0.7319078245085368  0.3787071546929145  .3523985386757005   T   T   T</span>
+<span class="sd">  0.6004140590434619  0.6017307633065315  .3787217106124001   T   T   T</span>
+<span class="sd">  0.3603923215774030  0.4109270277884635  .3852183512609502   T   T   T</span>
+<span class="sd">  0.3557746916442810  0.5933016256547884  .3802721473252602   T   T   T</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;C3H6_di&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;C  H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   3   6</span>
+<span class="sd">Selective dynamics</span>
+<span class="sd">Direct</span>
+<span class="sd">  0.5484236650091483  0.5793696228300774  .4534433537436204   T   T   T</span>
+<span class="sd">  0.4016582239211931  0.5674909994614906  .4441712821766108   T   T   T</span>
+<span class="sd">  0.6238100325535113  0.4558534322141073  .4957447541409306   T   T   T</span>
+<span class="sd">  0.5821137497425943  0.3637880141958846  .4493398337887504   T   T   T</span>
+<span class="sd">  0.6087096830988554  0.4398812179063704  .6046439066269607   T   T   T</span>
+<span class="sd">  0.7306517610703676  0.4604332215158591  .4783109306196105   T   T   T</span>
+<span class="sd">  0.5860507695136543  0.6716539482048837  .4996445825796005   T   T   T</span>
+<span class="sd">  0.3619691310064732  0.4757345003168245  .4899695206948405   T   T   T</span>
+<span class="sd">  0.3467741410754384  0.6554008047000537  .4777358996487706   T   T   T</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;O&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;O</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   1</span>
+<span class="sd">Direct</span>
+<span class="sd">0.0 0.0 0.0</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;OH&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;O H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   1 1</span>
+<span class="sd">C</span>
+<span class="sd">0.0 0.0 0.0</span>
+<span class="sd">0.6 0.0 0.7</span>
+
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;H&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   1</span>
+<span class="sd">C</span>
+<span class="sd">0.0 0.0 0.0</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;OOH&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;O H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   2 1</span>
+<span class="sd">C</span>
+<span class="sd">0.0 0.0 0.0</span>
+<span class="sd">1.290 0.0  0.733</span>
+<span class="sd">1.290 0.985 0.733</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;C3H7&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;C  H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   3   7</span>
+<span class="sd">Direct</span>
+<span class="sd">  0.5032285934578148  0.6060872441143981  .5105109296830013</span>
+<span class="sd">  0.4422956754542634  0.4792161991413143  .4515680270073219</span>
+<span class="sd">  0.5080514476976327  0.3555729792148237  .5130097657332779</span>
+<span class="sd">  0.6094002947779539  0.6164097976375560  .4841432123244549</span>
+<span class="sd">  0.4979847519485787  0.6016567794491650  .6203520958324020</span>
+<span class="sd">  0.4510082850485268  0.6967157765442196  .4785166738079019</span>
+<span class="sd">  0.4960478637085886  0.3580074123423511  .6224347248530488</span>
+<span class="sd">  0.6159067993202143  0.3518094062889375  .4926109199402289</span>
+<span class="sd">  0.4634551722627875  0.2617368964178830  .4779179563921314</span>
+<span class="sd">  0.3351823259455955  0.4772193591639445  .4754175078521692</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;H2O&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;O  H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   1   2</span>
+<span class="sd">Selective dynamics</span>
+<span class="sd">Direct</span>
+<span class="sd"> -0.0784545084624066  0.0593833974052588 -0.0140340470932173   T   T   T</span>
+<span class="sd"> -0.1681642636807406  0.0527481001604780  0.0509977647150731   T   T   T</span>
+<span class="sd">  0.0130447970972086  0.0495023949684338  0.0480243477337583   T   T   T</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+
+<span class="s1">&#39;O-OH_di&#39;</span><span class="p">:</span>
+<span class="sd">&#39;&#39;&#39;O  H</span>
+<span class="sd">   1.000000000000000</span>
+<span class="sd"> 10.0000000000000000  0.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000 10.0000000000000000  0.0000000000000000</span>
+<span class="sd">  0.0000000000000000  0.0000000000000000 10.0000000000000000</span>
+<span class="sd">   1   2</span>
+<span class="sd">Selective dynamics</span>
+<span class="sd">Direct</span>
+<span class="sd">  0.4228836854119255  0.3920430739081251  1.4378225557902757   T   T   T</span>
+<span class="sd">  0.5951536894026083  0.4940772164748853  1.4332004634520772   T   T   T</span>
+<span class="sd">  0.4564635647557642  0.3214577500443963  1.4969700076985024   T   T   T</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="exceptions.html" class="btn btn-neutral float-right" title="exceptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../lib.html" class="btn btn-neutral float-left" title="lib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2023, ZHANG Jun, ZHAO Shijun
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

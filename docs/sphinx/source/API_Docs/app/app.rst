@@ -25,6 +25,7 @@ AGAT model applications
          
 
    .. method:: __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda', **kwargs)
+
       :param model_save_dir: Directory storing the well-trained model.
       :type model_save_dir: str
       :param graph_build_scheme_dir: Direcotry storing the ``graph_build_scheme.json`` file.

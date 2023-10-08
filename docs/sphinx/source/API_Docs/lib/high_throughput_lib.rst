@@ -64,3 +64,11 @@ high_throughput_lib
    :param str template_file: file name of the template structure.
    :returns: bulk structure of a ``ase.atoms`` object.
 
+
+
+.. function:: run_vasp()
+
+    :raises ValueError: VASP can only run on a Linux platform
+
+
+    .. warning:: Setup your own VAPS package and Intel libraries before using this function.

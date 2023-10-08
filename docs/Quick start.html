@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Default parameters" href="Default%20parameters.html" />
+    <link rel="next" title="Brief" href="Tutorial.html" />
     <link rel="prev" title="Installation" href="Installation.html" /> 
 </head>
 
@@ -96,27 +96,26 @@
 <li class="toctree-l2"><a class="reference internal" href="#collect-paths-of-vasp-calculations">Collect paths of VASP calculations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-database">Build database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#train-agat-model">Train AGAT model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#model-prediction">Model prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#geometry-optimization">Geometry optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-geometry-optimization">Application (geometry optimization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-high-throughput-prediction">Application (high-throughput prediction)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Default%20parameters.html">Default parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently asked questions (FAQ)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Brief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html#more-tutorials">More tutorials</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="API_Docs.html">API_Docs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API_Docs.html#api-docs-old">API_Docs_old</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">CHANGE LOG:</span></p>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently asked questions (FAQ)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Change_log.html">Change log</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Other:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="other.html">Other info</a></li>
 </ul>
 
             
@@ -185,10 +184,12 @@
 <h1>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading">¶</a></h1>
 <section id="prepare-vasp-calculations">
 <h2>Prepare VASP calculations<a class="headerlink" href="#prepare-vasp-calculations" title="Permalink to this heading">¶</a></h2>
+<p>Run VASP calculations at this step.</p>
 </section>
 <section id="collect-paths-of-vasp-calculations">
 <h2>Collect paths of VASP calculations<a class="headerlink" href="#collect-paths-of-vasp-calculations" title="Permalink to this heading">¶</a></h2>
 <ul>
+<li><p>We provided examples of VASP outputs at <a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v1.0.0/files/VASP_calculations_example">VASP_calculations_example</a>.</p></li>
 <li><p>Find all directories containing <code class="docutils literal notranslate"><span class="pre">OUTCAR</span></code> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">name</span> <span class="n">OUTCAR</span> <span class="o">&gt;</span> <span class="n">paths</span><span class="o">.</span><span class="n">log</span>
 </pre></div>
@@ -208,48 +209,48 @@
 </section>
 <section id="build-database">
 <h2>Build database<a class="headerlink" href="#build-database" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.data</span> <span class="kn">import</span> <span class="n">AgatDatabase</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.data</span> <span class="kn">import</span> <span class="n">BuildDatabase</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">ad</span> <span class="o">=</span> <span class="n">AgatDatabase</span><span class="p">(</span><span class="n">mode_of_NN</span><span class="o">=</span><span class="s1">&#39;ase_dist&#39;</span><span class="p">,</span> <span class="n">num_of_cores</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">ad</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="n">BuildDatabase</span><span class="p">(</span><span class="n">mode_of_NN</span><span class="o">=</span><span class="s1">&#39;ase_dist&#39;</span><span class="p">,</span> <span class="n">num_of_cores</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">database</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
 <section id="train-agat-model">
 <h2>Train AGAT model<a class="headerlink" href="#train-agat-model" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.model</span> <span class="kn">import</span> <span class="n">Train</span>
-<span class="n">at</span> <span class="o">=</span> <span class="n">Train</span><span class="p">()</span>
-<span class="n">at</span><span class="o">.</span><span class="n">fit_energy_model</span><span class="p">()</span>
-<span class="n">at</span><span class="o">.</span><span class="n">fit_force_model</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.model</span> <span class="kn">import</span> <span class="n">Fit</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Fit</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
-<section id="model-prediction">
-<h2>Model prediction<a class="headerlink" href="#model-prediction" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.app</span> <span class="kn">import</span> <span class="n">GatApp</span>
-<span class="n">energy_model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="s1">&#39;energy_ckpt&#39;</span><span class="p">)</span>
-<span class="n">force_model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="s1">&#39;force_ckpt&#39;</span><span class="p">)</span>
+<section id="application-geometry-optimization">
+<h2>Application (geometry optimization)<a class="headerlink" href="#application-geometry-optimization" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">BFGS</span>
+<span class="kn">from</span> <span class="nn">agat.app</span> <span class="kn">import</span> <span class="n">AgatCalculator</span>
+
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="s1">&#39;agat_model&#39;</span>
 <span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">GatApp</span><span class="p">(</span><span class="n">energy_model_save_dir</span><span class="p">,</span> <span class="n">force_model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="p">)</span>
-<span class="n">graph</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="s1">&#39;POSCAR&#39;</span><span class="p">)</span>
-<span class="n">energy</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get_energy</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-<span class="n">forces</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get_forces</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;POSCAR&#39;</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculator</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span>
+                          <span class="n">graph_build_scheme_dir</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
+<span class="n">dyn</span> <span class="o">=</span> <span class="n">BFGS</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">&#39;test.traj&#39;</span><span class="p">)</span>
+<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="geometry-optimization">
-<h2>Geometry optimization<a class="headerlink" href="#geometry-optimization" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.io</span> <span class="kn">import</span> <span class="n">read</span>
-<span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">BFGS</span>
-<span class="kn">from</span> <span class="nn">agat.app</span> <span class="kn">import</span> <span class="n">GatAseCalculator</span>
-<span class="kn">from</span> <span class="nn">agat.default_parameters</span> <span class="kn">import</span> <span class="n">default_hp_config</span>
-<span class="n">poscar</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;POSCAR&#39;</span><span class="p">)</span>
-<span class="n">calculator</span><span class="o">=</span><span class="n">GatAseCalculator</span><span class="p">(</span><span class="n">energy_model_save_dir</span><span class="p">,</span>
-                            <span class="n">force_model_save_dir</span><span class="p">,</span>
-                            <span class="n">graph_build_scheme_dir</span><span class="p">)</span>
-<span class="n">poscar</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="n">poscar</span><span class="p">,</span> <span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
-<span class="n">dyn</span> <span class="o">=</span> <span class="n">BFGS</span><span class="p">(</span><span class="n">poscar</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">&#39;test.traj&#39;</span><span class="p">)</span>
-<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">**</span><span class="n">default_hp_config</span><span class="p">[</span><span class="s1">&#39;opt_config&#39;</span><span class="p">])</span>
+<section id="application-high-throughput-prediction">
+<h2>Application (high-throughput prediction)<a class="headerlink" href="#application-high-throughput-prediction" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.app.cata</span> <span class="kn">import</span> <span class="n">HpAds</span>
+
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="s1">&#39;agat_model&#39;</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span>
+<span class="n">formula</span><span class="o">=</span><span class="s1">&#39;NiCoFePdPt&#39;</span>
+
+<span class="n">ha</span> <span class="o">=</span> <span class="n">HpAds</span><span class="p">(</span><span class="n">model_save_dir</span><span class="o">=</span><span class="n">model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="o">=</span><span class="n">graph_build_scheme_dir</span><span class="p">)</span>
+<span class="n">ha</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">formula</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -263,7 +264,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Default%20parameters.html" class="btn btn-neutral float-right" title="Default parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Tutorial.html" class="btn btn-neutral float-right" title="Brief" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

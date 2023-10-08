@@ -120,6 +120,16 @@ def get_ase_atom_from_formula_template( chemical_formula, v_per_atom=None,
     return atoms
 
 def run_vasp():
+    """
+
+    :raises ValueError: VASP can only run on a Linux platform
+
+
+    .. warning:: Setup your own VAPS package and Intel libraries before using this function.
+
+
+    """
+
     os_type = platform.system()
     if not os_type == 'Linux':
         raise ValueError(f'VASP can only be executed on Linux OS, instead of {os_type}.')

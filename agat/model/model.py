@@ -17,41 +17,42 @@ from dgl.data.utils import load_graphs
 from .layer import Layer
 
 class PotentialModel(nn.Module):
-    """
-    Description:
-    ----------
-        A GAT model with multiple gat layers for predicting atomic energies, forces, and stress tensors.
-    Parameters
-    ----------
-    num_gat_out_list: list
-        A list of numbers that contains the representation dimension of each GAT layer.
-    num_readout_out_list: list
-        A list of numbers that contains the representation dimension of each readout layer.
-    head_list_en: list
-        A list contains the attention mechanisms of each head for the energy prediction.
-    head_list_force: list
-        A list contains the attention mechanisms of each head for the force prediction.
-    att_activation: str
-        TensorFlow activation function for calculating the attention score `a`.
-    embed_activation: str
-        TensorFlow activation function for embedding the inputs.
-    readout_activation: str
-        TensorFlow activation function for the readout layers.
-    bias: boolean
-        bias term of dense layers.
-    negative_slope: float
-        Negative slope of LeakyReLu function.
-    Return of `call` method
-    -----------------------
-    en_h : tf Tensor
-        Raw energy predictions of each atom (node).
-    graph.ndata['force_pred'] : tf Tensor
-        Raw force predictions of each atom (node).
-    Important note
-    -----------------------
-    The last readout list must be one. Because the node energy or node force should have one value.
-    The Gaussian expansion is not well tested and should be deprecated.
-    The first value of `read_out_node_list` is the input dimension and equals to last value of `gat_node_list * num_heads`.
+    """A GAT model with multiple gat layers for predicting atomic energies, forces, and stress tensors.
+
+
+    .. Note:: You can also use this model to train and predict atom and bond related properties. You need to store the labels on graph edges if you want to do so. This model has multiple attention heads.
+
+
+    .. Important::
+
+        The first value of ``gat_node_dim_list`` is the depth of atomic representation.
+
+        The first value of ``energy_readout_node_list``, ``force_readout_node_list``, ``stress_readout_node_list`` is the input dimension and equals to last value of `gat_node_list * num_heads`.
+
+        The last values of ``energy_readout_node_list``, ``force_readout_node_list``, ``stress_readout_node_list`` are ``1``, ``3``, and ``6``, respectively.
+
+
+    :param gat_node_dim_list: A list of node dimensions of the AGAT ``Layer``s.
+    :type gat_node_dim_list: list
+    :param energy_readout_node_list: A list of node dimensions of the energy readout layers.
+    :type energy_readout_node_list: list
+    :param force_readout_node_list: A list of node dimensions of the force readout layers.
+    :type force_readout_node_list: list
+    :param stress_readout_node_list: A list of node dimensions of the stress readout layers.
+    :type stress_readout_node_list: list
+    :param head_list: A list of attention head names, defaults to ['div']
+    :type head_list: list, optional
+    :param bias: Add bias or not to the neural networks., defaults to True
+    :type bias: TYPE, bool
+    :param negative_slope: This specifies the negative slope of the LeakyReLU (see https://pytorch.org/docs/stable/generated/torch.nn.LeakyReLU.html) activation function., defaults to 0.2
+    :type negative_slope: float, optional
+    :param device: Device to train the model. Use GPU cards to accerelate training., defaults to 'cuda'
+    :type device: str, optional
+    :param tail_readout_no_act: The tail ``tail_readout_no_act`` layers will have no activation functions. The first, second, and third elements are for energy, force, and stress readout layers, respectively., defaults to [3,3,3]
+    :type tail_readout_no_act: list, optional
+    :return: An AGAT model
+    :rtype: agat.model.PotentialModel
+
     """
     def __init__(self,
                  gat_node_dim_list,
@@ -62,7 +63,7 @@ class PotentialModel(nn.Module):
                  bias=True,
                  negative_slope=0.2,
                  device = 'cuda',
-                 tail_readout_no_act=[3,3,3]): # for energy, force, and stress, respectively.
+                 tail_readout_no_act=[3,3,3]):
         super(PotentialModel, self).__init__()
 
         # args
@@ -143,16 +144,42 @@ class PotentialModel(nn.Module):
                         'free': self.free}
 
     def mul(self, TorchTensor):
+        """Multiply head.
+
+        :param TorchTensor: Input tensor
+        :type TorchTensor: torch.tensor
+        :return: Ouput tensor
+        :rtype: torch.tensor
+
+        """
+
         return TorchTensor
 
     def div(self, TorchTensor):
+        """Division head.
+
+        :param TorchTensor: Input tensor
+        :type TorchTensor: torch.tensor
+        :return: Ouput tensor
+        :rtype: torch.tensor
+
+        """
         return 1/TorchTensor
 
     def free(self, TorchTensor):
+        """Free head.
+
+        :param TorchTensor: Input tensor
+        :type TorchTensor: torch.tensor
+        :return: Ouput tensor all ones
+        :rtype: torch.tensor
+
+        """
         return torch.ones(TorchTensor.size(), device=self.device)
 
     def get_head_mechanism(self, fn_list, TorchTensor):
-        """
+        """Get attention heads
+
         :param fn_list: A list of head mechanisms. For example: ['mul', 'div', 'free']
         :type fn_list: list
         :param TorchTensor: A PyTorch tensor
@@ -167,21 +194,18 @@ class PotentialModel(nn.Module):
         return torch.cat(TorchTensor_list, 1)
 
     def forward(self, graph):
-        '''
-        Description:
-        ----------
-            `forward` function of GAT model.
-        Parameters
-        ----------
-        graph: `DGL.Graph`
-            A graph.
-        Return
-        -----------------------
-        en_h : torch.Tensor
-            Raw energy predictions of each atom (node).
-        graph.ndata['force_pred'] : torch.Tensor
-            Raw force predictions of each atom (node).
-        '''
+        """The ``forward`` function of PotentialModel model.
+
+        :param graph: ``DGL.Graph``
+        :type graph: ``DGL.Graph``
+        :return:
+            - energy: atomic energy
+            - force: atomic force
+            - stress: cell stress tensor
+
+        :rtype: tuple of torch.tensors
+
+        """
         with graph.local_scope():
             h    = graph.ndata['h']                                    # shape: (number of nodes, dimension of one-hot code representation)
             dist = torch.reshape(graph.edata['dist'], (-1, 1, 1))      # shape: (number of edges, 1, 1)

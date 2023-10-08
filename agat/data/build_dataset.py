@@ -557,6 +557,15 @@ class ExtractVaspFiles(object):
         self.working_dir = os.getcwd()
 
     def read_oszicar(self,fname='OSZICAR'):
+        """Get the electronic steps of a VASP run.
+
+        :param fname: file name, defaults to 'OSZICAR'
+        :type fname: str, optional
+        :return: electronic steps of a VASP run.
+        :rtype: list
+
+        """
+
         ee_steps = []
         with open(fname, 'r') as f:
             lines = f.readlines()
@@ -567,6 +576,15 @@ class ExtractVaspFiles(object):
         return ee_steps
 
     def read_incar(self, fname='INCAR'):
+        """Get the NELM from INCAR. NELM: maximum electronic steps for each ionic step.
+
+        :param fname: file name, defaults to 'INCAR'
+        :type fname: str, optional
+        :return: NELM tage in INCAR
+        :rtype: int
+
+        """
+
         with open(fname, 'r') as f:
             lines = f.readlines()
         for line in lines:
@@ -681,6 +699,13 @@ class ExtractVaspFiles(object):
         f_csv.close()
 
     def __call__(self):
+        """The __call__ function
+
+        :return: DESCRIPTION
+        :rtype: TYPE
+
+        """
+
         processes = []
         for process_index in range(self.data_config['num_of_cores']):
             p = multiprocessing.Process(target=self.split_output, args=[process_index,])

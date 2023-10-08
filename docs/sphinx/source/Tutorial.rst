@@ -1,4 +1,4 @@
-Brief introduction
+Brief
 ==================
 
 Take a look at the Default parameters
@@ -35,20 +35,20 @@ For example:
 
    # Application (high-throughput prediction)
    from agat.app.cata import HpAds
-   ha = HpAds(model_save_dir=model_save_dir, graph_build_scheme_dir=graph_build_scheme_dir)
+   ha = HpAds()
    ha.run(formula='NiCoFePdPt')
 
 
-As you can see that, you only need to provide very few input arguments to instantiate the imported objects.
+As you can see, you only need to provide very few input arguments to instantiate the imported objects.
 
 
 Customized usage
 --------------------
 
-There are generally two ways to customize your AGAT training and deployment. Tacking the training as an example:
+There are generally two ways to customize your AGAT training and deployment. Taking the training as an example:
 
-Customized input arguements
-****************************
+Customized keyword arguements
+*****************************
 
 
 .. code-block:: python
@@ -59,7 +59,7 @@ Customized input arguements
 
 
 
-This will replace the seetings for ``verbose``, ``gat_node_dim_list``, ``b``. Other parameters are controled by the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
+This will replace the seetings for ``verbose``, ``gat_node_dim_list``, ``b``. Other parameters are still controled by the `Default parameters <https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md>`_ .
 
 
 Customized input dict

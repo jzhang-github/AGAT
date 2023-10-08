@@ -20,6 +20,18 @@ def file_exit():
         raise FileExit('Exit because `StopPython` file is found.')
 
 def modify_INCAR(key='NSW', value='300', s=''):
+    """Modify the INCAR file.
+
+    :param key: The INCAR tag, defaults to 'NSW'
+    :type key: str, optional
+    :param value: Value of the INCAR tag, defaults to '300'
+    :type value: str, optional
+    :param s: Comment string, defaults to ''
+    :type s: str, optional
+    :return: Modified INCAR file
+
+    """
+
     if not key in INCAR_TAG:
         print('Input key not avaliable, please check.')
         return 1

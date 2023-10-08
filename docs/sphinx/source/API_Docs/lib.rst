@@ -1,4 +1,4 @@
-Applications
+lib
 -------------
 
 .. toctree::

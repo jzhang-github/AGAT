@@ -17,3 +17,6 @@ dyn.run(fmax=0.05)
 ```
 
 Navigate to [ase.optimize.BFGS](https://wiki.fysik.dtu.dk/ase/ase/optimize.html#ase.optimize.BFGS) for more details.
+
+
+**Note**: You need to prepare the well-trained model, copy `graph_build_scheme.json` file, and structure file, i.e. `POSCAR`.

@@ -2,6 +2,7 @@
 
 Modify the passed input dict to control the prediction.
 
+### Python script
 ```python
 from agat.app import HpAds
 
@@ -35,3 +36,17 @@ ha.run(formula='NiCoFePdPt')
 ```
 
 **See [docs/sphinx/source/Default parameters.md#default_high_throughput_config](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md#default_high_throughput_config) to know how to use the parameter settings.**
+
+
+### Output
+
+```
+.
+├── ads_surf_energy_H_0.txt
+└── POSCAR_surf_opt_0.gat
+```
+
+| File name | Explanation |
+| --------- | ----------- |
+|`ads_surf_energy_H_0.txt` | Predicted total energies. First column: Total energies of adsorption structure. Second column: Total energy of clean surface. Third column: convergence code: `1` for converge; `0` for ill converge. |
+| `POSCAR_surf_opt_0.gat` | Optimized structure of clean surface. |

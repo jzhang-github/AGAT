@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Catalysis &mdash; AGAT 2022.10.04 documentation</title>
+  <title>cata &mdash; AGAT 2022.10.04 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="HpDftAds" href="cata/high_throughput_dft_calculation.html" />
-    <link rel="prev" title="Applications" href="../app.html" /> 
+    <link rel="next" title="find_adsorption_site" href="cata/find_adsorption_site.html" />
+    <link rel="prev" title="app" href="app.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,36 +92,36 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Quick%20start.html">Quick start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Default%20parameters.html">Default parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Contribution.html">Contribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently asked questions (FAQ)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html">Brief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html#more-tutorials">More tutorials</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../API_Docs.html">API_Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#default-parameters">default_parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#lib">lib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#data">data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#model">model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../API_Docs.html#app">app</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../app.html">Applications</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Catalysis</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../app.html">app</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="app.html">app</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cata</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#default-parameters">default_parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../API_Docs.html#api-docs-old">API_Docs_old</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">CHANGE LOG:</span></p>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently asked questions (FAQ)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Change_log.html">Change log</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Other:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../other.html">Other info</a></li>
 </ul>
 
             
@@ -169,9 +169,9 @@
         
           <li><a href="../../API_Docs.html">API_Docs</a> &raquo;</li>
         
-          <li><a href="../app.html">Applications</a> &raquo;</li>
+          <li><a href="../app.html">app</a> &raquo;</li>
         
-      <li>Catalysis</li>
+      <li>cata</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -190,11 +190,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="catalysis">
-<h1>Catalysis<a class="headerlink" href="#catalysis" title="Permalink to this heading">¶</a></h1>
+  <section id="cata">
+<h1>cata<a class="headerlink" href="#cata" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cata/high_throughput_dft_calculation.html">HpDftAds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/find_adsorption_site.html">find_adsorption_site</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/generate_adsorption_sites.html">generate_adsorption_sites_ase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/high_throughput_dft_calculation.html">high_throughput_dft_calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/high_throughput_predict.html">high_throughput_predict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/increase_vacuum.html">increase_vacuum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/volcano_2e.html">volcano_2e</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cata/volcano_plot.html">volcano_plot</a></li>
 </ul>
 </div>
 </section>
@@ -207,10 +213,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cata/high_throughput_dft_calculation.html" class="btn btn-neutral float-right" title="HpDftAds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cata/find_adsorption_site.html" class="btn btn-neutral float-right" title="find_adsorption_site" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../app.html" class="btn btn-neutral float-left" title="Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="app.html" class="btn btn-neutral float-left" title="app" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
