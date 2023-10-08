@@ -6,6 +6,8 @@
 Welcome to AGAT's documentation!
 ================================
 
+**If you have any bugs, questions, or suggestions, Please do NOT hesistate to click the** `New issue <https://github.com/jzhang-github/AGAT/issues>`_ **button.**
+
 .. note::
 
    Navigate to `v1.0.0 <https://github.com/jzhang-github/AGAT/tree/v1.0.0>`_ for the documentation and source codes to reproduce results and support conclusions of `Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning <https://doi.org/10.1016/j.joule.2023.06.003>`_.
