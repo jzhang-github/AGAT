@@ -117,10 +117,9 @@ class EarlyStopping:
         :type logger: _io.TextIOWrapper
         :param patience: Stop patience, defaults to 10
         :type patience: int, optional
-        :param model_save_dir: DESCRIPTION, defaults to 'model_save_dir'
-        :type model_save_dir: TYPE, optional
-        :return: DESCRIPTION
-        :rtype: TYPE
+        :param model_save_dir: A directory to save the model, defaults to 'model_save_dir'
+        :type model_save_dir: str, optional
+
 
         """
 

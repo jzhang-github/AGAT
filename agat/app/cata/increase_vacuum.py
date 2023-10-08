@@ -14,8 +14,8 @@ def increase_vacuum(fname):
 
     :param fname: Structural file name.
     :type fname: str
-    :return: DESCRIPTION
-    :rtype: TYPE
+    :return: A new file with thicker vacuum.
+    :rtype: A new file
 
     """
 
