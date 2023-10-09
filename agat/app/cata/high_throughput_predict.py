@@ -23,7 +23,7 @@ from ...default_parameters import default_high_throughput_config
 from ...lib.adsorbate_poscar import adsorbate_poscar
 from ...lib.high_throughput_lib import get_v_per_atom, get_ase_atom_from_formula, get_ase_atom_from_formula_template
 
-class HpAds(object):
+class HtAds(object):
     def __init__(self, **hp_config):
         self.hp_config = {**default_high_throughput_config, **config_parser(hp_config)}
 
@@ -213,5 +213,5 @@ class HpAds(object):
         self.ads_calc(formula, calculator, **kwargs)
 
 if __name__ == '__main__':
-    HA = HpAds()
+    HA = HtAds()
     HA.run('NiCoFePdPt') # debug only

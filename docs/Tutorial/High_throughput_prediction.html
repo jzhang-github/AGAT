@@ -191,7 +191,7 @@
 <section id="python-script">
 <h2>Python script<a class="headerlink" href="#python-script" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">agat.app</span> <span class="kn">import</span> <span class="n">HpAds</span>
+<span class="kn">from</span> <span class="nn">agat.app</span> <span class="kn">import</span> <span class="n">HtAds</span>
 
 <span class="n">ase_calculator_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fmax&#39;</span>             <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
                          <span class="s1">&#39;steps&#39;</span>            <span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
@@ -218,7 +218,7 @@
         <span class="p">}</span>
 
 
-<span class="n">ha</span> <span class="o">=</span> <span class="n">HpAds</span><span class="p">(</span><span class="o">**</span><span class="n">high_throughput_config</span><span class="p">)</span>
+<span class="n">ha</span> <span class="o">=</span> <span class="n">HtAds</span><span class="p">(</span><span class="o">**</span><span class="n">high_throughput_config</span><span class="p">)</span>
 <span class="n">ha</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;NiCoFePdPt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>

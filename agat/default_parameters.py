@@ -73,9 +73,9 @@ default_train_config = {
     'stop_patience': 300,
     'head_list': ['mul', 'div', 'free'],
     'gat_node_dim_list': [len(default_elements), 100, 100, 100],
-    'energy_readout_node_list': [len(head_list)*gat_node_dim_list[-1], 100, 50, 30, 10, 3, FIX_VALUE[0]],
-    'force_readout_node_list': [len(head_list)*gat_node_dim_list[-1], 100, 50, 30, 10, FIX_VALUE[1]],
-    'stress_readout_node_list': [len(head_list)*gat_node_dim_list[-1], 100, 50, 30, 10, FIX_VALUE[2]],
+    'energy_readout_node_list': [300, 100, 50, 30, 10, 3, FIX_VALUE[0]], # the first value should be: len(head_list)*gat_node_dim_list[-1]
+    'force_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[1]], # the first value should be: len(head_list)*gat_node_dim_list[-1]
+    'stress_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[2]], # the first value should be: len(head_list)*gat_node_dim_list[-1]
     'bias': True,
     'negative_slope': 0.2,
     'criterion': nn.MSELoss(),
@@ -101,11 +101,11 @@ default_ase_calculator_config = {'fmax'             : 0.1,
                                  'restart'          : None,
                                  'restart_steps'    : 0,
                                  'perturb_steps'    : 0,
-                                 'perturb_amplitude': 0.05}
-                                 # 'out'              : None }
+                                 'perturb_amplitude': 0.05,
+                                 'out'              : None}
+
 
 default_high_throughput_config = {
-        # 'volume_per_atom': 14.045510416666668,
         'model_save_dir': 'agat_model',
         'opt_config': default_ase_calculator_config,
         'calculation_index'    : '0', # sys.argv[1],

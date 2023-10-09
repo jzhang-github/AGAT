@@ -50,12 +50,12 @@ dyn.run(fmax=0.05)
 ```
 ### Application (high-throughput prediction)
 ```python
-from agat.app.cata import HpAds
+from agat.app.cata import HtAds
 
 model_save_dir = 'agat_model'
 graph_build_scheme_dir = 'dataset'
 formula='NiCoFePdPt'
 
-ha = HpAds(model_save_dir=model_save_dir, graph_build_scheme_dir=graph_build_scheme_dir)
+ha = HtAds(model_save_dir=model_save_dir, graph_build_scheme_dir=graph_build_scheme_dir)
 ha.run(formula=formula)
 ```

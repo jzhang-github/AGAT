@@ -195,18 +195,18 @@
   <section id="high-throughput-predict">
 <h1>high_throughput_predict<a class="headerlink" href="#high-throughput-predict" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="HpAds">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HpAds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpAds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtAds">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HtAds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtAds" title="Permalink to this definition">¶</a></dt>
 <dd><p>High-throughput predictions.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="HpAds.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hp_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpAds.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtAds.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hp_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtAds.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-high-throughput-config">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-high-throughput-config</a> for more details.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="HpAds.geo_opt">
-<span class="sig-name descname"><span class="pre">geo_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms_with_calculator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpAds.geo_opt" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtAds.geo_opt">
+<span class="sig-name descname"><span class="pre">geo_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms_with_calculator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtAds.geo_opt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Geometrical optimization of given structure.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -273,8 +273,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="HpAds.ads_calc">
-<span class="sig-name descname"><span class="pre">ads_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpAds.ads_calc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtAds.ads_calc">
+<span class="sig-name descname"><span class="pre">ads_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtAds.ads_calc" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/optimize.html#bfgs">BFGS</a> calculations including geometrical optimizations of bulk, clean surface, and adsorption strucures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -339,8 +339,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="HpAds.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpAds.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtAds.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtAds.run" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>formula</strong> (<em>str</em>) – Input chemical formula</p>

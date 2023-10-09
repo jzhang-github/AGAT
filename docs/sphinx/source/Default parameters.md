@@ -109,6 +109,7 @@ See [bfgs](https://gitlab.com/ase/ase/-/blob/master/ase/optimize/bfgs.py) for mo
 | `restart_steps`            | 0             | `int`        | Restart optimization if the optimization cannot converge. |
 | `perturb_steps`            | 0             | `int`        | Number of perturbated steps. AGAT may have issues in converging BFGS, perturbating atomic positions may help the convergence. |
 | `perturb_amplitude`        | 0.05          | `float`      | Perturbation amplitudes if `erturb_steps` larger than `1`. |
+| `out`                      | `None`        | str      | Base name of the output log and traj. |
 
 
 

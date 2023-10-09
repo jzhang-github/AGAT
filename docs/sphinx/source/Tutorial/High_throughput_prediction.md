@@ -5,7 +5,7 @@ Modify the passed input dict to control the prediction.
 ### Python script
 ```python
 import os
-from agat.app import HpAds
+from agat.app import HtAds
 
 ase_calculator_config = {'fmax'             : 0.1,
                          'steps'            : 200,
@@ -32,7 +32,7 @@ high_throughput_config = {
         }
 
 
-ha = HpAds(**high_throughput_config)
+ha = HtAds(**high_throughput_config)
 ha.run(formula='NiCoFePdPt')
 ```
 

@@ -195,22 +195,22 @@
   <section id="high-throughput-dft-calculation">
 <h1>high_throughput_dft_calculation<a class="headerlink" href="#high-throughput-dft-calculation" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="HpDftAds">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HpDftAds</span></span><a class="headerlink" href="#HpDftAds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HtDftAds</span></span><a class="headerlink" href="#HtDftAds" title="Permalink to this definition">¶</a></dt>
 <dd><p>High-throughput DFT calculations for adsorption.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HA</span> <span class="o">=</span> <span class="n">HpDftAds</span><span class="p">(</span><span class="n">calculation_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">HA</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;NiCoFePdPt&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HT</span> <span class="o">=</span> <span class="n">HtDftAds</span><span class="p">(</span><span class="n">calculation_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">HT</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;NiCoFePdPt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py property">
-<dt class="sig sig-object py" id="HpDftAds.root_dir">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">root_dir</span></span><a class="headerlink" href="#HpDftAds.root_dir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.root_dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">root_dir</span></span><a class="headerlink" href="#HtDftAds.root_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>The root working directory of this object.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hp_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hp_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**hp_config</strong> – <p>Configurations to control the process.</p>
@@ -225,8 +225,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.bulk_opt">
-<span class="sig-name descname"><span class="pre">bulk_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.bulk_opt" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.bulk_opt">
+<span class="sig-name descname"><span class="pre">bulk_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.bulk_opt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structural optimization of the bulk structure with VASP.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -236,8 +236,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.surf_opt">
-<span class="sig-name descname"><span class="pre">surf_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulk_structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_bulk_opt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.surf_opt" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.surf_opt">
+<span class="sig-name descname"><span class="pre">surf_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulk_structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_bulk_opt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.surf_opt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structural optimization of the surface slab with VASP.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -247,8 +247,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.ads_opt">
-<span class="sig-name descname"><span class="pre">ads_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_surf_opt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.ads_opt" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.ads_opt">
+<span class="sig-name descname"><span class="pre">ads_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_surf_opt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.ads_opt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structural optimization of the adsorption with VASP.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -265,8 +265,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.bulk_aimd">
-<span class="sig-name descname"><span class="pre">bulk_aimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.bulk_aimd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.bulk_aimd">
+<span class="sig-name descname"><span class="pre">bulk_aimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.bulk_aimd" title="Permalink to this definition">¶</a></dt>
 <dd><p>AIMD simulation for a bulk structure of given chemical formula</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -276,8 +276,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.surface_aimd">
-<span class="sig-name descname"><span class="pre">surface_aimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulk_structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_bulk_opt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.surface_aimd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.surface_aimd">
+<span class="sig-name descname"><span class="pre">surface_aimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulk_structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_bulk_opt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.surface_aimd" title="Permalink to this definition">¶</a></dt>
 <dd><p>AIMD simulation for the clean surface.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -287,8 +287,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.ads_aimd">
-<span class="sig-name descname"><span class="pre">ads_aimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_surf_opt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.ads_aimd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.ads_aimd">
+<span class="sig-name descname"><span class="pre">ads_aimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structural_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CONTCAR_surf_opt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.ads_aimd" title="Permalink to this definition">¶</a></dt>
 <dd><p>AIMD simulation for the adsorption.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -305,8 +305,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HpDftAds.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HpDftAds.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="HtDftAds.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#HtDftAds.run" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

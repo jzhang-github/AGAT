@@ -21,7 +21,7 @@ from ...default_parameters import default_hp_dft_config
 from ...lib.file_lib import modify_INCAR
 from ...lib.high_throughput_lib import get_ase_atom_from_formula, get_v_per_atom, run_vasp
 
-class HpDftAds(object):
+class HtDftAds(object):
     """High-throughput DFT calculations for adsorption. See details in: https://jzhang-github.github.io/AGAT/Default%20parameters.html#default_hp_dft_config
 
     .. py:property:: root_dir
@@ -354,5 +354,5 @@ class HpDftAds(object):
             os.chdir(self.root_dir)
 
 if __name__ == '__main__':
-    HA = HpDftAds(calculation_index=0)
-    HA.run(sys.argv[1]) # debug only
+    HT = HtDftAds(calculation_index=0)
+    HT.run(sys.argv[1]) # debug only

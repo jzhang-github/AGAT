@@ -3,7 +3,7 @@ high_throughput_predict
 ##############################
 
 
-.. class:: HpAds(object)
+.. class:: HtAds(object)
 
    High-throughput predictions. 
 

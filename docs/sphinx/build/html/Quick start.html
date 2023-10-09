@@ -244,13 +244,13 @@
 </section>
 <section id="application-high-throughput-prediction">
 <h2>Application (high-throughput prediction)<a class="headerlink" href="#application-high-throughput-prediction" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.app.cata</span> <span class="kn">import</span> <span class="n">HpAds</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agat.app.cata</span> <span class="kn">import</span> <span class="n">HtAds</span>
 
 <span class="n">model_save_dir</span> <span class="o">=</span> <span class="s1">&#39;agat_model&#39;</span>
 <span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span>
 <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;NiCoFePdPt&#39;</span>
 
-<span class="n">ha</span> <span class="o">=</span> <span class="n">HpAds</span><span class="p">(</span><span class="n">model_save_dir</span><span class="o">=</span><span class="n">model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="o">=</span><span class="n">graph_build_scheme_dir</span><span class="p">)</span>
+<span class="n">ha</span> <span class="o">=</span> <span class="n">HtAds</span><span class="p">(</span><span class="n">model_save_dir</span><span class="o">=</span><span class="n">model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="o">=</span><span class="n">graph_build_scheme_dir</span><span class="p">)</span>
 <span class="n">ha</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">formula</span><span class="p">)</span>
 </pre></div>
 </div>

@@ -34,8 +34,8 @@ For example:
    f.fit()
 
    # Application (high-throughput prediction)
-   from agat.app.cata import HpAds
-   ha = HpAds()
+   from agat.app.cata import HtAds
+   ha = HtAds()
    ha.run(formula='NiCoFePdPt')
 
 
