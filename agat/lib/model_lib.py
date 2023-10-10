@@ -186,6 +186,7 @@ def load_graph_build_method(path):
     """
 
     json_file  = path
+
     assert os.path.exists(json_file), f"{json_file} file dose not exist."
     with open(json_file, 'r') as jsonf:
         graph_build_scheme = json.load(jsonf)
