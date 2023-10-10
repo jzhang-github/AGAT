@@ -3,6 +3,7 @@
 ```python
 from ase.optimize import BFGS
 from ase.io import read
+from ase import Atoms
 from agat.app import AgatCalculator
 
 model_save_dir = 'agat_model'

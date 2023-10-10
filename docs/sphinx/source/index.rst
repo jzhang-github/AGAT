@@ -6,7 +6,11 @@
 Welcome to AGAT's documentation!
 ================================
 
-**If you have any bugs, questions, or suggestions, Please do NOT hesistate to click the** `New issue <https://github.com/jzhang-github/AGAT/issues>`_ **button.**
+**If you have any bugs, questions, or suggestions, please do NOT hesistate to click the** `New issue <https://github.com/jzhang-github/AGAT/issues>`_ **button.**
+
+
+`Github Homepage <https://github.com/jzhang-github/AGAT>`_
+
 
 .. note::
 
@@ -27,6 +31,12 @@ Welcome to AGAT's documentation!
 
    Tutorial
 
+
+.. toctree::
+   :maxdepth: 6
+   :caption: 中文手册:
+
+   Chinese_support
 
 .. toctree::
    :maxdepth: 2

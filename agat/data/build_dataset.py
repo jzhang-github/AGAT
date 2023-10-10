@@ -48,6 +48,14 @@ class CrystalGraph(object):
     """
     def __init__(self, **data_config):
         self.data_config = {**default_data_config, **config_parser(data_config)}
+
+        # check inputs
+        if self.data_config['topology_only']:
+            self.data_config['build_properties']['energy'] = False
+            self.data_config['build_properties']['forces'] = False
+            self.data_config['build_properties']['cell'] = False
+            self.data_config['build_properties']['stress'] = False
+
         self.all_atom_feat = get_atomic_feature_onehot(self.data_config['species'])
 
         """ Although we recommend representing atoms with one hot code, you can
@@ -384,7 +392,7 @@ class ReadGraphs(object):
         self.data_config = {**default_data_config, **config_parser(data_config)}
         assert os.path.exists(self.data_config['dataset_path']), str(self.data_config['dataset_path']) + " not found."
 
-        self.cg               = CrystalGraph(**data_config)
+        self.cg               = CrystalGraph(**self.data_config)
         fname_prop_data       = np.loadtxt(os.path.join(self.data_config['dataset_path'],
                                                         'fname_prop.csv'),
                                            dtype=str, delimiter=',')
@@ -473,70 +481,70 @@ class ReadGraphs(object):
                 json.dump(self.data_config, fjson, indent=4)
         return graph_list, graph_labels
 
-class TrainValTestSplit(object):
-    """
-    Description:
-    ----------
-        Split the dataset.
-    Parameters
-    ----------
-    validation_size: int or float
-        int: number of samples of the validation set.
-        float: portion of samples of the validation set
-    test_size: int or float
-        int: number of samples of the validation set.
-        float: portion of samples of the validation set
-    csv_file: str
-        File name of a csv file that contains the filenames of crystals
-        with cif or VASP formate.
-    new_split: boolean
-        Split the dataset by `sklearn.model_selection.train_test_split` or
-        loaded from previously saved txt files.
-    Returns of `__call__` method
-    ----------------------------
-    train_index : list
-        A list of integers of training dataset.
-    validation_index : list
-        A list of integers of validation dataset.
-    test_index : list
-        A list of integers of test dataset.
-    """
-    def __init__(self, **data_config):
-        self.data_config = {**default_data_config, **config_parser(data_config)}
+# class TrainValTestSplit(object):
+#     """
+#     Description:
+#     ----------
+#         Split the dataset.
+#     Parameters
+#     ----------
+#     validation_size: int or float
+#         int: number of samples of the validation set.
+#         float: portion of samples of the validation set
+#     test_size: int or float
+#         int: number of samples of the validation set.
+#         float: portion of samples of the validation set
+#     csv_file: str
+#         File name of a csv file that contains the filenames of crystals
+#         with cif or VASP formate.
+#     new_split: boolean
+#         Split the dataset by `sklearn.model_selection.train_test_split` or
+#         loaded from previously saved txt files.
+#     Returns of `__call__` method
+#     ----------------------------
+#     train_index : list
+#         A list of integers of training dataset.
+#     validation_index : list
+#         A list of integers of validation dataset.
+#     test_index : list
+#         A list of integers of test dataset.
+#     """
+#     def __init__(self, **data_config):
+#         self.data_config = {**default_data_config, **config_parser(data_config)}
 
-        fname_prop_data       = np.loadtxt(os.path.join(self.data_config['dataset_path'],
-                                                        'fname_prop.csv'),
-                                           dtype=str, delimiter=',')
-        self.number_of_graphs = np.shape(fname_prop_data)[0]
+#         fname_prop_data       = np.loadtxt(os.path.join(self.data_config['dataset_path'],
+#                                                         'fname_prop.csv'),
+#                                            dtype=str, delimiter=',')
+#         self.number_of_graphs = np.shape(fname_prop_data)[0]
 
-    def __call__(self):
-        if self.data_config['new_split']:
-            train_index,      validation_and_test_index = train_test_split([x for x in range(self.number_of_graphs)],
-                                                                           test_size=self.data_config['test_size']+self.data_config['validation_size'],
-                                                                           shuffle=True)
-            validation_index, test_index                = train_test_split(validation_and_test_index,
-                                                                           test_size=self.data_config['test_size']/(self.data_config['test_size']+self.data_config['validation_size']),
-                                                                           shuffle=True)
-            np.savetxt(os.path.join(self.data_config['dataset_path'], 'train.txt'),      train_index,      fmt='%.0f')
-            np.savetxt(os.path.join(self.data_config['dataset_path'], 'validation.txt'), validation_index, fmt='%.0f')
-            np.savetxt(os.path.join(self.data_config['dataset_path'], 'test.txt'),       test_index,       fmt='%.0f')
-        else:
-            try:
-                train_index      = np.loadtxt(os.path.join(self.data_config['dataset_path'], 'train.txt'),      dtype=int)
-                validation_index = np.loadtxt(os.path.join(self.data_config['dataset_path'], 'validation.txt'), dtype=int)
-                test_index       = np.loadtxt(os.path.join(self.data_config['dataset_path'], 'test.txt'),       dtype=int)
-            except OSError:
-                print('User: Index file not found, generate new files...')
-                train_index,      validation_and_test_index = train_test_split([x for x in range(self.number_of_graphs)],
-                                                                               test_size=self.data_config['test_size']+self.data_config['validation_size'],
-                                                                               shuffle=True)
-                validation_index, test_index                = train_test_split(validation_and_test_index,
-                                                                               test_size=self.data_config['test_size']/(self.data_config['test_size']+self.data_config['validation_size']),
-                                                                               shuffle=True)
-                np.savetxt(os.path.join(self.data_config['dataset_path'], 'train.txt'),      train_index,      fmt='%.0f')
-                np.savetxt(os.path.join(self.data_config['dataset_path'], 'validation.txt'), validation_index, fmt='%.0f')
-                np.savetxt(os.path.join(self.data_config['dataset_path'], 'test.txt'),       test_index,       fmt='%.0f')
-        return train_index, validation_index, test_index
+#     def __call__(self):
+#         if self.data_config['new_split']:
+#             train_index,      validation_and_test_index = train_test_split([x for x in range(self.number_of_graphs)],
+#                                                                            test_size=self.data_config['test_size']+self.data_config['validation_size'],
+#                                                                            shuffle=True)
+#             validation_index, test_index                = train_test_split(validation_and_test_index,
+#                                                                            test_size=self.data_config['test_size']/(self.data_config['test_size']+self.data_config['validation_size']),
+#                                                                            shuffle=True)
+#             np.savetxt(os.path.join(self.data_config['dataset_path'], 'train.txt'),      train_index,      fmt='%.0f')
+#             np.savetxt(os.path.join(self.data_config['dataset_path'], 'validation.txt'), validation_index, fmt='%.0f')
+#             np.savetxt(os.path.join(self.data_config['dataset_path'], 'test.txt'),       test_index,       fmt='%.0f')
+#         else:
+#             try:
+#                 train_index      = np.loadtxt(os.path.join(self.data_config['dataset_path'], 'train.txt'),      dtype=int)
+#                 validation_index = np.loadtxt(os.path.join(self.data_config['dataset_path'], 'validation.txt'), dtype=int)
+#                 test_index       = np.loadtxt(os.path.join(self.data_config['dataset_path'], 'test.txt'),       dtype=int)
+#             except OSError:
+#                 print('User: Index file not found, generate new files...')
+#                 train_index,      validation_and_test_index = train_test_split([x for x in range(self.number_of_graphs)],
+#                                                                                test_size=self.data_config['test_size']+self.data_config['validation_size'],
+#                                                                                shuffle=True)
+#                 validation_index, test_index                = train_test_split(validation_and_test_index,
+#                                                                                test_size=self.data_config['test_size']/(self.data_config['test_size']+self.data_config['validation_size']),
+#                                                                                shuffle=True)
+#                 np.savetxt(os.path.join(self.data_config['dataset_path'], 'train.txt'),      train_index,      fmt='%.0f')
+#                 np.savetxt(os.path.join(self.data_config['dataset_path'], 'validation.txt'), validation_index, fmt='%.0f')
+#                 np.savetxt(os.path.join(self.data_config['dataset_path'], 'test.txt'),       test_index,       fmt='%.0f')
+#         return train_index, validation_index, test_index
 
 class ExtractVaspFiles(object):
     '''

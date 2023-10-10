@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Application (high-throughput prediction)" href="High_throughput_prediction.html" />
-    <link rel="prev" title="Train AGAT model" href="Train_AGAT_model.html" /> 
+    <link rel="prev" title="Build graph" href="Predict_structural_file.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -98,12 +98,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorial.html">Brief</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../Tutorial.html#more-tutorials">More tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="VASP_calculations.html">VASP calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Build_graph.html">Build graph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Build_database.html">Build database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Train_AGAT_model.html">Train AGAT model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Predict_structural_file.html">Build graph</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Application (structural optimization)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="High_throughput_prediction.html">Application (high-throughput prediction)</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">中文手册:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Chinese_support.html">中文手册</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
 <ul>
@@ -185,6 +191,7 @@
 <h1>Application (structural optimization)<a class="headerlink" href="#application-structural-optimization" title="Permalink to this heading">¶</a></h1>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">BFGS</span>
 <span class="kn">from</span> <span class="nn">ase.io</span> <span class="kn">import</span> <span class="n">read</span>
+<span class="kn">from</span> <span class="nn">ase</span> <span class="kn">import</span> <span class="n">Atoms</span>
 <span class="kn">from</span> <span class="nn">agat.app</span> <span class="kn">import</span> <span class="n">AgatCalculator</span>
 
 <span class="n">model_save_dir</span> <span class="o">=</span> <span class="s1">&#39;agat_model&#39;</span>
@@ -213,7 +220,7 @@
         <a href="High_throughput_prediction.html" class="btn btn-neutral float-right" title="Application (high-throughput prediction)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Train_AGAT_model.html" class="btn btn-neutral float-left" title="Train AGAT model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Predict_structural_file.html" class="btn btn-neutral float-left" title="Build graph" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

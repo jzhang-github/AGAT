@@ -154,11 +154,11 @@ model_lib
       
 
 
-.. py:function:: load_graph_build_scheme(path)
+.. py:function:: load_graph_build_method(path)
 
    Load graph building scheme. This file is normally saved when you build your dataset.
 
-   :param path: Directory for storing ``graph_build_scheme.json`` file.
+   :param path: Path to ``graph_build_scheme.json`` file.
    :type path: str
    :return: A dict denotes how to build the graph.
    :rtype: dict

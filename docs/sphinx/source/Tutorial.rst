@@ -118,8 +118,10 @@ More tutorials
    :maxdepth: 6
 
    Tutorial/VASP_calculations
+   Tutorial/Build_graph
    Tutorial/Build_database
    Tutorial/Train_AGAT_model
+   Tutorial/Predict_structural_file
    Tutorial/Structural_optimization
    Tutorial/High_throughput_prediction
 

@@ -48,6 +48,7 @@ A dictionary defines how to build a database.
 | `species`                  | `default_elements` above | A list of element symbols | A list of elements that are used to encode atomic features. |
 | `path_file`                | 'paths.log'   | `str `         | A file of absolute paths where OUTCAR and XDATCAR files exist. | 
 | `build_properties`         |  `default_build_properties` above | See [default_build_properties](#default_build_properties) | Properties needed to be built into graph. | 
+| `topology_only`         |  `False` | `True` | Build graph with topology connections only. The `energy`, `forces`, `cell`, and `stress` will not be included. This setting has higher priority than [default_build_properties](#default_build_properties)  | 
 | `dataset_path`             | 'dataset'     | A `str`      | A directory contains the database. |
 | `mode_of_NN`               | 'ase_natural_cutoffs' | 'ase_natural_cutoffs', 'pymatgen_dist', 'ase_dist', and 'voronoi' | The mode of how to detect connection between atoms. Note that `pymatgen` is much faster than `ase`. |
 | `cutoff`                   | 5.0           | A `float`    | Cutoff distance to identify connections between atoms. Deprecated if `mode_of_NN` is `'ase_natural_cutoffs'`|   

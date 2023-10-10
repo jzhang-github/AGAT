@@ -175,7 +175,7 @@ class EarlyStopping:
         with open(os.path.join(self.model_save_dir, 'agat_model.json'), 'w') as f:
             json.dump(info, f, indent=4)
 
-def load_graph_build_scheme(path):
+def load_graph_build_method(path):
     """ Load graph building scheme. This file is normally saved when you build your dataset.
 
     :param path: Directory for storing ``graph_build_scheme.json`` file.
@@ -185,7 +185,7 @@ def load_graph_build_scheme(path):
 
     """
 
-    json_file  = os.path.join(path, 'graph_build_scheme.json')
+    json_file  = path
     assert os.path.exists(json_file), f"{json_file} file dose not exist."
     with open(json_file, 'r') as jsonf:
         graph_build_scheme = json.load(jsonf)
