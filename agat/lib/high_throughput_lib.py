@@ -49,6 +49,7 @@ def get_concentration_from_ase_formula(formula):
 
 def get_v_per_atom(chemical_formula):
     frac_dict = get_concentration_from_ase_formula(chemical_formula)
+    frac_dict = {k:(0.0 if k not in frac_dict else frac_dict[k]) for k in ['Ni', 'Co', 'Fe', 'Pd', 'Pt']}
     return -282.7957531391954 * (frac_dict['Ni'] + frac_dict['Co'] + frac_dict['Fe'])\
         - 278.79605077419797 * frac_dict['Pd'] - 278.6228860885035 * frac_dict['Pt']\
             + 293.66128761358624

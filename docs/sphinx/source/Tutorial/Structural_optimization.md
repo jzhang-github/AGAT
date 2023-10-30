@@ -14,7 +14,7 @@ calculator=AgatCalculator(model_save_dir,
                           graph_build_scheme_dir)
 atoms = Atoms(atoms, calculator=calculator)
 dyn = BFGS(atoms, trajectory='test.traj')
-dyn.run(fmax=0.05)
+dyn.run(fmax=0.05, steps=200)
 
 ```
 

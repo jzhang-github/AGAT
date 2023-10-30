@@ -16,6 +16,8 @@
   sed -i "s#^.#${PWD}#g" paths.log
   ``` 
 
+You may want to remove lines with `string`: `sed -i '/string/d' paths.log`
+
 ### Python script
 Modify `data_config` for your own purposes. **See [default_data_config](https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config) to know how to use the parameter settings.**
 
@@ -24,7 +26,16 @@ from agat.data import BuildDatabase
 data_config =  {
     'species': ['H', 'Ni', 'Co', 'Fe', 'Pd', 'Pt'],
     'path_file': 'paths.log', # A file of absolute paths where OUTCAR and XDATCAR files exist.
-    'build_properties': default_build_properties, # Properties needed to be built into graph.
+    'build_properties': {'energy': True,
+                         'forces': True,
+                         'cell': True,
+                         'cart_coords': False,
+                         'frac_coords': True,
+                         'constraints': True,
+                         'stress': True,
+                         'distance': True,
+                         'direction': True,
+                         'path': False}, # Properties needed to be built into graph.
     'dataset_path': 'dataset', # Path where the collected data to save.
     'mode_of_NN': 'ase_dist', # How to identify connections between atoms. 'ase_natural_cutoffs', 'pymatgen_dist', 'ase_dist', 'voronoi'. Note that pymatgen is much faster than ase.
     'cutoff': 5.0, # Cutoff distance to identify connections between atoms. Deprecated if ``mode_of_NN`` is ``'ase_natural_cutoffs'``

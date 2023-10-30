@@ -262,7 +262,7 @@ in this case. Provide a float here.'
             bg.ndata['constraints'] = torch.tensor(constraints, dtype=self.dtype)
         if self.data_config['build_properties']['forces']:
             forces_true             = torch.tensor(np.load(fname+'_force.npy'), dtype=self.dtype)
-            bg.ndata['forces_true'] = torch.tensor((forces_true))
+            bg.ndata['forces_true'] = forces_true
         if self.data_config['build_properties']['cart_coords']:
             bg.ndata['cart_coords'] = torch.tensor(ase_atoms.positions, dtype=self.dtype)
         if self.data_config['build_properties']['frac_coords']:
@@ -274,13 +274,13 @@ in this case. Provide a float here.'
         graph_info = {}
         if self.data_config['build_properties']['energy']:
             energy_true = torch.tensor(np.load(fname+'_energy.npy'), dtype=self.dtype)
-            graph_info['energy_true'] = torch.tensor((energy_true), dtype=self.dtype)
+            graph_info['energy_true'] = energy_true
         if self.data_config['build_properties']['stress']:
             stress_true = torch.tensor(np.load(fname+'_stress.npy'), dtype=self.dtype)
-            graph_info['stress_true'] = torch.tensor((stress_true), dtype=self.dtype)
+            graph_info['stress_true'] = stress_true
         if self.data_config['build_properties']['cell']:
             cell_true = torch.tensor(ase_atoms.cell.array, dtype=self.dtype)
-            graph_info['cell_true'] = torch.tensor((cell_true), dtype=self.dtype)
+            graph_info['cell_true'] = cell_true
         if self.data_config['build_properties']['path']:
             graph_info['path'] = fname
 

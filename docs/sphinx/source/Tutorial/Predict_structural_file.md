@@ -1,4 +1,4 @@
-# Build graph
+# Predict_structural_file
 
 
 
@@ -25,6 +25,7 @@ with torch.no_grad():
 ```
 
 Before using this script, you need to prepare:
+
 - a `POSCAR` file;
 - a `graph_build_scheme.json` file, which is normally saved when you build your database;
 - a well-trained model: `agat.pth`.
