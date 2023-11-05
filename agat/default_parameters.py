@@ -238,4 +238,5 @@ Gamma
         'include_bulk_aimd': True,
         'include_surface_aimd': True,
         'include_adsorption_aimd': True,
+        'random_samples': 1, # number of surfaces
     }

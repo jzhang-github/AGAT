@@ -322,7 +322,7 @@ class HtDftAds(object):
             shutil.copyfile(os.path.join('surface_static', 'CONTCAR'),
                             os.path.join('adsorption_static', 'CONTCAR_surf_opt'))
             os.chdir('adsorption_static')
-            self.ads_opt(structural_file='CONTCAR_surf_opt', random_samples=5)
+            self.ads_opt(structural_file='CONTCAR_surf_opt', random_samples=self.hp_config['random_samples'])
             os.chdir(self.root_dir)
 
         # bulk aimd
@@ -350,7 +350,7 @@ class HtDftAds(object):
             shutil.copyfile(os.path.join('surface_static', 'CONTCAR'),
                             os.path.join('adsorption_aimd', 'CONTCAR_surf_opt'))
             os.chdir('adsorption_aimd')
-            self.ads_aimd(structural_file='CONTCAR_surf_opt', random_samples=2)
+            self.ads_aimd(structural_file='CONTCAR_surf_opt', random_samples=self.hp_config['random_samples'])
             os.chdir(self.root_dir)
 
 if __name__ == '__main__':
