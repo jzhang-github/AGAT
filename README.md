@@ -87,6 +87,8 @@ f.fit()
 ```python
 from ase.optimize import BFGS
 from agat.app import AgatCalculator
+from ase.io import read
+from ase import Atoms
 
 model_save_dir = 'agat_model'
 graph_build_scheme_dir = 'dataset'

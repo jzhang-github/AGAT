@@ -1,5 +1,8 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 - Modify [agat/lib/model_lib.py#L178-L193](https://github.com/jzhang-github/AGAT/blob/dcb777cdede4947f7c033de35604b554bec39d66/agat/lib/model_lib.py#L178-L193)
+- Add default parameter: `vasp_bash_path`[high_throughput_dft_calculation.py#L71](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/high_throughput_dft_calculation.py#L71); [default_parameters.py#L242](https://github.com/jzhang-github/AGAT/blob/main/agat/default_parameters.py#L242).
+- Modify `run_vasp()` function: [high_throughput_lib.py#L124-L149](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/high_throughput_lib.py#L124-L149).
+
 
 # [v8.0.0](https://github.com/jzhang-github/AGAT/tree/v8.0.0)
 - Convert TensorFlow to PyTorch backend.

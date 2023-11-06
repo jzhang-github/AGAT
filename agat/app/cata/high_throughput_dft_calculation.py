@@ -68,7 +68,7 @@ class HtDftAds(object):
             f.write(self.hp_config['KPOINTS'])
 
         # run vasp
-        run_vasp()
+        run_vasp(vasp_bash_path=self.hp_config['vasp_bash_path'])
         print('Bulk static optimization done.')
 
     def surf_opt(self, bulk_structural_file='CONTCAR_bulk_opt'):
@@ -103,7 +103,7 @@ class HtDftAds(object):
             f.write(self.hp_config['KPOINTS'])
 
         # run vasp
-        run_vasp()
+        run_vasp(vasp_bash_path=self.hp_config['vasp_bash_path'])
         print('Surface static optimization done.')
 
     def ads_opt(self, structural_file='CONTCAR_surf_opt', random_samples=5):
@@ -157,7 +157,7 @@ class HtDftAds(object):
                     f.write(self.hp_config['KPOINTS'])
 
                 # run vasp
-                run_vasp()
+                run_vasp(vasp_bash_path=self.hp_config['vasp_bash_path'])
                 print(f'Adsorption static calculation for {ads}_{i} done.')
                 os.chdir(parent_dir)
 
@@ -190,7 +190,7 @@ class HtDftAds(object):
             f.write(self.hp_config['KPOINTS'])
 
         # run vasp
-        run_vasp()
+        run_vasp(vasp_bash_path=self.hp_config['vasp_bash_path'])
         print('Bulk AIMD simulation done.')
 
     def surface_aimd(self, bulk_structural_file='CONTCAR_bulk_opt'):
@@ -226,7 +226,7 @@ class HtDftAds(object):
             f.write(self.hp_config['KPOINTS'])
 
         # run vasp
-        run_vasp()
+        run_vasp(vasp_bash_path=self.hp_config['vasp_bash_path'])
         print('Surface AIMD simulation done.')
 
     def ads_aimd(self, structural_file='CONTCAR_surf_opt', random_samples=2):
@@ -281,7 +281,7 @@ class HtDftAds(object):
                     f.write(self.hp_config['KPOINTS'])
 
                 # run vasp
-                run_vasp()
+                run_vasp(vasp_bash_path=self.hp_config['vasp_bash_path'])
                 print(f'Adsorption AIMD simulation for {ads}_{i} done.')
                 os.chdir(parent_dir)
 

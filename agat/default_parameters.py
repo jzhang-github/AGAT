@@ -239,4 +239,5 @@ Gamma
         'include_surface_aimd': True,
         'include_adsorption_aimd': True,
         'random_samples': 1, # number of surfaces
+        'vasp_bash_path': 'vasp_run.sh'
     }

@@ -9,6 +9,7 @@ import platform
 import numpy as np
 import os
 import stat
+import shutil
 
 from ase.formula import Formula
 from ase.io import read
@@ -120,7 +121,7 @@ def get_ase_atom_from_formula_template( chemical_formula, v_per_atom=None,
         atoms = scale_atoms(atoms, scale_factor)
     return atoms
 
-def run_vasp():
+def run_vasp(vasp_bash_path):
     """
 
     :raises ValueError: VASP can only run on a Linux platform
@@ -128,22 +129,23 @@ def run_vasp():
 
     .. warning:: Setup your own VAPS package and Intel libraries before using this function.
 
-
     """
 
-    os_type = platform.system()
-    if not os_type == 'Linux':
-        raise ValueError(f'VASP can only be executed on Linux OS, instead of {os_type}.')
-    shell_script = '''#!/bin/bash
-. /home/jzhang/software/intel/oneapi/setvars.sh
-mpirun /home/jzhang/software/vasp/vasp_std
-    '''
+    # os_type = platform.system()
+    # if not os_type == 'Linux':
+    #     raise ValueError(f'VASP can only be executed on Linux OS, instead of {os_type}.')
+    # shell_script = '''#!/bin/bash
+# . /home/jzhang/software/intel/oneapi/setvars.sh
+# mpirun /home/jzhang/software/vasp/vasp_std
+    # '''
 
-    with open('vasp_run.sh', 'w') as f:
-        f.write(shell_script)
+    # with open('vasp_run.sh', 'w') as f:
+    #     f.write(shell_script)
+    # 
+    # os.chmod('vasp_run.sh', stat.S_IRWXU)
 
+    shutil.copyfile(vasp_bash_path, os.path.join('./vasp_run.sh'))
     os.chmod('vasp_run.sh', stat.S_IRWXU)
-
     os.system('./vasp_run.sh')
 
 # remove imported objects
