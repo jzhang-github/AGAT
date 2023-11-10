@@ -9,4 +9,4 @@ from .build_dataset import CrystalGraph, ReadGraphs, ExtractVaspFiles, BuildData
 from .atomic_feature import get_atomic_feature_onehot
 from .load_dataset import LoadDataset, Collater
 
-from ..lib.model_lib import load_graph_build_scheme
+from ..lib.model_lib import load_graph_build_method
