@@ -4,7 +4,10 @@
 [![Pypi](https://img.shields.io/pypi/v/agat.svg)](https://pypi.org/project/agat/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/agat)](https://pypi.org/project/agat/)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/agat)](https://pypi.org/project/agat/)
+
+<!--
 [![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
+-->
  
  ### The [PyTorch](https://pytorch.org/) backend AGAT is available now, try with `pip install agat==8.*`. For previous version, install with `pip install agat==7.*`.
   <br>  <br>  ![Model architecture](files/architecture.svg)
@@ -114,9 +117,9 @@ ha.run(formula=formula)
 
 ### For more custom manipulations, see our [documentation](https://jzhang-github.github.io/AGAT/) page.
 
-
+<!--
 [![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
-
+-->
 
 
 ### Some default parameters

@@ -1,9 +1,11 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
-- Modify [agat/lib/model_lib.py#L178-L193](https://github.com/jzhang-github/AGAT/blob/dcb777cdede4947f7c033de35604b554bec39d66/agat/lib/model_lib.py#L178-L193)
-- Add default parameter: `vasp_bash_path`[high_throughput_dft_calculation.py#L71](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/high_throughput_dft_calculation.py#L71); [default_parameters.py#L242](https://github.com/jzhang-github/AGAT/blob/main/agat/default_parameters.py#L242).
-- Modify `run_vasp()` function: [high_throughput_lib.py#L124-L149](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/high_throughput_lib.py#L124-L149). 
-- Add transfer learning: [default_parameters.py#L97](https://github.com/jzhang-github/AGAT/blob/main/agat/default_parameters.py#L97). [agat/model/fit.py#L169-L174](https://github.com/jzhang-github/AGAT/blob/main/agat/model/fit.py#L169-L174)
-- Add split graphs: [agat/data/build_dataset.py#L795-L824](https://github.com/jzhang-github/AGAT/blob/main/agat/data/build_dataset.py#L795-L824)
+
+# [v8.0.3](https://github.com/jzhang-github/AGAT/tree/v8.0.3)
+- Modify [agat/lib/model_lib.py#L178-L193](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/lib/model_lib.py#L178-L193)
+- Add default parameter: `vasp_bash_path`[high_throughput_dft_calculation.py#L71](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/app/cata/high_throughput_dft_calculation.py#L71); [default_parameters.py#L242](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/default_parameters.py#L242).
+- Modify `run_vasp()` function: [high_throughput_lib.py#L124-L149](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/lib/high_throughput_lib.py#L124-L149). 
+- Add transfer learning: [default_parameters.py#L97](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/default_parameters.py#L97). [agat/model/fit.py#L169-L174](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/model/fit.py#L169-L174)
+- Add split graphs: [agat/data/build_dataset.py#L795-L824](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/data/build_dataset.py#L795-L824)
 
 # [v8.0.0](https://github.com/jzhang-github/AGAT/tree/v8.0.0)
 - Convert TensorFlow to PyTorch backend.
