@@ -13,12 +13,13 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, random_split
+from torch.optim import lr_scheduler
 
 from .model import PotentialModel
 from ..lib.model_lib import EarlyStopping, PearsonR, config_parser, save_model, load_state_dict, save_state_dict
 from ..data.load_dataset import LoadDataset, Collater
 from ..default_parameters import default_train_config
-# from ..lib.file_lib import file_exit
+from ..lib.file_lib import file_exit
 
 class Fit(object):
     def __init__(self, **train_config):
@@ -165,7 +166,12 @@ changed to be: `6`.", file=self.log)
             print('User info: Checkpoint not detected', file=self.log)
 
         # transfer learning.
-        ...
+        if self.train_config['transfer_learning']:
+            for param in model.gat_layers.parameters():
+                param.requires_grad = False
+
+            exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=100,
+                                                   gamma=0.1, verbose=True)
 
         # early stop
         if self.train_config['early_stop']:
@@ -290,7 +296,9 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
                 save_model(model, model_save_dir=self.train_config['model_save_dir'])
                 save_state_dict(model, state_dict_save_dir=self.train_config['model_save_dir'])
 
-            # file_exit()
+            if self.train_config['transfer_learning']:
+                exp_lr_scheduler.step()
+            file_exit()
 
         # test with the best model
         try:
@@ -376,7 +384,7 @@ if __name__ == '__main__':
     FIX_VALUE = [1,3,6]
     train_config = {
         'verbose': 1,
-    'dataset_path': os.path.join('dataset', 'all_graphs.bin'),
+    'dataset_path': os.path.join('dataset', 'concated_graphs.bin'),
     'model_save_dir': 'agat_model',
     'epochs': 1000,
     'output_files': 'out_file',
@@ -407,8 +415,8 @@ if __name__ == '__main__':
     'mask_fixed': False,
     'tail_readout_no_act': [3,3,1],
     'adsorbate': False, # indentify adsorbate or not when building graphs.
-    'adsorbate_coeff': 20.0 # the importance of adsorbate atoms with respective to surface atoms.
-    }
+    'adsorbate_coeff': 20.0, # the importance of adsorbate atoms with respective to surface atoms.
+    'transfer_learning': False}
 
     f = Fit(**train_config)
-    # f.fit()
+    f.fit()

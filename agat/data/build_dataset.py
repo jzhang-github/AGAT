@@ -792,6 +792,36 @@ def concat_graphs(*list_of_bin):
 
     save_graphs('concated_graphs.bin', graph_list, graph_labels)
 
+def select_graphs_random(fname: str, num: int):
+    """ Randomly split graphs from a binary file.
+
+    :param fname: input file name.
+    :type fname: str
+    :param num: number of selected graphs (should be smaller than number of all graphs.
+    :type num: int
+    :return: A new file is saved to the current directory: Selected_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        select_graphs_random('graphs1.bin')
+
+    """
+
+    bg, labels = load_graphs(fname)
+    num_graphs = len(bg)
+    assert num < num_graphs, f'The number of selected graphs should be lower than\
+the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
+    random_int = np.random.choice(range(num_graphs), size=num, replace=False)
+
+    selected_bg = [bg[x] for x in random_int]
+
+    graph_labels = {}
+    for key in labels.keys():
+        graph_labels[key] = labels[key][random_int]
+
+    save_graphs('selected_graphs.bin', selected_bg, graph_labels)
+
 # build data
 if __name__ == '__main__':
     ad = BuildDatabase(mode_of_NN='pymatgen_dist', num_of_cores=16)

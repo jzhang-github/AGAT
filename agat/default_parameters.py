@@ -93,8 +93,8 @@ default_train_config = {
     'mask_fixed': False,
     'tail_readout_no_act': [3,3,3],
     # 'adsorbate': False, #  or not when building graphs.
-    'adsorbate_coeff': 20.0 # indentify and specify the importance of adsorbate atoms with respective to surface atoms. zero for equal importance.
-    }
+    'adsorbate_coeff': 20.0, # indentify and specify the importance of adsorbate atoms with respective to surface atoms. zero for equal importance.
+    'transfer_learning': False}
 
 default_ase_calculator_config = {'fmax'             : 0.1,
                                  'steps'            : 200,

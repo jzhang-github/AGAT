@@ -106,7 +106,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Train_AGAT_model.html">Train AGAT model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Predict_structural_file.html">Build graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Predict_structural_file.html">Predict_structural_file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Structural_optimization.html">Application (structural optimization)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="High_throughput_prediction.html">Application (high-throughput prediction)</a></li>
 </ul>
@@ -213,6 +213,7 @@
 </div>
 </li>
 </ul>
+<p>You may want to remove lines with <code class="docutils literal notranslate"><span class="pre">string</span></code>: <code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">-i</span> <span class="pre">'/string/d'</span> <span class="pre">paths.log</span></code></p>
 </section>
 <section id="python-script">
 <h2>Python script<a class="headerlink" href="#python-script" title="Permalink to this heading">¶</a></h2>
@@ -221,7 +222,16 @@
 <span class="n">data_config</span> <span class="o">=</span>  <span class="p">{</span>
     <span class="s1">&#39;species&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Co&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe&#39;</span><span class="p">,</span> <span class="s1">&#39;Pd&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">],</span>
     <span class="s1">&#39;path_file&#39;</span><span class="p">:</span> <span class="s1">&#39;paths.log&#39;</span><span class="p">,</span> <span class="c1"># A file of absolute paths where OUTCAR and XDATCAR files exist.</span>
-    <span class="s1">&#39;build_properties&#39;</span><span class="p">:</span> <span class="n">default_build_properties</span><span class="p">,</span> <span class="c1"># Properties needed to be built into graph.</span>
+    <span class="s1">&#39;build_properties&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;forces&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;cell&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;cart_coords&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                         <span class="s1">&#39;frac_coords&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;constraints&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;stress&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;distance&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                         <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="c1"># Properties needed to be built into graph.</span>
     <span class="s1">&#39;dataset_path&#39;</span><span class="p">:</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="c1"># Path where the collected data to save.</span>
     <span class="s1">&#39;mode_of_NN&#39;</span><span class="p">:</span> <span class="s1">&#39;ase_dist&#39;</span><span class="p">,</span> <span class="c1"># How to identify connections between atoms. &#39;ase_natural_cutoffs&#39;, &#39;pymatgen_dist&#39;, &#39;ase_dist&#39;, &#39;voronoi&#39;. Note that pymatgen is much faster than ase.</span>
     <span class="s1">&#39;cutoff&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="c1"># Cutoff distance to identify connections between atoms. Deprecated if ``mode_of_NN`` is ``&#39;ase_natural_cutoffs&#39;``</span>
