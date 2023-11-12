@@ -75,6 +75,10 @@ class Fit(object):
                                       num_workers=0,
                                       collate_fn=collate_fn)
 
+        # check the existence of adsorbates.
+        _graph, _ = self._dataset[0]
+        self._has_adsorbate = _graph.ndata.__contains__('adsorbate')
+
         # check neural nodes dimensions, and modify them if necessary.
         num_heads = len(self.train_config['head_list'])
         atomic_depth = self._dataset[0][0].ndata['h'].size()[1]
@@ -206,14 +210,19 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             for i, (graph, props) in enumerate(self.train_loader):
                 energy_true = props['energy_true']
                 force_true = graph.ndata['forces_true']
-                force_true *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
+                if self._has_adsorbate:
+                    force_true *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
                                             (-1,1))
                 stress_true = props['stress_true']
                 optimizer.zero_grad()
                 energy_pred, force_pred, stress_pred = model.forward(graph)
                 energy_loss = criterion(energy_pred, energy_true)
-                force_pred *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
+                if self._has_adsorbate:
+                    force_pred *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
                                             (-1,1))
+
+                # if self._has_adsorbate:
+                #     force_loss = ...
                 force_loss = criterion(force_pred, force_true)
                 stress_loss = criterion(stress_pred, stress_true)
                 total_loss = a*energy_loss + b*force_loss + c*stress_loss

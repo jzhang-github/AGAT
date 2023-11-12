@@ -39,6 +39,7 @@ class AseGraph(object):
         self.all_atom_feat = get_atomic_feature_onehot(self.data_config['species'])
         self.cutoff = self.data_config['cutoff']
         self.skin = 1.0 # angstrom
+        self.adsorbate_skin = 2.0 # in many cases, the adsorbates experience larger geometry relaxation than surface atoms.
         self.new_graph = True
         self.step = 0
         self.new_graph_steps = 20 # buid new graph every * steps.
@@ -59,10 +60,10 @@ class AseGraph(object):
         self.skin_receivers = []
         self.graph = None
 
-    def get_scaled_positions(self, cell, positions): # cell = np.mat(cell), positions = positions
-        scaled_positions = torch.matmul(C_coord_tmp, cell.I)
-        scaled_positions = np.dot(C_coord_tmp, cell.I)
-        pass
+    def get_scaled_positions(self, cell_I, positions): # cell = np.mat(cell), positions = positions
+        # cell_I and positions should be torch.tensor
+        scaled_positions = torch.matmul(positions, cell_I)
+        return scaled_positions
 
     def get_connections(self, ase_atoms):
         # get senders and receivers, including inner and skin connections.
