@@ -17,3 +17,4 @@ README.txt
 *.traj
 data/dataset
 agat.egg-info
+debug
