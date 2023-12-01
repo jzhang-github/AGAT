@@ -37,7 +37,12 @@ def load_model(model_save_dir='agat_model', device='cuda'):
     :rtype: PyTorch-based model.
 
     """
-    new_model = torch.load(os.path.join(model_save_dir, 'agat.pth'))
+    device = torch.device(device)
+    if device.type == 'cuda':
+        new_model = torch.load(os.path.join(model_save_dir, 'agat.pth'))
+    elif device.type == 'cpu':
+        new_model = torch.load(os.path.join(model_save_dir, 'agat.pth'),
+                               map_location=torch.device(device))
     new_model.eval()
     new_model = new_model.to(device)
     new_model.device = device
