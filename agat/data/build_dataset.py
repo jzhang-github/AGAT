@@ -55,6 +55,7 @@ class CrystalGraph(object):
             self.data_config['build_properties']['forces'] = False
             self.data_config['build_properties']['cell'] = False
             self.data_config['build_properties']['stress'] = False
+            self.data_config['build_properties']['frac_coords'] = False
 
         self.all_atom_feat = get_atomic_feature_onehot(self.data_config['species'])
 
