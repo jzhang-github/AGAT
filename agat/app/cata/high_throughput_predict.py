@@ -205,7 +205,7 @@ class HtAds(object):
         # instantiate a calculator
         calculator=AgatCalculator(model_save_dir,
                                  self.hp_config['graph_build_scheme_dir'],
-                                 gpu=self.hp_config['device'])
+                                 device=self.hp_config['device'])
 
         with open('high_throughput_config.json', 'w') as f:
             json.dump(self.hp_config, f, indent=4)
