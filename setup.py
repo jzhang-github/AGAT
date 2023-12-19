@@ -8,7 +8,7 @@ Created on Tue Jul 11 13:22:58 2023
 from distutils.core import setup
 from setuptools import find_packages
 
-with open("D:\GitHubRepo\AGAT\README.md", "r") as f:
+with open("README.md", "r") as f:
   long_description = f.read()
 
 # print(long_description)
@@ -19,7 +19,7 @@ with open("D:\GitHubRepo\AGAT\README.md", "r") as f:
 # long_description = (this_directory / "README.md").read_text()
 
 setup(name='agat',
-      version='8.0.3',
+      version='8.0.4',
       python_requires='>=3.10',
       description='Atomic Graph ATtention networks for predicting atomic energies and forces.',
       long_description=long_description,

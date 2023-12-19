@@ -1,10 +1,13 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
-- Modify [agat/lib/model_lib.py#L40-L45](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/model_lib.py#L40-L45)
+
+# [v8.0.3](https://github.com/jzhang-github/AGAT/tree/v8.0.4)
+- Modify [agat/lib/model_lib.py#L40-L45](https://github.com/jzhang-github/AGAT/blob/v8.0.4/agat/lib/model_lib.py#L40-L45)
+- Modify [agat/app/cata/high_throughput_predict.py#L208](https://github.com/jzhang-github/AGAT/blob/v8.0.4/agat/app/cata/high_throughput_predict.py#L208)
 
 # [v8.0.3](https://github.com/jzhang-github/AGAT/tree/v8.0.3)
 - Modify [agat/lib/model_lib.py#L178-L193](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/lib/model_lib.py#L178-L193)
 - Add default parameter: `vasp_bash_path`[high_throughput_dft_calculation.py#L71](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/app/cata/high_throughput_dft_calculation.py#L71); [default_parameters.py#L242](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/default_parameters.py#L242).
-- Modify `run_vasp()` function: [high_throughput_lib.py#L124-L149](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/lib/high_throughput_lib.py#L124-L149). 
+- Modify `run_vasp()` function: [high_throughput_lib.py#L124-L149](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/lib/high_throughput_lib.py#L124-L149).
 - Add transfer learning: [default_parameters.py#L97](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/default_parameters.py#L97). [agat/model/fit.py#L169-L174](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/model/fit.py#L169-L174)
 - Add split graphs: [agat/data/build_dataset.py#L795-L824](https://github.com/jzhang-github/AGAT/blob/v8.0.3/agat/data/build_dataset.py#L795-L824)
 
@@ -14,7 +17,7 @@
 
 # [v7.14.0](https://github.com/jzhang-github/AGAT/tree/v7.14.0)
 - Add API for controling HP DFT calculation. [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/default_parameters.py#L246-L251)
-- Add `mask_reversed_magnetic_moments` in [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/default_parameters.py#L58) and [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py) 
+- Add `mask_reversed_magnetic_moments` in [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/default_parameters.py#L58) and [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py)
 - Modify [agat/data/data.py](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py):
 	- Include stress in the graph: [agat/data/data.py#L273-L275](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L273-L275), [agat/data/data.py#L350-L352](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L350-L352).
 	- Update method of parsing the vasp data: [agat/data/data.py#L610](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L610), [agat/data/data.py#L625-L656](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L625-L656), [agat/data/data.py#L661-L675](https://github.com/jzhang-github/AGAT/tree/v7.14.0/agat/data/data.py#L661-L675).
@@ -29,7 +32,7 @@
 - Upgrade docs.
 
 # [v7.13.3](https://github.com/jzhang-github/AGAT/tree/v7.13.3)
-- Using self-defined tf-based functions to calculate Pearson r: [agat/lib/GatLib.py#L248-L259](https://github.com/jzhang-github/AGAT/tree/v7.13.3/agat/lib/GatLib.py#L248-L259)  
+- Using self-defined tf-based functions to calculate Pearson r: [agat/lib/GatLib.py#L248-L259](https://github.com/jzhang-github/AGAT/tree/v7.13.3/agat/lib/GatLib.py#L248-L259)
 
   This self-defined function can handle `ValueError: array must not contain infs or NaNs`.
 
@@ -45,7 +48,7 @@
   - [agat/app/GatApp.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2ain/agat/app/GatApp.py#L69-L70)
   - [agat/default_parameters.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/default_parameters.py#L133)
 
-- Deprecate redundant training configurations: 
+- Deprecate redundant training configurations:
 	- `train_energy_model`: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L96)  and [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L198)
 	- `train_force_model`: [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L274) and [agat/model/ModelFit.py](https://github.com/jzhang-github/AGAT/tree/v7.13.2/agat/model/ModelFit.py#L398)
 	- `new_energy_train`
@@ -80,10 +83,9 @@
 
 # [v7.12](https://github.com/jzhang-github/AGAT/tree/v7.12)
 
-- Release pip wheel.   
+- Release pip wheel.
 - Simplify packages. See [v1.0.0](https://github.com/jzhang-github/AGAT/tree/v1.0.0) for more details of the first release.
 
-# [v1.0.0](https://github.com/jzhang-github/AGAT/tree/v1.0.0) [![DOI](https://zenodo.org/badge/545430295.svg)](https://zenodo.org/badge/latestdoi/545430295)  
+# [v1.0.0](https://github.com/jzhang-github/AGAT/tree/v1.0.0) [![DOI](https://zenodo.org/badge/545430295.svg)](https://zenodo.org/badge/latestdoi/545430295)
 
 First release to reproduce results and support conclusions of [***Design High-Entropy Electrocatalyst via Interpretable Deep Graph Attention Learning***](https://doi.org/10.1016/j.joule.2023.06.003).
-
