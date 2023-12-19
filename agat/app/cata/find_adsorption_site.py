@@ -11,6 +11,7 @@ def find_adsorption_site():
     :rtype: TYPE
 
     """
+    from pymatgen.core.structure import Structure
 
     assert len(sys.argv) > 3, 'Usage: command + file name + atomic index (start from zero) + distance cutoff'
     fname = sys.argv[1]
