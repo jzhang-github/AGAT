@@ -104,6 +104,9 @@ class AgatCalculator(Calculator):
         if properties is None:
             properties = self.implemented_properties
 
+        if atoms is not None:
+            self.atoms = atoms.copy()
+
         # read graph
         graph, info = self.cg.get_graph(atoms)
         graph = graph.to(self.device)
