@@ -138,7 +138,7 @@ def bulk_opt(ase_atoms, calculator,
              deform_list=np.linspace(0.80, 1.20, num=41, endpoint=True),
              **kwargs):
     # ase calculator should be set for ase_atoms
-    energy_bulk, force_bulk, atoms_bulk = geo_opt(atoms, **kwargs)
+    energy_bulk, force_bulk, atoms_bulk = geo_opt(ase_atoms, **kwargs)
                 # fmax=0.05, steps=200, maxstep=0.05,
                 # restart=None,
                 # restart_steps=3,
@@ -163,11 +163,11 @@ def bulk_opt(ase_atoms, calculator,
         else:
             atoms_bulk_new = scale_atoms(energy_bulk, scale_factor)
             energy_bulk_new, force_bulk_new, atoms_bulk_new = geo_opt(atoms_bulk_new,
-                                                                  fmax=fmax, steps=200, maxstep=0.05,
+                                                                  fmax=0.05, steps=200, maxstep=0.05,
                                                                   restart=None,
                                                                   restart_steps=3,
-                                                                  perturb_steps=perturb_steps,
-                                                                  perturb_amplitude=perturb_amplitude)
+                                                                  perturb_steps=0,
+                                                                  perturb_amplitude=0)
             energy_list[index_new] = energy_bulk_new
             atoms_list[index_new]  = atoms_bulk_new
         if energy_bulk_new < energy_bulk_old:
