@@ -1,4 +1,5 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
+- Fix a bug when saving model [agat\lib\model_lib.py](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/model_lib.py#L161).
 
 # [v8.0.3](https://github.com/jzhang-github/AGAT/tree/v8.0.4)
 - Modify [agat/lib/model_lib.py#L40-L45](https://github.com/jzhang-github/AGAT/blob/v8.0.4/agat/lib/model_lib.py#L40-L45)

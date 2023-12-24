@@ -158,7 +158,7 @@ class EarlyStopping:
             self.best_score = score
             self.update     = True
             self.save_model(model)
-            save_state_dict(model, state_dict_save_dir='agat_model',
+            save_state_dict(model, state_dict_save_dir=self.model_save_dir,
                             optimizer_state_dict=optimizer.state_dict(),
                             epoch=epoch, total_loss=score)
             self.counter = 0
