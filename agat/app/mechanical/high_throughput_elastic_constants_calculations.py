@@ -59,7 +59,7 @@ def geo_opt(atoms_with_calculator, **kwargs):
                        maxstep=config["maxstep"])
             return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"])
         force_opt.append(atoms.get_forces())
-        energy_opt.append(atoms.get_potential_energy(apply_constraint=False))
+        energy_opt.append(atoms.get_total_energy()) # no difference between `atoms.get_total_energy` and `atoms.get_potential_energy`.
         atoms_list.append(atoms.copy())
         if config["perturb_steps"] > 0:
             atoms = perturb_positions(atoms, amplitude=config["perturb_amplitude"])

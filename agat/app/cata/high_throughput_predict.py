@@ -60,7 +60,7 @@ class HtAds(object):
                            maxstep=maxstep_tmp)
                 return_code  = dyn.run(fmax=config["fmax"], steps=config["steps"])
             force_opt.append(atoms.get_forces())
-            energy_opt.append(atoms.get_potential_energy(apply_constraint=False))
+            energy_opt.append(atoms.get_total_energy())
             atoms_list.append(atoms.copy())
             if config["perturb_steps"] > 0:
                 atoms = self.perturb_positions(atoms, amplitude=config["perturb_amplitude"])
