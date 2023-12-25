@@ -241,14 +241,15 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
                 for i, (graph, props) in enumerate(self.val_loader):
                     energy_true_all.append(props['energy_true'])
                     force_true = graph.ndata['forces_true']
-                    force_true *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
-                                                (-1,1))
-                    force_true_all.append(force_true)
                     stress_true_all.append(props['stress_true'])
                     energy_pred, force_pred, stress_pred = model.forward(graph)
                     energy_pred_all.append(energy_pred)
-                    force_pred *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
-                                                (-1,1))
+                    if self._has_adsorbate:
+                        force_true *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
+                                                    (-1,1))
+                        force_pred *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
+                                                    (-1,1))
+                    force_true_all.append(force_true)
                     force_pred_all.append(force_pred)
                     stress_pred_all.append(stress_pred)
 
