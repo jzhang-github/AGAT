@@ -240,7 +240,7 @@ class PotentialModel(nn.Module):
             # Predict stress
             for l in range(self.__real_num_stress_readout_layers):
                 stress_score = self.stress_readout_layers[l](stress_score)
-            graph.edata['stress_score_vector'] = stress_score * torch.cat((graph.edata['direction'],graph.edata['direction']), dim=1)      # shape (number of edges, 1)
+            graph.edata['stress_score_vector'] = stress_score * torch.cat((graph.edata['direction'],graph.edata['direction']), dim=1)      # shape (number of edges, 2)
             graph.update_all(fn.copy_e('stress_score_vector', 'm'), fn.sum('m', 'stress_pred'))        # shape of graph.ndata['force_pred']: (number of nodes, 3)
             # stress = torch.sum(graph.ndata['stress_pred'], dim=0)
             stress = torch.split(graph.ndata['stress_pred'], batch_nodes)
