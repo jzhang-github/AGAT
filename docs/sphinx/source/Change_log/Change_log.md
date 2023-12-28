@@ -1,5 +1,13 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 
+# [v9.0.0](https://github.com/jzhang-github/AGAT/tree/v9.0.0)
+**Note: AGAT after this version (included) cannot load the well-trained model before.** If you need to do so, please use v8.0.5: https://pypi.org/project/agat/8.0.5/
+- Fix bugs when traing model with voigt stress tensor.
+    - Add a node to edge layer: [agat/model/model.py](https://github.com/jzhang-github/AGAT/blob/v9.0.0/agat/model/model.py#L137-L138).
+    - Message passing: [agat/model/model.py](https://github.com/jzhang-github/AGAT/blob/v9.0.0/agat/model/model.py#L244-L247).
+- Fix a bug when saving model [agat\lib\model_lib.py](https://github.com/jzhang-github/AGAT/blob/v9.0.0/agat/lib/model_lib.py#L161).
+- Fix a bug when training model [agat\model\fit.py](https://github.com/jzhang-github/AGAT/blob/v9.0.0/agat/model/fit.py#L244-L252).
+
 # [v8.0.3](https://github.com/jzhang-github/AGAT/tree/v8.0.4)
 - Modify [agat/lib/model_lib.py#L40-L45](https://github.com/jzhang-github/AGAT/blob/v8.0.4/agat/lib/model_lib.py#L40-L45)
 - Modify [agat/app/cata/high_throughput_predict.py#L208](https://github.com/jzhang-github/AGAT/blob/v8.0.4/agat/app/cata/high_throughput_predict.py#L208)

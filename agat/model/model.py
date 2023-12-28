@@ -244,10 +244,12 @@ class PotentialModel(nn.Module):
             graph.edata['stress_score'] = stress_score
             graph.ndata['atom_code'] = self.u2e(graph.ndata['h'])
             graph.apply_edges(fn.u_add_e('atom_code', 'stress_score',  'stress_score'))
+            stress_score = graph.edata['stress_score']
 
             for l in range(self.__real_num_stress_readout_layers):
                 stress_score = self.stress_readout_layers[l](stress_score)
-            graph.edata['stress_score_vector'] = stress_score * torch.cat((graph.edata['direction'],graph.edata['direction']), dim=1)      # shape (number of edges, 2)
+            graph.edata['stress_score_vector'] = stress_score * torch.cat((graph.edata['direction'],
+                                                                           graph.edata['direction']), dim=1)      # shape (number of edges, 2)
             batch_edges = graph.batch_num_edges().tolist()
             stress = torch.split(graph.edata['stress_score_vector'], batch_edges)
             stress = torch.stack([torch.mean(s, dim=0) for s in stress])
