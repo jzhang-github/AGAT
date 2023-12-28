@@ -134,6 +134,9 @@ class PotentialModel(nn.Module):
                                                          self.stress_readout_node_list[l-self.tail_readout_no_act[2]],
                                                          self.bias, self.device))
 
+        self.u2e = nn.Linear(self.gat_node_dim_list[0], self.stress_readout_node_list[0],
+                             False, self.device) # propogate source nodes to edges.
+
         self.__real_num_energy_readout_layers = len(self.energy_readout_layers)
         self.__real_num_force_readout_layers = len(self.force_readout_layers)
         self.__real_num_stress_readout_layers = len(self.stress_readout_layers)
@@ -238,13 +241,21 @@ class PotentialModel(nn.Module):
             force = graph.ndata['force_pred']
 
             # Predict stress
+            graph.edata['stress_score'] = stress_score
+            graph.ndata['atom_code'] = self.u2e(graph.ndata['h'])
+            graph.apply_edges(fn.u_add_e('atom_code', 'stress_score',  'stress_score'))
+
             for l in range(self.__real_num_stress_readout_layers):
                 stress_score = self.stress_readout_layers[l](stress_score)
             graph.edata['stress_score_vector'] = stress_score * torch.cat((graph.edata['direction'],graph.edata['direction']), dim=1)      # shape (number of edges, 2)
-            graph.update_all(fn.copy_e('stress_score_vector', 'm'), fn.sum('m', 'stress_pred'))        # shape of graph.ndata['force_pred']: (number of nodes, 3)
-            # stress = torch.sum(graph.ndata['stress_pred'], dim=0)
-            stress = torch.split(graph.ndata['stress_pred'], batch_nodes)
-            stress = torch.stack([torch.sum(s, dim=0) for s in stress])
+            batch_edges = graph.batch_num_edges().tolist()
+            stress = torch.split(graph.edata['stress_score_vector'], batch_edges)
+            stress = torch.stack([torch.mean(s, dim=0) for s in stress])
+
+            # graph.update_all(fn.copy_e('stress_score_vector', 'm'), fn.sum('m', 'stress_pred'))        # shape of graph.ndata['force_pred']: (number of nodes, 3)
+            # # stress = torch.sum(graph.ndata['stress_pred'], dim=0)
+            # stress = torch.split(graph.ndata['stress_pred'], batch_nodes)
+            # stress = torch.stack([torch.sum(s, dim=0) for s in stress])
             return energy, force, stress
 
 class CrystalPropertyModel(nn.Module):

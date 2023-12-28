@@ -5,7 +5,7 @@ Created on Tue Aug 15 11:41:20 2023
 @author: ZHANG Jun
 """
 
-__version__ = '8.0.5'
+__version__ = '9.0.0'
 
 import os
 # os.environ['DGLBACKEND']="pytorch"
