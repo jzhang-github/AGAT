@@ -12,6 +12,7 @@ import os
 
 # import important object.
 from .data.build_dataset import BuildDatabase
+from .data.build_dataset import CrystalGraph
 from .model.fit import Fit
 from .app.cata.high_throughput_predict import HtAds
 
