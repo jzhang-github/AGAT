@@ -210,7 +210,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             for i, (graph, props) in enumerate(self.train_loader):
                 energy_true = props['energy_true']
                 force_true = graph.ndata['forces_true']
-                stress_true = props['stress_true1000']
+                stress_true = props['stress_true']
                 optimizer.zero_grad()
                 energy_pred, force_pred, stress_pred = model.forward(graph)
                 energy_loss = criterion(energy_pred, energy_true)
@@ -241,7 +241,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
                 for i, (graph, props) in enumerate(self.val_loader):
                     energy_true_all.append(props['energy_true'])
                     force_true = graph.ndata['forces_true']
-                    stress_true_all.append(props['stress_true1000'])
+                    stress_true_all.append(props['stress_true'])
                     energy_pred, force_pred, stress_pred = model.forward(graph)
                     energy_pred_all.append(energy_pred)
                     if self._has_adsorbate:
@@ -326,7 +326,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             for i, (graph, props) in enumerate(self.test_loader):
                 energy_true_all.append(props['energy_true'])
                 force_true_all.append(graph.ndata['forces_true'])
-                stress_true_all.append(props['stress_true1000'])
+                stress_true_all.append(props['stress_true'])
                 energy_pred, force_pred, stress_pred = model.forward(graph)
                 energy_pred_all.append(energy_pred)
                 force_pred_all.append(force_pred)
@@ -356,11 +356,11 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
     Epoch      : {epoch}
     Energy loss: {energy_loss.item()}
     Force_Loss : {force_loss.item()}
-    Stress_Loss: {stress_loss.item()} (units: 1e-3 ASE stress)
+    Stress_Loss: {stress_loss.item()}
     Total_Loss : {total_loss.item()}
     Energy_MAE : {energy_mae.item()}
     Force_MAE  : {force_mae.item()}
-    Stress_MAE : {stress_mae.item()} (units: 1e-3 ASE stress)
+    Stress_MAE : {stress_mae.item()}
     Energy_R   : {energy_r.item()}
     Force_R    : {force_r.item()}
     Stress_R   : {stress_r.item()}
