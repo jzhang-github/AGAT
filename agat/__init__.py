@@ -15,5 +15,6 @@ from .data.build_dataset import BuildDatabase
 from .data.build_dataset import CrystalGraph
 from .model.fit import Fit
 from .app.cata.high_throughput_predict import HtAds
+from .model.model import PotentialModel
 
 del os
