@@ -115,8 +115,8 @@ class PotentialModel(nn.Module):
         # self.stress_outlayer = nn.BatchNorm1d(6, device=self.device)
         self.u2e = nn.Linear(self.gat_node_dim_list[0], self.stress_readout_node_list[0],
                              False, self.device) # propogate source nodes to edges.
-        self.skip_connect = nn.Linear(1, self.stress_readout_node_list[0],
-                             False, self.device)
+        # self.skip_connect = nn.Linear(1, self.stress_readout_node_list[0],
+        #                      False, self.device)
 
         for l in range(self.num_gat_layers):
             self.gat_layers.append(Layer(self.__gat_real_node_dim_list[l],
@@ -240,6 +240,7 @@ class PotentialModel(nn.Module):
 
         """
         with graph.local_scope():
+            print(torch.flatten(graph.edata['dist']))
             h    = graph.ndata['h']                                    # shape: (number of nodes, dimension of one-hot code representation)
             dist = torch.reshape(graph.edata['dist'], (-1, 1, 1))      # shape: (number of edges, 1, 1)
             dist = torch.where(dist < 0.01, 0.01, dist)                  # This will creat a new `dist` variable, insted of modifying the original memory.
@@ -247,7 +248,7 @@ class PotentialModel(nn.Module):
 
             for l in range(self.num_gat_layers):
                 h = self.gat_layers[l](h, dist, graph)                 # shape of h: (number of nodes, number of heads * num_out)
-
+            # print(h)
             # predict energy
             energy = h
             for l in range(self.__real_num_energy_readout_layers):
@@ -274,7 +275,7 @@ class PotentialModel(nn.Module):
             graph.edata['stress_score'] = stress_score
             graph.ndata['atom_code'] = self.u2e(graph.ndata['h'])
             graph.apply_edges(fn.u_add_e('atom_code', 'stress_score',  'stress_score'))
-            stress_score = graph.edata['stress_score'] + self.skip_connect(graph.edata['dist'])
+            stress_score = graph.edata['stress_score']  # + self.skip_connect(graph.edata['dist'])
 
             # graph.edata['stress_score_test'][6]
             # graph.edata['stress_score_test'][690]
@@ -505,14 +506,14 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
                 batch_step += 1
                 energy_true = props['energy_true']
                 force_true = graph.ndata['forces_true']
-                stress_true = props['stress_true']
+                stress_true = props['stress_true1000']
 
                 # self.writer.add_scalar('stress_true_xx', stress_true[0].item(), epoch)
-                self.writer.add_histogram('stress_true', torch.flatten(stress_true), batch_step)
+                self.writer.add_histogram('stress_true1000', torch.flatten(stress_true), batch_step)
 
                 optimizer.zero_grad()
                 energy_pred, force_pred, stress_pred = model.forward(graph)
-                self.writer.add_histogram('stress_pred', stress_pred, batch_step)
+                self.writer.add_histogram('stress_pred1000', stress_pred, batch_step)
                 energy_loss = criterion(energy_pred, energy_true)
                 if self._has_adsorbate:
                     force_true *= torch.reshape(graph.ndata['adsorbate']*self.train_config['adsorbate_coeff']+1.,
@@ -524,7 +525,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
                 #     force_loss = ...
                 force_loss = criterion(force_pred, force_true)
                 stress_loss = criterion(stress_pred, stress_true)
-                self.writer.add_scalar('stress_loss', torch.flatten(stress_loss), batch_step)
+                self.writer.add_scalar('stress_loss1000', torch.flatten(stress_loss), batch_step)
                 self.writer.add_scalar('force_loss', torch.flatten(force_loss), batch_step)
                 total_loss = a*energy_loss + b*force_loss + c*stress_loss
                 total_loss.backward()
@@ -561,7 +562,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
                 for i, (graph, props) in enumerate(self.val_loader):
                     energy_true_all.append(props['energy_true'])
                     force_true = graph.ndata['forces_true']
-                    stress_true_all.append(props['stress_true'])
+                    stress_true_all.append(props['stress_true1000'])
                     energy_pred, force_pred, stress_pred = model.forward(graph)
                     energy_pred_all.append(energy_pred)
                     if self._has_adsorbate:
@@ -651,7 +652,7 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             for i, (graph, props) in enumerate(self.test_loader):
                 energy_true_all.append(props['energy_true'])
                 force_true_all.append(graph.ndata['forces_true'])
-                stress_true_all.append(props['stress_true'])
+                stress_true_all.append(props['stress_true1000'])
                 energy_pred, force_pred, stress_pred = model.forward(graph)
                 energy_pred_all.append(energy_pred)
                 force_pred_all.append(force_pred)
@@ -716,73 +717,107 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
         return total_loss
 
 if __name__ == '__main__':
+    from agat.lib import load_model
+    from agat.data import CrystalGraph
+    from agat.default_parameters import default_data_config
+    from ase.io import read
     # import dgl
     # g_list, l_list = dgl.load_graphs(os.path.join(
     #     '..', 'all_graphs_generation_0_aimd_only.bin'))
     # graph = g_list[1] #.to('cuda')
 
-    # feat = graph.ndata['h']
-    # dist = graph.edata['dist']
+    fname = os.path.join('agat', 'test', 'POSCAR')
+    default_data_config['topology_only'] = True
+    default_data_config['mode_of_NN'] = 'ase_dist'
+    default_data_config['species'] = ['Ni', 'Co', 'Fe', 'Pd', 'Pt', 'H']
+    atoms = read(fname)
+    atoms.wrap()
+    cg = CrystalGraph(**default_data_config)
+    # model = load_model(model_save_dir='agat_model', device='cpu')
 
-    # PM = PotentialModel([4,30,20,10],
-    #                     [20,10,10,5,1],
-    #                     [20,10,10,5,3],
-    #                     [20,10,10,5,6],
-    #                     head_list=['div', 'mul'],
-    #                     bias=True,
-    #                     negative_slope=0.2,
-    #                     device = 'cpu',
-    #                     tail_readout_no_act=[2,2,2]
-    #                     )
+    PM = PotentialModel([6,30,20,10],
+                        [20,10,10,5,1],
+                        [20,10,10,5,3],
+                        [20,10,10,5,6],
+                        head_list=['free', 'mul'],
+                        bias=True,
+                        negative_slope=0.2,
+                        device = 'cpu',
+                        tail_readout_no_act=[2,2,2]
+                        )
+
+    atoms_r = atoms.copy()
+    atoms_r.rotate('z', 180)
+    atoms_r.wrap()
+    graph, _ = cg.get_graph(atoms)
+    graph_r, _ = cg.get_graph(atoms_r)
+
+    with torch.no_grad():
+        e, f, s = PM(graph)
+        er, fr, sr = PM(graph_r)
+
+
+    # compare edge distances
+    for i, d in enumerate(graph.edata['dist']):
+        src = graph.edges()[0][i]
+        dst = graph.edges()[1][i]
+        j = torch.where((graph_r.edges()[0] == src) & (graph_r.edges()[1] == dst))
+        dr = graph_r.edata['dist'][j]
+        diff = d-dr
+        if torch.abs(diff) > 0.0:
+            print(i, j)
+
+        # graph.edata['dist'][1]
+        # graph_r.edata['dist'][2]
 
     # energy, force, stress = PM.forward(graph)
 
     # # self = PM
 
 
-    import shutil
-    if os.path.isdir('agat_model'):
-        shutil.rmtree('agat_model')
-        print('remove agat_model')
+    # import shutil
+    # if os.path.isdir('agat_model'):
+    #     shutil.rmtree('agat_model')
+    #     print('remove agat_model')
 
-    FIX_VALUE = [1,3,6]
-    train_config = {
-    'verbose': 2,
-    'dataset_path': os.path.join('..', 'all_graphs_generation_0_aimd_only.bin'),
-    # 'dataset_path': os.path.join('..', 'all_graphs_generation_0.bin'),
-    'model_save_dir': 'agat_model',
-    'epochs': 200,
-    'output_files': 'out_file',
-    'device': 'cuda',
-    'validation_size': 0.15,
-    'test_size': 0.15,
-    'early_stop': True,
-    'stop_patience': 300,
-    'gat_node_dim_list': [6, 100, 100, 100],
-    'head_list': ['mul', 'div', 'free'],
-    'energy_readout_node_list': [300, 100, 50, 30, 10, 3, FIX_VALUE[0]],
-    'force_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[1]],
-    'stress_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[2]],
-    'bias': True,
-    'negative_slope': 0.2,
-    'criterion': nn.MSELoss(),
-    'a': 1.0,
-    'b': 1.0,
-    'c': 1.0,
-    'optimizer': 'adam', # Fix to sgd.
-    'learning_rate': 0.0001,
-    'weight_decay': 0.0, # weight decay (L2 penalty)
-    'batch_size': 64,
-    'val_batch_size': 400,
-    # 'validation_batches': 150,
-    'transfer_learning': False,
-    'trainable_layers': -4,
-    'mask_fixed': False,
-    'tail_readout_no_act': [3,3,3],
-    'adsorbate': False, # indentify adsorbate or not when building graphs.
-    'adsorbate_coeff': 20.0, # the importance of adsorbate atoms with respective to surface atoms.
-    'transfer_learning': False}
+    # FIX_VALUE = [1,3,6]
+    # train_config = {
+    # 'verbose': 2,
+    # 'dataset_path': os.path.join('..', 'all_graphs_generation_0_aimd_only.bin'),
+    # # 'dataset_path': os.path.join('..', 'all_graphs_generation_0.bin'),
+    # 'model_save_dir': 'agat_model',
+    # 'epochs': 200,
+    # 'output_files': 'out_file',
+    # 'device': 'cuda',
+    # 'validation_size': 0.15,
+    # 'test_size': 0.15,
+    # 'early_stop': True,
+    # 'stop_patience': 300,
+    # 'gat_node_dim_list': [6, 100, 100, 100],
+    # 'head_list': ['mul', 'div', 'free'],
+    # 'energy_readout_node_list': [300, 100, 50, 30, 10, 3, FIX_VALUE[0]],
+    # 'force_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[1]],
+    # 'stress_readout_node_list': [300, 100, 50, 30, 10, FIX_VALUE[2]],
+    # 'bias': True,
+    # 'negative_slope': 0.2,
+    # 'criterion': nn.MSELoss(),
+    # 'a': 1.0,
+    # 'b': 1.0,
+    # 'c': 1.0,
+    # 'optimizer': 'adam', # Fix to sgd.
+    # 'learning_rate': 0.0001,
+    # 'weight_decay': 0.0, # weight decay (L2 penalty)
+    # 'batch_size': 64,
+    # 'val_batch_size': 400,
+    # # 'validation_batches': 150,
+    # 'transfer_learning': False,
+    # 'trainable_layers': -4,
+    # 'mask_fixed': False,
+    # 'tail_readout_no_act': [3,3,3],
+    # 'adsorbate': False, # indentify adsorbate or not when building graphs.
+    # 'adsorbate_coeff': 20.0, # the importance of adsorbate atoms with respective to surface atoms.
+    # 'transfer_learning': False}
 
-    f = Fit(**train_config)
-    f.fit()
-    # self = f
+    # f = Fit(**train_config)
+    # f.fit()
+    # # self = f
