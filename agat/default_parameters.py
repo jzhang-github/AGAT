@@ -81,8 +81,8 @@ default_train_config = {
     'negative_slope': 0.2,
     'criterion': nn.MSELoss(),
     'a': 1.0,
-    'b': 1.0,
-    'c': 1.0,
+    'b': 50.0,
+    'c': 1000.0,
     # 'optimizer': 'adam',
     'learning_rate': 0.0001,
     'weight_decay': 0.0, # weight decay (L2 penalty)
