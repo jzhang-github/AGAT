@@ -277,8 +277,13 @@ in this case. Provide a float here.'
             energy_true = torch.tensor(np.load(fname+'_energy.npy'), dtype=self.dtype)
             graph_info['energy_true'] = energy_true
         if self.data_config['build_properties']['stress']:
-            stress_true = torch.tensor(np.load(fname+'_stress.npy'), dtype=self.dtype)
-            graph_info['stress_true'] = stress_true
+            # Stresses of many snapshots are lower than 1e-6, which can be
+            # problematic when training with torch.float32
+            stress_true = np.load(fname+'_stress.npy')
+            # graph_info['stress_true'] = torch.tensor(stress_true,
+            #                                          dtype=self.dtype)
+            graph_info['stress_true1000'] = torch.tensor(stress_true * 1000,
+                                                         dtype=self.dtype)
         if self.data_config['build_properties']['cell']:
             cell_true = torch.tensor(ase_atoms.cell.array, dtype=self.dtype)
             graph_info['cell_true'] = cell_true
@@ -354,8 +359,13 @@ in this case. Provide a float here.'
             energy_true = torch.tensor(np.load(crystal_fname+'_energy.npy'), dtype=self.dtype)
             graph_info['energy_true'] = torch.tensor((energy_true), dtype=self.dtype)
         if self.data_config['build_properties']['stress']:
-            stress_true = torch.tensor(np.load(crystal_fname+'_stress.npy'), dtype=self.dtype)
-            graph_info['stress_true'] = torch.tensor((stress_true), dtype=self.dtype)
+            # Stresses of many snapshots are lower than 1e-6, which can be
+            # problematic when training with torch.float32
+            stress_true = np.load(crystal_fname+'_stress.npy')
+            # graph_info['stress_true'] = torch.tensor(stress_true,
+            #                                          dtype=self.dtype)
+            graph_info['stress_true1000'] = torch.tensor(stress_true * 1000,
+                                                         dtype=self.dtype)
         if self.data_config['build_properties']['cell']:
             cell_true = torch.tensor(mycrystal.lattice.matrix, dtype=self.dtype)
             graph_info['cell_true'] = torch.tensor((cell_true), dtype=self.dtype)
@@ -827,4 +837,3 @@ the number of all graphs. Number of selected graphs: {num}. Number of all graphs
 if __name__ == '__main__':
     ad = BuildDatabase(mode_of_NN='pymatgen_dist', num_of_cores=16)
     ad.build()
-

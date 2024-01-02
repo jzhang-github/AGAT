@@ -19,7 +19,7 @@ with open("README.md", "r") as f:
 # long_description = (this_directory / "README.md").read_text()
 
 setup(name='agat',
-      version='9.0.0',
+      version='9.0.1',
       python_requires='>=3.10',
       description='Atomic Graph ATtention networks for predicting atomic energies and forces.',
       long_description=long_description,

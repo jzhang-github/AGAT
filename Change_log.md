@@ -1,4 +1,6 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
+- when extracting data, the true stress is amplified 1000 to avoid the pytorch accuracy.
+    - Stresses of many snapshots are lower than 1e-6, which can be problematic when training with torch.float32
 
 # [v9.0.0](https://github.com/jzhang-github/AGAT/tree/v9.0.0)
 **Note: AGAT after this version (included) cannot load the well-trained model before.** If you need to do so, please use v8.0.5: https://pypi.org/project/agat/8.0.5/

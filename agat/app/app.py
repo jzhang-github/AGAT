@@ -111,11 +111,14 @@ class AgatCalculator(Calculator):
         graph, info = self.cg.get_graph(atoms)
         graph = graph.to(self.device)
 
+        # Stresses of many snapshots are lower than 1e-6, which can be
+        # problematic when training with torch.float32
         with torch.no_grad():
-            energy_pred, force_pred, stress_pred = self.model.forward(graph)
+            energy_pred, force_pred, stress1000_pred = self.model.forward(graph)
 
         self.results = {'energy': energy_pred[0].item() * len(atoms),
-                        'forces': force_pred.cpu().numpy()}
+                        'forces': force_pred.cpu().numpy(),
+                        'stress': stress1000_pred.cpu().numpy() / 1000}
 
 # class GatCalculator(Calculator):
 #     """ Calculator with ASE module. Pymatgen is also needed.
@@ -186,4 +189,3 @@ class AgatCalculator(Calculator):
 # debug
 if __name__ == '__main__':
     pass
-
