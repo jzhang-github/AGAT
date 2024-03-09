@@ -181,16 +181,18 @@ class AddAtoms(object):
     def write_file_with_adsorption_sites(self, adsorbate_poscar, calculation_index=0):
         site_func = dict(zip(self._support_sites, [self.get_ontop_sites, self.get_bridge_sites, self.get_hollow_sites, self.get_disigma_sites]))
 
-        if 'C3H6_pi' == self.species:
-            x_shift=0.72
-            y_shift=0.0
-        else:
-            x_shift=0.0
-            y_shift=0.0
+        # if 'C3H6_pi' == self.species:
+        #     x_shift=0.72
+        #     y_shift=0.0
+        # else:
+        #     x_shift=0.0
+        #     y_shift=0.0
 
         cart_coords, site_str, out_array=[], [], []
         for site in self.sites:
-            coord_tmp, out = site_func[site](x_shift=x_shift, y_shift=y_shift)
+            coord_tmp, out = site_func[site](
+                x_shift=adsorbate_poscar[self.species]['x_shift'],
+                y_shift=adsorbate_poscar[self.species]['y_shift'])
             cart_coords.append(coord_tmp)
             site_str += [site for x in coord_tmp]
             out_array += out.tolist()
@@ -198,12 +200,12 @@ class AddAtoms(object):
 
         num_sites = np.shape(cart_coords)[0]
         for site_i in range(num_sites):
-            f         = StringIO(adsorbate_poscar[self.species])
+            f         = StringIO(adsorbate_poscar[self.species]['positions'])
             adsorbate = read(f, format='vasp')
             surface   = self._structure.copy()
             position  = (cart_coords[site_i][0], cart_coords[site_i][1])
 
-            if site_str[site_i] == 'disigma':
+            if site_str[site_i] == 'disigma': # rotate the adsorbate
                 src_v = adsorbate.arrays['positions'][0] - adsorbate.arrays['positions'][1]
                 src_v[2] = 0.0
                 dst_v = out_array[site_i]
@@ -212,8 +214,8 @@ class AddAtoms(object):
                 displacement = np.array([[0.0, 0.0, 0.0] for x in surface])
 
             add_adsorbate(surface, adsorbate, self.dist_from_surf, position)
-            if site_str[site_i] == 'disigma':
-                displacement_tmp = dst_v / np.linalg.norm(dst_v) * -0.72
+            if site_str[site_i] == 'disigma': # translate/displace adsorbate only.
+                displacement_tmp = dst_v / np.linalg.norm(dst_v) * adsorbate_poscar[self.species]['displacement']
                 displacement = np.vstack([displacement, [displacement_tmp for x in range(len(adsorbate))]])
                 surface.translate(displacement)
             write(f'POSCAR_{calculation_index}_{site_i}', surface, format='vasp')
