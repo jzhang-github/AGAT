@@ -252,10 +252,14 @@ in this case. Provide a float here.'
             constraints             = [[1, 1, 1]] * num_sites
             for c in ase_atoms.constraints:
                 if isinstance(c, ase.constraints.FixScaled):
-                    constraints[c.a] = c.mask
+                    for i in c.index:
+                        constraints[i] = [int(c.mask[0]), int(c.mask[1]), int(c.mask[2])]
                 elif isinstance(c, ase.constraints.FixAtoms):
                     for i in c.index:
                         constraints[i] = [0, 0, 0]
+                elif isinstance(c, ase.constraints.FixedLine):
+                    for i in c.index:
+                        constraints[i] = c.dir.tolist()
                 elif isinstance(c, ase.constraints.FixBondLengths):
                     pass
                 else:
