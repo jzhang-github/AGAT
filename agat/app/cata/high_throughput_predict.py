@@ -13,7 +13,7 @@ import numpy as np
 from ase.optimize import BFGS
 from ase.io import read, write
 from ase.build import add_vacuum, sort
-from ase.constraints import FixAtoms
+from ase.constraints import FixAtoms, FixScaled
 
 from ..app import AgatCalculator
 from .generate_adsorption_sites import AddAtoms
