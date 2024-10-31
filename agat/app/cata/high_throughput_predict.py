@@ -97,7 +97,7 @@ class HtAds(object):
             write(os.path.join(out_dir, 'POSCAR_bulk.gat'), atoms, format='vasp')
             outbasename = os.path.join(out_dir, 'bulk_opt')
 
-        hp_config['out'] = outbasename
+        hp_config['opt_config']['out'] = outbasename
 
         energy_bulk, force_bulk, atoms_bulk, force_max_bulk = self.geo_opt(atoms,
                                                                            **hp_config['opt_config'])
@@ -125,7 +125,7 @@ class HtAds(object):
 
         # surface optimization
         atoms_bulk.set_calculator(calculator)
-        hp_config['out'] = outbasename
+        hp_config['opt_config']['out'] = outbasename
 
         energy_surf, force_surf, atoms_surf, force_max_surf = self.geo_opt(atoms_bulk,
                                                                            **hp_config['opt_config'])
@@ -160,12 +160,18 @@ class HtAds(object):
                 energy_ads_list, converge_stat = [], []
                 for i, ads_atoms in enumerate(ase_atoms):
                     file_exit()
+                    # fix x and y of H atoms if necessary
+                    if hp_config['fix_H_x_y']:
+                        c= FixScaled(a=[atom.index for atom in ads_atoms if atom.symbol == 'H'],
+                                     mask=[True, True, False]) # (False: unfixed, True: fixed)
+                        ads_atoms.constraints.append(c)
+
                     if hp_config['save_trajectory']:
                         write(os.path.join(out_dir, f'POSCAR_{ads}_ads_{hp_config["calculation_index"]}_{i}.gat'),
                               ads_atoms)
                         outbasename = os.path.join(out_dir, f'adsorption_{ads}_opt_{i}')
 
-                    hp_config['out'] = outbasename
+                    hp_config['opt_config']['out'] = outbasename
                     ads_atoms.set_calculator(calculator)
                     energy_ads, force_ads, atoms_ads, force_max_ads = self.geo_opt(ads_atoms, **hp_config['opt_config'])
 

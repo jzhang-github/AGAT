@@ -111,6 +111,7 @@ default_high_throughput_config = {
         'opt_config': default_ase_calculator_config,
         'calculation_index'    : '0', # sys.argv[1],
         'fix_all_surface_atom' : False,
+        'fix_H_x_y'            : False, # fix x and y of H atoms.
         'remove_bottom_atoms'  : False,
         'save_trajectory'      : False,
         'partial_fix_adsorbate': True,
