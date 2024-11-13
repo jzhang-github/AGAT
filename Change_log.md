@@ -1,13 +1,9 @@
 # [main](https://github.com/jzhang-github/AGAT/tree/main)
 - Fix warning when using `torch.load`. [agat/lib/model_lib.py](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/model_lib.py#L42-L44)
-
 - Fix bugs is `ase.atoms` has `ase.constraints.FixScaled` and `ase.constraints.FixedLine`.
-
 - Add [`agat_linux_gpu_cu124.yml`](agat_linux_gpu_cu124.yml) file.
-
 - Fix a bug: [agat\app\cata\generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L129-L131); [agat\app\cata\generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L164-L166); [agat\app\cata\generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L209)
-
-  
+- Fix a bug: [agat\app\cata\high_throughput_predict.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/high_throughput_predict.py#L193-L195)
 
 # [v9.0.0](https://github.com/jzhang-github/AGAT/tree/v9.0.0)
 **Note: AGAT after this version (included) cannot load the well-trained model before.** If you need to do so, please use v8.0.5: https://pypi.org/project/agat/8.0.5/

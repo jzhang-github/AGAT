@@ -190,8 +190,9 @@ class HtAds(object):
                 energy_ads_list = np.array(energy_ads_list)
 
                 out = np.vstack([energy_ads_list, energy_surf_list, converge_stat]).T
-                np.savetxt(f'ads_surf_energy_{ads}_{hp_config["calculation_index"]}.txt',
-                           out, fmt='%f')
+                if not np.shape(out)[0]:
+                    np.savetxt(f'ads_surf_energy_{ads}_{hp_config["calculation_index"]}.txt',
+                               out, fmt='%f')
 
     def run(self, formula, **kwargs):
         """
