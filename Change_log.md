@@ -5,6 +5,8 @@
 
 - Add [`agat_linux_gpu_cu124.yml`](agat_linux_gpu_cu124.yml) file.
 
+- Fix a bug: [agat\app\cata\generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L129-L131); [agat\app\cata\generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L164-L166); [agat\app\cata\generate_adsorption_sites.py](https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L209)
+
   
 
 # [v9.0.0](https://github.com/jzhang-github/AGAT/tree/v9.0.0)

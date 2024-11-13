@@ -5,6 +5,7 @@ Created on Tue Sep  7 22:32:50 2021
 @author: ZHANG Jun
 """
 
+import os
 from io import StringIO
 import numpy as np
 
@@ -125,6 +126,9 @@ class AddAtoms(object):
         for i in self.one_NN_top:
             mid     = self.get_middle_fcoord(self._top_layer_frac_coords[[i[0], i[1]],:])
             fcoords.append(mid)
+        if len(fcoords) < 1:
+            print(f'User warning: No site detected for {self.fname} at {os.getcwd()}')
+            return np.array([]), np.array([])
         fcoords = np.array(fcoords)
         ccoords = self.fractional2cartesian(self.lattice_cell, fcoords)
         ccoords[:,0] += x_shift
@@ -157,6 +161,9 @@ class AddAtoms(object):
                     if len(nn_set) == 3:
                         mid = self.get_middle_fcoord(self._top_layer_frac_coords[[nn_set[0], nn_set[1], nn_set[2]],:])
                         fcoord.append(mid)
+        if len(fcoord) < 1:
+            print(f'User warning: No site detected for {self.fname} at {os.getcwd()}')
+            return np.array([]), np.array([])
         fcoords = np.array(fcoord)
         ccoords = self.fractional2cartesian(self.lattice_cell, fcoords)
         ccoords[:,0] += x_shift
@@ -199,6 +206,8 @@ class AddAtoms(object):
         cart_coords = np.vstack(tuple(cart_coords))
 
         num_sites = np.shape(cart_coords)[0]
+        if np.shape(cart_coords)[1] == 0: num_sites=0
+
         for site_i in range(num_sites):
             f         = StringIO(adsorbate_poscar[self.species]['positions'])
             adsorbate = read(f, format='vasp')
