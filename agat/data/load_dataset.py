@@ -9,6 +9,7 @@ import torch
 from torch.utils.data import Dataset
 import dgl
 from dgl.data.utils import load_graphs
+from .build_dataset import concat_graphs, select_graphs_random
 
 class LoadDataset(Dataset):
     """Load the binary graphs.

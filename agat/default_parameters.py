@@ -242,3 +242,52 @@ Gamma
         'random_samples': 1, # number of surfaces
         'vasp_bash_path': 'vasp_run.sh'
     }
+
+default_graph_config =  {
+    'species': default_elements,
+    'path_file': 'paths.log', # A file of absolute paths where OUTCAR and XDATCAR files exist.
+    'build_properties': default_build_properties, # Properties needed to be built into graph.
+    'topology_only': False,
+    'dataset_path': 'dataset', # Path where the collected data to save.
+    'mode_of_NN': 'ase_dist', # How to identify connections between atoms. 'ase_natural_cutoffs', 'pymatgen_dist', 'ase_dist', 'voronoi'. Note that pymatgen is much faster than ase.
+    'cutoff': 5.0, # Cutoff distance to identify connections between atoms. Deprecated if ``mode_of_NN`` is ``'ase_natural_cutoffs'``
+    'load_from_binary': False, # Read graphs from binary graphs that are constructed before. If this variable is ``True``, these above variables will be depressed.
+    'num_of_cores': 8,
+    'super_cell': False,
+    'has_adsorbate': False,
+    'keep_readable_structural_files': False,
+    'mask_similar_frames': False,
+    'mask_reversed_magnetic_moments': -0.5, # or -0.5 # Frames with atomic magnetic moments lower than this value will be masked.
+    'energy_stride': 0.05,
+    'scale_prop': False
+             }
+
+default_potential_generator_config = {
+    # global
+    'number_of_models': 5,
+    'current_generation': 0,
+    'vasp_raw_data_dir': '0_vasp_raw_data',
+    'graphs_dir': '0_binary_graphs',
+    'agat_model_dir': '0_agat_models',
+    'device': 'cuda',
+    'collected_snapshot_num_in_each_gen': 500,
+    'vasp_contribution_convergence': 0.1,
+
+    # build graphs
+    # 'raw_dataset_dir': '0_vasp_raw_data',
+
+    # train agat
+    'epochs': 1000,
+
+    # for NPT run
+    'structural_fname': ('POSCAR_LGPS'),
+    'cell_scale_factor': 1.0,
+    'use_vasp': True,
+    'start_step': 0,
+    'energy_threshold': 0.01,
+    'force_threshold': 0.05,
+    'stress_threshold': 0.0015,
+    'timestep': 1.0, # unit: units.fs
+    'temperature_K': 300,
+    'npt_steps': 20000
+    }

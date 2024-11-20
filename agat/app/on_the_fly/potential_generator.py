@@ -11,21 +11,17 @@ from shutil import copyfile, move, copytree, rmtree
 import json
 
 from ase import units
-# from ase.md.npt import NPT
-from ion_diffusion.md.modified_npt import ModifiedNPT as NPT # WARNING: Not specifying pfactor sets it to None, disabling the barostat.
-# Here, we use NVT by depressing the barostat
 from ase.md import MDLogger
 from ase.io import read
 
-from agat.data import BuildDatabase
-from agat.model import Fit
-from agat.data import concat_graphs
+from ...data import BuildDatabase, concat_graphs
+from ...model import Fit
+# Here, we use NVT by depressing the barostat
+from ..ensembles import ModifiedNPT as NPT # WARNING: Not specifying pfactor sets it to None, disabling the barostat.
+from ...default_parameters import default_train_config, default_graph_config, default_potential_generator_config
+from ..calculators import OnTheFlyCalculator
 
-import ion_diffusion
-from ion_diffusion.default_parameters import default_train_config, default_graph_config, default_potential_generator_config
-from ion_diffusion.md.calculators import AgatEnsembleCalculatorTorchGraph
-
-class PotentialGenerator():
+class PotentialGeneratorNVT():
     def __init__(self, **config):
         self.config = {**default_potential_generator_config, **config}
 
@@ -35,7 +31,7 @@ class PotentialGenerator():
         self.graphs_dir = self.config['graphs_dir']
         self.agat_model_dir = self.config['agat_model_dir']
         self.device = self.config['device']
-        self.logIO = open('potential_generation.log', 'a+', buffering=1)
+        self.logIO = open('potential_generation_nvt.log', 'a+', buffering=1)
         self.root_dir = os.getcwd()
 
         with open('generator_config.json', 'w') as config_f:
@@ -81,7 +77,7 @@ class PotentialGenerator():
         print(f'Starting time for building graphs (generation {self.generation}):',
               self.time, file=self.logIO)
         os.chdir(raw_dataset_dir)
-        os.system(f"bash {os.path.join(ion_diffusion.__path__[0], 'bin', 'get_paths.sh')}")
+        os.system('get_paths.sh')
         os.chdir(self.root_dir)
 
         dst = os.path.join(f'generation_{self.generation}', 'paths.log')
@@ -184,7 +180,7 @@ class PotentialGenerator():
         print(f'Starting time for NPT run (generation {self.generation}):',
               self.time, file=self.logIO)
 
-        aectg = AgatEnsembleCalculatorTorchGraph(
+        otfc = OnTheFlyCalculator(
             os.path.join(config['agat_model_dir'], 'agat_model_latest'),
             config['graphs_dir'],
             use_vasp=config['use_vasp'],
@@ -197,7 +193,7 @@ class PotentialGenerator():
             stress_threshold = config['stress_threshold'],
             io=self.logIO)
 
-        atoms.set_calculator(aectg)
+        atoms.set_calculator(otfc)
 
         dyn = NPT(atoms,
                   timestep=config['timestep'] * units.fs,
@@ -294,7 +290,7 @@ class PotentialGenerator():
               self.time, file=self.logIO)
 
 if __name__ == '__main__':
-    pg = PotentialGenerator(
+    pg = PotentialGeneratorNVT(
             structural_fname='POSCAR',
             cell_scale_factor=1.0,
             energy_threshold= 0.02,
@@ -309,7 +305,7 @@ if __name__ == '__main__':
 
     current_generation = 0
     for csf in [0.97,0.98,0.99,1.01,1.02,1.03]:
-        pg = PotentialGenerator(
+        pg = PotentialGeneratorNVT(
                 structural_fname='POSCAR',
                 cell_scale_factor=csf,
                 energy_threshold= 0.02,

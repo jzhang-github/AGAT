@@ -8,7 +8,7 @@
 <!--
 [![Documentation Status](https://readthedocs.org/projects/agat/badge/?version=latest)](https://jzhang-github.github.io/AGAT/)
 -->
- 
+
  ### The [PyTorch](https://pytorch.org/) backend AGAT is available now, try with `pip install agat`. For previous version, install with `pip install agat==7.*`.
   <br>  <br>  ![Model architecture](files/architecture.svg)
 
@@ -61,15 +61,15 @@ Run VASP calculations at this step.
 - Find all directories containing `OUTCAR` file:   
   ```
   find . -name OUTCAR > paths.log
-  ```    
+  ```
 - Remove the string 'OUTCAR' in `paths.log`.   
   ```
   sed -i 's/OUTCAR$//g' paths.log
-  ```   
+  ```
 - Specify the absolute paths in `paths.log`.   
   ```
   sed -i "s#^.#${PWD}#g" paths.log
-  ``` 
+  ```
 
 ### Build database
 ```python
@@ -126,5 +126,13 @@ ha.run(formula=formula)
 [agat/default_parameters.py](agat/default_parameters.py); Explanations: [docs/sphinx/source/Default parameters.md](https://github.com/jzhang-github/AGAT/blob/main/docs/sphinx/source/Default%20parameters.md).
 
 
+
+# Package structure
+
+![Model architecture](files/Package.svg)
+
+
+
 # Change log  
+
 Please check [Change_log.md](https://github.com/jzhang-github/AGAT/blob/main/Change_log.md)
