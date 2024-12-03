@@ -20,3 +20,4 @@ agat.egg-info
 debug
 *.bin
 agat_model
+generator_config.json

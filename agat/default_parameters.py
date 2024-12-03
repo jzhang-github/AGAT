@@ -266,9 +266,10 @@ default_potential_generator_config = {
     # global
     'number_of_models': 5,
     'current_generation': 0,
-    'vasp_raw_data_dir': '0_vasp_raw_data',
-    'graphs_dir': '0_binary_graphs',
-    'agat_model_dir': '0_agat_models',
+    # 'vasp_raw_data_dir': '0_vasp_raw_data',
+    # 'graphs_dir': '0_binary_graphs',
+    # 'agat_model_dir': '0_agat_models',
+    'factory_dir': 'factory'
     'device': 'cuda',
     'collected_snapshot_num_in_each_gen': 500,
     'vasp_contribution_convergence': 0.1,
@@ -280,7 +281,7 @@ default_potential_generator_config = {
     'epochs': 1000,
 
     # for NPT run
-    'structural_fname': ('POSCAR_LGPS'),
+    'structural_fname': ('POSCAR'),
     'cell_scale_factor': 1.0,
     'use_vasp': True,
     'start_step': 0,

@@ -13,41 +13,50 @@ import json
 from ase import units
 from ase.md import MDLogger
 from ase.io import read
+import pandas as pd
 
-from ...data import BuildDatabase, concat_graphs
-from ...model import Fit
+from agat.data import BuildDatabase, concat_graphs
+from agat.model import Fit
+from agat.default_parameters import default_train_config, default_graph_config, default_potential_generator_config
 # Here, we use NVT by depressing the barostat
-from ..ensembles import ModifiedNPT as NPT # WARNING: Not specifying pfactor sets it to None, disabling the barostat.
-from ...default_parameters import default_train_config, default_graph_config, default_potential_generator_config
-from ..calculators import OnTheFlyCalculator
+from agat.app.ensembles import ModifiedNPT as NPT # WARNING: Not specifying pfactor sets it to None, disabling the barostat.
+from agat.app.calculators import OnTheFlyCalculator
 
-class PotentialGeneratorNVT():
+class PotentialGenerator():
     def __init__(self, **config):
         self.config = {**default_potential_generator_config, **config}
 
         self.number_of_models = self.config['number_of_models']
-        self.generation = self.config['current_generation']
-        self.vasp_raw_data_dir = self.config['vasp_raw_data_dir']
-        self.graphs_dir = self.config['graphs_dir']
-        self.agat_model_dir = self.config['agat_model_dir']
-        self.device = self.config['device']
-        self.logIO = open('potential_generation_nvt.log', 'a+', buffering=1)
-        self.root_dir = os.getcwd()
+        # self.generation = self.config['current_generation']
+        self.factory_dir = self.config['current_generation']
 
-        with open('generator_config.json', 'w') as config_f:
+        self.device = self.config['device']
+
+        with open(os.path.join(self.factory_dir, 'generator_config.json'), 'w') as config_f:
             json.dump(self.config, config_f, indent=4)
 
         # check the file
-        if not os.path.exists(self.graphs_dir):
-            os.mkdir(self.graphs_dir)
-        if not os.path.exists(f'generation_{self.generation}'):
-            os.mkdir(f'generation_{self.generation}')
-        if not os.path.exists(self.agat_model_dir):
-            os.mkdir(self.agat_model_dir)
+        if not os.path.exists(self.factory_dir):
+            os.makedirs(self.factory_dir)
+        for site in ['0_prepare_vasp', '1_run_vasp', '2_build_graph', '3_train_agat']:
+            if not os.path.exists(os.path.join(self.factory_dir, site)):
+                os.makedirs(os.path.join(self.factory_dir, site))
 
     @property
     def time(self):
         return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    def update_generator_status(self, Current_job, **kwargs):
+        df = pd.DataFrame(columns=['Time', 'Generation', 'VASP_count', 'Current_work', 'Note'])
+        df['Time'] = [0000] # self.time
+        df['Generation'] = [self.generation]
+        df['VASP_count'] = [None]
+        df['Current_work'] = [Current_job]
+        if os.path.exists(os.path.join(self.factory_dir, 'generator_status.csv')):
+            df.to_csv(os.path.join(self.factory_dir, 'generator_status.csv'),
+                      mode='a', header=False)
+        else:
+            df.to_csv(os.path.join(self.factory_dir, 'generator_status.csv')) # create a status file
 
     def file_force_action(self, func, src, dst):
         if os.path.exists(dst):
@@ -59,30 +68,28 @@ class PotentialGeneratorNVT():
                 os.remove(dst)
         func(src, dst)
 
-    def build_graphs(self,
-                     **kwargs):
-        raw_dataset_dir = os.path.join(self.config['vasp_raw_data_dir'],
-                                       f'generation_{self.generation}')
+    def build_graphs(self, **kwargs):
+        # raw_dataset_dir = os.path.join(self.vasp_raw_data_dir,
+        #                                f'generation_{self.generation}')
 
-        # generation = self.generation
-        assert os.path.isdir(raw_dataset_dir), f'{raw_dataset_dir} is not a directory.'
+        # # generation = self.generation
+        # assert os.path.isdir(raw_dataset_dir), f'{raw_dataset_dir} is not a directory.'
         config = {**default_graph_config, **self.config, **kwargs}
 
-        if not os.path.exists(f'generation_{self.generation}'):
-            os.makedirs(f'generation_{self.generation}')
-        if not os.path.exists(self.graphs_dir):
-            os.makedirs(self.graphs_dir)
+        # if not os.path.exists(f'generation_{self.generation}'):
+        #     os.makedirs(f'generation_{self.generation}')
+        # if not os.path.exists(self.graphs_dir):
+        #     os.makedirs(self.graphs_dir)
 
         # build
         print(f'Starting time for building graphs (generation {self.generation}):',
               self.time, file=self.logIO)
-        os.chdir(raw_dataset_dir)
+        os.chdir(os.path.join(self.facotry_dir, '1_run_vasp'))
         os.system('get_paths.sh')
-        os.chdir(self.root_dir)
-
-        dst = os.path.join(f'generation_{self.generation}', 'paths.log')
-        self.file_force_action(copyfile,
-                               os.path.join(raw_dataset_dir, 'paths.log'),
+        # os.chdir(self.root_dir)
+        dst = os.path.join(self.facotry_dir, '2_build_graph', 'paths.log')
+        self.file_force_action(move,
+                               os.path.join(self.facotry_dir, '1_run_vasp', 'paths.log'),
                                dst)
 
         # update settings
@@ -170,6 +177,7 @@ class PotentialGeneratorNVT():
         #     print(f'(Generation {self.generation}): Reading structure from md_NPT_{int(self.generation)-1}.traj.',
         #           self.time, file=self.logIO)
         # else:
+        self.logIO = open('potential_generation_nvt.log', 'a+', buffering=1)
         atoms = read(config['structural_fname'])
         atoms.set_cell(atoms.cell * config['cell_scale_factor'],
                        scale_atoms=True)
@@ -289,8 +297,16 @@ class PotentialGeneratorNVT():
         print('Complete time for potential generation:',
               self.time, file=self.logIO)
 
+    def run_static(self, poscar='POSCAR', **kwargs):
+        self.logIO = open('potential_generation_nvt.log', 'a+', buffering=1)
+
+        # check dependent files
+        ## VASP files
+        ## Bash scripts
+        pass
+
 if __name__ == '__main__':
-    pg = PotentialGeneratorNVT(
+    pg = PotentialGenerator(
             structural_fname='POSCAR',
             cell_scale_factor=1.0,
             energy_threshold= 0.02,
@@ -305,7 +321,7 @@ if __name__ == '__main__':
 
     current_generation = 0
     for csf in [0.97,0.98,0.99,1.01,1.02,1.03]:
-        pg = PotentialGeneratorNVT(
+        pg = PotentialGenerator(
                 structural_fname='POSCAR',
                 cell_scale_factor=csf,
                 energy_threshold= 0.02,
