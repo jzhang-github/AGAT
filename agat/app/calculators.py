@@ -7,7 +7,7 @@ Created on Mon Dec  4 16:56:28 2023
 
 import os
 import json
-from shutil import move
+from shutil import move, rmtree
 
 import torch
 
@@ -16,13 +16,13 @@ from ase.io import read
 
 from ..data.build_graph import CrystalGraph, AseGraphTorch
 from ..lib.file_lib import get_INCAR, get_KPOINTS_gamma, get_KPOINTS, get_POTCAR, modify_INCAR, run_vasp, file_force_action
-from ..lib.model_lib import load_model, load_model_ensemble
+from ..lib.model_lib import load_model, load_model_ensemble, config_parser
 
 class AgatCalculator(Calculator):
     implemented_properties = ['energy', 'forces', 'stress']
     default_parameters  = { }
     ignored_changes = set()
-    def __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda',
+    def __init__(self, model_save_dir, graph_build_scheme_dir=None, graph_build_scheme=None, device = 'cuda',
                  **kwargs):
         Calculator.__init__(self, **kwargs)
         # self.atoms = None  # copy of atoms object from last calculation
@@ -35,7 +35,11 @@ class AgatCalculator(Calculator):
         self.device = device
 
         self.model = load_model(self.model_save_dir, self.device)
-        self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
+
+        if graph_build_scheme:
+            self.graph_build_scheme = config_parser(graph_build_scheme)
+        else:
+            self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
 
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False,
@@ -104,7 +108,7 @@ class AgatCalculatorAseGraphTorch(Calculator):
     implemented_properties = ['energy', 'forces', 'stress']
     default_parameters  = { }
     ignored_changes = set()
-    def __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda',
+    def __init__(self, model_save_dir, graph_build_scheme_dir=None, graph_build_scheme=None, device = 'cuda',
                  **kwargs):
         Calculator.__init__(self, **kwargs)
 
@@ -113,7 +117,10 @@ class AgatCalculatorAseGraphTorch(Calculator):
         self.device = torch.device(device)
 
         self.model = load_model(self.model_save_dir, self.device)
-        self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
+        if graph_build_scheme:
+            self.graph_build_scheme = config_parser(graph_build_scheme)
+        else:
+            self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
 
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False,
@@ -183,7 +190,7 @@ class AgatCalculatorAseGraphTorchNumpy(Calculator):
     implemented_properties = ['energy', 'forces', 'stress']
     default_parameters  = { }
     ignored_changes = set()
-    def __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda',
+    def __init__(self, model_save_dir, graph_build_scheme_dir=None, graph_build_scheme=None, device = 'cuda',
                  **kwargs):
         Calculator.__init__(self, **kwargs)
 
@@ -192,7 +199,10 @@ class AgatCalculatorAseGraphTorchNumpy(Calculator):
         self.device = torch.device(device)
 
         self.model = load_model(self.model_save_dir, self.device)
-        self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
+        if graph_build_scheme:
+            self.graph_build_scheme = config_parser(graph_build_scheme)
+        else:
+            self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
 
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False,
@@ -262,7 +272,7 @@ class AgatEnsembleCalculator(Calculator):
     default_parameters  = { }
     ignored_changes = set()
     def __init__(self, model_ensemble_dir,
-                 graph_build_scheme_dir,
+                 graph_build_scheme_dir=None, graph_build_scheme=None,
                  start_step=0,
                  device = 'cuda',
                  # collect_mode = True, # collect snapshots, instead of using DFT
@@ -274,7 +284,10 @@ class AgatEnsembleCalculator(Calculator):
         self.step = start_step
         self.device = torch.device(device)
         self.model_list = load_model_ensemble(self.model_ensemble_dir, self.device)
-        self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
+        if graph_build_scheme:
+            self.graph_build_scheme = config_parser(graph_build_scheme)
+        else:
+            self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
 
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False,
@@ -353,13 +366,14 @@ class OnTheFlyCalculator(Calculator):
     default_parameters  = { }
     ignored_changes = set()
     def __init__(self, model_ensemble_dir,
-                 graph_build_scheme_dir,
+                 graph_build_scheme,
                  use_vasp=False,
                  start_step=0,
                  vasp_work_dir='.',
                  vasp_inputs_dir='.',
                  gamma_only=False,
                  vasp_potential_generator='getpotential.sh',
+                 vasp_script='vasp_run.sh',
                  device = 'cuda',
                  energy_threshold = 0.5,
                  force_threshold = 0.5,
@@ -370,7 +384,6 @@ class OnTheFlyCalculator(Calculator):
         Calculator.__init__(self, **kwargs)
 
         self.model_ensemble_dir = model_ensemble_dir
-        self.graph_build_scheme_dir = graph_build_scheme_dir
         self.use_vasp = use_vasp
         self.collected_snapshot_num = 0
         self.step = start_step
@@ -378,12 +391,13 @@ class OnTheFlyCalculator(Calculator):
         self.vasp_inputs_dir = vasp_inputs_dir
         self.gamma_only = gamma_only
         self.vasp_potential_generator = vasp_potential_generator
+        self.vasp_script = vasp_script
         self.device = torch.device(device)
 
         self.root_dir = os.getcwd()
 
         self.model_list = load_model_ensemble(self.model_ensemble_dir, self.device)
-        self.graph_build_scheme = self.load_graph_build_scheme(self.graph_build_scheme_dir)
+        self.graph_build_scheme = config_parser(graph_build_scheme)
 
         build_properties = {'energy': False, 'forces': False, 'cell': False,
                             'cart_coords': False, 'frac_coords': False, 'path': False,
@@ -414,16 +428,18 @@ class OnTheFlyCalculator(Calculator):
         if not os.path.exists(work_dir):
             os.makedirs(work_dir)
         os.chdir(work_dir)
-        r = run_vasp()
+        r = run_vasp(self.vasp_script)
         os.chdir(self.root_dir)
         return r
 
-    def prepare_vasp_calculation(self, atoms, dst_dir):
-        atoms.write(os.path.join(dst_dir, 'POSCAR'), format='vasp')
+    def prepare_vasp_calculation(self, atoms):
+        dst_dir = os.path.join(self.vasp_work_dir, str(self.step))
+        atoms.write(os.path.join(dst_dir, 'POSCAR'),
+                    format='vasp')
         get_INCAR(os.path.join(self.vasp_inputs_dir, 'INCAR'),
                   os.path.join(dst_dir, 'INCAR'))
         if self.gamma_only:
-            get_KPOINTS_gamma(dst_dir)
+            get_KPOINTS_gamma(os.path.join(dst_dir, 'KPOINTS'))
         else:
             get_KPOINTS(os.path.join(self.vasp_inputs_dir, 'KPOINTS'),
                       os.path.join(dst_dir, 'KPOINTS'))
@@ -445,28 +461,19 @@ class OnTheFlyCalculator(Calculator):
                       file=self.io)
                 file_force_action(move,
                                   wavecar,
-                                  os.path.join(dst_dir,
+                                  os.path.join(str(self.step),
                                                'WAVECAR'))
                 file_force_action(move,
                                   chgcar,
-                                  os.path.join(dst_dir,
+                                  os.path.join(str(self.step),
                                                'CHGCAR'))
             break
 
-    def load_graph_build_scheme(self, path):
-        """ Load graph building scheme. This file is normally saved when you build your dataset.
-
-        :param path: Directory for storing ``graph_build_scheme.json`` file.
-        :type path: str
-        :return: A dict denotes how to build the graph.
-        :rtype: dict
-
-        """
-        json_file  = os.path.join(path, 'graph_build_scheme.json')
-        assert os.path.exists(json_file), f"{json_file} file dose not exist."
-        with open(json_file, 'r') as jsonf:
-            graph_build_scheme = json.load(jsonf)
-        return graph_build_scheme
+        # remove large files in previous steps.
+        for f in ['WAVECAR', 'CHG', 'CHGCAR']:
+            f = os.path.join(self.vasp_work_dir, str(self.step-4), f)
+            if os.path.exists(f):
+                rmtree(f)
 
     def calculate(self, atoms=None, properties=None, system_changes=['positions', 'numbers', 'cell', 'pbc']):
         """
@@ -489,8 +496,6 @@ class OnTheFlyCalculator(Calculator):
             properties = self.implemented_properties
 
         # read graph
-        # self.atg.reset()
-        # graph = self.atg.get_graph(atoms)
         graph, _ = self.g.get_graph(atoms)
         graph = graph.to(self.device)
 
@@ -504,7 +509,7 @@ class OnTheFlyCalculator(Calculator):
 
         energies = torch.stack(energies)
         forces = torch.stack(forces)
-        stresses = torch.stack(stresses)[0]
+        stresses = torch.stack(stresses)
 
         energy = torch.mean(energies).item() * len(atoms)
         force = torch.mean(forces, dim=0).cpu().numpy()
@@ -518,13 +523,14 @@ class OnTheFlyCalculator(Calculator):
                          self.force_std > self.force_threshold or\
                          self.stress_std > self.stress_threshold
 
+        vasp_status = 'False'
         if over_threshold:
             self.collected_snapshot_num += 1
             work_dir = os.path.join(self.vasp_work_dir, str(self.step))
             if not os.path.exists(work_dir):
                 os.makedirs(work_dir)
 
-            self.prepare_vasp_calculation(self.atoms, work_dir)
+            self.prepare_vasp_calculation(self.atoms)
 
             if self.use_vasp:
                 self.run_vasp(work_dir) # run vasp
@@ -535,8 +541,12 @@ class OnTheFlyCalculator(Calculator):
                 energy = atoms.get_total_energy() # torch.tensor(, dtype=torch.float32)
                 force = atoms.get_forces(apply_constraint=False)
                 stress = atoms.get_stress(apply_constraint=False)
+                vasp_status = 'True'
 
-        print(f'Step: {self.step} over_threshold: {over_threshold} use_vasp: {self.use_vasp} ',
+        print('Step: {:4d} over_threshold: {:5s} VASP: {:5s} energy_std: {:1.6f} \
+force_std: {:1.6f} stress_std: {:1.6f}'.format(
+self.step, str(bool(over_threshold)), vasp_status, self.energy_std,
+self.force_std, self.stress_std),
               file=self.io)
 
         self.results = {'energy': energy,

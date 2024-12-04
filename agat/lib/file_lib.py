@@ -22,7 +22,7 @@ def file_exit():
         os.remove('StopPython')
         raise FileExit('Exit because `StopPython` file is found.')
 
-def modify_INCAR(key='NSW', value='300', s=''):
+def modify_INCAR(working_dir='.', key='NSW', value='300', s=''):
     """Modify the INCAR file.
 
     :param key: The INCAR tag, defaults to 'NSW'
@@ -40,7 +40,7 @@ def modify_INCAR(key='NSW', value='300', s=''):
         return 1
 
     new_incar, discover_code = [], False
-    with open('INCAR', 'r') as f:
+    with open(os.path.join(working_dir, 'INCAR'), 'r') as f:
         for line in f:
             str_list = line.split()
             if len(str_list) == 0:
@@ -58,7 +58,7 @@ def modify_INCAR(key='NSW', value='300', s=''):
     if not discover_code:
         new_incar.append(f'  {key} = {value}\n')
 
-    with open('INCAR', 'w') as f:
+    with open(os.path.join(working_dir, 'INCAR'), 'w') as f:
         for line in new_incar:
             f.write(line)
     return 0
@@ -112,7 +112,7 @@ def get_POTCAR(cmd='getpotential.sh', line=1, working_dir='.'):
 def run_vasp(cmd='vasp_run.sh'):
     assert platform.system() == 'Linux', 'The VASP code can only be executed on a Linux OS.'
     # The POSCAR file should exist already.
-    r = os.system(f'{cmd}')
+    r = os.system(f'bash {cmd}')
     return r # `0` for good; `1` for bad execution.
 
 def file_force_action(func, src, dst):

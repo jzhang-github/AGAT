@@ -261,34 +261,3 @@ default_graph_config =  {
     'energy_stride': 0.05,
     'scale_prop': False
              }
-
-default_potential_generator_config = {
-    # global
-    'number_of_models': 5,
-    'current_generation': 0,
-    # 'vasp_raw_data_dir': '0_vasp_raw_data',
-    # 'graphs_dir': '0_binary_graphs',
-    # 'agat_model_dir': '0_agat_models',
-    'factory_dir': 'factory'
-    'device': 'cuda',
-    'collected_snapshot_num_in_each_gen': 500,
-    'vasp_contribution_convergence': 0.1,
-
-    # build graphs
-    # 'raw_dataset_dir': '0_vasp_raw_data',
-
-    # train agat
-    'epochs': 1000,
-
-    # for NPT run
-    'structural_fname': ('POSCAR'),
-    'cell_scale_factor': 1.0,
-    'use_vasp': True,
-    'start_step': 0,
-    'energy_threshold': 0.01,
-    'force_threshold': 0.05,
-    'stress_threshold': 0.0015,
-    'timestep': 1.0, # unit: units.fs
-    'temperature_K': 300,
-    'npt_steps': 20000
-    }
