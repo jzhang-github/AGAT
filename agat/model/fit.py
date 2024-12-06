@@ -173,8 +173,37 @@ changed to be: `6`.", file=self.log)
         if self.train_config['transfer_learning']:
             for param in model.gat_layers.parameters():
                 param.requires_grad = False
+            num_linear = 0
+            for l in model.energy_readout_layers:
+                for param in l.parameters():
+                    param.requires_grad = False
+                if isinstance(l, torch.nn.modules.linear.Linear):
+                    num_linear += 1
+                    if num_linear > model.num_energy_readout_layers - 3:
+                        break
+            num_linear = 0
+            for l in model.force_readout_layers:
+                for param in l.parameters():
+                    param.requires_grad = False
+                if isinstance(l, torch.nn.modules.linear.Linear):
+                    num_linear += 1
+                    if num_linear > model.num_force_readout_layers - 3:
+                        break
+            num_linear = 0
+            for l in model.stress_readout_layers:
+                for param in l.parameters():
+                    param.requires_grad = False
+                if isinstance(l, torch.nn.modules.linear.Linear):
+                    num_linear += 1
+                    if num_linear > model.num_stress_readout_layers - 2:
+                        break
 
-            exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=100,
+            # We don't need status of optimizer when transfer learning.
+            optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()),
+                                  lr=self.train_config['learning_rate'],
+                                  weight_decay=self.train_config['weight_decay'])
+
+            exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=20,
                                                    gamma=0.1, verbose=True)
 
         # early stop
