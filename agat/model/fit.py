@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader, random_split
 from torch.optim import lr_scheduler
 
 from .model import PotentialModel
-from ..lib.model_lib import EarlyStopping, PearsonR, config_parser, save_model, load_state_dict, save_state_dict
+from ..lib.model_lib import EarlyStopping, PearsonR, config_parser, save_model, load_state_dict, save_state_dict, load_model
 from ..data.load_dataset import LoadDataset, Collater
 from ..default_parameters import default_train_config
 from ..lib.file_lib import file_exit
@@ -133,41 +133,47 @@ changed to be: `6`.", file=self.log)
         if not os.path.exists(self.train_config['output_files']):
             os.mkdir(self.train_config['output_files'])
 
-    def fit(self, **train_config):
+    def fit(self, agat_model_dir=None, **train_config):
         # update config if needed.
         self.train_config = {**self.train_config, **config_parser(train_config)}
 
-        # construct a model and an optimizer.
-        model = PotentialModel(self.train_config['gat_node_dim_list'],
-                               self.train_config['energy_readout_node_list'],
-                               self.train_config['force_readout_node_list'],
-                               self.train_config['stress_readout_node_list'],
-                               self.train_config['head_list'],
-                               self.train_config['bias'],
-                               self.train_config['negative_slope'],
-                               self.device,
-                               self.train_config['tail_readout_no_act']
-                               )
-
-        optimizer = optim.Adam(model.parameters(),
-                              lr=self.train_config['learning_rate'],
-                              weight_decay=self.train_config['weight_decay'])
-
-        # load stat dict if there exists.
-        if os.path.exists(os.path.join(self.train_config['model_save_dir'],
-                                       'agat_state_dict.pth')):
-            try:
-                checkpoint = load_state_dict(self.train_config['model_save_dir'])
-                model.load_state_dict(checkpoint['model_state_dict'])
-                model.eval()
-                model = model.to(self.device)
-                model.device = self.device
-                optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-                print(f'User info: Model and optimizer state dict loaded successfully from {self.train_config["model_save_dir"]}.', file=self.log)
-            except:
-                print('User warning: Exception catched when loading model and optimizer state dict.', file=self.log)
+        if self.train_config['transfer_learning']:
+            model = load_model(model_save_dir=agat_model_dir,
+                               device=self.device)
+            print('User info: transfer model loaded successfully from {agat_model_dir}.',
+                  file=self.log)
         else:
-            print('User info: Checkpoint not detected', file=self.log)
+            # construct a model and an optimizer.
+            model = PotentialModel(self.train_config['gat_node_dim_list'],
+                                   self.train_config['energy_readout_node_list'],
+                                   self.train_config['force_readout_node_list'],
+                                   self.train_config['stress_readout_node_list'],
+                                   self.train_config['head_list'],
+                                   self.train_config['bias'],
+                                   self.train_config['negative_slope'],
+                                   self.device,
+                                   self.train_config['tail_readout_no_act']
+                                   )
+
+            optimizer = optim.Adam(model.parameters(),
+                                  lr=self.train_config['learning_rate'],
+                                  weight_decay=self.train_config['weight_decay'])
+
+            # load stat dict if there exists.
+            if os.path.exists(os.path.join(self.train_config['model_save_dir'],
+                                           'agat_state_dict.pth')):
+                try:
+                    checkpoint = load_state_dict(self.train_config['model_save_dir'])
+                    model.load_state_dict(checkpoint['model_state_dict'])
+                    model.eval()
+                    model = model.to(self.device)
+                    model.device = self.device
+                    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+                    print(f'User info: Model and optimizer state dict loaded successfully from {self.train_config["model_save_dir"]}.', file=self.log)
+                except:
+                    print('User warning: Exception catched when loading model and optimizer state dict.', file=self.log)
+            else:
+                print('User info: Checkpoint not detected', file=self.log)
 
         # transfer learning.
         if self.train_config['transfer_learning']:

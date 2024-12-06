@@ -18,6 +18,7 @@ from tqdm import tqdm
 from .build_graph import CrystalGraph
 from ..default_parameters import default_data_config
 from ..lib.model_lib import config_parser
+from .load_dataset import LoadDataset
 
 class ReadGraphs(object):
     """
@@ -61,7 +62,7 @@ class ReadGraphs(object):
                 batch_labels[key] = graph_info_tmp
         save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs_' + str(batch_num) + '.bin'), batch_g, batch_labels)
 
-    def read_all_graphs(self): # prop_per_node=False Deprecated!
+    def read_all_graphs(self, save_files=True): # prop_per_node=False Deprecated!
         """
         .. py:method:: read_all_graphs(self)
 
@@ -116,11 +117,11 @@ class ReadGraphs(object):
                         graph_labels[key] = batch_labels[key]
 
                 os.remove(os.path.join(self.data_config['dataset_path'], 'all_graphs_' + str(x) + '.bin'))
-            save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs.bin'), graph_list, graph_labels)
-
-            with open(os.path.join(self.data_config['dataset_path'], 'graph_build_scheme.json'), 'w') as fjson:
-                json.dump(self.data_config, fjson, indent=4)
-        return graph_list, graph_labels
+            if save_files:
+                save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs.bin'), graph_list, graph_labels)
+                with open(os.path.join(self.data_config['dataset_path'], 'graph_build_scheme.json'), 'w') as fjson:
+                    json.dump(self.data_config, fjson, indent=4)
+        return LoadDataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
 
 # class TrainValTestSplit(object):
 #     """
@@ -380,13 +381,13 @@ class BuildDatabase():
     def __init__(self, **data_config):
         self.data_config = {**default_data_config, **config_parser(data_config)}
 
-    def build(self):
+    def build(self, save_files=True):
         # extract vasp files.
         evf = ExtractVaspFiles(**self.data_config)()
 
         # build binary DGL graphs.
         graph_reader = ReadGraphs(**self.data_config)
-        graph_reader.read_all_graphs()
+        dataset = graph_reader.read_all_graphs(save_files=save_files)
 
         # split the dataset.
         # train_index, validation_index, test_index = TrainValTestSplit(**self.data_config)()
@@ -404,8 +405,9 @@ class BuildDatabase():
             # os.remove(os.path.join(self.data_config['dataset_path'], 'fname_prop.csv'))
             for i in range(self.data_config['num_of_cores']):
                 os.remove(os.path.join(self.data_config['dataset_path'], f'fname_prop_{i}.csv'))
+        return dataset
 
-def concat_graphs(*list_of_bin):
+def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
     """ Concat binary graph files.
 
     :param *list_of_bin: input file names of binary graphs.
@@ -431,7 +433,39 @@ def concat_graphs(*list_of_bin):
             except KeyError:
                 graph_labels[key] = batch_labels[key]
 
-    save_graphs('concated_graphs.bin', graph_list, graph_labels)
+    if save_file:
+        save_graphs(fname, graph_list, graph_labels)
+    return LoadDataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
+
+def concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bin'):
+    """ Concat binary graph files.
+
+    :param *list_of_bin: input file names of binary graphs.
+    :type *list_of_bin: strings
+    :return: A new file is saved to the current directory: concated_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
+
+    """
+
+    graph_list = []
+    graph_labels = {}
+    for d in list_of_datasets:
+        batch_g, batch_labels = d.graph_list, d.props
+        graph_list.extend(batch_g)
+        for key in batch_labels.keys():
+            try:
+                graph_labels[key] = torch.cat([graph_labels[key],
+                                               batch_labels[key]], 0)
+            except KeyError:
+                graph_labels[key] = batch_labels[key]
+
+    if save_file:
+        save_graphs(fname, graph_list, graph_labels)
+    return LoadDataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
 
 def select_graphs_random(fname: str, num: int):
     """ Randomly split graphs from a binary file.
@@ -462,6 +496,31 @@ the number of all graphs. Number of selected graphs: {num}. Number of all graphs
         graph_labels[key] = labels[key][random_int]
 
     save_graphs('selected_graphs.bin', selected_bg, graph_labels)
+
+def select_graphs_from_dataset_random(dataset, num: int, save_file=False,
+                                      fname='selected_graphs.bin'):
+    """ Randomly split graphs from a binary file.
+
+    :param fname: input file name.
+    :type fname: str
+    :param num: number of selected graphs (should be smaller than number of all graphs.
+    :type num: int
+    :return: A new file is saved to the current directory: Selected_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        select_graphs_random('graphs1.bin')
+
+    """
+
+    num_graphs = len(dataset)
+    assert num < num_graphs, f'The number of selected graphs should be lower than\
+the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
+    random_int = np.random.choice(range(num_graphs), size=num, replace=False)
+    dataset = dataset[list(random_int)]
+    if save_file:
+        save_graphs(fname, dataset.graph_list, dataset.props)
 
 # build data
 if __name__ == '__main__':

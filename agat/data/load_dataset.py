@@ -31,10 +31,15 @@ class LoadDataset(Dataset):
     :rtype: list
 
     """
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path=None, from_file=True, graph_list=None, props = None):
         super(LoadDataset, self).__init__()
-        self.dataset_path = dataset_path
-        self.graph_list, self.props = load_graphs(self.dataset_path) # `props`: properties.
+        if from_file:
+            self.dataset_path = dataset_path
+            self.graph_list, self.props = load_graphs(self.dataset_path) # `props`: properties.
+        else:
+            self.dataset_path = None
+            self.graph_list = graph_list
+            self.props = props
 
     def __getitem__(self, index):
         """Index or slice the dataset.
@@ -51,6 +56,11 @@ class LoadDataset(Dataset):
         if isinstance(index, slice):
             graph_list = self.graph_list[index]
             graph = dgl.batch(graph_list)
+        elif isinstance(index, (list, tuple)):
+            graph = [self.graph_list[x] for x in index]
+            # props = {k:v[index] for k,v in self.props.items()}
+            props = {k:torch.cat([v[i] for i in index], 0)\
+                     for k,v in self.props.items()}
         else:
             graph = self.graph_list[index]
         props = {k:v[index] for k,v in self.props.items()}
