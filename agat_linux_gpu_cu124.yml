@@ -132,4 +132,4 @@ dependencies:
       - matplotlib==3.9.2
       - packaging==24.1
       - pyparsing==3.2.0
-prefix: /public/home/ias_junzhang/.conda/envs/otfagat
+
