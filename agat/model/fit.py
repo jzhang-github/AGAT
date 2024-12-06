@@ -198,7 +198,7 @@ changed to be: `6`.", file=self.log)
                     if num_linear > model.num_stress_readout_layers - 2:
                         break
 
-            # We don't need status of optimizer when transfer learning.
+            print("We don't need the status of optimizer when transfer learning, reinstantiate the `optimizer`.", file=self.log)
             optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()),
                                   lr=self.train_config['learning_rate'],
                                   weight_decay=self.train_config['weight_decay'])
