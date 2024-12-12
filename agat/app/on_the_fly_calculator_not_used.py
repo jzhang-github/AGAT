@@ -8,6 +8,7 @@ Created on Mon Dec  4 16:56:28 2023
 import os
 import json
 from shutil import move
+from warnings import warn
 
 import torch
 
@@ -38,6 +39,7 @@ class OnTheFlyCalculator(Calculator):
                  # collect_mode = True, # collect snapshots, instead of using DFT
                  io = None,
                  **kwargs):
+        warn("This object will be deprecated in the future. Please use `agat.app.calculators.OnTheFlyCalculator`")
         Calculator.__init__(self, **kwargs)
 
         self.model_ensemble_dir = model_ensemble_dir
@@ -46,7 +48,7 @@ class OnTheFlyCalculator(Calculator):
         self.collected_snapshot_num = 0
         self.step = start_step
         # self.vasp_work_dir = vasp_work_dir
-        self.factory_dir = factory
+        self.factory_dir = factory_dir
         self.vasp_inputs_dir = vasp_inputs_dir
         self.gamma_only = gamma_only
         self.vasp_potential_generator = vasp_potential_generator

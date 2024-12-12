@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Sep 30 23:54:56 2023
+Created on Tue Dec 10 15:13:44 2024
 
-@author: 18326
+@author: ZHANGJUN
 """
 
+''' For compatibility with earlier versions '''
+
+from warnings import warn
 import torch
 from torch.utils.data import Dataset
 import dgl
 from dgl.data.utils import load_graphs
-from .build_dataset import concat_graphs, select_graphs_random
 
 class LoadDataset(Dataset):
     """Load the binary graphs.
@@ -31,7 +33,9 @@ class LoadDataset(Dataset):
     :rtype: list
 
     """
+
     def __init__(self, dataset_path=None, from_file=True, graph_list=None, props = None):
+        warn("This object will be deprecated in the future. Please use `agat.data.dataset.Dataset`")
         super(LoadDataset, self).__init__()
         if from_file:
             self.dataset_path = dataset_path
@@ -110,6 +114,7 @@ class Collater(object):
 
     """
     def __init__(self, device='cuda'):
+        warn("This object will be deprecated in the future. Please use `agat.data.dataset.Collater`")
         self.device = device
 
     def __call__(self, data):
@@ -162,4 +167,3 @@ if __name__ == '__main__':
             break
     dur2 = time.time()-start
     print(dur2-5.0-dur1)
-

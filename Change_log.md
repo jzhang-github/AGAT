@@ -1,4 +1,21 @@
-# [main](https://github.com/jzhang-github/AGAT/tree/main)
+# [v9.1.0](https://github.com/jzhang-github/AGAT/tree/v9.1.0)
+
+- Optimize memory when training. The whole dataset is added to the `CPU` memory. The `Dataset` is loaded to `GPU`/`CPU` memory when batch training. Thus, less `GPU` memory is required.
+
+- Optimize the dataset management, so that one can manipulate dataset in the memory, instead of I/O on disk.
+
+  - Deprecate `LoadDataset` and `Collater` in `agat/data/load_dataset.py`.
+  - Return a new AGAT `Dataset`  object when indexing a `Dataset` with `int`, `slice`, `tuple`, and `list`.
+  - A `Dataset` is returned of `ReadGraphs`, `BuildDatabase`, `concat_graphs`, `concat_dataset`, and `select_graphs_from_dataset_random`.
+  - Add `__repr__` method to `Dataset`.
+
+- Optimize transfer learning. `agat/model/fit.py`
+
+- Optimize `agat/app/calculators.py`, `.../calculators.py`, and `.../ensembles.py`, and deprecate `agat/app/app.py`
+
+- Add `CrystalGraph` and `AseGraphTorch` to `agat/data/build_graph.py`.
+
+# [v9.0.1](https://github.com/jzhang-github/AGAT/tree/v9.0.1)
 - Fix warning when using `torch.load`. [agat/lib/model_lib.py](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/model_lib.py#L42-L44)
 - Fix bugs is `ase.atoms` has `ase.constraints.FixScaled` and `ase.constraints.FixedLine`.
 - Add [`agat_linux_gpu_cu124.yml`](agat_linux_gpu_cu124.yml) file.

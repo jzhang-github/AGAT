@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['agat\\app\\calculators.py', 'agat\\default_parameters.py', 'agat\\lib\\file_lib.py', 'agat\\model\\fit.py', 'agat\\model\\model.py']
+recent_files = ['agat\\data\\dataset.py']
 
 [main]
 version = 0.2.0

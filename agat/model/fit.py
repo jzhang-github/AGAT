@@ -17,7 +17,7 @@ from torch.optim import lr_scheduler
 
 from .model import PotentialModel
 from ..lib.model_lib import EarlyStopping, PearsonR, config_parser, save_model, load_state_dict, save_state_dict, load_model
-from ..data.load_dataset import LoadDataset, Collater
+from ..data.dataset import Dataset, Collater
 from ..default_parameters import default_train_config
 from ..lib.file_lib import file_exit
 
@@ -40,7 +40,8 @@ class Fit(object):
         # read dataset
         print(f'User info: Loading dataset from {self.train_config["dataset_path"]}',
               file=self.log)
-        self._dataset=LoadDataset(self.train_config['dataset_path'])
+        self._dataset=Dataset(self.train_config['dataset_path'],
+                              from_file=True, graph_list=None, props=None) # load dataset on CPU.
 
         # split dataset
         self._val_size = int(len(self._dataset)*self.train_config['validation_size'])
@@ -50,6 +51,7 @@ class Fit(object):
                                                                 [self._train_size,
                                                                  self._val_size,
                                                                  self._test_size])
+
         # check batch size
         self.train_config['batch_size'] = min(self.train_config['batch_size'],
                                               self._train_size)
@@ -58,7 +60,7 @@ class Fit(object):
                                                   self._test_size)
 
         # instantiate data loader
-        collate_fn = Collater(device=self.device)
+        collate_fn = Collater(device=self.device) # load on GPU if device='cuda'
         self.train_loader = DataLoader(train_dataset,
                                        batch_size=self.train_config['batch_size'],
                                        shuffle=True,
@@ -76,12 +78,12 @@ class Fit(object):
                                       collate_fn=collate_fn)
 
         # check the existence of adsorbates.
-        _graph, _ = self._dataset[0]
+        _graph = self._dataset[0].graph_list[0]
         self._has_adsorbate = _graph.ndata.__contains__('adsorbate')
 
         # check neural nodes dimensions, and modify them if necessary.
         num_heads = len(self.train_config['head_list'])
-        atomic_depth = self._dataset[0][0].ndata['h'].size()[1]
+        atomic_depth = _graph.ndata['h'].size()[1]
         if self.train_config['gat_node_dim_list'][0] != atomic_depth:
             print(f'User warning: Input dimension of the first AGAT `Layer` \
 (the first element of `gat_node_dim_list`) should equal to the dimension of \
@@ -137,7 +139,7 @@ changed to be: `6`.", file=self.log)
         # update config if needed.
         self.train_config = {**self.train_config, **config_parser(train_config)}
 
-        if self.train_config['transfer_learning']:
+        if self.train_config['transfer_learning']: # when transfer learning, you may need to load the model from a different place.
             model = load_model(model_save_dir=agat_model_dir,
                                device=self.device)
             print('User info: transfer model loaded successfully from {agat_model_dir}.',
@@ -242,7 +244,9 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             # release GPU memory
             # torch.cuda.empty_cache()
 
-            for i, (graph, props) in enumerate(self.train_loader):
+            for i,  batch_dataset in enumerate(self.train_loader): # This is a batch graph and stacked props
+                graph = batch_dataset.graph_list[0]
+                props = batch_dataset.props
                 energy_true = props['energy_true']
                 force_true = graph.ndata['forces_true']
                 stress_true = props['stress_true']
@@ -273,7 +277,9 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
             with torch.no_grad():
                 energy_true_all, force_true_all, stress_true_all = [], [], []
                 energy_pred_all, force_pred_all, stress_pred_all = [], [], []
-                for i, (graph, props) in enumerate(self.val_loader):
+                for i, batch_dataset in enumerate(self.val_loader):
+                    graph = batch_dataset.graph_list[0]
+                    props = batch_dataset.props
                     energy_true_all.append(props['energy_true'])
                     force_true = graph.ndata['forces_true']
                     stress_true_all.append(props['stress_true'])
@@ -358,7 +364,9 @@ Energy_MAE Force_MAE Stress_MAE Energy_R Force_R Stress_R Dur_(s) Validation_inf
         with torch.no_grad():
             energy_true_all, force_true_all, stress_true_all = [], [], []
             energy_pred_all, force_pred_all, stress_pred_all = [], [], []
-            for i, (graph, props) in enumerate(self.test_loader):
+            for i, batch_dataset in enumerate(self.test_loader):
+                graph = batch_dataset.graph_list[0]
+                props = batch_dataset.props
                 energy_true_all.append(props['energy_true'])
                 force_true_all.append(graph.ndata['forces_true'])
                 stress_true_all.append(props['stress_true'])

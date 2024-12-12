@@ -9,6 +9,7 @@ import numpy as np
 import os
 import json
 import multiprocessing
+from warnings import warn
 
 from ase.io import read
 import torch
@@ -18,7 +19,7 @@ from tqdm import tqdm
 from .build_graph import CrystalGraph
 from ..default_parameters import default_data_config
 from ..lib.model_lib import config_parser
-from .load_dataset import LoadDataset
+from .dataset import Dataset
 
 class ReadGraphs(object):
     """
@@ -121,7 +122,7 @@ class ReadGraphs(object):
                 save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs.bin'), graph_list, graph_labels)
                 with open(os.path.join(self.data_config['dataset_path'], 'graph_build_scheme.json'), 'w') as fjson:
                     json.dump(self.data_config, fjson, indent=4)
-        return LoadDataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
+        return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
 
 # class TrainValTestSplit(object):
 #     """
@@ -421,6 +422,8 @@ def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
 
     """
 
+    warn("This object will be deprecated in the future. Please use `concat_dataset`.")
+
     graph_list = []
     graph_labels = {}
     for file in list_of_bin:
@@ -435,7 +438,7 @@ def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
 
     if save_file:
         save_graphs(fname, graph_list, graph_labels)
-    return LoadDataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
+    return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props=graph_labels)
 
 def concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bin'):
     """ Concat binary graph files.
@@ -465,7 +468,7 @@ def concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bi
 
     if save_file:
         save_graphs(fname, graph_list, graph_labels)
-    return LoadDataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
+    return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
 
 def select_graphs_random(fname: str, num: int):
     """ Randomly split graphs from a binary file.
@@ -482,6 +485,7 @@ def select_graphs_random(fname: str, num: int):
         select_graphs_random('graphs1.bin')
 
     """
+    warn("This object will be deprecated in the future. Please use `select_graphs_from_dataset_random`")
 
     bg, labels = load_graphs(fname)
     num_graphs = len(bg)
@@ -521,6 +525,11 @@ the number of all graphs. Number of selected graphs: {num}. Number of all graphs
     dataset = dataset[list(random_int)]
     if save_file:
         save_graphs(fname, dataset.graph_list, dataset.props)
+    return dataset
+
+def save_dataset(dataset: Dataset, fname='graphs.bin'):
+    assert isinstance(dataset, Dataset), f'Wrong dataset type. Expect `LoadDataset`, but got {type(dataset)}'
+    save_graphs(fname, dataset.graph_list, dataset.props)
 
 # build data
 if __name__ == '__main__':
