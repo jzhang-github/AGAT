@@ -22,7 +22,7 @@ from ..default_parameters import default_train_config
 from ..lib.file_lib import file_exit
 
 class Fit(object):
-    def __init__(self, **train_config):
+    def __init__(self, dataset=None, **train_config):
         self.train_config = {**default_train_config, **config_parser(train_config)}
         self.log = open('fit.log', 'w', buffering=1)
 
@@ -37,11 +37,17 @@ class Fit(object):
             self.device = 'cpu'
         print('User info: Specified device for potential model:', self.device, file=self.log)
 
-        # read dataset
-        print(f'User info: Loading dataset from {self.train_config["dataset_path"]}',
-              file=self.log)
-        self._dataset=Dataset(self.train_config['dataset_path'],
-                              from_file=True, graph_list=None, props=None) # load dataset on CPU.
+        if self.train_config['transfer_learning'] and isinstance(dataset, Dataset):
+            # load dataset from memory
+            print(f'User info: Loading dataset from memory: `{print(dataset)}`',
+                  file=self.log)
+            self._dataset = dataset
+        else:
+            # load dataset from file
+            print(f'User info: Loading dataset from {self.train_config["dataset_path"]}',
+                  file=self.log)
+            self._dataset=Dataset(self.train_config['dataset_path'],
+                                  from_file=True, graph_list=None, props=None) # load dataset on CPU.
 
         # split dataset
         self._val_size = int(len(self._dataset)*self.train_config['validation_size'])

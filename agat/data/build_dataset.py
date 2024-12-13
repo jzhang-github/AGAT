@@ -33,10 +33,10 @@ class ReadGraphs(object):
     """
     def __init__(self, **data_config):
         self.data_config = {**default_data_config, **config_parser(data_config)}
-        assert os.path.exists(self.data_config['dataset_path']), str(self.data_config['dataset_path']) + " not found."
+        assert os.path.exists(self.data_config['dataset_dir']), str(self.data_config['dataset_dir']) + " not found."
 
         self.cg               = CrystalGraph(**self.data_config)
-        fname_prop_data       = np.loadtxt(os.path.join(self.data_config['dataset_path'],
+        fname_prop_data       = np.loadtxt(os.path.join(self.data_config['dataset_dir'],
                                                         'fname_prop.csv'),
                                            dtype=str, delimiter=',')
         self.name_list        = fname_prop_data[:,0]
@@ -46,7 +46,7 @@ class ReadGraphs(object):
         batch_fname  = [self.name_list[x] for x in batch_index_list]
         batch_g, batch_graph_info = [], []
         for fname in tqdm(batch_fname, desc='Reading ' + str(batch_num) + ' batch graphs', delay=batch_num):
-            g, graph_info = self.cg.get_graph(os.path.join(self.data_config['dataset_path'] ,fname))
+            g, graph_info = self.cg.get_graph(os.path.join(self.data_config['dataset_dir'] ,fname))
             batch_g.append(g)
             batch_graph_info.append(graph_info)
 
@@ -61,7 +61,7 @@ class ReadGraphs(object):
                 graph_info_tmp = np.array(graph_info_tmp)
                 graph_info_tmp = torch.tensor(graph_info_tmp)
                 batch_labels[key] = graph_info_tmp
-        save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs_' + str(batch_num) + '.bin'), batch_g, batch_labels)
+        save_graphs(os.path.join(self.data_config['dataset_dir'], 'all_graphs_' + str(batch_num) + '.bin'), batch_g, batch_labels)
 
     def read_all_graphs(self, save_files=True): # prop_per_node=False Deprecated!
         """
@@ -69,7 +69,7 @@ class ReadGraphs(object):
 
            Read all graphs specified in the csv file.
 
-           .. Note:: The loaded graphs are saved under the attribute of :py:attr:`dataset_path`.
+           .. Note:: The loaded graphs are saved under the attribute of :py:attr:`dataset_dir`.
 
            .. DANGER:: Do not scale the label if you don't know what are you doing.
 
@@ -81,11 +81,11 @@ class ReadGraphs(object):
         """
         if self.data_config['load_from_binary']:
             try:
-                graph_path = os.readlink(os.path.join(self.data_config['dataset_path'], 'all_graphs.bin'))
+                graph_path = os.readlink(os.path.join(self.data_config['dataset_dir'], 'all_graphs.bin'))
             except:
                 graph_path = 'all_graphs.bin'
             cwd = os.getcwd()
-            os.chdir(self.data_config['dataset_path'])
+            os.chdir(self.data_config['dataset_dir'])
             graph_list, graph_labels = load_graphs(graph_path)
             os.chdir(cwd)
         else:
@@ -106,7 +106,7 @@ class ReadGraphs(object):
             graph_list = []
             graph_labels = {}
             for x in range(self.data_config['num_of_cores']):
-                batch_g, batch_labels = load_graphs(os.path.join(self.data_config['dataset_path'],
+                batch_g, batch_labels = load_graphs(os.path.join(self.data_config['dataset_dir'],
                                                                  'all_graphs_' + str(x) + '.bin'))
                 graph_list.extend(batch_g)
                 for key in batch_labels.keys():
@@ -117,10 +117,10 @@ class ReadGraphs(object):
                     except KeyError:
                         graph_labels[key] = batch_labels[key]
 
-                os.remove(os.path.join(self.data_config['dataset_path'], 'all_graphs_' + str(x) + '.bin'))
+                os.remove(os.path.join(self.data_config['dataset_dir'], 'all_graphs_' + str(x) + '.bin'))
             if save_files:
-                save_graphs(os.path.join(self.data_config['dataset_path'], 'all_graphs.bin'), graph_list, graph_labels)
-                with open(os.path.join(self.data_config['dataset_path'], 'graph_build_scheme.json'), 'w') as fjson:
+                save_graphs(os.path.join(self.data_config['dataset_dir'], 'all_graphs.bin'), graph_list, graph_labels)
+                with open(os.path.join(self.data_config['dataset_dir'], 'graph_build_scheme.json'), 'w') as fjson:
                     json.dump(self.data_config, fjson, indent=4)
         return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
 
@@ -191,16 +191,16 @@ class ReadGraphs(object):
 
 class ExtractVaspFiles(object):
     '''
-    :param data_config['dataset_path']: Absolute path where the collected data to save.
-    :type data_config['dataset_path']: str
+    :param data_config['dataset_dir']: Absolute path where the collected data to save.
+    :type data_config['dataset_dir']: str
 
     .. Note:: Always save the property per node as the label. For example: energy per atom (eV/atom).
 
     '''
     def __init__(self, **data_config):
         self.data_config = {**default_data_config, **config_parser(data_config)}
-        if not os.path.exists(self.data_config['dataset_path']):
-            os.mkdir(self.data_config['dataset_path'])
+        if not os.path.exists(self.data_config['dataset_dir']):
+            os.mkdir(self.data_config['dataset_dir'])
 
         self.in_path_list = np.loadtxt(self.data_config['path_file'], dtype=str)
         self.batch_index = np.array_split([x for x in range(len(self.in_path_list))], self.data_config['num_of_cores'])
@@ -253,7 +253,7 @@ class ExtractVaspFiles(object):
 
         print('Mask similar frames:', self.data_config['mask_similar_frames'],
               'Mask reversed magnetic moments:', self.data_config['mask_reversed_magnetic_moments'])
-        f_csv = open(os.path.join(self.data_config['dataset_path'], f'fname_prop_{process_index}.csv'), 'w', buffering=1)
+        f_csv = open(os.path.join(self.data_config['dataset_dir'], f'fname_prop_{process_index}.csv'), 'w', buffering=1)
         in_path_index = self.batch_index[process_index]
         for path_index in tqdm(in_path_index, desc='Extracting ' + str(process_index) + ' VASP files.', delay=process_index): # tqdm(batch_fname, desc='Reading ' + str(batch_num) + ' batch graphs', delay=batch_num)
             in_path = self.in_path_list[path_index]
@@ -327,7 +327,7 @@ class ExtractVaspFiles(object):
 
                     # save frames
                     for i in range(len(no_mask_list)):
-                        fname = str(os.path.join(self.data_config['dataset_path'], f'POSCAR_{process_index}_{path_index}_{i}'))
+                        fname = str(os.path.join(self.data_config['dataset_dir'], f'POSCAR_{process_index}_{path_index}_{i}'))
                         while os.path.exists(os.path.join(self.working_dir, fname)):
                             fname = fname + '_new'
 
@@ -368,11 +368,11 @@ class ExtractVaspFiles(object):
             process.join()
 
         f = open(os.path.join(self.working_dir,
-                              self.data_config['dataset_path'],
+                              self.data_config['dataset_dir'],
                               'fname_prop.csv'), 'w')
         for job in range(self.data_config['num_of_cores']):
             lines = np.loadtxt(os.path.join(self.working_dir,
-                                            self.data_config['dataset_path'],
+                                            self.data_config['dataset_dir'],
                                             f'fname_prop_{job}.csv'),
                                dtype=str)
             np.savetxt(f, lines, fmt='%s')
@@ -394,18 +394,18 @@ class BuildDatabase():
         # train_index, validation_index, test_index = TrainValTestSplit(**self.data_config)()
 
         if not self.data_config['keep_readable_structural_files']:
-            fname_prop_data = np.loadtxt(os.path.join(self.data_config['dataset_path'],
+            fname_prop_data = np.loadtxt(os.path.join(self.data_config['dataset_dir'],
                                                       'fname_prop.csv'),
                                          dtype=str, delimiter=',')
             fname_list      = fname_prop_data[:,0]
             for fname in fname_list:
-                os.remove(os.path.join(self.data_config['dataset_path'], fname))
-                os.remove(os.path.join(self.data_config['dataset_path'], f'{fname}_energy.npy'))
-                os.remove(os.path.join(self.data_config['dataset_path'], f'{fname}_force.npy'))
-                os.remove(os.path.join(self.data_config['dataset_path'], f'{fname}_stress.npy'))
-            # os.remove(os.path.join(self.data_config['dataset_path'], 'fname_prop.csv'))
+                os.remove(os.path.join(self.data_config['dataset_dir'], fname))
+                os.remove(os.path.join(self.data_config['dataset_dir'], f'{fname}_energy.npy'))
+                os.remove(os.path.join(self.data_config['dataset_dir'], f'{fname}_force.npy'))
+                os.remove(os.path.join(self.data_config['dataset_dir'], f'{fname}_stress.npy'))
+            # os.remove(os.path.join(self.data_config['dataset_dir'], 'fname_prop.csv'))
             for i in range(self.data_config['num_of_cores']):
-                os.remove(os.path.join(self.data_config['dataset_path'], f'fname_prop_{i}.csv'))
+                os.remove(os.path.join(self.data_config['dataset_dir'], f'fname_prop_{i}.csv'))
         return dataset
 
 def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
