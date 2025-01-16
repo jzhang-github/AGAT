@@ -10,6 +10,9 @@ skopt: https://scikit-optimize.github.io/stable/auto_examples/hyperparameter-opt
 skopt: https://scikit-optimize.github.io/stable/auto_examples/bayesian-optimization.html#sphx-glr-auto-examples-bayesian-optimization-py
 """
 
+import os
+import shutil
+from datetime import datetime
 from agat.model import Fit
 from skopt.space import Real, Integer, Categorical
 from skopt.utils import use_named_args
@@ -74,13 +77,13 @@ search_space = [
     Integer(2, 256,  prior='log-uniform', base=2, name="batch_size"),
 
     # `head_list`
-    Categorical([['mul'], ['div'], ['free'],
-                 ['mul', 'div'], ['mul', 'free'], ['div', 'free'],
-                 ['mul', 'div', 'free']], name="head_list")
+    Categorical([('mul',), ('div',), ('free',),
+                 ('mul', 'div'), ('mul', 'free'), ('div', 'free'),
+                 ('mul', 'div', 'free')], name="head_list")
 ]
 
 @use_named_args(search_space)
-def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, gat_layer_6, gat_layer_7,
+def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, gat_layer_6, gat_layer_7, gat_layer_8,
               energy_readout_layers, energy_readout_layer_2, energy_readout_layer_3, energy_readout_layer_4, energy_readout_layer_5, energy_readout_layer_6, energy_readout_layer_7, energy_readout_layer_8, energy_readout_layer_9, energy_readout_layer_10, energy_readout_layer_11, energy_readout_layer_12,
               force_readout_layers, force_readout_layer_2, force_readout_layer_3, force_readout_layer_4, force_readout_layer_5, force_readout_layer_6, force_readout_layer_7, force_readout_layer_8, force_readout_layer_9, force_readout_layer_10, force_readout_layer_11, force_readout_layer_12,
               negative_slope,
@@ -94,7 +97,7 @@ def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, ga
 
     gat_node_dim_list = [
         118, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5,
-        gat_layer_6, gat_layer_7][:gat_layers]
+        gat_layer_6, gat_layer_7, gat_layer_8][:gat_layers]
     energy_readout_node_list = [gat_node_dim_list[-1]*len(head_list),
         energy_readout_layer_2, energy_readout_layer_3, energy_readout_layer_4,
         energy_readout_layer_5, energy_readout_layer_6, energy_readout_layer_7,
@@ -105,6 +108,16 @@ def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, ga
         force_readout_layer_5, force_readout_layer_6, force_readout_layer_7,
         force_readout_layer_8, force_readout_layer_9, force_readout_layer_10,
         force_readout_layer_11, force_readout_layer_12,][:force_readout_layers]
+    gat_node_dim_list = [int(x) for x in gat_node_dim_list]
+    energy_readout_node_list = [int(x) for x in energy_readout_node_list]
+    force_readout_node_list = [int(x) for x in force_readout_node_list]
+    negative_slope = float(negative_slope)
+    a, b = float(a), float(b)
+    learning_rate = float(learning_rate)
+    weight_decay = float(weight_decay)
+    batch_size=int(batch_size)
+    energy_readout_node_list.append(1)
+    force_readout_node_list.append(3)
 
     f = Fit(
             gat_node_dim_list=gat_node_dim_list,
@@ -127,13 +140,27 @@ def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, ga
     loss = f.fit()
     loss = loss.item()
 
-    # with open('skopt_parameters.txt', mode='a') as f:
-    #     print(loss,
-    #           head1, head2, head3,
-    #           GAT_out1, GAT_out2, GAT_out3,
-    #           ereadout2, ereadout3, ereadout4, ereadout5, ereadout6,
-    #           freadout2, freadout3, freadout4, freadout5, freadout6,
-    #           file=f)
+    with open('skopt_parameters.txt', mode='a') as f:
+        print('###################################################')
+        print(f' loss: {loss}\n',
+              f'gat_node_dim_list: {gat_node_dim_list}\n',
+              f'energy_readout_node_list: {energy_readout_node_list}\n',
+              f'force_readout_node_list: {force_readout_node_list}\n',
+              f'negative_slope: {negative_slope}\n',
+              f'a: {a}\n',
+              f'b: {b}\n',
+              f'learning_rate: {learning_rate}\n',
+              f'weight_decay: {weight_decay}\n',
+              f'batch_size: {batch_size}\n',
+              f'head_list: {head_list}\n',
+              end='\n', file=f)
+
+    # move agat model.
+    if not os.path.exists('all_agat_models'): os.mkdir('all_agat_models')
+    dst_dir = os.path.join('all_agat_models',
+                           f'agat_model_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}')
+    shutil.move('agat_model', dst_dir)
+    shutil.move('fit.log', os.path.join(dst_dir, 'fit.log'))
     return loss
 
 def skopt_run():
