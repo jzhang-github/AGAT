@@ -77,10 +77,18 @@ search_space = [
     Integer(2, 256,  prior='log-uniform', base=2, name="batch_size"),
 
     # `head_list`
-    Categorical([('mul',), ('div',), ('free',),
-                 ('mul', 'div'), ('mul', 'free'), ('div', 'free'),
-                 ('mul', 'div', 'free')], name="head_list")
+    Categorical(['m', 'd', 'f', 'md', 'mf', 'df', 'mdf'], name="head_list")
 ]
+
+head_list_dict = {
+        'm': ['mul'],
+        'd': ['div'],
+        'f': ['free'],
+        'md': ['mul', 'div'],
+        'mf': ['mul', 'free'],
+        'df': ['div', 'free'],
+        'mdf': ['mul', 'div', 'free']
+        }
 
 @use_named_args(search_space)
 def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, gat_layer_6, gat_layer_7, gat_layer_8,
@@ -118,6 +126,7 @@ def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, ga
     batch_size=int(batch_size)
     energy_readout_node_list.append(1)
     force_readout_node_list.append(3)
+    head_list = head_list_dict[head_list]
 
     f = Fit(
             gat_node_dim_list=gat_node_dim_list,
@@ -141,7 +150,7 @@ def objective(gat_layers, gat_layer_2, gat_layer_3, gat_layer_4, gat_layer_5, ga
     loss = loss.item()
 
     with open('skopt_parameters.txt', mode='a') as f:
-        print('###################################################')
+        print('###################################################', file=f)
         print(f' loss: {loss}\n',
               f'gat_node_dim_list: {gat_node_dim_list}\n',
               f'energy_readout_node_list: {energy_readout_node_list}\n',
