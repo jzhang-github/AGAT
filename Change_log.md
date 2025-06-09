@@ -8,12 +8,15 @@
   - Return a new AGAT `Dataset`  object when indexing a `Dataset` with `int`, `slice`, `tuple`, and `list`.
   - A `Dataset` is returned of `ReadGraphs`, `BuildDatabase`, `concat_graphs`, `concat_dataset`, and `select_graphs_from_dataset_random`.
   - Add `__repr__` method to `Dataset`.
+  - Add `save` method to `Dataset`.
 
 - Optimize transfer learning. `agat/model/fit.py`
 
 - Optimize `agat/app/calculators.py`, `.../calculators.py`, and `.../ensembles.py`, and deprecate `agat/app/app.py`
 
 - Add `CrystalGraph` and `AseGraphTorch` to `agat/data/build_graph.py`.
+
+  
 
 # [v9.0.1](https://github.com/jzhang-github/AGAT/tree/v9.0.1)
 - Fix warning when using `torch.load`. [agat/lib/model_lib.py](https://github.com/jzhang-github/AGAT/blob/main/agat/lib/model_lib.py#L42-L44)

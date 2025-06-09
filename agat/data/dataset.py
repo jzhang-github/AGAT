@@ -6,11 +6,11 @@ Created on Sat Sep 30 23:54:56 2023
 """
 
 import torch
-from torch.utils.data import Dataset
+# from torch.utils.data import Dataset
 import dgl
-from dgl.data.utils import load_graphs
+from dgl.data.utils import load_graphs, save_graphs
 
-class Dataset(Dataset):
+class Dataset(torch.utils.data.Dataset):
     """Load the binary graphs.
 
     Example::
@@ -31,7 +31,8 @@ class Dataset(Dataset):
 
     """
     def __init__(self, dataset_path=None, from_file=True, graph_list=None, props=None):
-        super(Dataset, self).__init__()
+        # super(Dataset, self).__init__()
+        super().__init__()
         if from_file:
             self.dataset_path = dataset_path
             self.graph_list, self.props = load_graphs(self.dataset_path) # `props`: properties.
@@ -81,6 +82,9 @@ class Dataset(Dataset):
 
         """
         return len(self.graph_list)
+
+    def save(self, file='graphs.bin'):
+        save_graphs(file, self.graph_list, self.props)
 
 class Collater(object):
     """The collate function used in torch.utils.data.DataLoader: https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader

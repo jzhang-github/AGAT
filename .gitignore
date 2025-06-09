@@ -21,3 +21,5 @@ debug
 *.bin
 agat_model
 generator_config.json
+agat_model
+build
