@@ -1,92 +1,48 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Train AGAT model &mdash; AGAT 2022.10.04 documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=ecf52d7f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Predict_structural_file" href="Predict_structural_file.html" />
     <link rel="prev" title="Build database" href="Build_database.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> AGAT
           
-
-          
-            
-            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
-          
+          <a href="../index.html" class="icon icon-home">
+            AGAT
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a></li>
@@ -127,77 +83,38 @@
 <li class="toctree-l1"><a class="reference internal" href="../Change_log.html">Change log</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">AGAT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../Tutorial.html">Brief</a> &raquo;</li>
-        
-      <li>Train AGAT model</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Tutorial.html">Brief</a></li>
+      <li class="breadcrumb-item active">Train AGAT model</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/Tutorial/Train_AGAT_model.md.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="train-agat-model">
-<h1>Train AGAT model<a class="headerlink" href="#train-agat-model" title="Permalink to this heading">¶</a></h1>
+<h1>Train AGAT model<a class="headerlink" href="#train-agat-model" title="Link to this heading"></a></h1>
 <section id="python-script">
-<h2>Python script<a class="headerlink" href="#python-script" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">from</span> <span class="nn">agat.model</span> <span class="kn">import</span> <span class="n">Fit</span>
+<h2>Python script<a class="headerlink" href="#python-script" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fit</span>
 
 <span class="n">train_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># `0`: no train and validation output; `1`: Validation and test output; `2`: train, validation, and test output.</span>
@@ -241,7 +158,7 @@
 <p><strong>See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-train-config">default_train_config</a> to know how to use the parameter settings.</strong></p>
 </section>
 <section id="output">
-<h2>Output<a class="headerlink" href="#output" title="Permalink to this heading">¶</a></h2>
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
 <p>The file structure:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">.</span>
 <span class="go">├── agat_model</span>
@@ -263,151 +180,116 @@
 <span class="go">└── train.py</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <thead>
-<tr>
-<th>Folder/File</th>
-<th>File</th>
-<th>Explanation</th>
+<tr class="row-odd"><th class="head"><p>Folder/File</p></th>
+<th class="head"><p>File</p></th>
+<th class="head"><p>Explanation</p></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>agat_model</code></td>
-<td>───</td>
-<td>A directory for saving well-trained model.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">agat_model</span></code></p></td>
+<td><p>───</p></td>
+<td><p>A directory for saving well-trained model.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>agat_model.json</code></td>
-<td>An information file tells you how to build an AGAT model.</td>
+<tr class="row-odd"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agat_model.json</span></code></p></td>
+<td><p>An information file tells you how to build an AGAT model.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>agat.pth</code></td>
-<td>The saved AGAT model including model structure and parameters.</td>
+<tr class="row-even"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agat.pth</span></code></p></td>
+<td><p>The saved AGAT model including model structure and parameters.</p></td>
 </tr>
-<tr>
-<td>└──</td>
-<td><code>agat_state_dict.pth</code></td>
-<td>Model and optimizer state dict file including model parameters only. You will need to construct a model or optimizer before using this file.</td>
+<tr class="row-odd"><td><p>└──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agat_state_dict.pth</span></code></p></td>
+<td><p>Model and optimizer state dict file including model parameters only. You will need to construct a model or optimizer before using this file.</p></td>
 </tr>
-<tr>
-<td><code>dataset</code></td>
-<td>───</td>
-<td>A directory for the database.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dataset</span></code></p></td>
+<td><p>───</p></td>
+<td><p>A directory for the database.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>all_graphs.bin</code></td>
-<td>Binary file of the DGL graphs</td>
+<tr class="row-odd"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">all_graphs.bin</span></code></p></td>
+<td><p>Binary file of the DGL graphs</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>fname_prop.csv</code></td>
-<td>A file storing the structural file name, properties, and paths. This file will not be used in the training, but is useful for checking the raw data.</td>
+<tr class="row-even"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fname_prop.csv</span></code></p></td>
+<td><p>A file storing the structural file name, properties, and paths. This file will not be used in the training, but is useful for checking the raw data.</p></td>
 </tr>
-<tr>
-<td>└──</td>
-<td><code>graph_build_scheme.json</code></td>
-<td>An information file tells you how to build the database. When deploying the well-trained model, this file is useful to construct new graphs.</td>
+<tr class="row-odd"><td><p>└──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">graph_build_scheme.json</span></code></p></td>
+<td><p>An information file tells you how to build the database. When deploying the well-trained model, this file is useful to construct new graphs.</p></td>
 </tr>
-<tr>
-<td><code>fit.log</code></td>
-<td></td>
-<td>The training log file. The <code>train_config['verbose']</code> controls the verbosity.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fit.log</span></code></p></td>
+<td><p></p></td>
+<td><p>The training log file. The <code class="docutils literal notranslate"><span class="pre">train_config['verbose']</span></code> controls the verbosity.</p></td>
 </tr>
-<tr>
-<td><code>out_file</code></td>
-<td>───</td>
-<td>A directory to store ouputs of true and predicted properties. Folder name specified by <code>train_config['output_files']</code>.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">out_file</span></code></p></td>
+<td><p>───</p></td>
+<td><p>A directory to store ouputs of true and predicted properties. Folder name specified by <code class="docutils literal notranslate"><span class="pre">train_config['output_files']</span></code>.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>energy_test_pred_true.txt</code></td>
-<td>Predicted and true energy on the test dataset.</td>
+<tr class="row-even"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">energy_test_pred_true.txt</span></code></p></td>
+<td><p>Predicted and true energy on the test dataset.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>energy_val_pred_true.txt</code></td>
-<td>Predicted and true energy on the validation dataset.</td>
+<tr class="row-odd"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">energy_val_pred_true.txt</span></code></p></td>
+<td><p>Predicted and true energy on the validation dataset.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>force_test_pred_true.txt</code></td>
-<td>Predicted and true force on the test dataset.</td>
+<tr class="row-even"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">force_test_pred_true.txt</span></code></p></td>
+<td><p>Predicted and true force on the test dataset.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>force_val_pred_true.txt</code></td>
-<td>Predicted and true force on the validation dataset.</td>
+<tr class="row-odd"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">force_val_pred_true.txt</span></code></p></td>
+<td><p>Predicted and true force on the validation dataset.</p></td>
 </tr>
-<tr>
-<td>├──</td>
-<td><code>stress_test_pred_true.txt</code></td>
-<td>Predicted and true stress on the test dataset.</td>
+<tr class="row-even"><td><p>├──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stress_test_pred_true.txt</span></code></p></td>
+<td><p>Predicted and true stress on the test dataset.</p></td>
 </tr>
-<tr>
-<td>└──</td>
-<td><code>stress_val_pred_true.txt</code></td>
-<td>Predicted and true stress on the validation dataset.</td>
+<tr class="row-odd"><td><p>└──</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stress_val_pred_true.txt</span></code></p></td>
+<td><p>Predicted and true stress on the validation dataset.</p></td>
 </tr>
-<tr>
-<td><code>train.py</code></td>
-<td></td>
-<td>The training script.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">train.py</span></code></p></td>
+<td><p></p></td>
+<td><p>The training script.</p></td>
 </tr>
 </tbody>
-</table></section>
+</table>
+</section>
 </section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Predict_structural_file.html" class="btn btn-neutral float-right" title="Predict_structural_file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Build_database.html" class="btn btn-neutral float-left" title="Build database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Build_database.html" class="btn btn-neutral float-left" title="Build database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Predict_structural_file.html" class="btn btn-neutral float-right" title="Predict_structural_file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2023, ZHANG Jun, ZHAO Shijun
-
-    </p>
+    <p>&#169; Copyright 2023, ZHANG Jun, ZHAO Shijun.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

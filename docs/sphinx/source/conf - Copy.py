@@ -29,10 +29,7 @@ release = '2022.10.04'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    'myst_parser',       # 支持 Markdown
-    # 'sphinx.ext.autodoc', # 自动文档
-    'sphinx.ext.viewcode', # 显示源码
+extensions = ['recommonmark', 'sphinx_markdown_tables'
 ]
 source_suffix = {'.rst': 'restructuredtext','.md': 'markdown'}
 

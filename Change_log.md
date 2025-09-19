@@ -2,7 +2,7 @@
 
 - Optimize memory when training. The whole dataset is added to the `CPU` memory. The `Dataset` is loaded to `GPU`/`CPU` memory when batch training. Thus, less `GPU` memory is required.
 
-- Optimize the dataset management, so that one can manipulate dataset in the memory, instead of I/O on disk.
+- Optimize the dataset management so that one can manipulate the dataset in memory, instead of I/O on disk.
 
   - Deprecate `LoadDataset` and `Collater` in `agat/data/load_dataset.py`.
   - Return a new AGAT `Dataset`  object when indexing a `Dataset` with `int`, `slice`, `tuple`, and `list`.

@@ -20,3 +20,12 @@ make html
 
 
 
+### For windows:
+
+```shell
+.\make.bat clean
+.\make.bat html
+```
+
+
+

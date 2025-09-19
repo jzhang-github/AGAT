@@ -1,10 +1,12 @@
-###
-app
-###
+###############
+app_deprecated
+###############
+
+.. Warning :: This object will be deprecated in the near future. The ``AgatCalculator`` is moved to https://github.com/jzhang-github/AGAT/blob/main/agat/app/calculators.py
 
 AGAT model applications
 
-.. class:: AgatCalculator(Calculator)
+.. class:: AgatCalculator_deprecat(Calculator)
 
    Deploy AGAT model on ``ase.calculators``, which can relax and find the ground state energy of a structure.
 
@@ -24,7 +26,7 @@ AGAT model applications
          {}
          
 
-   .. method:: __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda', **kwargs)
+   .. method:: __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda', \**kwargs)
 
       :param model_save_dir: Directory storing the well-trained model.
       :type model_save_dir: str
@@ -32,8 +34,8 @@ AGAT model applications
       :type graph_build_scheme_dir: str
       :param device: model device, defaults to 'cuda'
       :type device: str, optional
-      :param **kwargs: other input arguments
-      :type **kwargs: dict
+      :param \**kwargs: other input arguments
+      :type \**kwargs: dict
       :return: Calculated properties.
       :rtype: dict
     

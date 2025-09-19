@@ -1,92 +1,48 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>build_dataset &mdash; AGAT 2022.10.04 documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=ecf52d7f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="load_dataset" href="load_dataset.html" />
     <link rel="prev" title="atomic_feature" href="atomic_feature.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> AGAT
           
-
-          
-            
-            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
-          
+          <a href="../../index.html" class="icon icon-home">
+            AGAT
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
@@ -130,74 +86,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Change_log.html">Change log</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">AGAT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../../API_Docs.html">API_Docs</a> &raquo;</li>
-        
-          <li><a href="../data.html">data</a> &raquo;</li>
-        
-      <li>build_dataset</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../API_Docs.html">API_Docs</a></li>
+          <li class="breadcrumb-item"><a href="../data.html">data</a></li>
+      <li class="breadcrumb-item active">build_dataset</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../../_sources/API_Docs/data/build_dataset.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="build-dataset">
-<h1>build_dataset<a class="headerlink" href="#build-dataset" title="Permalink to this heading">¶</a></h1>
+<h1>build_dataset<a class="headerlink" href="#build-dataset" title="Link to this heading"></a></h1>
 <p>The high-level API in this script is <a class="reference internal" href="#BuildDatabase" title="BuildDatabase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuildDatabase</span></code></a>.</p>
 <p>For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">database</span> <span class="o">=</span> <span class="n">BuildDatabase</span><span class="p">()</span>
@@ -207,14 +123,14 @@
 <p>See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html">https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html</a> for more info.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CrystalGraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrystalGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrystalGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph" title="Link to this definition"></a></dt>
 <dd><p>Read structural file and return a graph.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>The constructed crystal graph may be unreasonable for high-entropy materials, if the connections are analyzed by Voronoi method.</p>
 </div>
 <p>Code example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Crystal2raph</span> <span class="kn">import</span> <span class="n">CrystalGraph</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Crystal2raph</span><span class="w"> </span><span class="kn">import</span> <span class="n">CrystalGraph</span>
 <span class="n">cg</span> <span class="o">=</span> <span class="n">CrystalGraph</span><span class="p">(</span><span class="n">cutoff</span> <span class="o">=</span> <span class="mf">6.0</span><span class="p">,</span> <span class="n">mode_of_NN</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">adsorbate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">cg</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="s1">&#39;POSCAR&#39;</span><span class="p">)</span>
 </pre></div>
@@ -237,7 +153,7 @@ other modules.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.__init__" title="Link to this definition"></a></dt>
 <dd><blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">param <a href="#id1"><span class="problematic" id="id2">**</span></a>data_config<span class="colon">:</span></dt>
@@ -273,7 +189,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_adsorbate_bool">
-<span class="sig-name descname"><span class="pre">get_adsorbate_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_adsorbate_bool" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_adsorbate_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_adsorbate_bool" title="Link to this definition"></a></dt>
 <dd><p>Identify adsorbates based on elements： H and O.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -290,7 +206,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_crystal">
-<span class="sig-name descname"><span class="pre">get_crystal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_crystal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_crystal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_crystal" title="Link to this definition"></a></dt>
 <dd><p>Read structural file and return a pymatgen crystal object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -310,7 +226,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_1NN_pairs_voronoi">
-<span class="sig-name descname"><span class="pre">get_1NN_pairs_voronoi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_voronoi" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_1NN_pairs_voronoi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_voronoi" title="Link to this definition"></a></dt>
 <dd><p>The <code class="docutils literal notranslate"><span class="pre">get_connections_new()</span></code> of <code class="docutils literal notranslate"><span class="pre">VoronoiConnectivity</span></code> object is modified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -328,7 +244,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_1NN_pairs_distance">
-<span class="sig-name descname"><span class="pre">get_1NN_pairs_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_distance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_1NN_pairs_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_distance" title="Link to this definition"></a></dt>
 <dd><p>Find the index of senders, receivers, and distance between them based on the <code class="docutils literal notranslate"><span class="pre">distance_matrix</span></code> of pymargen crystal object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -346,7 +262,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_1NN_pairs_ase_distance">
-<span class="sig-name descname"><span class="pre">get_1NN_pairs_ase_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_ase_distance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_1NN_pairs_ase_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_ase_distance" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ase_atoms</strong> (<em>ase.atoms</em>) – <code class="docutils literal notranslate"><span class="pre">ase.atoms</span></code> object.</p>
@@ -363,7 +279,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_ndata">
-<span class="sig-name descname"><span class="pre">get_ndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_ndata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_ndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_ndata" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>crystal</strong> (<em>pymargen.core.structure</em>) – a pymatgen crystal object.</p>
@@ -379,7 +295,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_graph_from_ase">
-<span class="sig-name descname"><span class="pre">get_graph_from_ase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_ase" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_graph_from_ase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_ase" title="Link to this definition"></a></dt>
 <dd><p>Build graphs with <code class="docutils literal notranslate"><span class="pre">ase</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -396,7 +312,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_graph_from_pymatgen">
-<span class="sig-name descname"><span class="pre">get_graph_from_pymatgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_pymatgen" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_graph_from_pymatgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_pymatgen" title="Link to this definition"></a></dt>
 <dd><p>Build graphs with pymatgen.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -414,7 +330,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CrystalGraph.get_graph">
-<span class="sig-name descname"><span class="pre">get_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph" title="Link to this definition"></a></dt>
 <dd><p>This method can choose which graph-construction method is used, according to the <code class="docutils literal notranslate"><span class="pre">mode_of_NN</span></code> attribute.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -438,11 +354,11 @@ other modules.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ReadGraphs">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReadGraphs</span></span><a class="headerlink" href="#ReadGraphs" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReadGraphs</span></span><a class="headerlink" href="#ReadGraphs" title="Link to this definition"></a></dt>
 <dd><p>This object is used to build a list of graphs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ReadGraphs.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.__init__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**data_config</strong> (<em>dict</em>) – <p>Configuration file for building database. See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config</a> for the detailed info.</p>
@@ -463,7 +379,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ReadGraphs.read_batch_graphs">
-<span class="sig-name descname"><span class="pre">read_batch_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_index_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.read_batch_graphs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read_batch_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_index_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.read_batch_graphs" title="Link to this definition"></a></dt>
 <dd><p>Read graphs with batches.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -481,7 +397,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ReadGraphs.read_all_graphs">
-<span class="sig-name descname"><span class="pre">read_all_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ckpt_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.read_all_graphs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read_all_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ckpt_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReadGraphs.read_all_graphs" title="Link to this definition"></a></dt>
 <dd><p>Read all graphs specified in the csv file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -511,7 +427,7 @@ other modules.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="TrainValTestSplit">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TrainValTestSplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TrainValTestSplit" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TrainValTestSplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TrainValTestSplit" title="Link to this definition"></a></dt>
 <dd><p>Split the dataset.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -521,7 +437,7 @@ other modules.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ExtractVaspFiles">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExtractVaspFiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExtractVaspFiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles" title="Link to this definition"></a></dt>
 <dd><p>Extract VASP outputs for building AGAT database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -534,7 +450,7 @@ other modules.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="ExtractVaspFiles.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.__init__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**data_config</strong> (<em>dict</em>) – <p>Configuration file for building database. See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config</a> for the detailed info.</p>
@@ -545,7 +461,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ExtractVaspFiles.read_oszicar">
-<span class="sig-name descname"><span class="pre">read_oszicar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OSZICAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.read_oszicar" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read_oszicar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OSZICAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.read_oszicar" title="Link to this definition"></a></dt>
 <dd><p>Get the electronic steps of a VASP run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -562,7 +478,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ExtractVaspFiles.split_output">
-<span class="sig-name descname"><span class="pre">split_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.split_output" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">split_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.split_output" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>process_index</strong> (<em>int.</em>) – A number to index the process.</p>
@@ -572,7 +488,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ExtractVaspFiles.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.__call__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExtractVaspFiles.__call__" title="Link to this definition"></a></dt>
 <dd><p>The __call__ function</p>
 </dd></dl>
 
@@ -580,11 +496,11 @@ other modules.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="BuildDatabase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BuildDatabase</span></span><a class="headerlink" href="#BuildDatabase" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BuildDatabase</span></span><a class="headerlink" href="#BuildDatabase" title="Link to this definition"></a></dt>
 <dd><p>Build a database. Detailed information: <a class="reference external" href="https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html">https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html</a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="BuildDatabase.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BuildDatabase.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BuildDatabase.__init__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**data_config</strong> (<em>dict</em>) – <p>Configuration file for building database. See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config</a> for the detailed info.</p>
@@ -595,7 +511,7 @@ other modules.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="BuildDatabase.build">
-<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BuildDatabase.build" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BuildDatabase.build" title="Link to this definition"></a></dt>
 <dd><p>Run the construction process.</p>
 </dd></dl>
 
@@ -603,7 +519,7 @@ other modules.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="concat_graphs">
-<span class="sig-name descname"><span class="pre">concat_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">list_of_bin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#concat_graphs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">concat_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">list_of_bin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#concat_graphs" title="Link to this definition"></a></dt>
 <dd><p>Concat binary graph files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -627,51 +543,33 @@ other modules.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="load_dataset.html" class="btn btn-neutral float-right" title="load_dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="atomic_feature.html" class="btn btn-neutral float-left" title="atomic_feature" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="atomic_feature.html" class="btn btn-neutral float-left" title="atomic_feature" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="load_dataset.html" class="btn btn-neutral float-right" title="load_dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2023, ZHANG Jun, ZHAO Shijun
-
-    </p>
+    <p>&#169; Copyright 2023, ZHANG Jun, ZHAO Shijun.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
