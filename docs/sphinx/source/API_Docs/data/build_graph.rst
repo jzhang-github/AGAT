@@ -32,8 +32,8 @@ build_graph
 
    .. py:method:: __init__(self, **data_config)
 
-      :param **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
-      :type **data_config: str/dict
+      :param \*\*data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
+      :type \*\*data_config: str/dict
       :return: A ``DGL.graph``.
       :rtype: ``DGL.graph``.
 
@@ -144,8 +144,8 @@ build_graph
 
    .. py:method:: __init__(self, **data_config)
 
-      :param **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
-      :type **data_config: str/dict
+      :param \*\*data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
+      :type \*\*data_config: str/dict
 
 
    .. py:method:: reset(self)

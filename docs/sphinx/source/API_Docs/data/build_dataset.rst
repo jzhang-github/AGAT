@@ -21,7 +21,7 @@ build_dataset
 
    .. py:method:: __init__(self, **data_config)
 
-      :param dict **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
+      :param dict \*\*data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
 
          .. Hint::
             Mode of how to get the neighbors, which can be:
@@ -84,7 +84,7 @@ build_dataset
 
    .. method:: __init__(self, **data_config)
 
-      :param dict **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
+      :param dict \*\*data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
 
    .. py:method:: read_oszicar(self,fname='OSZICAR')
 
@@ -124,7 +124,7 @@ build_dataset
 
    .. method:: __init__(self, **data_config)
 
-      :param dict **data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
+      :param dict \*\*data_config: Configuration file for building database. See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config for the detailed info.
 
    .. py:method:: build(self)
 
@@ -136,8 +136,8 @@ build_dataset
 
    Concat binary graph files.
 
-   :param *list_of_bin: input file names of binary graphs.
-   :type *list_of_bin: strings
+   :param \*list_of_bin: input file names of binary graphs.
+   :type \*list_of_bin: strings
    :return: A new file is saved to the current directory: concated_graphs.bin.
    :rtype: None. A new file.
 
@@ -151,8 +151,8 @@ build_dataset
 
    Concat ``agat.dataset.Dataset`` in the RAM.
 
-   :param *list_of_datasets: a list of ``agat.dataset.Dataset`` object.
-   :type *list_of_datasets: ``agat.dataset.Dataset``
+   :param \*list_of_datasets: a list of ``agat.dataset.Dataset`` object.
+   :type \*list_of_datasets: ``agat.dataset.Dataset``
    :return: A new file is saved to the current directory: concated_graphs.bin.
    :param save_file: save to a new file or not. Default: False
    :type save_file: bool

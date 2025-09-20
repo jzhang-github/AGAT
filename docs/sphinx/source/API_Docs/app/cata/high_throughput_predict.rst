@@ -7,7 +7,7 @@ high_throughput_predict
 
    High-throughput predictions. 
 
-   .. function:: __init__(self, **hp_config)
+   .. function:: __init__(self, \*\*hp_config)
    
       See https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-high-throughput-config for more details.
 
@@ -19,7 +19,7 @@ high_throughput_predict
       .. Note:: `BFGS`_ optimizer is adopted.
       
       :param ase.atoms atoms_with_calculator: structure with ``ase.calculators`` attribute.
-      :param dict/args **kwargs: relaxation configuration.
+      :param dict/args \*\*kwargs: relaxation configuration.
       
          .. Hint:: You can find detailed settings of `BFGS`_. Here is the summary:
    
@@ -46,7 +46,7 @@ high_throughput_predict
       
       :param str formula: chemical formula.
       :param ase.calculators calculator: calculator.
-      :param dict/args **kwargs: relaxation configuration.
+      :param dict/args \*\*kwargs: relaxation configuration.
       
          .. Hint:: Details of relaxation configuration:
             

@@ -65,6 +65,7 @@ model
 
 
    .. py:method:: div(self, TorchTensor)
+      :no-index:
 
       Free head.
 

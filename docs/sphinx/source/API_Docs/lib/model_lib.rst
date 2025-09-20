@@ -42,8 +42,8 @@ model_lib
    :type model: PyTorch-based model.
    :param state_dict_save_dir: A directory to store the model state dict (model weigths and other input info), defaults to 'agat_model'
    :type state_dict_save_dir: str, optional
-   :param **kwargs: More information you want to save.
-   :type **kwargs: kwargs
+   :param \*\*kwargs: More information you want to save.
+   :type \*\*kwargs: kwargs
    :output: A file saved to the disk under ``model_save_dir``.
    :outputtype: A file
 

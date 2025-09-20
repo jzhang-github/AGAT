@@ -24,7 +24,7 @@ dataset
 
    .. py:method:: __init__(self, dataset_path=None, from_file=True, graph_list=None, props=None)
 
-      .. Tips::
+      .. Tip::
          You can load a dataset from file or from the RAM.
          From file: ``dataset_path='string_example'`` and ``from_file=True``
          From RAM: Specify ``from_file=False``, and provide ``graph_list`` and ``props``.

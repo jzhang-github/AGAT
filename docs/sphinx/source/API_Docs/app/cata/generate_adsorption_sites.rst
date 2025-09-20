@@ -176,6 +176,7 @@ Generate adsorption configurations on [111] surface of FCC metals.
 
 
 .. data:: adsorbate_poscar
+   :no-index:
 
    Structural positions with `VASP`_ format.
    

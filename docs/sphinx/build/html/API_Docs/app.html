@@ -70,13 +70,14 @@
 <li class="toctree-l4"><a class="reference internal" href="app/calculators.html">calculators</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app/cata.html">cata</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app/ase_torch.html">ase_torch</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app/ensembles.html"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="app/optimizers.html"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/ensembles.html">ensembles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/optimizers.html">optimizers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app/app_deprecated.html">app_deprecated</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../API_Docs.html#bin">bin</a></li>
 </ul>
 </li>
 </ul>
@@ -187,7 +188,6 @@
 <li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.write_file_with_adsorption_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.write_file_with_adsorption_sites()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#adsorbate_poscar"><code class="docutils literal notranslate"><span class="pre">adsorbate_poscar</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html">high_throughput_dft_calculation</a><ul>
@@ -229,25 +229,33 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="app/ase_torch.html">ase_torch</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="app/ase_torch.html">ase_torch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/ase_abc.html">ase_abc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/ase_torch/ase_abc.html#Optimizable"><code class="docutils literal notranslate"><span class="pre">Optimizable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app/ase_torch/ase_abc.html#Optimizable.converged"><code class="docutils literal notranslate"><span class="pre">Optimizable.converged()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="app/ensembles.html"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#AgatCalculatora.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.implemented_properties</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#AgatCalculatora.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.default_parameters</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#AgatCalculatora.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.__init__()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#AgatCalculatora.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.load_graph_build_scheme()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#AgatCalculatora.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.calculate()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="app/optimizers.html"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app/optimizers.html#AgatCalculatorb.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.implemented_properties</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/optimizers.html#AgatCalculatorb.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.default_parameters</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/optimizers.html#AgatCalculatorb.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.__init__()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/optimizers.html#AgatCalculatorb.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.load_graph_build_scheme()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/optimizers.html#AgatCalculatorb.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.calculate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/ase_dyn.html">ase_dyn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/ase_torch/ase_dyn.html#MDMinTorch"><code class="docutils literal notranslate"><span class="pre">MDMinTorch</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/ase_filters.html">ase_filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/bfgs_torch.html">bfgs_torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/optimize_torch.html">optimize_torch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app/ensembles.html">ensembles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#ModifiedNPT"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/ensembles.html#ModifiedNPT.classname"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.classname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/ensembles.html#ModifiedNPT.__init__"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/ensembles.html#ModifiedNPT.run"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app/optimizers.html">optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app/app_deprecated.html">app_deprecated</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.implemented_properties</span></code></a></li>

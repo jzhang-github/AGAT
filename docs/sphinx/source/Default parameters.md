@@ -46,17 +46,17 @@ A dictionary defines how to build a database.
 | Parameter                  | Default value | Alternative(s) | Explanation |
 | -------------------------  | ------------- | ------------ | ----------- |
 | `species`                  | `default_elements` above | A list of element symbols | A list of elements that are used to encode atomic features. |
-| `path_file`                | 'paths.log'   | `str `         | A file of absolute paths where OUTCAR and XDATCAR files exist. | 
-| `build_properties`         |  `default_build_properties` above | See [default_build_properties](#default_build_properties) | Properties needed to be built into graph. | 
-| `topology_only`         |  `False` | `True` | Build graph with topology connections only. The `energy`, `forces`, `cell`, and `stress` will not be included. This setting has higher priority than [default_build_properties](#default_build_properties)  | 
+| `path_file`                | 'paths.log'   | `str `         | A file of absolute paths where OUTCAR and XDATCAR files exist. |
+| `build_properties`         |  `default_build_properties` above | See [default_build_properties](#`default_build_properties `) | Properties needed to be built into graph. |
+| `topology_only`         |  `False` | `True` | Build graph with topology connections only. The `energy`, `forces`, `cell`, and `stress` will not be included. This setting has higher priority than [default_build_properties](#`default_build_properties `) |
 | `dataset_path`             | 'dataset'     | A `str`      | A directory contains the database. |
 | `mode_of_NN`               | 'ase_natural_cutoffs' | 'ase_natural_cutoffs', 'pymatgen_dist', 'ase_dist', and 'voronoi' | The mode of how to detect connection between atoms. Note that `pymatgen` is much faster than `ase`. |
-| `cutoff`                   | 5.0           | A `float`    | Cutoff distance to identify connections between atoms. Deprecated if `mode_of_NN` is `'ase_natural_cutoffs'`|   
-| `load_from_binary`         | `False`       | `True` | Read graphs from binary graphs that are constructed before. If this variable is `True`, these above variables will be depressed. | 
+| `cutoff`                   | 5.0           | A `float`    | Cutoff distance to identify connections between atoms. Deprecated if `mode_of_NN` is `'ase_natural_cutoffs'`|
+| `load_from_binary`         | `False`       | `True` | Read graphs from binary graphs that are constructed before. If this variable is `True`, these above variables will be depressed. |
 | `num_of_cores`             | 2             | `int`         | How many cores are used to extract vasp files and build graphs. |
-| `super_cell`               | `False`       | `True`        | When building graphs, small cell may have problems to find neighbors. Specify this parameter as `True` to repeat cell to avoid such problems | 
-| `has_adsorbate`            | `False`       | `True`        | Include adsorbate information when building graphs. For now, only `H` and `O` atoms are considered as adsorbate atoms. | |
-| `keep_readable_structural_files` | `False`       | `True`        | Massive number of structural files (POSCARs) under `dataset_path` are generated when building graphs, you can choose to keep them or not. | 
+| `super_cell`               | `False`       | `True`        | When building graphs, small cell may have problems to find neighbors. Specify this parameter as `True` to repeat cell to avoid such problems |
+| `has_adsorbate`            | `False`       | `True`        | Include adsorbate information when building graphs. For now, only `H` and `O` atoms are considered as adsorbate atoms. |
+| `keep_readable_structural_files` | `False`       | `True`        | Massive number of structural files (POSCARs) under `dataset_path` are generated when building graphs, you can choose to keep them or not. |
 | `mask_similar_frames`      | `False`       | `True`        | In VASP calculations, the energy optimization generate many frames that have similar geometry and total energies, you can extract only some of them by specifying this parameter and `energy_stride` below. |
 | `mask_reversed_magnetic_moments`      | `False`       | `float`        | Frames with atomic magnetic moments lower than this value will be masked. |
 | `scale_prop`               | `False`       | `True`        | Scale the properties. This function seems to be deprecated. I need to double-check the source code first, so do not use it. |

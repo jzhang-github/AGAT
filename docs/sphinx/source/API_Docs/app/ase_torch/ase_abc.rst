@@ -8,7 +8,4 @@ ase_abc
 
    .. method:: converged(self, forces, fmax)
 
-      .. Note::
-      Replace ``return np.linalg.norm(forces, axis=1).max() < fmax``
-      with
-      ``return torch.linalg.norm(forces, dim=1).max() < fmax``
+      .. Note:: Replace ``return np.linalg.norm(forces, axis=1).max() < fmax`` with ``return torch.linalg.norm(forces, dim=1).max() < fmax``

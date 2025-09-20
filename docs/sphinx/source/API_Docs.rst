@@ -39,7 +39,7 @@ app
    API_Docs/app
 
 
-app
+bin
 -------------
 .. toctree::
    :maxdepth: 6

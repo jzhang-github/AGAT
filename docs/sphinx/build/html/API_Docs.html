@@ -81,6 +81,10 @@
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/app.html">app</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#bin">bin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/bin.html">bin</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -151,7 +155,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="API_Docs/lib/file_lib.html">file_lib</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/lib/file_lib.html#generate_file_name"><code class="docutils literal notranslate"><span class="pre">generate_file_name()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/lib/file_lib.html#file_exit"><code class="docutils literal notranslate"><span class="pre">file_exit()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/lib/file_lib.html#modify_INCAR"><code class="docutils literal notranslate"><span class="pre">modify_INCAR()</span></code></a></li>
 </ul>
 </li>
@@ -210,20 +213,42 @@
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/data/atomic_feature.html#get_atomic_feature_onehot"><code class="docutils literal notranslate"><span class="pre">get_atomic_feature_onehot()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="API_Docs/data/build_dataset.html">build_dataset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph"><code class="docutils literal notranslate"><span class="pre">CrystalGraph</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.__init__"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_adsorbate_bool"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_adsorbate_bool()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_crystal"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_crystal()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_1NN_pairs_voronoi"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_1NN_pairs_voronoi()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_1NN_pairs_distance"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_1NN_pairs_distance()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_1NN_pairs_ase_distance"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_1NN_pairs_ase_distance()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_ndata"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_ndata()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_graph_from_ase"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_graph_from_ase()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_graph_from_pymatgen"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_graph_from_pymatgen()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#CrystalGraph.get_graph"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_graph()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/data/build_graph.html">build_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph"><code class="docutils literal notranslate"><span class="pre">CrystalGraph</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.__init__"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_adsorbate_bool"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_adsorbate_bool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_crystal"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_crystal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_1NN_pairs_voronoi"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_1NN_pairs_voronoi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_1NN_pairs_distance"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_1NN_pairs_distance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_1NN_pairs_ase_distance"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_1NN_pairs_ase_distance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_ndata"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_ndata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_graph_from_ase"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_graph_from_ase()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_graph_from_pymatgen"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_graph_from_pymatgen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#CrystalGraph.get_graph"><code class="docutils literal notranslate"><span class="pre">CrystalGraph.get_graph()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.__init__"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.reset"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_ndata"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_ndata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_adsorbate_bool"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_adsorbate_bool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_scaled_positions_wrap"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_scaled_positions_wrap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_scaled_positions"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_scaled_positions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.fractional2cartesian"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.fractional2cartesian()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.safe_to_use"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.safe_to_use()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_pair_distances"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_pair_distances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.update_pair_distances"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.update_pair_distances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_all_possible_distances"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_all_possible_distances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_init_connections"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_init_connections()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.update_connections"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.update_connections()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.build"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.build()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.update"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_graph.html#AseGraphTorch.get_graph"><code class="docutils literal notranslate"><span class="pre">AseGraphTorch.get_graph()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/data/build_dataset.html">build_dataset</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#ReadGraphs"><code class="docutils literal notranslate"><span class="pre">ReadGraphs</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#ReadGraphs.__init__"><code class="docutils literal notranslate"><span class="pre">ReadGraphs.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/data/build_dataset.html#ReadGraphs.read_batch_graphs"><code class="docutils literal notranslate"><span class="pre">ReadGraphs.read_batch_graphs()</span></code></a></li>
@@ -244,6 +269,44 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#concat_graphs"><code class="docutils literal notranslate"><span class="pre">concat_graphs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#concat_dataset"><code class="docutils literal notranslate"><span class="pre">concat_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#select_graphs_random"><code class="docutils literal notranslate"><span class="pre">select_graphs_random()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#select_graphs_from_dataset_random"><code class="docutils literal notranslate"><span class="pre">select_graphs_from_dataset_random()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/build_dataset.html#save_dataset"><code class="docutils literal notranslate"><span class="pre">save_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/data/dataset.html">dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/dataset.html#Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/dataset.html#Dataset.__init__"><code class="docutils literal notranslate"><span class="pre">Dataset.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/dataset.html#getitem__"><code class="docutils literal notranslate"><span class="pre">__getitem__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/dataset.html#repr__"><code class="docutils literal notranslate"><span class="pre">__repr__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/dataset.html#len__"><code class="docutils literal notranslate"><span class="pre">__len__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/dataset.html#save"><code class="docutils literal notranslate"><span class="pre">save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/dataset.html#DCollater"><code class="docutils literal notranslate"><span class="pre">DCollater</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/dataset.html#DCollater.__init__"><code class="docutils literal notranslate"><span class="pre">DCollater.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/dataset.html#DCollater.__call__"><code class="docutils literal notranslate"><span class="pre">DCollater.__call__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/data/generate_database.html">generate_database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator"><code class="docutils literal notranslate"><span class="pre">DataGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.__init__"><code class="docutils literal notranslate"><span class="pre">DataGenerator.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.set_structure"><code class="docutils literal notranslate"><span class="pre">DataGenerator.set_structure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.get_INCAR"><code class="docutils literal notranslate"><span class="pre">DataGenerator.get_INCAR()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.get_KPOINTS"><code class="docutils literal notranslate"><span class="pre">DataGenerator.get_KPOINTS()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.get_POTCAR"><code class="docutils literal notranslate"><span class="pre">DataGenerator.get_POTCAR()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.apply_strain"><code class="docutils literal notranslate"><span class="pre">DataGenerator.apply_strain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.apply_perturbation"><code class="docutils literal notranslate"><span class="pre">DataGenerator.apply_perturbation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.create_vacancy"><code class="docutils literal notranslate"><span class="pre">DataGenerator.create_vacancy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.create_species_vacancy"><code class="docutils literal notranslate"><span class="pre">DataGenerator.create_species_vacancy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.relocate_atoms"><code class="docutils literal notranslate"><span class="pre">DataGenerator.relocate_atoms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.static"><code class="docutils literal notranslate"><span class="pre">DataGenerator.static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/data/generate_database.html#DataGenerator.aimd"><code class="docutils literal notranslate"><span class="pre">DataGenerator.aimd()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="API_Docs/data/load_dataset.html">load_dataset</a><ul>
@@ -284,7 +347,6 @@
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/model/model.html#PotentialModel.__init__"><code class="docutils literal notranslate"><span class="pre">PotentialModel.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/model/model.html#PotentialModel.mul"><code class="docutils literal notranslate"><span class="pre">PotentialModel.mul()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/model/model.html#PotentialModel.div"><code class="docutils literal notranslate"><span class="pre">PotentialModel.div()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/model/model.html#id0"><code class="docutils literal notranslate"><span class="pre">PotentialModel.div()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/model/model.html#PotentialModel.get_head_mechanism"><code class="docutils literal notranslate"><span class="pre">PotentialModel.get_head_mechanism()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/model/model.html#PotentialModel.forward"><code class="docutils literal notranslate"><span class="pre">PotentialModel.forward()</span></code></a></li>
 </ul>
@@ -379,7 +441,6 @@
 <li class="toctree-l5"><a class="reference internal" href="API_Docs/app/cata/generate_adsorption_sites.html#AddAtoms.write_file_with_adsorption_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.write_file_with_adsorption_sites()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="API_Docs/app/cata/generate_adsorption_sites.html#adsorbate_poscar"><code class="docutils literal notranslate"><span class="pre">adsorbate_poscar</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/app/cata/high_throughput_dft_calculation.html">high_throughput_dft_calculation</a><ul>
@@ -421,25 +482,33 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="API_Docs/app/ase_torch.html">ase_torch</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/app/ase_torch.html">ase_torch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ase_torch/ase_abc.html">ase_abc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/app/ase_torch/ase_abc.html#Optimizable"><code class="docutils literal notranslate"><span class="pre">Optimizable</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="API_Docs/app/ase_torch/ase_abc.html#Optimizable.converged"><code class="docutils literal notranslate"><span class="pre">Optimizable.converged()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="API_Docs/app/ensembles.html"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ensembles.html#AgatCalculatora.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.implemented_properties</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ensembles.html#AgatCalculatora.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.default_parameters</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ensembles.html#AgatCalculatora.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.__init__()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ensembles.html#AgatCalculatora.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.load_graph_build_scheme()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ensembles.html#AgatCalculatora.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculatora.calculate()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="API_Docs/app/optimizers.html"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/optimizers.html#AgatCalculatorb.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.implemented_properties</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/optimizers.html#AgatCalculatorb.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.default_parameters</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/optimizers.html#AgatCalculatorb.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.__init__()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/optimizers.html#AgatCalculatorb.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.load_graph_build_scheme()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/optimizers.html#AgatCalculatorb.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorb.calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ase_torch/ase_dyn.html">ase_dyn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/app/ase_torch/ase_dyn.html#MDMinTorch"><code class="docutils literal notranslate"><span class="pre">MDMinTorch</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ase_torch/ase_filters.html">ase_filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ase_torch/bfgs_torch.html">bfgs_torch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ase_torch/optimize_torch.html">optimize_torch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/app/ensembles.html">ensembles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_Docs/app/ensembles.html#ModifiedNPT"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/app/ensembles.html#ModifiedNPT.classname"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.classname</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/app/ensembles.html#ModifiedNPT.__init__"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_Docs/app/ensembles.html#ModifiedNPT.run"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/app/optimizers.html">optimizers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="API_Docs/app/app_deprecated.html">app_deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="API_Docs/app/app_deprecated.html#AgatCalculator_deprecat"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_Docs/app/app_deprecated.html#AgatCalculator_deprecat.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.implemented_properties</span></code></a></li>
@@ -451,6 +520,18 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="bin">
+<h2>bin<a class="headerlink" href="#bin" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API_Docs/bin.html">bin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/bin/agat_bayesian_opt.html">agat_bayesian_opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API_Docs/bin/bayesian_skopt.html">bayesian_skopt</a></li>
 </ul>
 </li>
 </ul>
