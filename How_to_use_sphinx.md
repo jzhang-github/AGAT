@@ -29,3 +29,10 @@ make html
 
 
 
+## Sphinx style basics
+
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+
+
+
+Go to OneNote for more details.

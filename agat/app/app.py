@@ -16,7 +16,7 @@ from ase.calculators.calculator import Calculator
 from ..data.build_dataset import CrystalGraph
 from ..lib.model_lib import load_model
 
-class AgatCalculator(Calculator):
+class AgatCalculator_deprecated(Calculator):
     """Calculator with ASE module.
 
     :param model_save_dir: Directory storing the well-trained model.

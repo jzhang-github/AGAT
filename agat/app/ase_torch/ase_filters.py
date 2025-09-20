@@ -8,7 +8,7 @@ from ase.calculators.calculator import PropertyNotImplementedError
 from ase.stress import full_3x3_to_voigt_6_stress, voigt_6_to_full_3x3_stress
 from ase.utils import deprecated, lazyproperty
 # from ase.utils.abc import Optimizable
-from acatal.ase_torch.ase_abc import Optimizable
+from agat.app.ase_torch.ase_abc import Optimizable
 
 __all__ = [
     'Filter', 'StrainFilter', 'UnitCellFilter', 'FrechetCellFilter',

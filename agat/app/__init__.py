@@ -6,4 +6,4 @@ Created on Tue Aug 15 11:41:20 2023
 """
 
 # import important object.
-from .app import AgatCalculator
+from .calculators import AgatCalculator

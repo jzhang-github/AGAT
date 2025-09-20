@@ -36,7 +36,7 @@ The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is availa
 
 
 
-- [Customized installation](Customized_installation.md)
+- More installation options: [**Customized installation**](Customized_installation.md)
 
 
 

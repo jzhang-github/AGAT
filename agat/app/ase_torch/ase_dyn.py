@@ -154,7 +154,8 @@ class Dynamics:
 #     def load(self):
 #         return pickle.load(open(self.restart))
     
-from acatal.ase_torch.optimize_torch import Optimizer
+# from acatal.ase_torch.optimize_torch import Optimizer
+from agat.app.ase_torch.optimize_torch import Optimizer
 from typing import IO, Optional, Union
 
 # import numpy as np
