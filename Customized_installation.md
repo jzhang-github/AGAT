@@ -5,7 +5,7 @@
 
 Compatibility
 
-From 2024, DGL became poor in compatibility with CUDA and Windows. This project will transfer to PyG in the future.
+
 
 | OS      | Python | DGL   | PyTorch | CUDA |
 | ------- | ------ | ----- | ------- | ---- |
@@ -24,7 +24,7 @@ The `DGL` package has limited compatibility with Windows, particularly for CUDA 
 
 - Create a new environment   
   ```console
-  conda create -n agat python==3.10
+  conda create -n agat python==3.11
   ```
 
 - Activate the environment  
@@ -37,20 +37,17 @@ The `DGL` package has limited compatibility with Windows, particularly for CUDA 
   For example (GPU):
   
   ```console
-  conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4 -c pytorch -c nvidia
   conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia
   ```
   
 - Install packaging: `pip install packaging`
   
 - Install [dgl](https://www.dgl.ai/).   
-  Please navigate to the [Get Started](https://www.dgl.ai/pages/start.html) page of [dgl](https://www.dgl.ai/). 
-  For example (GPU):  
-
+  
   ```console
-  conda install dgl=2.0 -c dglteam
+  pip install  dgl -f https://data.dgl.ai/wheels/cu121/repo.html
   ```
-
+  
 - Install ASE: `pip install ase`.
 
 - Install AGAT package
