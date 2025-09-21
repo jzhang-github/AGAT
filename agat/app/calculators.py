@@ -283,6 +283,7 @@ class AgatEnsembleCalculator(Calculator):
         self.step = start_step
         self.device = torch.device(device)
         self.model_list = load_model_ensemble(self.model_ensemble_dir, self.device)
+        self.graph_build_scheme_dir = graph_build_scheme_dir
         if graph_build_scheme:
             self.graph_build_scheme = config_parser(graph_build_scheme)
         else:
@@ -529,9 +530,10 @@ class OnTheFlyCalculator(Calculator):
             if not os.path.exists(work_dir):
                 os.makedirs(work_dir)
 
-            self.prepare_vasp_calculation(self.atoms)
+            # self.prepare_vasp_calculation(self.atoms)
 
             if self.use_vasp:
+                self.prepare_vasp_calculation(self.atoms)
                 self.run_vasp(work_dir) # run vasp
 
                 # read dft results
@@ -555,4 +557,3 @@ self.force_std, self.stress_std),
         self.step += 1
 
         # print(self.energy_std, self.force_std, self.stress_std)
-

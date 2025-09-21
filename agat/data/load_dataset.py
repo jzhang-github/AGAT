@@ -5,7 +5,7 @@ Created on Tue Dec 10 15:13:44 2024
 @author: ZHANGJUN
 """
 
-''' For compatibility with earlier versions '''
+''' !!! For compatibility with earlier versions !!! '''
 
 from warnings import warn
 import torch

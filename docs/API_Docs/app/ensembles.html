@@ -117,7 +117,68 @@
              
   <section id="ensembles">
 <h1>ensembles<a class="headerlink" href="#ensembles" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Modified <code class="docutils literal notranslate"><span class="pre">ase.md</span></code> ensembles to deploy the AGAT model.</p>
+</div>
+<p>Examples of using ensembles:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###############################################################################</span>
+<span class="c1"># Detect GPU card</span>
+<span class="c1">###############################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA is available.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of GPUs: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPU Name: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA is NOT available.&quot;</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Modified ASE ensembles for AGAT</span>
+<span class="c1">###############################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dgl</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                                                               <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">graph</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DGL graph device: </span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.md.npt</span><span class="w"> </span><span class="kn">import</span> <span class="n">NPT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.md</span><span class="w"> </span><span class="kn">import</span> <span class="n">MDLogger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.ensembles</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModifiedNPT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgatEnsembleCalculator</span>
+<span class="n">model_ensemble_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatEnsembleCalculator</span><span class="p">(</span><span class="n">model_ensemble_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                                  <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">atoms</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">calculator</span><span class="p">)</span>
+
+<span class="n">dyn</span> <span class="o">=</span> <span class="n">ModifiedNPT</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span>
+          <span class="n">timestep</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span>
+          <span class="n">temperature_K</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+          <span class="n">ttime</span> <span class="o">=</span> <span class="mi">25</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span>
+          <span class="n">pfactor</span> <span class="o">=</span> <span class="mi">75</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span>
+          <span class="n">externalstress</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="n">mask</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span>
+          <span class="n">trajectory</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;md_NPT.traj&#39;</span><span class="p">))</span>
+
+<span class="n">dyn</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MDLogger</span><span class="p">(</span><span class="n">dyn</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;md_NPT.log&#39;</span><span class="p">),</span>
+                    <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">stress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">peratom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">),</span>
+           <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="ModifiedNPT">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ModifiedNPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NPT</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModifiedNPT" title="Link to this definition"></a></dt>

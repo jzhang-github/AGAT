@@ -226,6 +226,7 @@ class MDMinTorch(Optimizer):
         if forces is None:
             forces = optimizable.get_forces()
 
+        forces = torch.tensor(forces)
         if self.v is None:
             # self.v = np.zeros((len(optimizable), 3))
             self.v = torch.zeros((len(optimizable), 3), device=self.device)

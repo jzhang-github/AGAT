@@ -49,6 +49,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-with-conda-environment-configuration-file">1. Install with conda environment configuration file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-manually-with-conda">2. Install manually with conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-with-conda-environment-on-linux">3. Install with Conda environment on Linux.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-with-conda-environment-on-windows">4. Install with Conda environment on Windows.</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Quick%20start.html">Quick start</a></li>
@@ -108,19 +112,92 @@
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>agat_linux_gpu_cu124.yml
 </pre></div>
 </div>
-<p>or</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>agat_win_cpu.yml
-</pre></div>
-</div>
 </li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code> to check installed environments.</p></li>
 </ul>
 </section>
 <section id="install-manually-with-conda">
 <h2>2. Install manually with <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a><a class="headerlink" href="#install-manually-with-conda" title="Link to this heading"></a></h2>
+<p>Examined dependency compatibility:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>OS</p></th>
+<th class="head"><p>Python</p></th>
+<th class="head"><p>DGL</p></th>
+<th class="head"><p>PyTorch</p></th>
+<th class="head"><p>numpy</p></th>
+<th class="head"><p>ASE</p></th>
+<th class="head"><p>CUDA</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Windows CPU</p></td>
+<td><p>3.10</p></td>
+<td><p>2.2.1</p></td>
+<td><p>2.3.0</p></td>
+<td><p>2.0.1</p></td>
+<td><p>3.23.0</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux GPU</p></td>
+<td><p>3.12</p></td>
+<td><p>2.4.0</p></td>
+<td><p>2.4</p></td>
+<td><p>2.0.1</p></td>
+<td><p>3.23.0</p></td>
+<td><p>12.4</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="install-with-conda-environment-on-linux">
+<h2>3. Install with <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a> environment on Linux.<a class="headerlink" href="#install-with-conda-environment-on-linux" title="Link to this heading"></a></h2>
 <ul>
 <li><p>Create a new environment</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create -n agat python==3.12</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">agat</span> <span class="n">python</span><span class="o">==</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+</li>
+<li><p>Activate the environment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">agat</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install <a class="reference external" href="https://pytorch.org/">PyTorch</a>,
+Navigate to the <a class="reference external" href="https://pytorch.org/get-started/locally/#start-locally">installation page</a> and choose your platform. For example (GPU):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu126</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.
+Please navigate to the <a class="reference external" href="https://www.dgl.ai/pages/start.html">Get Started</a> page of <a class="reference external" href="https://www.dgl.ai/">dgl</a>. For example (GPU):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span>  <span class="n">dgl</span> <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">dgl</span><span class="o">.</span><span class="n">ai</span><span class="o">/</span><span class="n">wheels</span><span class="o">/</span><span class="n">cu124</span><span class="o">/</span><span class="n">repo</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install AGAT package</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">agat</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install CUDA and CUDNN [<strong>Optional</strong>].</p>
+<ul class="simple">
+<li><p>For HPC with Linux OS, you may load CUDA by checking <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">av</span></code>, or you can contact your administrator for help.</p></li>
+<li><p>Or download manually:</p>
+<ul>
+<li><p><a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA Toolkit</a></p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/cudnn">cuDNN</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="install-with-conda-environment-on-windows">
+<h3>4. Install with <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a> environment on Windows.<a class="headerlink" href="#install-with-conda-environment-on-windows" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">DGL</span></code> package has limited compatibility with Windows, particularly for CUDA versions. You are highly recommended to use the CPU version on Windows.</p>
+<ul>
+<li><p>Create a new environment</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create -n agat python==3.10</span>
 </pre></div>
 </div>
 </li>
@@ -129,33 +206,27 @@
 </pre></div>
 </div>
 </li>
-<li><p>Install <a class="reference external" href="https://pytorch.org/">PyTorch</a></p>
-<p>Navigate to the <a class="reference external" href="https://pytorch.org/get-started/locally/#start-locally">installation page</a> and choose you platform.
+<li><p>Install <a class="reference external" href="https://pytorch.org/">PyTorch</a>,<br />
+Navigate to the <a class="reference external" href="https://pytorch.org/get-started/locally/#start-locally">installation page</a> and choose your platform.
 For example (GPU):</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 cpuonly -c pytorch</span>
 </pre></div>
 </div>
 </li>
-<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.<br />
-Please navigate to the <a class="reference external" href="https://www.dgl.ai/pages/start.html">Get Started</a> page of <a class="reference external" href="https://www.dgl.ai/">dgl</a>.
-For example (GPU):</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install  dgl -f https://data.dgl.ai/wheels/cu124/repo.html</span>
+<li><p>Install packaging: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">packaging</span></code></p></li>
+<li><p>Install <a class="reference external" href="https://www.dgl.ai/">dgl</a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
+<li><p>Install ASE: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ase</span></code>.</p></li>
 <li><p>Install AGAT package</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install agat</span>
 </pre></div>
 </div>
 </li>
-<li><p>Install CUDA and CUDNN [<strong>Optional</strong>].</p>
-<ul class="simple">
-<li><p>For HPC, you may load CUDA by checking <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">av</span></code>, or you can contact your administrator for help.</p></li>
-<li><p><a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA Toolkit</a></p></li>
-<li><p><a class="reference external" href="https://developer.nvidia.com/cudnn">cuDNN</a></p></li>
 </ul>
-</li>
-</ul>
+</section>
 </section>
 </section>
 

@@ -117,7 +117,82 @@
              
   <section id="calculators">
 <h1>calculators<a class="headerlink" href="#calculators" title="Link to this heading"></a></h1>
-<p>AGAT model applications</p>
+<p>Examples of using calculators:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###############################################################################</span>
+<span class="c1"># Detect GPU card</span>
+<span class="c1">###############################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA is available.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of GPUs: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPU Name: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA is NOT available.&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">dgl</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                                                               <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">graph</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DGL graph device: </span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># AGAT calculators with torch</span>
+<span class="c1">###############################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgatCalculator</span><span class="p">,</span> <span class="n">AgatCalculatorAseGraphTorch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgatCalculatorAseGraphTorchNumpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgatEnsembleCalculator</span><span class="p">,</span> <span class="n">OnTheFlyCalculator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span><span class="p">,</span> <span class="n">write</span>
+
+<span class="c1"># --- 1 --- AgatCalculator</span>
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;agat_model_1&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculator</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculator</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
+
+<span class="c1"># --- 2 --- AgatCalculatorAseGraphTorch</span>
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;agat_model_1&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculatorAseGraphTorch</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                                       <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculator</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
+
+<span class="c1"># --- 3 --- AgatCalculatorAseGraphTorchNumpy</span>
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;agat_model_1&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculatorAseGraphTorchNumpy</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span>
+                                            <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                                            <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculator</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
+
+<span class="c1"># --- 4 --- AgatEnsembleCalculator</span>
+<span class="n">model_ensemble_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatEnsembleCalculator</span><span class="p">(</span><span class="n">model_ensemble_dir</span><span class="p">,</span> <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                                  <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculator</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
+
+<span class="c1"># --- 5 --- OnTheFlyCalculator</span>
+<span class="c1"># model_ensemble_dir = os.path.join(&#39;potential_models&#39;)</span>
+<span class="c1"># graph_build_scheme_dir = os.path.join(&#39;potential_models&#39;)</span>
+<span class="c1"># atoms = read(os.path.join(&#39;potential_models&#39;, &#39;POSCAR&#39;))</span>
+<span class="c1"># calculator=OnTheFlyCalculator(model_ensemble_dir, graph_build_scheme_dir,</span>
+<span class="c1">#                                   device=device)</span>
+<span class="c1"># calculator.calculate(atoms)</span>
+<span class="c1"># print(calculator.results)</span>
+</pre></div>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="AgatCalculator">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AgatCalculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Calculator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AgatCalculator" title="Link to this definition"></a></dt>
@@ -170,20 +245,6 @@
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_save_dir</span> <span class="o">=</span> <span class="s1">&#39;agat_model&#39;</span>
-<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span>
-<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;CONTCAR&#39;</span><span class="p">)</span>
-<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculator</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span>
-                          <span class="n">graph_build_scheme_dir</span><span class="p">)</span>
-<span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
-<span class="n">dyn</span> <span class="o">=</span> <span class="n">BFGS</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">&#39;test.traj&#39;</span><span class="p">)</span>
-<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span>
-
-<span class="n">traj</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;test.traj&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">&quot;XDATCAR.gat&quot;</span><span class="p">,</span> <span class="n">traj</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py method">
@@ -387,7 +448,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="AgatCalculatorAseGraphTorchNumpy.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span> <span class="pre">=</span> <span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">\**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AgatCalculatorAseGraphTorchNumpy.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AgatCalculatorAseGraphTorchNumpy.__init__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -507,15 +568,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="AgatEnsembleCalculator.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span> <span class="pre">=</span> <span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">\**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AgatEnsembleCalculator.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_ensemble_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_build_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">io</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AgatEnsembleCalculator.__init__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model_save_dir</strong> (<em>str</em>) – Directory storing the well-trained model.</p></li>
+<li><p><strong>model_ensemble_dir</strong> (<em>str</em>) – Directory storing the well-trained models.</p></li>
 <li><p><strong>graph_build_scheme_dir</strong> (str
 :param graph_build_scheme: Direcotry storing the <code class="docutils literal notranslate"><span class="pre">graph_build_scheme.json</span></code> file or parse the input dict. Note that this argument has higher priority than <code class="docutils literal notranslate"><span class="pre">graph_build_scheme_dir</span></code>.) – Direcotry storing the <code class="docutils literal notranslate"><span class="pre">graph_build_scheme.json</span></code> file.</p></li>
 <li><p><strong>device</strong> (<em>str</em><em>, </em><em>optional
-:param io: Unknown.</em>) – model device, defaults to ‘cuda’</p></li>
+:param io: Unknown. May be useful for logging in the future.</em>) – model device, defaults to ‘cuda’</p></li>
 <li><p><strong>**kwargs</strong> (<em>dict</em>) – other input arguments</p></li>
 </ul>
 </dd>

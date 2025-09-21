@@ -237,7 +237,7 @@ in this case. Provide a float here.'
                                                     ase_atoms,
                                                     cutoff=ase_cutoffs,
                                                     self_interaction=True)
-
+        # print(i,j,d,D)
         ndata                   = self.get_ndata(ase_atoms)
         bg                      = dgl.graph((i, j))
         bg.ndata['h']           = torch.tensor(ndata, dtype=self.dtype)
@@ -531,7 +531,7 @@ this function to calculate distances. Alternatively, you need to use \
         cell = ase_atoms.cell.array
         cell_tensor = torch.tensor(cell, dtype=torch.float32, device=self.device)
         cell_I_tensor = torch.tensor(
-            np.array(np.mat(cell).I), dtype=torch.float32, device=self.device)
+            np.array(np.asmatrix(cell).I), dtype=torch.float32, device=self.device)
         positions = torch.tensor(ase_atoms.positions, dtype=torch.float32,
                                  device=self.device)
         scaled_positions = self.get_scaled_positions(cell_I_tensor, positions)

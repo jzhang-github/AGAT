@@ -4,6 +4,29 @@ dataset
 
 .. Hint:: The objects in this page help manipulating dataset(s).
 
+Examples of manipulating dataset(s):
+
+.. code-block:: python
+
+   from agat.data import Dataset, concat_dataset
+   from agat.data import select_graphs_from_dataset_random
+   dataset = Dataset('graphs.bin')
+   da = dataset[11]
+   db = dataset[1:4]
+   dc = concat_dataset(da, db)
+   dd = select_graphs_from_dataset_random(dataset, 10, save_file=False,
+                                          fname=None)
+   print(dataset, da, db, dc, dd)
+   
+   from agat.data import select_graphs_from_dataset_random
+   de = select_graphs_from_dataset_random(dd, 3, save_file=False, fname=None)
+   print(de)
+   
+   from agat.data import save_dataset
+   save_dataset(dd, fname='new_dataset.bin')
+
+
+
 .. py:class:: Dataset(torch.utils.data.Dataset)
 
    This object is used to build a list of graphs.
@@ -66,7 +89,7 @@ dataset
 
 
 
-.. py:class:: DCollater(object)
+.. py:class:: Collater(object)
 
    The collate function used in torch.utils.data.DataLoader: https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 

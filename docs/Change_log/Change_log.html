@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>main &mdash; AGAT 2022.10.04 documentation</title>
+  <title>v9.1.0 &mdash; AGAT 2022.10.04 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -67,7 +67,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently asked questions (FAQ)</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../Change_log.html">Change log</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">main</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">v9.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v9-0-1">v9.0.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v9-0-0">v9.0.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v8-0-3">v8.0.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">v8.0.3</a></li>
@@ -101,7 +102,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../Change_log.html">Change log</a></li>
-      <li class="breadcrumb-item active">main</li>
+      <li class="breadcrumb-item active">v9.1.0</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Change_log/Change_log.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -111,8 +112,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="main">
-<h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/main">main</a><a class="headerlink" href="#main" title="Link to this heading"></a></h1>
+  <section id="v9-1-0">
+<h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v9.1.0">v9.1.0</a><a class="headerlink" href="#v9-1-0" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Optimize memory when training. The whole dataset is added to the <code class="docutils literal notranslate"><span class="pre">CPU</span></code> memory. The <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> is loaded to <code class="docutils literal notranslate"><span class="pre">GPU</span></code>/<code class="docutils literal notranslate"><span class="pre">CPU</span></code> memory when batch training. Thus, less <code class="docutils literal notranslate"><span class="pre">GPU</span></code> memory is required.</p></li>
+<li><p>Optimize the dataset management so that one can manipulate the dataset in memory, instead of I/O on disk.</p>
+<ul>
+<li><p>Deprecate <code class="docutils literal notranslate"><span class="pre">LoadDataset</span></code> and <code class="docutils literal notranslate"><span class="pre">Collater</span></code> in <code class="docutils literal notranslate"><span class="pre">agat/data/load_dataset.py</span></code>.</p></li>
+<li><p>Return a new AGAT <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>  object when indexing a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> with <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">slice</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, and <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> is returned of <code class="docutils literal notranslate"><span class="pre">ReadGraphs</span></code>, <code class="docutils literal notranslate"><span class="pre">BuildDatabase</span></code>, <code class="docutils literal notranslate"><span class="pre">concat_graphs</span></code>, <code class="docutils literal notranslate"><span class="pre">concat_dataset</span></code>, and <code class="docutils literal notranslate"><span class="pre">select_graphs_from_dataset_random</span></code>.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> method to <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">save</span></code> method to <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Optimize transfer learning. <code class="docutils literal notranslate"><span class="pre">agat/model/fit.py</span></code></p></li>
+<li><p>Optimize <code class="docutils literal notranslate"><span class="pre">agat/app/calculators.py</span></code>, <code class="docutils literal notranslate"><span class="pre">.../calculators.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">.../ensembles.py</span></code>, and deprecate <code class="docutils literal notranslate"><span class="pre">agat/app/app.py</span></code></p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">CrystalGraph</span></code> and <code class="docutils literal notranslate"><span class="pre">AseGraphTorch</span></code> to <code class="docutils literal notranslate"><span class="pre">agat/data/build_graph.py</span></code>.</p></li>
+<li><p>Update documentation.</p></li>
+</ul>
+</section>
+<section id="v9-0-1">
+<h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v9.0.1">v9.0.1</a><a class="headerlink" href="#v9-0-1" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Fix warning when using <code class="docutils literal notranslate"><span class="pre">torch.load</span></code>. <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/agat/lib/model_lib.py#L42-L44">agat/lib/model_lib.py</a></p></li>
+<li><p>Fix bugs is <code class="docutils literal notranslate"><span class="pre">ase.atoms</span></code> has <code class="docutils literal notranslate"><span class="pre">ase.constraints.FixScaled</span></code> and <code class="docutils literal notranslate"><span class="pre">ase.constraints.FixedLine</span></code>.</p></li>
+<li><p>Add <a class="reference internal" href="#agat_linux_gpu_cu124.yml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">agat_linux_gpu_cu124.yml</span></code></span></a> file.</p></li>
+<li><p>Fix a bug: <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L129-L131">agat\app\cata\generate_adsorption_sites.py</a>; <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L164-L166">agat\app\cata\generate_adsorption_sites.py</a>; <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/generate_adsorption_sites.py#L209">agat\app\cata\generate_adsorption_sites.py</a></p></li>
+<li><p>Fix a bug: <a class="reference external" href="https://github.com/jzhang-github/AGAT/blob/main/agat/app/cata/high_throughput_predict.py#L193-L195">agat\app\cata\high_throughput_predict.py</a></p></li>
+</ul>
 </section>
 <section id="v9-0-0">
 <h1><a class="reference external" href="https://github.com/jzhang-github/AGAT/tree/v9.0.0">v9.0.0</a><a class="headerlink" href="#v9-0-0" title="Link to this heading"></a></h1>

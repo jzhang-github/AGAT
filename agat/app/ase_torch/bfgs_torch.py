@@ -126,7 +126,7 @@ class BFGSTorch(Optimizer):
             self.dump((self.H, self.pos0, self.forces0, self.maxstep))
 
     def prepare_step(self, pos, forces):
-        forces = forces.reshape(-1)
+        forces = torch.tensor(forces.reshape(-1))
         self.update(pos.flatten(), forces, self.pos0, self.forces0)
         # omega, V = eigh(self.H)
         omega, V = torch.linalg.eigh(self.H)

@@ -122,6 +122,25 @@
 <p class="admonition-title">Hint</p>
 <p>The objects in this page help manipulating dataset(s).</p>
 </div>
+<p>Examples of manipulating dataset(s):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">agat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">concat_dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">select_graphs_from_dataset_random</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;graphs.bin&#39;</span><span class="p">)</span>
+<span class="n">da</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">dc</span> <span class="o">=</span> <span class="n">concat_dataset</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">select_graphs_from_dataset_random</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                       <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">da</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">dc</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">select_graphs_from_dataset_random</span>
+<span class="n">de</span> <span class="o">=</span> <span class="n">select_graphs_from_dataset_random</span><span class="p">(</span><span class="n">dd</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_dataset</span>
+<span class="n">save_dataset</span><span class="p">(</span><span class="n">dd</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;new_dataset.bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="Dataset">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">torch.utils.data.Dataset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Dataset" title="Link to this definition"></a></dt>
@@ -215,8 +234,8 @@ From RAM: Specify <code class="docutils literal notranslate"><span class="pre">f
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="DCollater">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DCollater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DCollater" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="Collater">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Collater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Collater" title="Link to this definition"></a></dt>
 <dd><p>The collate function used in torch.utils.data.DataLoader: <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader</a></p>
 <p>The collate function determines how to merge the batch data.</p>
 <p>Example:</p>
@@ -230,8 +249,8 @@ From RAM: Specify <code class="docutils literal notranslate"><span class="pre">f
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="DCollater.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DCollater.__init__" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="Collater.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Collater.__init__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>device</strong> (<em>str</em>) – The device for manipulating Dataset(s)</p>
@@ -240,8 +259,8 @@ From RAM: Specify <code class="docutils literal notranslate"><span class="pre">f
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="DCollater.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DCollater.__call__" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="Collater.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Collater.__call__" title="Link to this definition"></a></dt>
 <dd><p>Collate the data into batches.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

@@ -22,6 +22,7 @@ load_dataset
 
 
    .. py:method:: __init__(self, dataset_path)
+      :no-index:
 
       :param dataset_path: A paths leads to the binary DGL graph file.
       :type dataset_path: str
@@ -50,6 +51,7 @@ load_dataset
 
 
 .. py:class:: Collater(object)
+   :no-index:
 
    The collate function used in torch.utils.data.DataLoader: https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 
@@ -67,11 +69,13 @@ load_dataset
 
 
    .. py:method:: __init__(self, device='cuda')
+      :no-index:
 
       :param device: device to store the merged data, defaults to 'cuda'
       :type device: str, optional
 
    .. py:method:: __call__(self, data)
+      :no-index:
 
       Collate the data into batches.
 

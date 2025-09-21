@@ -13,6 +13,10 @@ build_dataset
 
    See https://jzhang-github.github.io/AGAT/Tutorial/Build_database.html for more info.
 
+.. Warning::
+
+   Some functions on this page will be deprecated in the future. Including ``select_graphs_random`` and ``concat_graphs``. Use ``select_graphs_from_dataset_random`` and ``concat_dataset``, respectively.
+
 
 .. py:class:: ReadGraphs()
 

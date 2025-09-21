@@ -8,12 +8,12 @@ import warnings
 
 from ase import Atoms
 # from ase.filters import UnitCellFilter
-from acatal.ase_torch.ase_filters import UnitCellFilter
+from .ase_filters import UnitCellFilter
 from ase.calculators.calculator import PropertyNotImplementedError
 from ase.parallel import barrier, world
 from ase.utils import IOContext, lazyproperty
 # from ase.utils.abc import Optimizable
-from acatal.ase_torch.ase_abc import Optimizable
+from .ase_abc import Optimizable
 
 import torch
 
@@ -442,8 +442,8 @@ class Optimizer(Dynamics):
         if forces is None:
             forces = self.optimizable.get_forces()
         # fmax = sqrt((forces ** 2).sum(axis=1).max())
-        # print(forces)
-        fmax = torch.max(torch.norm(forces, dim=1))
+        # print('=====================', type(forces))
+        fmax = torch.max(torch.norm(torch.tensor(forces), dim=1))
         e = self.optimizable.get_potential_energy()
         T = time.localtime()
         if self.logfile is not None:

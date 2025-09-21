@@ -32,7 +32,7 @@ class Optimizable(collections.abc.Sized):
 
     def converged(self, forces, fmax):
         # return np.linalg.norm(forces, axis=1).max() < fmax
-        return torch.linalg.norm(forces, dim=1).max() < fmax
+        return torch.linalg.norm(torch.tensor(forces), dim=1).max() < fmax
 
     def is_neb(self):
         return False

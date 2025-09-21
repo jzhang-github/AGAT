@@ -16,6 +16,8 @@
 
 - Add `CrystalGraph` and `AseGraphTorch` to `agat/data/build_graph.py`.
 
+- Update documentation.
+
   
 
 # [v9.0.1](https://github.com/jzhang-github/AGAT/tree/v9.0.1)

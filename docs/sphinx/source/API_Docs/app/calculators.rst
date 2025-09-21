@@ -2,7 +2,83 @@
 calculators
 ############
 
-AGAT model applications
+Examples of using calculators:
+
+.. code-block:: python
+
+   ###############################################################################
+   # Detect GPU card
+   ###############################################################################
+   import torch
+   if torch.cuda.is_available():
+       device='cuda'
+       print("CUDA is available.")
+       print(f"Number of GPUs: {torch.cuda.device_count()}")
+       print(f"GPU Name: {torch.cuda.get_device_name(0)}")
+   else:
+       device='cpu'
+       print("CUDA is NOT available.")
+   
+   import dgl
+   u, v = torch.tensor([0, 0, 0, 1], device=device), torch.tensor([1, 2, 3, 3], 
+                                                                  device=device)
+   g = dgl.graph((u, v), device=device)
+   print(f'DGL graph device: {g.device}')
+   
+   ###############################################################################
+   # AGAT calculators with torch
+   ###############################################################################
+   from agat.app.calculators import AgatCalculator, AgatCalculatorAseGraphTorch
+   from agat.app.calculators import AgatCalculatorAseGraphTorchNumpy
+   from agat.app.calculators import AgatEnsembleCalculator, OnTheFlyCalculator
+   import os
+   from ase.io import read, write
+   
+   # --- 1 --- AgatCalculator
+   model_save_dir = os.path.join('potential_models', 'agat_model_1')
+   graph_build_scheme_dir = os.path.join('potential_models')
+   atoms = read(os.path.join('potential_models', 'POSCAR'))
+   calculator=AgatCalculator(model_save_dir, graph_build_scheme_dir, 
+                             device=device)
+   calculator.calculate(atoms)
+   print(calculator.results)
+   
+   # --- 2 --- AgatCalculatorAseGraphTorch
+   model_save_dir = os.path.join('potential_models', 'agat_model_1')
+   graph_build_scheme_dir = os.path.join('potential_models')
+   atoms = read(os.path.join('potential_models', 'POSCAR'))
+   calculator=AgatCalculatorAseGraphTorch(model_save_dir, graph_build_scheme_dir,
+                                          device=device)
+   calculator.calculate(atoms)
+   print(calculator.results)
+   
+   # --- 3 --- AgatCalculatorAseGraphTorchNumpy
+   model_save_dir = os.path.join('potential_models', 'agat_model_1')
+   graph_build_scheme_dir = os.path.join('potential_models')
+   atoms = read(os.path.join('potential_models', 'POSCAR'))
+   calculator=AgatCalculatorAseGraphTorchNumpy(model_save_dir, 
+                                               graph_build_scheme_dir, 
+                                               device=device)
+   calculator.calculate(atoms)
+   print(calculator.results)
+   
+   # --- 4 --- AgatEnsembleCalculator
+   model_ensemble_dir = os.path.join('potential_models')
+   graph_build_scheme_dir = os.path.join('potential_models')
+   atoms = read(os.path.join('potential_models', 'POSCAR'))
+   calculator=AgatEnsembleCalculator(model_ensemble_dir, graph_build_scheme_dir, 
+                                     device=device)
+   calculator.calculate(atoms)
+   print(calculator.results)
+   
+   # --- 5 --- OnTheFlyCalculator
+   # model_ensemble_dir = os.path.join('potential_models')
+   # graph_build_scheme_dir = os.path.join('potential_models')
+   # atoms = read(os.path.join('potential_models', 'POSCAR'))
+   # calculator=OnTheFlyCalculator(model_ensemble_dir, graph_build_scheme_dir, 
+   #                                   device=device)
+   # calculator.calculate(atoms)
+   # print(calculator.results)
 
 .. class:: AgatCalculator(Calculator)
 
@@ -10,20 +86,6 @@ AGAT model applications
 
 
    .. Note:: Go to https://wiki.fysik.dtu.dk/ase/development/calculators.html#adding-new-calculators for more information about ``ase.calculators``
-
-
-   Example::
-
-      model_save_dir = 'agat_model'
-      graph_build_scheme_dir = 'dataset'
-      atoms = read('CONTCAR')
-      calculator=AgatCalculator(model_save_dir,
-                                graph_build_scheme_dir)
-      atoms = Atoms(atoms, calculator=calculator)
-      dyn = BFGS(atoms, trajectory='test.traj')
-      dyn.run(fmax=0.005)
-      traj = read('test.traj', index=':')
-      write("XDATCAR.gat", traj)
 
    .. attribute:: implemented_properties
 
@@ -187,7 +249,7 @@ AGAT model applications
 
          set()
 
-   .. method:: __init__(self, model_save_dir, graph_build_scheme_dir, graph_build_scheme, device = 'cuda', \**kwargs)
+   .. method:: __init__(self, model_save_dir, graph_build_scheme_dir, graph_build_scheme, device = 'cuda', **kwargs)
 
       :param model_save_dir: Directory storing the well-trained model.
       :type model_save_dir: str
@@ -267,10 +329,10 @@ AGAT model applications
 
          set()
 
-   .. method:: __init__(self, model_save_dir, graph_build_scheme_dir, graph_build_scheme, start_step, device = 'cuda', io, \**kwargs)
+   .. method:: __init__(model_ensemble_dir, graph_build_scheme_dir=None, graph_build_scheme=None, start_step=0, device = 'cuda', io = None, **kwargs)
 
-      :param model_save_dir: Directory storing the well-trained model.
-      :type model_save_dir: str
+      :param model_ensemble_dir: Directory storing the well-trained models.
+      :type model_ensemble_dir: str
       :param graph_build_scheme_dir: Direcotry storing the ``graph_build_scheme.json`` file.
       :type graph_build_scheme_dir: str
 	  :param graph_build_scheme: Direcotry storing the ``graph_build_scheme.json`` file or parse the input dict. Note that this argument has higher priority than ``graph_build_scheme_dir``.
@@ -279,10 +341,10 @@ AGAT model applications
       :type start_step: int
       :param device: model device, defaults to 'cuda'
       :type device: str, optional
-	  :param io: Unknown.
-      :type io: int
-      :param \**kwargs: other input arguments
-      :type \**kwargs: dict
+	  :param io: Unknown. May be useful for logging in the future.
+      :type io: python I/O object.
+      :param \*\*kwargs: other input arguments
+      :type \*\*kwargs: dict
       :return: Calculated properties.
       :rtype: dict
 

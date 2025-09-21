@@ -30,7 +30,7 @@ class ModifiedNPT(NPT):
         loginterval: int = 1,
         append_trajectory: bool = False,
 
-        max_collected_snapshot_num = 500
+        # max_collected_snapshot_num = 500
     ):
 
         super(ModifiedNPT, self).__init__(
@@ -49,7 +49,7 @@ class ModifiedNPT(NPT):
                      append_trajectory=append_trajectory)
 
 
-        self.max_collected_snapshot_num = max_collected_snapshot_num
+        # self.max_collected_snapshot_num = max_collected_snapshot_num
 
     def run(self, steps):
         """Perform a number of time steps."""
@@ -65,7 +65,7 @@ class ModifiedNPT(NPT):
             self.nsteps += 1
             self.call_observers()
 
-            if self.atoms.calc.collected_snapshot_num > self.max_collected_snapshot_num:
-                return i
+            # if self.atoms.calc.collected_snapshot_num > self.max_collected_snapshot_num:
+            #     return i
         else:
             return i
