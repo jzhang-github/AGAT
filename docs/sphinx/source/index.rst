@@ -6,8 +6,6 @@
 Welcome to AGAT's documentation!
 ================================
 
-**If you have any bugs, questions, or suggestions, please do NOT hesitate to click the** `New issue <https://github.com/jzhang-github/AGAT/issues>`_ **button.**
-
 
 `Github Homepage <https://github.com/jzhang-github/AGAT>`_
 

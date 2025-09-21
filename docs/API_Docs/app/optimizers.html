@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>optimizers &mdash; AGAT 2022.10.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=ecf52d7f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="app_deprecated" href="app_deprecated.html" />
+    <link rel="prev" title="ensembles" href="ensembles.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AGAT
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quick%20start.html">Quick start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html">Brief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html#more-tutorials">More tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">中文手册:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Chinese_support.html">中文手册</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../API_Docs.html">API_Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#default-parameters">default_parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#lib">lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#data">data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#model">model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../API_Docs.html#app">app</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../app.html">app</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="calculators.html">calculators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cata.html">cata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ase_torch.html">ase_torch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensembles.html">ensembles</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app_deprecated.html">app_deprecated</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#bin">bin</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Change_log.html">Change log</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AGAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../API_Docs.html">API_Docs</a></li>
+          <li class="breadcrumb-item"><a href="../app.html">app</a></li>
+      <li class="breadcrumb-item active">optimizers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/API_Docs/app/optimizers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="optimizers">
+<h1>optimizers<a class="headerlink" href="#optimizers" title="Link to this heading"></a></h1>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Modified ase optimizers by implementing Torch tensor calculation.</p>
+</div>
+<p>Examples of using optimizers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###############################################################################</span>
+<span class="c1"># Detect GPU card</span>
+<span class="c1">###############################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA is available.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of GPUs: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPU Name: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA is NOT available.&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">dgl</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                                                               <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">graph</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DGL graph device: </span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Optimizers</span>
+<span class="c1">###############################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span><span class="p">,</span> <span class="n">write</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">Atoms</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.optimizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">BFGSTorch</span><span class="p">,</span> <span class="n">MDMinTorch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agat.app.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgatCalculator</span>
+<span class="c1"># --- 1 --- BFGSTorch</span>
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;agat_model_1&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculator</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span>
+                          <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
+<span class="n">dyn</span> <span class="o">=</span> <span class="n">BFGSTorch</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">&#39;test.traj&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;test.traj&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">write</span><span class="p">(</span><span class="s2">&quot;XDATCAR.gat&quot;</span><span class="p">,</span> <span class="n">traj</span><span class="p">)</span>
+
+<span class="c1"># --- 2 --- MDMinTorch</span>
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;agat_model_1&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculator</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span>
+                          <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
+<span class="n">dyn</span> <span class="o">=</span> <span class="n">MDMinTorch</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">&#39;test.traj&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># --- 3 --- ase.optimize.BFGS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">BFGS</span>
+<span class="n">model_save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;agat_model_1&#39;</span><span class="p">)</span>
+<span class="n">graph_build_scheme_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;potential_models&#39;</span><span class="p">,</span> <span class="s1">&#39;POSCAR&#39;</span><span class="p">))</span>
+<span class="n">calculator</span><span class="o">=</span><span class="n">AgatCalculator</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">,</span>
+                          <span class="n">graph_build_scheme_dir</span><span class="p">,</span>
+                          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
+<span class="n">dyn</span> <span class="o">=</span> <span class="n">BFGS</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">&#39;test.traj&#39;</span><span class="p">)</span>
+<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">BFGSTorch</span></span></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">IO</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append_trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxstep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.device('cuda')</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>device</strong> (<em>str/torch.device</em>) – <p>Device to run the simulation.</p>
+<blockquote>
+<div></div></blockquote>
+<dl class="simple">
+<dt>restart: string</dt><dd><p>Pickle file used to store hessian matrix. If set, file with
+such a name will be searched and hessian matrix stored will
+be used, if the file exists.</p>
+</dd>
+<dt>trajectory: string</dt><dd><p>Pickle file used to store trajectory of atomic movement.</p>
+</dd>
+<dt>logfile: file object or str</dt><dd><p>If <em>logfile</em> is a string, a file with that name will be opened.
+Use ‘-’ for stdout.</p>
+</dd>
+<dt>maxstep: float</dt><dd><p>Used to set the maximum distance an atom can move per
+iteration (default value is 0.2 Å).</p>
+</dd>
+<dt>master: boolean</dt><dd><p>Defaults to None, which causes only rank 0 to save files.  If
+set to true,  this rank will save files.</p>
+</dd>
+<dt>alpha: float</dt><dd><p>Initial guess for the Hessian (curvature of energy surface). A
+conservative value of 70.0 is the default, but number of needed
+steps to converge might be less if a lower value is used. However,
+a lower value also means risk of instability.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">MDMinTorch</span></span></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms:</span> <span class="pre">Atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile:</span> <span class="pre">Union[IO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt:</span> <span class="pre">Optional[float]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxstep:</span> <span class="pre">Optional[float]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master:</span> <span class="pre">Optional[bool]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cuda'</span></span></em><span class="sig-paren">)</span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>device</strong> (<em>str/torch.device</em>) – <p>Device to run the simulation.</p>
+<blockquote>
+<div></div></blockquote>
+<dl class="simple">
+<dt>restart: string</dt><dd><p>Pickle file used to store hessian matrix. If set, file with
+such a name will be searched and hessian matrix stored will
+be used, if the file exists.</p>
+</dd>
+<dt>trajectory: string</dt><dd><p>Pickle file used to store trajectory of atomic movement.</p>
+</dd>
+<dt>logfile: string</dt><dd><p>Text file used to write summary information.</p>
+</dd>
+<dt>dt: float</dt><dd><p>Time step for integrating the equation of motion.</p>
+</dd>
+<dt>maxstep: float</dt><dd><p>Spatial step limit in Angstrom. This allows larger values of dt
+while being more robust to instabilities in the optimization.</p>
+</dd>
+<dt>master: boolean</dt><dd><p>Defaults to None, which causes only rank 0 to save files.  If
+set to true,  this rank will save files.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ensembles.html" class="btn btn-neutral float-left" title="ensembles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="app_deprecated.html" class="btn btn-neutral float-right" title="app_deprecated" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ZHANG Jun, ZHAO Shijun.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

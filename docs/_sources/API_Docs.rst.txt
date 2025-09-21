@@ -22,7 +22,7 @@ data
    :maxdepth: 6
 
    API_Docs/data
-   
+
 
 model
 -------------
@@ -39,4 +39,10 @@ app
    API_Docs/app
 
 
+bin
+-------------
+.. toctree::
+   :maxdepth: 6
+
+   API_Docs/bin
 

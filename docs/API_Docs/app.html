@@ -1,92 +1,48 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>app &mdash; AGAT 2022.10.04 documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=ecf52d7f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="app" href="app/app.html" />
+    <link rel="next" title="calculators" href="app/calculators.html" />
     <link rel="prev" title="fit" href="model/fit.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> AGAT
           
-
-          
-            
-            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
-          
+          <a href="../index.html" class="icon icon-home">
+            AGAT
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a></li>
@@ -111,12 +67,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../API_Docs.html#model">model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../API_Docs.html#app">app</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">app</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="app/app.html">app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/calculators.html">calculators</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app/cata.html">cata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/ase_torch.html">ase_torch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/ensembles.html">ensembles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/optimizers.html">optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/app_deprecated.html">app_deprecated</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../API_Docs.html#bin">bin</a></li>
 </ul>
 </li>
 </ul>
@@ -128,83 +89,185 @@
 <li class="toctree-l1"><a class="reference internal" href="../Change_log.html">Change log</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">AGAT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../API_Docs.html">API_Docs</a> &raquo;</li>
-        
-      <li>app</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../API_Docs.html">API_Docs</a></li>
+      <li class="breadcrumb-item active">app</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/API_Docs/app.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="app">
-<h1>app<a class="headerlink" href="#app" title="Permalink to this heading">¶</a></h1>
+<h1>app<a class="headerlink" href="#app" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="app/app.html">app</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app/calculators.html">calculators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/calculators.html#AgatCalculator"><code class="docutils literal notranslate"><span class="pre">AgatCalculator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculator.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculator.implemented_properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculator.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculator.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculator.ignored_changes"><code class="docutils literal notranslate"><span class="pre">AgatCalculator.ignored_changes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculator.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculator.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculator.load_graph_build_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculator.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculator.calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch.implemented_properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch.ignored_changes"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch.ignored_changes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch.load_graph_build_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorch.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorch.calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy.implemented_properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy.ignored_changes"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy.ignored_changes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy.load_graph_build_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatCalculatorAseGraphTorchNumpy.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculatorAseGraphTorchNumpy.calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator.implemented_properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator.ignored_changes"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator.ignored_changes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator.__init__"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator.load_graph_build_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#AgatEnsembleCalculator.calculate"><code class="docutils literal notranslate"><span class="pre">AgatEnsembleCalculator.calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator.implemented_properties"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator.implemented_properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator.default_parameters"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator.ignored_changes"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator.ignored_changes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator.__init__"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator.load_graph_build_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/calculators.html#OnTheFlyCalculator.calculate"><code class="docutils literal notranslate"><span class="pre">OnTheFlyCalculator.calculate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="app/cata.html">cata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/find_adsorption_site.html">find_adsorption_site</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/generate_adsorption_sites.html">generate_adsorption_sites_ase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html">high_throughput_dft_calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/high_throughput_predict.html">high_throughput_predict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/increase_vacuum.html">increase_vacuum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/volcano_2e.html">volcano_2e</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app/cata/volcano_plot.html">volcano_plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/find_adsorption_site.html">find_adsorption_site</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/find_adsorption_site.html#find_adsorption_site"><code class="docutils literal notranslate"><span class="pre">find_adsorption_site()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/generate_adsorption_sites.html">generate_adsorption_sites_ase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms"><code class="docutils literal notranslate"><span class="pre">AddAtoms</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.__init__"><code class="docutils literal notranslate"><span class="pre">AddAtoms.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms._support_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms._support_sites</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.shift_fcoords"><code class="docutils literal notranslate"><span class="pre">AddAtoms.shift_fcoords()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_1NN_cutoff"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_1NN_cutoff()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_atomic_diameter_for_slab"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_atomic_diameter_for_slab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_1NN_of_top_layer"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_1NN_of_top_layer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_ontop_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_ontop_sites()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_bridge_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_bridge_sites()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_disigma_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_disigma_sites()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.get_hollow_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.get_hollow_sites()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.fractional2cartesian"><code class="docutils literal notranslate"><span class="pre">AddAtoms.fractional2cartesian()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.cartesian2fractional"><code class="docutils literal notranslate"><span class="pre">AddAtoms.cartesian2fractional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/generate_adsorption_sites.html#AddAtoms.write_file_with_adsorption_sites"><code class="docutils literal notranslate"><span class="pre">AddAtoms.write_file_with_adsorption_sites()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html">high_throughput_dft_calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds"><code class="docutils literal notranslate"><span class="pre">HtDftAds</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.root_dir"><code class="docutils literal notranslate"><span class="pre">HtDftAds.root_dir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.__init__"><code class="docutils literal notranslate"><span class="pre">HtDftAds.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.bulk_opt"><code class="docutils literal notranslate"><span class="pre">HtDftAds.bulk_opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.surf_opt"><code class="docutils literal notranslate"><span class="pre">HtDftAds.surf_opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.ads_opt"><code class="docutils literal notranslate"><span class="pre">HtDftAds.ads_opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.bulk_aimd"><code class="docutils literal notranslate"><span class="pre">HtDftAds.bulk_aimd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.surface_aimd"><code class="docutils literal notranslate"><span class="pre">HtDftAds.surface_aimd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.ads_aimd"><code class="docutils literal notranslate"><span class="pre">HtDftAds.ads_aimd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_dft_calculation.html#HtDftAds.run"><code class="docutils literal notranslate"><span class="pre">HtDftAds.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/high_throughput_predict.html">high_throughput_predict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/high_throughput_predict.html#HtAds"><code class="docutils literal notranslate"><span class="pre">HtAds</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_predict.html#HtAds.__init__"><code class="docutils literal notranslate"><span class="pre">HtAds.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_predict.html#HtAds.geo_opt"><code class="docutils literal notranslate"><span class="pre">HtAds.geo_opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_predict.html#HtAds.ads_calc"><code class="docutils literal notranslate"><span class="pre">HtAds.ads_calc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="app/cata/high_throughput_predict.html#HtAds.run"><code class="docutils literal notranslate"><span class="pre">HtAds.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/increase_vacuum.html">increase_vacuum</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/increase_vacuum.html#increase_vacuum"><code class="docutils literal notranslate"><span class="pre">increase_vacuum()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/volcano_2e.html">volcano_2e</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/volcano_2e.html#volcano_2e"><code class="docutils literal notranslate"><span class="pre">volcano_2e()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/cata/volcano_plot.html">volcano_plot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/cata/volcano_plot.html#volcano_plot"><code class="docutils literal notranslate"><span class="pre">volcano_plot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app/ase_torch.html">ase_torch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/ase_abc.html">ase_abc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/ase_torch/ase_abc.html#Optimizable"><code class="docutils literal notranslate"><span class="pre">Optimizable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app/ase_torch/ase_abc.html#Optimizable.converged"><code class="docutils literal notranslate"><span class="pre">Optimizable.converged()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/ase_dyn.html">ase_dyn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/ase_torch/ase_dyn.html#MDMinTorch"><code class="docutils literal notranslate"><span class="pre">MDMinTorch</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/ase_filters.html">ase_filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/bfgs_torch.html">bfgs_torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app/ase_torch/optimize_torch.html">optimize_torch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app/ensembles.html">ensembles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/ensembles.html#ModifiedNPT"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/ensembles.html#ModifiedNPT.classname"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.classname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/ensembles.html#ModifiedNPT.__init__"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/ensembles.html#ModifiedNPT.run"><code class="docutils literal notranslate"><span class="pre">ModifiedNPT.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app/optimizers.html">optimizers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/optimizers.html#init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app/app_deprecated.html">app_deprecated</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat.implemented_properties"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.implemented_properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat.default_parameters"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat.__init__"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat.load_graph_build_scheme"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.load_graph_build_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app/app_deprecated.html#AgatCalculator_deprecat.calculate"><code class="docutils literal notranslate"><span class="pre">AgatCalculator_deprecat.calculate()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -213,51 +276,33 @@
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="app/app.html" class="btn btn-neutral float-right" title="app" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="model/fit.html" class="btn btn-neutral float-left" title="fit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="model/fit.html" class="btn btn-neutral float-left" title="fit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="app/calculators.html" class="btn btn-neutral float-right" title="calculators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2023, ZHANG Jun, ZHAO Shijun
-
-    </p>
+    <p>&#169; Copyright 2023, ZHANG Jun, ZHAO Shijun.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,8 +1,8 @@
 Brief
 ==================
 
-Take a look at the Default parameters
----------------------------------------------
+Take a look at the default parameters
+-------------------------------------
 
 .. toctree::
    :maxdepth: 6

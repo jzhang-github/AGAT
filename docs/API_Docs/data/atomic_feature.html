@@ -1,92 +1,48 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>atomic_feature &mdash; AGAT 2022.10.04 documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=ecf52d7f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="build_dataset" href="build_dataset.html" />
+    <link rel="next" title="build_graph" href="build_graph.html" />
     <link rel="prev" title="data" href="../data.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> AGAT
           
-
-          
-            
-            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
-          
+          <a href="../../index.html" class="icon icon-home">
+            AGAT
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
@@ -110,7 +66,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../API_Docs.html#data">data</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../data.html">data</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">atomic_feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_graph.html">build_graph</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_dataset.html">build_dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dataset.html">dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate_database.html">generate_database</a></li>
 <li class="toctree-l4"><a class="reference internal" href="load_dataset.html">load_dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
 </ul>
@@ -119,6 +78,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#model">model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#app">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#bin">bin</a></li>
 </ul>
 </li>
 </ul>
@@ -130,78 +90,38 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Change_log.html">Change log</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">AGAT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../../API_Docs.html">API_Docs</a> &raquo;</li>
-        
-          <li><a href="../data.html">data</a> &raquo;</li>
-        
-      <li>atomic_feature</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../API_Docs.html">API_Docs</a></li>
+          <li class="breadcrumb-item"><a href="../data.html">data</a></li>
+      <li class="breadcrumb-item active">atomic_feature</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../../_sources/API_Docs/data/atomic_feature.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="atomic-feature">
-<h1>atomic_feature<a class="headerlink" href="#atomic-feature" title="Permalink to this heading">¶</a></h1>
+<h1>atomic_feature<a class="headerlink" href="#atomic-feature" title="Link to this heading"></a></h1>
 <p>Atomic features are one-hot codes.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="all_elements">
-<span class="sig-name descname"><span class="pre">all_elements</span></span><a class="headerlink" href="#all_elements" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">all_elements</span></span><a class="headerlink" href="#all_elements" title="Link to this definition"></a></dt>
 <dd><p>All element symbols in the periodic table. Some radioactive elements are not included:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Ac&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Am&#39;</span><span class="p">,</span> <span class="s1">&#39;Ar&#39;</span><span class="p">,</span> <span class="s1">&#39;As&#39;</span><span class="p">,</span> <span class="s1">&#39;At&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="s1">&#39;Ba&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Be&#39;</span><span class="p">,</span> <span class="s1">&#39;Bh&#39;</span><span class="p">,</span> <span class="s1">&#39;Bi&#39;</span><span class="p">,</span> <span class="s1">&#39;Bk&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span>  <span class="s1">&#39;Ca&#39;</span><span class="p">,</span> <span class="s1">&#39;Cd&#39;</span><span class="p">,</span> <span class="s1">&#39;Ce&#39;</span><span class="p">,</span> <span class="s1">&#39;Cf&#39;</span><span class="p">,</span>
@@ -221,7 +141,7 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="elements">
-<span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#elements" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#elements" title="Link to this definition"></a></dt>
 <dd><p>Common elements:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Ac&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Am&#39;</span><span class="p">,</span> <span class="s1">&#39;As&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="s1">&#39;Ba&#39;</span><span class="p">,</span> <span class="s1">&#39;Be&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Bi&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span>  <span class="s1">&#39;Ca&#39;</span><span class="p">,</span> <span class="s1">&#39;Cd&#39;</span><span class="p">,</span> <span class="s1">&#39;Ce&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;Co&#39;</span><span class="p">,</span> <span class="s1">&#39;Cr&#39;</span><span class="p">,</span> <span class="s1">&#39;Cs&#39;</span><span class="p">,</span>
@@ -238,7 +158,7 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="selected_elements">
-<span class="sig-name descname"><span class="pre">selected_elements</span></span><a class="headerlink" href="#selected_elements" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">selected_elements</span></span><a class="headerlink" href="#selected_elements" title="Link to this definition"></a></dt>
 <dd><p>Selected elements for a specific system. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;He&#39;</span><span class="p">,</span> <span class="s1">&#39;Li&#39;</span><span class="p">,</span> <span class="s1">&#39;Be&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
 </pre></div>
@@ -247,7 +167,7 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="Elements_used">
-<span class="sig-name descname"><span class="pre">Elements_used</span></span><a class="headerlink" href="#Elements_used" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">Elements_used</span></span><a class="headerlink" href="#Elements_used" title="Link to this definition"></a></dt>
 <dd><p>Elements used for one-hot coding.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -257,7 +177,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="get_atomic_features">
-<span class="sig-name descname"><span class="pre">get_atomic_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_atomic_features" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_atomic_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_atomic_features" title="Link to this definition"></a></dt>
 <dd><p>Encode atomistic features with physical properties. For more input features, please refer to: <a class="reference external" href="https://pymatgen.org/pymatgen.core.periodic_table.html">https://pymatgen.org/pymatgen.core.periodic_table.html</a>. For now, the following properties are included.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -317,7 +237,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="get_atomic_feature_onehot">
-<span class="sig-name descname"><span class="pre">get_atomic_feature_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Elements_used</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_atomic_feature_onehot" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_atomic_feature_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Elements_used</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_atomic_feature_onehot" title="Link to this definition"></a></dt>
 <dd><p>Get the one-hot code of all considered elements. The elements are sorted by their atomic number:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atomic_number</span> <span class="o">=</span> <span class="p">[</span><span class="n">atomic_numbers</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Elements_used</span><span class="p">]</span>
 <span class="n">atoms_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">atomic_number</span><span class="p">,</span> <span class="n">Elements_used</span><span class="p">))</span>
@@ -341,51 +261,33 @@
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="build_dataset.html" class="btn btn-neutral float-right" title="build_dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../data.html" class="btn btn-neutral float-left" title="data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../data.html" class="btn btn-neutral float-left" title="data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="build_graph.html" class="btn btn-neutral float-right" title="build_graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2023, ZHANG Jun, ZHAO Shijun
-
-    </p>
+    <p>&#169; Copyright 2023, ZHANG Jun, ZHAO Shijun.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -19,6 +19,9 @@ from ase.formula import Formula
 from ase.build import sort
 from scipy.optimize import curve_fit
 
+from warnings import warn
+warn("This script is not well tested, use it with caution.")
+
 def geo_opt(atoms_with_calculator, **kwargs):
     calculator = atoms_with_calculator.get_calculator()
     atoms  = atoms_with_calculator.copy()

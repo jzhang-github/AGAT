@@ -14,6 +14,7 @@ file_lib
 
 
 .. function:: file_exit()
+   :no-index:
 
    Stop high-throughput prediction if ``StopPython`` file is detected.
    

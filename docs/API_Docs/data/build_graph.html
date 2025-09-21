@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>build_graph &mdash; AGAT 2022.10.04 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=ecf52d7f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="build_dataset" href="build_dataset.html" />
+    <link rel="prev" title="atomic_feature" href="atomic_feature.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AGAT
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AGAT:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quick%20start.html">Quick start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html">Brief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tutorial.html#more-tutorials">More tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">中文手册:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Chinese_support.html">中文手册</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AGAT API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../API_Docs.html">API_Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#default-parameters">default_parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#lib">lib</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../API_Docs.html#data">data</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../data.html">data</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="atomic_feature.html">atomic_feature</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">build_graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_dataset.html">build_dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dataset.html">dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate_database.html">generate_database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="load_dataset.html">load_dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PymatgenStructureAnalyzer.html">PymatgenStructureAnalyzer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#model">model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#app">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_Docs.html#bin">bin</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">OTHER:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Contribution.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Change_log.html">Change log</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AGAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../API_Docs.html">API_Docs</a></li>
+          <li class="breadcrumb-item"><a href="../data.html">data</a></li>
+      <li class="breadcrumb-item active">build_graph</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/API_Docs/data/build_graph.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-graph">
+<h1>build_graph<a class="headerlink" href="#build-graph" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="CrystalGraph">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrystalGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph" title="Link to this definition"></a></dt>
+<dd><p>Read structural file and return a graph.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The constructed crystal graph may be unreasonable for high-entropy materials, if the connections are analyzed by Voronoi method.</p>
+</div>
+<p>Code example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Crystal2raph</span><span class="w"> </span><span class="kn">import</span> <span class="n">CrystalGraph</span>
+<span class="n">cg</span> <span class="o">=</span> <span class="n">CrystalGraph</span><span class="p">(</span><span class="n">cutoff</span> <span class="o">=</span> <span class="mf">6.0</span><span class="p">,</span> <span class="n">mode_of_NN</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">adsorbate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cg</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="s1">&#39;POSCAR&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Although we recommend representing atoms with one hot code, you can
+use the another way with: <code class="docutils literal notranslate"><span class="pre">self.all_atom_feat</span> <span class="pre">=</span> <span class="pre">get_atomic_features()</span></code></p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In order to build a reasonable graph, a samll cell should be repeated.
+One can modify “self._cell_length_cutoff” for special needs.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>We encourage you to use <code class="docutils literal notranslate"><span class="pre">ase</span></code> module to build crystal graphs.
+The <code class="docutils literal notranslate"><span class="pre">pymatgen</span></code> module needs some dependencies that conflict with
+other modules.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.__init__" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param **data_config<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configuration file for building database. See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config</a> for the detailed info.</p>
+</dd>
+<dt class="field-even">type **data_config<span class="colon">:</span></dt>
+<dd class="field-even"><p>str/dict</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <code class="docutils literal notranslate"><span class="pre">DGL.graph</span></code>.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">DGL.graph</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Mode of how to get the neighbors, which can be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'voronoi'</span></code>: consider Voronoi neighbors only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'pymatgen_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">pymatgen</span></code> module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ase_dist'</span></code>: build graph based on a constant distance using <code class="docutils literal notranslate"><span class="pre">ase</span></code> module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ase_natural_cutoffs'</span></code>: build graph from <code class="docutils literal notranslate"><span class="pre">ase</span></code> which has a dynamic cutoff scheme. In this case, the <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is deprecated because <code class="docutils literal notranslate"><span class="pre">ase</span></code> will use the dynamic cutoffs in <code class="docutils literal notranslate"><span class="pre">ase.neighborlist.natural_cutoffs()</span></code>.</p></li>
+</ul>
+</div>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>adsorbate</strong> (<em>bool</em>) – Identify the adsorbate or not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_adsorbate_bool">
+<span class="sig-name descname"><span class="pre">get_adsorbate_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_adsorbate_bool" title="Link to this definition"></a></dt>
+<dd><p>Identify adsorbates based on elements： H and O.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>element_list</strong> (<em>list</em>) – a list of element symbols.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of bool values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_crystal">
+<span class="sig-name descname"><span class="pre">get_crystal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_crystal" title="Link to this definition"></a></dt>
+<dd><p>Read structural file and return a pymatgen crystal object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>crystal_fpath</strong> (<em>str</em>) – the path to the crystal structural.</p></li>
+<li><p><strong>super_cell</strong> (<em>bool</em>) – repeat the cell or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a pymatgen structure object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">pymatgen.core.structure</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_1NN_pairs_voronoi">
+<span class="sig-name descname"><span class="pre">get_1NN_pairs_voronoi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_voronoi" title="Link to this definition"></a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">get_connections_new()</span></code> of <code class="docutils literal notranslate"><span class="pre">VoronoiConnectivity</span></code> object is modified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>crystal</strong> (<em>pymatgen.core.structure</em>) – a pymatgen structure object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>index of senders</p></li>
+<li><p>index of receivers</p></li>
+<li><p>a list of distance between senders and receivers</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_1NN_pairs_distance">
+<span class="sig-name descname"><span class="pre">get_1NN_pairs_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_distance" title="Link to this definition"></a></dt>
+<dd><p>Find the index of senders, receivers, and distance between them based on the <code class="docutils literal notranslate"><span class="pre">distance_matrix</span></code> of pymargen crystal object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>crystal</strong> (<em>pymargen.core.structure</em>) – pymargen crystal object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>index of senders</p></li>
+<li><p>index of receivers</p></li>
+<li><p>a list of distance between senders and receivers</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_1NN_pairs_ase_distance">
+<span class="sig-name descname"><span class="pre">get_1NN_pairs_ase_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_1NN_pairs_ase_distance" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ase_atoms</strong> (<em>ase.atoms</em>) – <code class="docutils literal notranslate"><span class="pre">ase.atoms</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>index of senders</p></li>
+<li><p>index of receivers</p></li>
+<li><p>a list of distance between senders and receivers</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_ndata">
+<span class="sig-name descname"><span class="pre">get_ndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_ndata" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>crystal</strong> (<em>pymargen.core.structure</em>) – a pymatgen crystal object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndata: the atomic representations of a crystal graph.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_graph_from_ase">
+<span class="sig-name descname"><span class="pre">get_graph_from_ase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_ase" title="Link to this definition"></a></dt>
+<dd><p>Build graphs with <code class="docutils literal notranslate"><span class="pre">ase</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str/ase.Atoms</em>) – File name or <code class="docutils literal notranslate"><span class="pre">ase.Atoms</span></code> object.</p></li>
+<li><p><strong>include_forces</strong> (<em>bool</em>) – Include forces into graphs or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A bidirectional graph with self-loop connection.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_graph_from_pymatgen">
+<span class="sig-name descname"><span class="pre">get_graph_from_pymatgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph_from_pymatgen" title="Link to this definition"></a></dt>
+<dd><p>Build graphs with pymatgen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>crystal_fname</strong> (<em>str</em>) – File name.</p></li>
+<li><p><strong>super_cell</strong> (<em>bool</em>) – repeat small cell or not.</p></li>
+<li><p><strong>include_forces</strong> (<em>bool</em>) – Include forces into graphs or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A bidirectional graph with self-loop connection.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CrystalGraph.get_graph">
+<span class="sig-name descname"><span class="pre">get_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">super_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_forces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CrystalGraph.get_graph" title="Link to this definition"></a></dt>
+<dd><p>This method can choose which graph-construction method is used, according to the <code class="docutils literal notranslate"><span class="pre">mode_of_NN</span></code> attribute.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can call this method to build one graph.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>crystal_fname</strong> (<em>str</em>) – File name.</p></li>
+<li><p><strong>super_cell</strong> (<em>bool</em>) – repeat small cell or not.</p></li>
+<li><p><strong>include_forces</strong> (<em>bool</em>) – Include forces into graphs or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A bidirectional graph with self-loop connection.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AseGraphTorch">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AseGraphTorch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch" title="Link to this definition"></a></dt>
+<dd><p>Build <code class="docutils literal notranslate"><span class="pre">DGL</span></code> graphs with <code class="docutils literal notranslate"><span class="pre">ASE</span></code> and <code class="docutils literal notranslate"><span class="pre">Torch</span></code> module. A GPU card can be used for a large system, or for simulations of geometry optimization and molecular dynamics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During the geometry optimization or MD simulation, connections among atoms may not change with several ionic steps. Thus, calculating neighboring relationships for every ionic step is high-cost. This class aims to reduce such cost and improve speed.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**data_config</strong> (<em>str/dict</em>) – Configuration file for building database. See <a class="reference external" href="https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config">https://jzhang-github.github.io/AGAT/Default%20parameters.html#default-data-config</a> for the detailed info.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset parameters for building graph from sctrach.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_ndata">
+<span class="sig-name descname"><span class="pre">get_ndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_ndata" title="Link to this definition"></a></dt>
+<dd><p>Get node data (atomic features)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ase_atoms</strong> – <code class="docutils literal notranslate"><span class="pre">ase.Atoms</span></code></p></li>
+<li><p><strong>type</strong> – <code class="docutils literal notranslate"><span class="pre">ase.Atoms</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>atomic input features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_adsorbate_bool">
+<span class="sig-name descname"><span class="pre">get_adsorbate_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_adsorbate_bool" title="Link to this definition"></a></dt>
+<dd><p>Identify adsorbates based on elements： H and O.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of bool values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tf.constant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_scaled_positions_wrap">
+<span class="sig-name descname"><span class="pre">get_scaled_positions_wrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_I_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_scaled_positions_wrap" title="Link to this definition"></a></dt>
+<dd><p>Get the scaled atomic positions and wrap into the origional cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell_I_tensor</strong> (<em>torch.Tensor</em>) – cell array in the torch.Tensor format.</p></li>
+<li><p><strong>positions</strong> (<em>torch.Tensor</em>) – atomic positions.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_scaled_positions">
+<span class="sig-name descname"><span class="pre">get_scaled_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_I_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_scaled_positions" title="Link to this definition"></a></dt>
+<dd><p>Get the scaled atomic positions and DO NOT wrap into the origional cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell_I_tensor</strong> (<em>torch.Tensor</em>) – cell array in the torch.Tensor format.</p></li>
+<li><p><strong>positions</strong> (<em>torch.Tensor</em>) – atomic positions.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.fractional2cartesian">
+<span class="sig-name descname"><span class="pre">fractional2cartesian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaled_positions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.fractional2cartesian" title="Link to this definition"></a></dt>
+<dd><p>Convert scaled (fractional) coordinates to the cartesian coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell_tensor</strong> (<em>torch.Tensor</em>) – Simulation cell array.</p></li>
+<li><p><strong>scaled_positions</strong> (<em>torch.Tensor</em>) – Scaled atomic positions.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.safe_to_use">
+<span class="sig-name descname"><span class="pre">safe_to_use</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.safe_to_use" title="Link to this definition"></a></dt>
+<dd><p>For small simulation cells or non-cubic cells, this class may lead to unwanted results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ase_atoms</strong> (<em>ase.Atoms</em>) – ASE atoms.</p></li>
+<li><p><strong>critical</strong> (<em>float</em>) – Critical value for determing a cubic cell or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Safe or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_pair_distances">
+<span class="sig-name descname"><span class="pre">get_pair_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_pair_distances" title="Link to this definition"></a></dt>
+<dd><p>Get distance between two atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>int</em>) – The index of first atom.</p></li>
+<li><p><strong>b</strong> (<em>int</em>) – The index of second atom.</p></li>
+<li><p><strong>ase_atoms</strong> (<em>ase.Atoms</em>) – ase atoms in RAM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>d</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>D</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.update_pair_distances">
+<span class="sig-name descname"><span class="pre">update_pair_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.update_pair_distances" title="Link to this definition"></a></dt>
+<dd><p>Update distance between two atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>int</em>) – The index of first atom.</p></li>
+<li><p><strong>b</strong> (<em>int</em>) – The index of second atom.</p></li>
+<li><p><strong>b_image</strong> (<em>int</em>) – Clearly, I fogot things.</p></li>
+<li><p><strong>ase_atoms</strong> (<em>ase.Atoms</em>) – ase atoms in RAM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>d</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>D</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_all_possible_distances">
+<span class="sig-name descname"><span class="pre">get_all_possible_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_all_possible_distances" title="Link to this definition"></a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Get senders and receivers, including inner and skin connections.
+Torch.from_numpy is memory effcient than torch.tensor, especially for large tensors.
+No self loop and reverse direction.</p>
+</div>
+<p>Get all possible connections, not every pair of atoms will be calculated in order to improve the efficiency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ase_atoms</strong> (<em>ase.Atoms</em>) – ASE atoms in RAM.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_init_connections">
+<span class="sig-name descname"><span class="pre">get_init_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_init_connections" title="Link to this definition"></a></dt>
+<dd><p>Get connection from scratch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ase_atoms</strong> (<em>ase.Atoms</em>) – ASE atoms in RAM.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return connections for both real neighbors and potential neighbors defined by the skin thickness.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.update_connections">
+<span class="sig-name descname"><span class="pre">update_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_image_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_image_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.update_connections" title="Link to this definition"></a></dt>
+<dd><p>Update connections instead of calculating every pair distance. Some skin aotm may become real neighbors, while neighbors can go to the skin region (potential neighbor).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.build" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">DGL</span></code> graph.</p>
+</dd>
+</dl>
+<p>Build graph from scratch?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.update" title="Link to this definition"></a></dt>
+<dd><p>Build graph from updated connections, not from scratch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">DGL</span></code> graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AseGraphTorch.get_graph">
+<span class="sig-name descname"><span class="pre">get_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ase_atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AseGraphTorch.get_graph" title="Link to this definition"></a></dt>
+<dd><p>Get graph from ASE atoms object.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This is the high-level API of this class.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">DGL</span></code> graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The owner seems forgot some details. So use <code class="docutils literal notranslate"><span class="pre">AseGraphTorch</span></code> with caution.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="atomic_feature.html" class="btn btn-neutral float-left" title="atomic_feature" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="build_dataset.html" class="btn btn-neutral float-right" title="build_dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ZHANG Jun, ZHAO Shijun.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

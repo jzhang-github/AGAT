@@ -48,6 +48,17 @@ def load_model(model_save_dir='agat_model', device='cuda'):
     new_model.device = device
     return new_model
 
+def load_model_ensemble(model_ensemble_dir, device='cuda'):
+    model_list = []
+    model_dirs = os.listdir(model_ensemble_dir)
+    model_dirs = [d for d in model_dirs if os.path.exists(
+        os.path.join(model_ensemble_dir, d, 'agat.pth')
+        )]
+    for d in model_dirs:
+        model = load_model(os.path.join(model_ensemble_dir, d), device)
+        model_list.append(model)
+    return model_list
+
 def save_state_dict(model, state_dict_save_dir='agat_model', **kwargs):
     """Saving state dict (model weigths and other input info) to the disk. See: https://pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html
 

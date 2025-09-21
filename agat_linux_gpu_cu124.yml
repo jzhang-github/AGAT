@@ -4,19 +4,17 @@ channels:
   - dglteam/label/th24_cu124
   - nvidia
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=5.1=1_gnu
   - blas=1.0=mkl
+  - bottleneck=1.4.2=py311hf4808d0_0
   - brotli-python=1.0.9=py311h6a678d5_8
   - bzip2=1.0.8=h5eee18b_6
-  - ca-certificates=2024.9.24=h06a4308_0
+  - ca-certificates=2024.11.26=h06a4308_0
   - certifi=2024.8.30=py311h06a4308_0
   - charset-normalizer=3.3.2=pyhd3eb1b0_0
   - cuda-cudart=12.4.127=0
@@ -83,25 +81,31 @@ dependencies:
   - ncurses=6.4=h6a678d5_0
   - nettle=3.7.3=hbbd107a_1
   - networkx=3.3=py311h06a4308_0
+  - numexpr=2.10.1=py311h3c60e43_0
   - numpy=1.26.4=py311h08b1b3b_0
   - numpy-base=1.26.4=py311hf175353_0
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.5.2=he7f1fd0_0
   - openssl=3.0.15=h5eee18b_0
+  - pandas=2.2.3=py311h6a678d5_0
   - pillow=10.4.0=py311h5eee18b_0
   - pip=24.2=py311h06a4308_0
   - psutil=5.9.0=py311h5eee18b_0
   - pybind11-abi=4=hd3eb1b0_1
   - pysocks=1.7.1=py311h06a4308_0
   - python=3.11.10=he870216_0
+  - python-dateutil=2.9.0post0=py311h06a4308_2
+  - python-tzdata=2023.3=pyhd3eb1b0_0
   - pytorch=2.5.0=py3.11_cuda12.4_cudnn9.1.0_0
   - pytorch-cuda=12.4=hc786d27_7
   - pytorch-mutex=1.0=cuda
+  - pytz=2024.1=py311h06a4308_0
   - pyyaml=6.0.2=py311h5eee18b_0
   - readline=8.2=h5eee18b_0
   - requests=2.32.3=py311h06a4308_0
   - scipy=1.13.1=py311h08b1b3b_0
   - setuptools=75.1.0=py311h06a4308_0
+  - six=1.16.0=pyhd3eb1b0_1
   - sqlite=3.45.3=h5eee18b_0
   - sympy=1.13.2=py311h06a4308_0
   - tbb=2021.8.0=hdb19cb5_0
@@ -119,7 +123,6 @@ dependencies:
   - zlib=1.2.13=h5eee18b_1
   - zstd=1.5.6=hc292b87_0
   - pip:
-      - agat==9.0.0
       - ase==3.23.0
       - contourpy==1.3.0
       - cycler==0.12.1
@@ -128,4 +131,5 @@ dependencies:
       - matplotlib==3.9.2
       - packaging==24.1
       - pyparsing==3.2.0
+      - agat
 

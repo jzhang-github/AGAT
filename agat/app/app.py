@@ -8,6 +8,7 @@ Created on Fri Sep  3 17:16:24 2021
 import json
 import os
 import sys
+from warnings import warn
 
 import torch
 from ase.calculators.calculator import Calculator
@@ -49,6 +50,7 @@ class AgatCalculator(Calculator):
     ignored_changes = set()
     def __init__(self, model_save_dir, graph_build_scheme_dir, device = 'cuda',
                  **kwargs):
+        warn("This object will be deprecated in the future. Please use `ase.calculators` in `calculators.py`")
         Calculator.__init__(self, **kwargs)
         # self.atoms = None  # copy of atoms object from last calculation
         # self.results = {}  # calculated properties (energy, forces, ...)

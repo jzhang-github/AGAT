@@ -5,9 +5,12 @@ Created on Sat Aug 12 16:08:41 2023
 @author: ZHANG Jun
 """
 
+import sys
+import platform
 import os
 from .exceptions import FileExit
 from .incar_tag import INCAR_TAG
+import shutil
 
 def generate_file_name(fname):
     while os.path.exists(fname):
@@ -19,7 +22,7 @@ def file_exit():
         os.remove('StopPython')
         raise FileExit('Exit because `StopPython` file is found.')
 
-def modify_INCAR(key='NSW', value='300', s=''):
+def modify_INCAR(working_dir='.', key='NSW', value='300', s=''):
     """Modify the INCAR file.
 
     :param key: The INCAR tag, defaults to 'NSW'
@@ -37,7 +40,7 @@ def modify_INCAR(key='NSW', value='300', s=''):
         return 1
 
     new_incar, discover_code = [], False
-    with open('INCAR', 'r') as f:
+    with open(os.path.join(working_dir, 'INCAR'), 'r') as f:
         for line in f:
             str_list = line.split()
             if len(str_list) == 0:
@@ -55,7 +58,67 @@ def modify_INCAR(key='NSW', value='300', s=''):
     if not discover_code:
         new_incar.append(f'  {key} = {value}\n')
 
-    with open('INCAR', 'w') as f:
+    with open(os.path.join(working_dir, 'INCAR'), 'w') as f:
         for line in new_incar:
             f.write(line)
     return 0
+
+def modify_KPOINTS(working_dir='.', k='3 3 3'):
+    with open(os.path.join(working_dir, 'KPOINTS'), 'r') as f:
+        lines = f.readlines()
+
+    lines[3] = k
+
+    with open(os.path.join(working_dir, 'KPOINTS'), 'r') as f:
+        for l in f:
+            f.write(l)
+
+def get_INCAR(src='INCAR', dst='INCAR'):
+    # path = dst
+    if not os.path.exists(dst):
+        shutil.copy(src, dst)
+    else:
+        print(f'INCAR file already exists in {dst}. Skipping ...')
+
+def get_KPOINTS(src='KPOINTS', dst='KPOINTS'):
+    if not os.path.exists(dst):
+        shutil.copy(src, dst)
+    else:
+        print(f'KPOINTS file already exists in {dst}. Skipping ...')
+
+def get_KPOINTS_gamma(dst='KPOINTS'):
+
+    with open(dst, 'w') as f:
+        f.write('''Automatic mesh
+0
+Gamma
+1 1 1
+0.0 0.0 0.0
+''')
+
+def get_POTCAR(cmd='getpotential.sh', line=1, working_dir='.'):
+    if sys.platform != 'linux':
+        print('The POTCAR file can only be generated on a Linux OS.')
+        return None
+    path = os.path.join(working_dir, 'POTCAR')
+    if not os.path.exists(path):
+        curdir = os.getcwd()
+        os.chdir(working_dir)
+        os.system(f"{cmd} {str(line)}")
+        os.chdir(curdir)
+    else:
+        print(f'POTCAR file already exists in {path}. Skipping ...')
+
+def run_vasp(cmd='vasp_run.sh'):
+    assert platform.system() == 'Linux', 'The VASP code can only be executed on a Linux OS.'
+    # The POSCAR file should exist already.
+    r = os.system(f'bash {cmd}')
+    return r # `0` for good; `1` for bad execution.
+
+def file_force_action(func, src, dst):
+    if os.path.exists(dst):
+        if os.path.isdir(dst):
+            shutil.rmtree(dst)
+        else:
+            os.remove(dst)
+    func(src, dst)

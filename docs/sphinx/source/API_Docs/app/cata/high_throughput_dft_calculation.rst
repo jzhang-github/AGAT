@@ -18,8 +18,8 @@ high_throughput_dft_calculation
 
    .. py:method:: __init__(self, **hp_config)
 
-      :param **hp_config: Configurations to control the process.
-      :type **hp_config: dict
+      :param \*\*hp_config: Configurations to control the process.
+      :type \*\*hp_config: dict
 
       Example::
 
@@ -84,6 +84,6 @@ high_throughput_dft_calculation
 
       :param formula: Chemical formula.
       :type formula: str
-      :param **kwargs: Configurations to control the process.
-      :type **kwargs: dict
+      :param \*\*kwargs: Configurations to control the process.
+      :type \*\*kwargs: dict
 

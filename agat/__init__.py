@@ -5,7 +5,7 @@ Created on Tue Aug 15 11:41:20 2023
 @author: ZHANG Jun
 """
 
-__version__ = '9.0.0'
+__version__ = '9.1.0'
 
 import os
 # os.environ['DGLBACKEND']="pytorch"
@@ -13,6 +13,7 @@ import os
 # import important object.
 from .data.build_dataset import BuildDatabase
 from .data.build_dataset import CrystalGraph
+from .data.dataset import Dataset
 from .model.fit import Fit
 from .app.cata.high_throughput_predict import HtAds
 from .model.model import PotentialModel

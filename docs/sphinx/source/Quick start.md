@@ -7,22 +7,22 @@ Run VASP calculations at this step.
 - Find all directories containing `OUTCAR` file:   
   ```
   find . -name OUTCAR > paths.log
-  ```    
+  ```
 - Remove the string 'OUTCAR' in `paths.log`.   
   ```
   sed -i 's/OUTCAR$//g' paths.log
-  ```   
+  ```
 - Specify the absolute paths in `paths.log`.   
   ```
   sed -i "s#^.#${PWD}#g" paths.log
-  ``` 
+  ```
 
 ### Build database
 ```python
 from agat.data import BuildDatabase
 if __name__ == '__main__':
     database = BuildDatabase(mode_of_NN='ase_dist', num_of_cores=16)
-    database.build()
+    dataset = database.build()
 ```
 
 ### Train AGAT model
@@ -59,3 +59,16 @@ formula='NiCoFePdPt'
 ha = HtAds(model_save_dir=model_save_dir, graph_build_scheme_dir=graph_build_scheme_dir)
 ha.run(formula=formula)
 ```
+
+
+
+### Tips:
+
+See [API doc](https://jzhang-github.github.io/AGAT/API_Docs.html) for more details. For example:
+
+- Manipulating `agat.dataset`: 
+- AGAT molecular dynamics simulations:
+- More options for controlling the AGAT training process.
+
+
+
