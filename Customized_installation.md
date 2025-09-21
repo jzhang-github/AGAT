@@ -2,7 +2,25 @@
 # Customized installation of AGAT environment
 
 
+
+Compatibility
+
+From 2024, DGL became poor in compatibility with CUDA and Windows. This project will transfer to PyG in the future.
+
+| OS      | Python | DGL   | PyTorch | CUDA |
+| ------- | ------ | ----- | ------- | ---- |
+| Windows | 3.10   | 2.2.1 | 2.3     | 12.1 |
+| Linux   |        |       |         |      |
+
+
+
+
+
+
+
 ### Install with [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment on Windows.
+
+The `DGL` package has limited compatibility with Windows, particularly for CUDA versions. You are highly recommended to use the `WSL`.
 
 - Create a new environment   
   ```console
@@ -20,6 +38,7 @@
   
   ```console
   conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4 -c pytorch -c nvidia
+  conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia
   ```
   
 - Install packaging: `pip install packaging`
@@ -32,7 +51,7 @@
   conda install dgl=2.0 -c dglteam
   ```
 
-- Install: `pip install packaging`.
+- Install ASE: `pip install ase`.
 
 - Install AGAT package
 

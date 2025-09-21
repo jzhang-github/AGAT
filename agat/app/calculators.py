@@ -92,7 +92,6 @@ class AgatCalculator(Calculator):
 
         # read graph
         graph, info = self.cg.get_graph(atoms)
-        graph = graph.to(self.device)
 
         with torch.no_grad():
             energy_pred, force_pred, stress_pred = self.model.forward(graph)
