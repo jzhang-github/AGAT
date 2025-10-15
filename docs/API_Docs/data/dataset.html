@@ -277,6 +277,110 @@ From RAM: Specify <code class="docutils literal notranslate"><span class="pre">f
 
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="concat_graphs">
+<span class="sig-name descname"><span class="pre">concat_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">list_of_bin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#concat_graphs" title="Link to this definition"></a></dt>
+<dd><p>Concat binary graph files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*list_of_bin</strong> (<em>strings</em>) – input file names of binary graphs.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new file is saved to the current directory: concated_graphs.bin.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None. A new file.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">concat_graphs</span><span class="p">(</span><span class="s1">&#39;graphs1.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;graphs2.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;graphs3.bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="concat_dataset">
+<span class="sig-name descname"><span class="pre">concat_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">list_of_datasets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'concated_graphs.bin'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#concat_dataset" title="Link to this definition"></a></dt>
+<dd><p>Concat <code class="docutils literal notranslate"><span class="pre">agat.dataset.Dataset</span></code> in the RAM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*list_of_datasets</strong> (<code class="docutils literal notranslate"><span class="pre">agat.dataset.Dataset</span></code>) – a list of <code class="docutils literal notranslate"><span class="pre">agat.dataset.Dataset</span></code> object.</p></li>
+<li><p><strong>save_file</strong> (<em>bool</em>) – save to a new file or not. Default: False</p></li>
+<li><p><strong>fname</strong> (<em>str</em>) – The saved file name if <code class="docutils literal notranslate"><span class="pre">savefile=True</span></code>. Default: ‘concated_graphs.bin’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new file is saved to the current directory: concated_graphs.bin.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">agat.dataset.Dataset</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="select_graphs_random">
+<span class="sig-name descname"><span class="pre">select_graphs_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#select_graphs_random" title="Link to this definition"></a></dt>
+<dd><p>Randomly split graphs from a binary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em>) – input file name.</p></li>
+<li><p><strong>num</strong> (<em>int</em>) – number of selected graphs (should be smaller than number of all graphs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new file is saved to the current directory: Selected_graphs.bin.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None. A new file.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select_graphs_random</span><span class="p">(</span><span class="s1">&#39;graphs1.bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="select_graphs_from_dataset_random">
+<span class="sig-name descname"><span class="pre">select_graphs_from_dataset_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'selected_graphs.bin'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#select_graphs_from_dataset_random" title="Link to this definition"></a></dt>
+<dd><p>Randomly split graphs from a binary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em>) – input file name.</p></li>
+<li><p><strong>num</strong> (<em>int</em>) – number of selected graphs (should be smaller than number of all graphs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new file is saved to the current directory: Selected_graphs.bin.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None. A new file.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select_graphs_random</span><span class="p">(</span><span class="s1">&#39;graphs1.bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="save_dataset">
+<span class="sig-name descname"><span class="pre">save_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#Dataset" title="Dataset"><span class="pre">Dataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'graphs.bin'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#save_dataset" title="Link to this definition"></a></dt>
+<dd><p>Save a <code class="docutils literal notranslate"><span class="pre">agat.dataset.Dataset</span></code> to a binary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<code class="docutils literal notranslate"><span class="pre">agat.dataset.Dataset</span></code>) – AGAT dataset in RAM.</p></li>
+<li><p><strong>fname</strong> (<em>str</em>) – output file name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
