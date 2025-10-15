@@ -118,3 +118,75 @@ Examples of manipulating dataset(s):
       :type data: AGAT Dataset
       :return: AGAT Dataset with dgl batch graphs. See https://docs.dgl.ai/en/1.1.x/generated/dgl.batch.html
       :rtype: AGAT Dataset
+
+
+
+.. py:function:: concat_graphs(*list_of_bin)
+
+   Concat binary graph files.
+
+   :param \*list_of_bin: input file names of binary graphs.
+   :type \*list_of_bin: strings
+   :return: A new file is saved to the current directory: concated_graphs.bin.
+   :rtype: None. A new file.
+
+   Example::
+
+       concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
+
+
+
+.. py:function:: concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bin')
+
+   Concat ``agat.dataset.Dataset`` in the RAM.
+
+   :param \*list_of_datasets: a list of ``agat.dataset.Dataset`` object.
+   :type \*list_of_datasets: ``agat.dataset.Dataset``
+   :return: A new file is saved to the current directory: concated_graphs.bin.
+   :param save_file: save to a new file or not. Default: False
+   :type save_file: bool
+   :param fname: The saved file name if ``savefile=True``. Default: 'concated_graphs.bin'
+   :type fname: str
+   :rtype: ``agat.dataset.Dataset``
+
+
+
+.. py:function:: select_graphs_random(fname: str, num: int)
+
+   Randomly split graphs from a binary file.
+
+   :param fname: input file name.
+   :type fname: str
+   :param num: number of selected graphs (should be smaller than number of all graphs.
+   :type num: int
+   :return: A new file is saved to the current directory: Selected_graphs.bin.
+   :rtype: None. A new file.
+
+   Example::
+
+      select_graphs_random('graphs1.bin')
+
+.. py:function:: select_graphs_from_dataset_random(dataset, num: int, save_file=False, fname='selected_graphs.bin')
+
+   Randomly split graphs from a binary file.
+
+   :param fname: input file name.
+   :type fname: str
+   :param num: number of selected graphs (should be smaller than number of all graphs.
+   :type num: int
+   :return: A new file is saved to the current directory: Selected_graphs.bin.
+   :rtype: None. A new file.
+
+   Example::
+
+      select_graphs_random('graphs1.bin')
+
+
+.. py:function:: save_dataset(dataset: Dataset, fname='graphs.bin')
+
+   Save a ``agat.dataset.Dataset`` to a binary file.
+
+   :param dataset: AGAT dataset in RAM.
+   :type dataset: ``agat.dataset.Dataset``
+   :param fname: output file name.
+   :type fname: str

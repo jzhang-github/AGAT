@@ -135,7 +135,6 @@ build_dataset
       Run the construction process.
 
 
-
 .. py:function:: concat_graphs(*list_of_bin)
 
    Concat binary graph files.
@@ -205,6 +204,7 @@ build_dataset
    :type dataset: ``agat.dataset.Dataset``
    :param fname: output file name.
    :type fname: str
+
 
 
 ..

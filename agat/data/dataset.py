@@ -5,6 +5,8 @@ Created on Sat Sep 30 23:54:56 2023
 @author: 18326
 """
 
+import numpy as np
+from warnings import warn
 import torch
 # from torch.utils.data import Dataset
 import dgl
@@ -86,6 +88,129 @@ class Dataset(torch.utils.data.Dataset):
     def save(self, file='graphs.bin'):
         save_graphs(file, self.graph_list, self.props)
 
+def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
+    """ Concat binary graph files.
+
+    :param *list_of_bin: input file names of binary graphs.
+    :type *list_of_bin: strings
+    :return: A new file is saved to the current directory: concated_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
+
+    """
+
+    warn("This object will be deprecated in the future. Please use `concat_dataset`.")
+
+    graph_list = []
+    graph_labels = {}
+    for file in list_of_bin:
+        batch_g, batch_labels = load_graphs(file)
+        graph_list.extend(batch_g)
+        for key in batch_labels.keys():
+            try:
+                graph_labels[key] = torch.cat([graph_labels[key],
+                                               batch_labels[key]], 0)
+            except KeyError:
+                graph_labels[key] = batch_labels[key]
+
+    if save_file:
+        save_graphs(fname, graph_list, graph_labels)
+    return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props=graph_labels)
+
+def concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bin'):
+    """ Concat binary graph files.
+
+    :param *list_of_bin: input file names of binary graphs.
+    :type *list_of_bin: strings
+    :return: A new file is saved to the current directory: concated_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
+
+    """
+
+    graph_list = []
+    graph_labels = {}
+    for d in list_of_datasets:
+        batch_g, batch_labels = d.graph_list, d.props
+        graph_list.extend(batch_g)
+        for key in batch_labels.keys():
+            try:
+                graph_labels[key] = torch.cat([graph_labels[key],
+                                               batch_labels[key]], 0)
+            except KeyError:
+                graph_labels[key] = batch_labels[key]
+
+    if save_file:
+        save_graphs(fname, graph_list, graph_labels)
+    return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
+
+def select_graphs_random(fname: str, num: int):
+    """ Randomly split graphs from a binary file.
+
+    :param fname: input file name.
+    :type fname: str
+    :param num: number of selected graphs (should be smaller than number of all graphs.
+    :type num: int
+    :return: A new file is saved to the current directory: Selected_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        select_graphs_random('graphs1.bin')
+
+    """
+    warn("This object will be deprecated in the future. Please use `select_graphs_from_dataset_random`")
+
+    bg, labels = load_graphs(fname)
+    num_graphs = len(bg)
+    assert num < num_graphs, f'The number of selected graphs should be lower than\
+the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
+    random_int = np.random.choice(range(num_graphs), size=num, replace=False)
+
+    selected_bg = [bg[x] for x in random_int]
+
+    graph_labels = {}
+    for key in labels.keys():
+        graph_labels[key] = labels[key][random_int]
+
+    save_graphs('selected_graphs.bin', selected_bg, graph_labels)
+
+def select_graphs_from_dataset_random(dataset, num: int, save_file=False,
+                                      fname='selected_graphs.bin'):
+    """ Randomly split graphs from a binary file.
+
+    :param fname: input file name.
+    :type fname: str
+    :param num: number of selected graphs (should be smaller than number of all graphs.
+    :type num: int
+    :return: A new file is saved to the current directory: Selected_graphs.bin.
+    :rtype: None. A new file.
+
+    Example::
+
+        select_graphs_random('graphs1.bin')
+
+    """
+
+    num_graphs = len(dataset)
+    assert num < num_graphs, f'The number of selected graphs should be lower than\
+the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
+    random_int = np.random.choice(range(num_graphs), size=num, replace=False)
+    dataset = dataset[list(random_int)]
+    if save_file:
+        save_graphs(fname, dataset.graph_list, dataset.props)
+    return dataset
+
+def save_dataset(dataset: Dataset, fname='graphs.bin'):
+    assert isinstance(dataset, Dataset), f'Wrong dataset type. Expect `LoadDataset`, but got {type(dataset)}'
+    save_graphs(fname, dataset.graph_list, dataset.props)
+
 class Collater(object):
     """The collate function used in torch.utils.data.DataLoader: https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 
@@ -117,6 +242,8 @@ class Collater(object):
         :rtype: AGAT Dataset
 
         """
+        if isinstance(data, list):
+            data = concat_dataset(*data)
         data.graph_list = [dgl.batch(data.graph_list).to(self.device)]
         data.props = {k:v.to(self.device) for k,v in data.props.items()}
         return data

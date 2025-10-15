@@ -9,7 +9,6 @@ import numpy as np
 import os
 import json
 import multiprocessing
-from warnings import warn
 
 from ase.io import read
 import torch
@@ -20,6 +19,9 @@ from .build_graph import CrystalGraph
 from ..default_parameters import default_data_config
 from ..lib.model_lib import config_parser
 from .dataset import Dataset
+
+# for compatibility with old versions
+from .dataset import concat_graphs, concat_dataset, select_graphs_random, select_graphs_from_dataset_random
 
 class ReadGraphs(object):
     """
@@ -408,128 +410,128 @@ class BuildDatabase():
                 os.remove(os.path.join(self.data_config['dataset_dir'], f'fname_prop_{i}.csv'))
         return dataset
 
-def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
-    """ Concat binary graph files.
+# def concat_graphs(*list_of_bin, save_file=True, fname='concated_graphs.bin'):
+#     """ Concat binary graph files.
 
-    :param *list_of_bin: input file names of binary graphs.
-    :type *list_of_bin: strings
-    :return: A new file is saved to the current directory: concated_graphs.bin.
-    :rtype: None. A new file.
+#     :param *list_of_bin: input file names of binary graphs.
+#     :type *list_of_bin: strings
+#     :return: A new file is saved to the current directory: concated_graphs.bin.
+#     :rtype: None. A new file.
 
-    Example::
+#     Example::
 
-        concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
+#         concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
 
-    """
+#     """
 
-    warn("This object will be deprecated in the future. Please use `concat_dataset`.")
+#     warn("This object will be deprecated in the future. Please use `concat_dataset`.")
 
-    graph_list = []
-    graph_labels = {}
-    for file in list_of_bin:
-        batch_g, batch_labels = load_graphs(file)
-        graph_list.extend(batch_g)
-        for key in batch_labels.keys():
-            try:
-                graph_labels[key] = torch.cat([graph_labels[key],
-                                               batch_labels[key]], 0)
-            except KeyError:
-                graph_labels[key] = batch_labels[key]
+#     graph_list = []
+#     graph_labels = {}
+#     for file in list_of_bin:
+#         batch_g, batch_labels = load_graphs(file)
+#         graph_list.extend(batch_g)
+#         for key in batch_labels.keys():
+#             try:
+#                 graph_labels[key] = torch.cat([graph_labels[key],
+#                                                batch_labels[key]], 0)
+#             except KeyError:
+#                 graph_labels[key] = batch_labels[key]
 
-    if save_file:
-        save_graphs(fname, graph_list, graph_labels)
-    return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props=graph_labels)
+#     if save_file:
+#         save_graphs(fname, graph_list, graph_labels)
+#     return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props=graph_labels)
 
-def concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bin'):
-    """ Concat binary graph files.
+# def concat_dataset(*list_of_datasets, save_file=False, fname='concated_graphs.bin'):
+#     """ Concat binary graph files.
 
-    :param *list_of_bin: input file names of binary graphs.
-    :type *list_of_bin: strings
-    :return: A new file is saved to the current directory: concated_graphs.bin.
-    :rtype: None. A new file.
+#     :param *list_of_bin: input file names of binary graphs.
+#     :type *list_of_bin: strings
+#     :return: A new file is saved to the current directory: concated_graphs.bin.
+#     :rtype: None. A new file.
 
-    Example::
+#     Example::
 
-        concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
+#         concat_graphs('graphs1.bin', 'graphs2.bin', 'graphs3.bin')
 
-    """
+#     """
 
-    graph_list = []
-    graph_labels = {}
-    for d in list_of_datasets:
-        batch_g, batch_labels = d.graph_list, d.props
-        graph_list.extend(batch_g)
-        for key in batch_labels.keys():
-            try:
-                graph_labels[key] = torch.cat([graph_labels[key],
-                                               batch_labels[key]], 0)
-            except KeyError:
-                graph_labels[key] = batch_labels[key]
+#     graph_list = []
+#     graph_labels = {}
+#     for d in list_of_datasets:
+#         batch_g, batch_labels = d.graph_list, d.props
+#         graph_list.extend(batch_g)
+#         for key in batch_labels.keys():
+#             try:
+#                 graph_labels[key] = torch.cat([graph_labels[key],
+#                                                batch_labels[key]], 0)
+#             except KeyError:
+#                 graph_labels[key] = batch_labels[key]
 
-    if save_file:
-        save_graphs(fname, graph_list, graph_labels)
-    return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
+#     if save_file:
+#         save_graphs(fname, graph_list, graph_labels)
+#     return Dataset(dataset_path=None, from_file=False, graph_list=graph_list, props = graph_labels)
 
-def select_graphs_random(fname: str, num: int):
-    """ Randomly split graphs from a binary file.
+# def select_graphs_random(fname: str, num: int):
+#     """ Randomly split graphs from a binary file.
 
-    :param fname: input file name.
-    :type fname: str
-    :param num: number of selected graphs (should be smaller than number of all graphs.
-    :type num: int
-    :return: A new file is saved to the current directory: Selected_graphs.bin.
-    :rtype: None. A new file.
+#     :param fname: input file name.
+#     :type fname: str
+#     :param num: number of selected graphs (should be smaller than number of all graphs.
+#     :type num: int
+#     :return: A new file is saved to the current directory: Selected_graphs.bin.
+#     :rtype: None. A new file.
 
-    Example::
+#     Example::
 
-        select_graphs_random('graphs1.bin')
+#         select_graphs_random('graphs1.bin')
 
-    """
-    warn("This object will be deprecated in the future. Please use `select_graphs_from_dataset_random`")
+#     """
+#     warn("This object will be deprecated in the future. Please use `select_graphs_from_dataset_random`")
 
-    bg, labels = load_graphs(fname)
-    num_graphs = len(bg)
-    assert num < num_graphs, f'The number of selected graphs should be lower than\
-the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
-    random_int = np.random.choice(range(num_graphs), size=num, replace=False)
+#     bg, labels = load_graphs(fname)
+#     num_graphs = len(bg)
+#     assert num < num_graphs, f'The number of selected graphs should be lower than\
+# the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
+#     random_int = np.random.choice(range(num_graphs), size=num, replace=False)
 
-    selected_bg = [bg[x] for x in random_int]
+#     selected_bg = [bg[x] for x in random_int]
 
-    graph_labels = {}
-    for key in labels.keys():
-        graph_labels[key] = labels[key][random_int]
+#     graph_labels = {}
+#     for key in labels.keys():
+#         graph_labels[key] = labels[key][random_int]
 
-    save_graphs('selected_graphs.bin', selected_bg, graph_labels)
+#     save_graphs('selected_graphs.bin', selected_bg, graph_labels)
 
-def select_graphs_from_dataset_random(dataset, num: int, save_file=False,
-                                      fname='selected_graphs.bin'):
-    """ Randomly split graphs from a binary file.
+# def select_graphs_from_dataset_random(dataset, num: int, save_file=False,
+#                                       fname='selected_graphs.bin'):
+#     """ Randomly split graphs from a binary file.
 
-    :param fname: input file name.
-    :type fname: str
-    :param num: number of selected graphs (should be smaller than number of all graphs.
-    :type num: int
-    :return: A new file is saved to the current directory: Selected_graphs.bin.
-    :rtype: None. A new file.
+#     :param fname: input file name.
+#     :type fname: str
+#     :param num: number of selected graphs (should be smaller than number of all graphs.
+#     :type num: int
+#     :return: A new file is saved to the current directory: Selected_graphs.bin.
+#     :rtype: None. A new file.
 
-    Example::
+#     Example::
 
-        select_graphs_random('graphs1.bin')
+#         select_graphs_random('graphs1.bin')
 
-    """
+#     """
 
-    num_graphs = len(dataset)
-    assert num < num_graphs, f'The number of selected graphs should be lower than\
-the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
-    random_int = np.random.choice(range(num_graphs), size=num, replace=False)
-    dataset = dataset[list(random_int)]
-    if save_file:
-        save_graphs(fname, dataset.graph_list, dataset.props)
-    return dataset
+#     num_graphs = len(dataset)
+#     assert num < num_graphs, f'The number of selected graphs should be lower than\
+# the number of all graphs. Number of selected graphs: {num}. Number of all graphs: {num_graphs}.'
+#     random_int = np.random.choice(range(num_graphs), size=num, replace=False)
+#     dataset = dataset[list(random_int)]
+#     if save_file:
+#         save_graphs(fname, dataset.graph_list, dataset.props)
+#     return dataset
 
-def save_dataset(dataset: Dataset, fname='graphs.bin'):
-    assert isinstance(dataset, Dataset), f'Wrong dataset type. Expect `LoadDataset`, but got {type(dataset)}'
-    save_graphs(fname, dataset.graph_list, dataset.props)
+# def save_dataset(dataset: Dataset, fname='graphs.bin'):
+#     assert isinstance(dataset, Dataset), f'Wrong dataset type. Expect `LoadDataset`, but got {type(dataset)}'
+#     save_graphs(fname, dataset.graph_list, dataset.props)
 
 # build data
 if __name__ == '__main__':
