@@ -18,15 +18,15 @@ The [documentation](https://jzhang-github.github.io/AGAT/) of AGAT API is availa
 
 ### Install with [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
 
-- Download the [`agat_linux_gpu_cu124.yml`](agat_linux_gpu_cu124.yml) file.
+- Download the [`agat_linux_gpu_cu124_py312.yml`](agat_linux_gpu_cu124_py312.yml) file.
 
 - Run
 
   ```shell
-  conda env create -f agat_linux_gpu_cu124.yml
+  conda env create -f agat_linux_gpu_cu124_py312.yml
   ```
 
-  
+  *This may take a while, but not more than 30 minutes*
 
 - Install CUDA and CUDNN [**Optional**].
   
