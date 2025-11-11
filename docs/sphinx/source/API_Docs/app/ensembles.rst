@@ -64,6 +64,44 @@ Examples of using ensembles:
    
    dyn.run(200)
 
+.. code-block:: python
+
+
+   from ase.io import read
+   from ase import units
+   from ase import Atoms
+   from ase.md import MDLogger
+   from agat.app import AgatCalculator
+   from agat.app.ensembles import ModifiedNPT
+   
+   model_save_dir = 'agat_model'
+   graph_build_scheme_dir = '.' # location where you can find `graph_build_scheme.json` file.
+   
+   atoms = read('POSCAR')
+   calculator=AgatCalculator(model_save_dir,
+                             graph_build_scheme_dir, device='cpu')
+   atoms = Atoms(atoms, calculator=calculator)
+   dyn = ModifiedNPT(atoms,
+             timestep=1.0 * units.fs,
+             temperature_K=300,
+             ttime = 25 * units.fs,
+             pfactor = 75 * units.fs,
+             externalstress = [0.0] * 6,
+             mask=[[1,0,0],
+                   [0,1,0],
+                   [0,0,1]],
+             trajectory='md_NPT.traj')
+   
+   dyn.attach(MDLogger(dyn, atoms, 'md_NPT.log',
+                       header=True,
+                       stress=True,
+                       peratom=False,
+                       mode="a"),
+              interval=1)
+   
+   dyn.run(200)
+
+
 
 .. class:: ModifiedNPT(NPT)
 
